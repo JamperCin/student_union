@@ -1,0 +1,100 @@
+import 'package:core_module/core/def/global_definitions.dart';
+import 'package:core_module/core_module.dart';
+import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
+import 'package:core_module/core_ui/widgets/network_image_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:student_union/core/def/global_access.dart';
+
+class TopHeaderWidget extends StatelessWidget {
+  final VoidCallback? onNotifyOnClick;
+  final bool displayEmail;
+
+  const TopHeaderWidget({super.key, this.onNotifyOnClick})
+      : displayEmail = false;
+
+  const TopHeaderWidget.withEmail({super.key, this.onNotifyOnClick})
+      : displayEmail = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      height: appDimen.screenHeight * 0.18,
+      width: appDimen.screenWidth,
+      color: colorScheme.surface,
+      padding: EdgeInsets.only(
+        top: appDimen.dimen(5),
+        right: appDimen.dimen(10),
+        left: appDimen.dimen(10),
+        bottom: appDimen.dimen(2),
+      ),
+      child: Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                NetworkImageWidget.withCircular(
+                  url: userApiService.profilePic.value,
+                  radius: appDimen.dimen(25),
+                ),
+                SizedBox(width: appDimen.dimen(1)),
+                if (displayEmail)
+                  RichText(
+                      text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'John Doe',
+                        style: textTheme.titleLarge,
+                      ),
+                      TextSpan(
+                        text: '\nmyemail@gmail.com',
+                        style: textTheme.labelSmall,
+                      )
+                    ],
+                  ))
+                else
+                  RichText(
+                      text: TextSpan(
+                    children: [
+                      TextSpan(text: 'Welcome', style: textTheme.bodyLarge),
+                      const TextSpan(text: '\n'),
+                      TextSpan(
+                        text: 'John Doe',
+                        style: textTheme.bodyMedium
+                            ?.copyWith(color: colorScheme.primary),
+                      ),
+                      TextSpan(text: '  👋', style: textTheme.bodyLarge),
+                    ],
+                  )),
+              ],
+            ),
+            SizedBox(width: appDimen.dimen(5)),
+            Row(
+              children: [
+                IconButtonWidget(
+                  icon: Icons.notifications_none,
+                  iconSize: 10,
+                  iconPadding: -1,
+                  iconColor: colorScheme.secondary,
+                  onTap: onNotifyOnClick,
+                ),
+                //SizedBox(width: appDimen.dimen(1)),
+                // IconButtonWidget(
+                //   icon: Icons.settings,
+                //   iconSize: 10,
+                //   iconPadding: -1,
+                //   //backgroundColor: colorScheme.inversePrimary.withOpacity(0.5),
+                //  // borderColor: Colors.transparent,
+                //   onTap: _controller.onSettingsOnClick,
+                // ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
