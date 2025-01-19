@@ -6,4 +6,11 @@ class NotificationsScreen extends BaseScreenStandard{
   bool showAppBar() {
     return true;
   }
+
+  @override
+  String appBarTitle() {
+    return 'Notifications';
+  }
+
+
 }

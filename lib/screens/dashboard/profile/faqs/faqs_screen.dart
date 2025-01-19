@@ -5,4 +5,10 @@ class FaqScreen extends BaseScreenStandard{
   bool showAppBar() {
     return true;
   }
+
+  @override
+  String appBarTitle() {
+    return 'FAQs';
+  }
+
 }

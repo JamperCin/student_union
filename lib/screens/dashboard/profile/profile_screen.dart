@@ -126,6 +126,7 @@ class ProfileScreen extends BaseScreenStandard {
                   children: [
                     ProfileMenuWidget(
                       asset: icLogOut,
+                      assetColor: colorScheme.error,
                       onTap: _controller.onLogOutOnClick,
                       text: "Log Out",
                     ),
