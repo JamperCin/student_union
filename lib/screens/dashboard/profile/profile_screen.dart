@@ -107,16 +107,6 @@ class ProfileScreen extends BaseScreenStandard {
                       onTap: _controller.onInviteOnClick,
                       text: "Invite Friends",
                     ),
-                    // ProfileMenuWidget(
-                    //   asset: icReport,
-                    //   onTap: () {},
-                    //   text: "Report Bug",
-                    // ),
-                    // ProfileMenuWidget(
-                    //   asset: icFavorite,
-                    //   onTap: () {},
-                    //   text: "Rate Our App",
-                    // ),
                   ],
                 ),
               ),

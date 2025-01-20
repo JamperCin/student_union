@@ -2,6 +2,7 @@ import 'package:core_module/core/def/global_definitions.dart';
 import 'package:get/get.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/screens/auth/forgot_password/forgot_password_screen.dart';
+import 'package:student_union/screens/auth/login/login_screen.dart';
 import 'package:student_union/screens/dashboard/donate/donations_history_screen.dart';
 import 'package:student_union/screens/dashboard/profile/about/about_screen.dart';
 import 'package:student_union/screens/dashboard/profile/edit_profile/edit_profile_screen.dart';
@@ -46,5 +47,6 @@ class ProfileController extends BaseController {
   }
 
   void onLogOutOnClick() {
+    navUtils.fireTargetOff(LoginScreen());
   }
 }
