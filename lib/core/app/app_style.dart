@@ -14,101 +14,101 @@ TextStyle normalButtonLightModeStyle = TextStyle(
   fontStyle: FontStyle.normal,
   fontFamily: _fontFamily,
   fontWeight: FontWeight.w700,
-  fontSize: appDimen.dimen(6),
+  fontSize: appDimen.dimen(20),
   wordSpacing: _wordSpacing,
   height: _height,
   letterSpacing: _letterSpacing,
-  color: whiteColor,
+  color: Colors.white,
 );
 
 TextStyle boldButtonLightModeStyle =
-    normalButtonLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+normalButtonLightModeStyle.copyWith(fontWeight: FontWeight.w900);
 
 ///Label Text
 TextStyle labelSmallTextLightModeStyle = TextStyle(
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w200,
   fontFamily: _fontFamily,
-  fontSize: appDimen.dimen(2),
+  fontSize: appDimen.dimen(12),
   wordSpacing: _wordSpacing,
   height: _height,
   letterSpacing: _letterSpacing,
-  color: darkColor,
+  color: Colors.black87,
 );
 
 TextStyle labelMediumTextLightModeStyle =
-    labelSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+labelSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
 
 TextStyle labelLargeTextLightModeStyle =
-    labelSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+labelSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
 
 ///Body Text
 TextStyle bodySmallTextLightModeStyle = TextStyle(
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w200,
   fontFamily: _fontFamily,
-  fontSize: appDimen.dimen(4),
+  fontSize: appDimen.dimen(16),
   wordSpacing: _wordSpacing,
   height: _height,
   letterSpacing: _letterSpacing,
-  color: darkColor,
+  color: Colors.black87,
 );
 
 TextStyle bodyMediumTextLightModeStyle =
-    bodySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+bodySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
 
 TextStyle bodyLargeTextLightModeStyle =
-    bodySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+bodySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
 
 ///Title text
 TextStyle titleSmallTextLightModeStyle = TextStyle(
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w200,
   fontFamily: _fontFamily,
-  fontSize: appDimen.dimen(8),
+  fontSize: appDimen.dimen(20),
   wordSpacing: _wordSpacing,
   height: _height,
   letterSpacing: _letterSpacing,
-  color: darkColor,
+  color: Colors.black87,
 );
 
 TextStyle titleMediumTextLightModeStyle =
-    titleSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+titleSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
 
 TextStyle titleLargeTextLightModeStyle =
-    titleSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+titleSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
 
 ///Display text
 TextStyle displaySmallTextLightModeStyle = TextStyle(
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w200,
   fontFamily: _fontFamily,
-  fontSize: appDimen.dimen(22),
+  fontSize: appDimen.dimen(35),
   wordSpacing: _wordSpacing,
   height: _height,
   letterSpacing: _letterSpacing,
-  color: darkColor,
+  color: Colors.black87,
 );
 
 TextStyle displayMediumTextLightModeStyle =
-    displaySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+displaySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
 
 TextStyle displayLargeTextLightModeStyle =
-    displaySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+displaySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
 
 ///Heading text
 TextStyle headingSmallTextLightModeStyle = TextStyle(
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w200,
   fontFamily: _fontFamily,
-  fontSize: appDimen.dimen(30),
+  fontSize: appDimen.dimen(50),
   wordSpacing: _wordSpacing,
   height: _height,
   letterSpacing: _letterSpacing,
-  color: darkColor,
+  color: Colors.black87,
 );
 TextStyle headingMediumTextLightModeStyle =
-    headingSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+headingSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
 
 TextStyle headingLargeTextLightModeStyle =
-    headingSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+headingSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);

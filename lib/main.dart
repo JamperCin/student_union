@@ -1,3 +1,5 @@
+import 'package:core_module/core/app/app_dimens.dart';
+import 'package:core_module/core/def/global_definitions.dart';
 import 'package:core_module/core_module.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +17,7 @@ void main() async {
     debugPrint = (String? message, {int? wrapWidth}) {};
   }
 
-  ///Initialise the Core module library and other services here
-  await CoreModule().init(envPath: 'assets/data/env.json');
-  userApiService = UserApiService();
+  await _initializeApp();
 
   runApp(const MyApp());
 
@@ -33,17 +33,24 @@ void main() async {
   );
 }
 
+///Initialise the Core module library and other services here
+Future<void> _initializeApp() async {
+  await Future.delayed(const Duration(seconds: 1)); // Simulating a heavy task
+  await CoreModule().init(envPath: 'assets/data/env.json');
+  userApiService = UserApiService();
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    CoreModule().init(context: context);
+    appDimen = AppDimens(context);
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Student Union',
+      title: 'Scripture Union',
       initialRoute: rootRoute,
       getPages: appRoute,
       theme: lightMode,

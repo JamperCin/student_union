@@ -1,6 +1,6 @@
 # student_union
 
-A new Flutter project for Student Union
+A new Flutter project for Scripture Union
 
 ## Getting Started
 

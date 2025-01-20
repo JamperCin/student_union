@@ -66,8 +66,7 @@ class IntroScreen extends BaseScreenStandard {
                       child: Text(
                         model.mainText,
                         textAlign: TextAlign.center,
-                        style: textTheme.displayLarge
-                            ?.copyWith(fontSize: appDimen.dimen(18)),
+                        style: textTheme.displayLarge,
                       ),
                     ),
                     SizedBox(height: appDimen.dimen(20)),
@@ -93,11 +92,11 @@ class IntroScreen extends BaseScreenStandard {
               children: [
                 if (_introController.pageIndex.value != 0)
                   IconButtonWidget.withCircularBorder(
-                    iconSize: 10,
+                    iconSize: 20,
                     icon: Icons.arrow_back_ios,
                     iconColor: colorScheme.primary,
                     borderColor: Colors.transparent,
-                    iconPadding: -1,
+                    iconPadding: 2,
                     onTap: () {
                       _introController.onGoToPrevious(_pageController);
                     },
@@ -119,8 +118,8 @@ class IntroScreen extends BaseScreenStandard {
                 SizedBox(width: appDimen.dimen(10)),
                 IconButtonWidget.withCircularBorder(
                   icon: Icons.arrow_forward_ios,
-                  iconSize: 10,
-                  iconPadding: -1,
+                  iconSize: 20,
+                  iconPadding: 2,
                   iconColor: colorScheme.primary,
                   borderColor: Colors.transparent,
                   onTap: () {

@@ -20,8 +20,8 @@ class LoginController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    emailTxtCtrl.text = "jampercola@gmail.com";
-    passwordTxtCtrl.text = "Cola360";
+    // emailTxtCtrl.text = "jampercola@gmail.com";
+    // passwordTxtCtrl.text = "Cola360";
   }
 
 

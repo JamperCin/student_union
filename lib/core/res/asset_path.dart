@@ -11,3 +11,4 @@ const icAddDevotion = "$_rootPath/ic_add_devotion.png";
 const icDonate = "$_rootPath/ic_donate.png";
 const icNews = "$_rootPath/ic_news.png";
 const icAbout = "$_rootPath/ic_about.png";
+const icSu = "$_rootPath/ic_su.jpeg";

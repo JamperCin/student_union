@@ -38,9 +38,9 @@ class TopHeaderWidget extends StatelessWidget {
               children: [
                 NetworkImageWidget.withCircular(
                   url: userApiService.profilePic.value,
-                  radius: appDimen.dimen(25),
+                  radius: appDimen.dimen(40),
                 ),
-                SizedBox(width: appDimen.dimen(1)),
+                SizedBox(width: appDimen.dimen(5)),
                 if (displayEmail)
                   RichText(
                       text: TextSpan(
@@ -59,7 +59,7 @@ class TopHeaderWidget extends StatelessWidget {
                   RichText(
                       text: TextSpan(
                     children: [
-                      TextSpan(text: 'Welcome', style: textTheme.bodyLarge),
+                      TextSpan(text: 'Welcome', style: textTheme.titleLarge),
                       const TextSpan(text: '\n'),
                       TextSpan(
                         text: 'John Doe',
@@ -76,9 +76,9 @@ class TopHeaderWidget extends StatelessWidget {
               children: [
                 IconButtonWidget(
                   icon: Icons.notifications_none,
-                  iconSize: 10,
-                  iconPadding: -1,
-                  iconColor: colorScheme.secondary,
+                  iconSize: 30,
+                  iconPadding: 2,
+                  iconColor: colorScheme.primary,
                   onTap: onNotifyOnClick,
                 ),
                 //SizedBox(width: appDimen.dimen(1)),

@@ -102,10 +102,10 @@ packages:
     description:
       path: "packages/core_module"
       ref: HEAD
-      resolved-ref: "557b1a65e1d32840956af552b201f7d57ac4661b"
+      resolved-ref: f4403c9a27508c3024d2e26f7d776705c1958e2b
       url: "https://github.com/JamperCin/core_package"
     source: git
-    version: "1.0.6"
+    version: "1.1.1"
   crypto:
     dependency: transitive
     description:

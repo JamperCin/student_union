@@ -17,7 +17,7 @@ class LoginScreen extends BaseScreenDecorated {
 
   @override
   String decoPageAsset() {
-    return intro3;
+    return icSu;
   }
 
   @override
@@ -43,7 +43,7 @@ class LoginScreen extends BaseScreenDecorated {
             prefixIcon: Icon(
               Icons.email_outlined,
               color: colorScheme.onPrimary,
-              size: appDimen.dimen(7),
+              size: appDimen.dimen(18),
             ),
             keyboardType: TextInputType.emailAddress,
             controller: _controller.emailTxtCtrl,
@@ -69,9 +69,9 @@ class LoginScreen extends BaseScreenDecorated {
             },
             text: 'Login',
           ),
-          SizedBox(height: appDimen.dimen(10)),
+          SizedBox(height: appDimen.dimen(20)),
           const DividerWidget.withChild(text: 'Or'),
-          SizedBox(height: appDimen.dimen(10)),
+          SizedBox(height: appDimen.dimen(20)),
           const ThirdPartyAuthWidget(),
           SizedBox(height: appDimen.dimen(20)),
           Center(
@@ -81,12 +81,12 @@ class LoginScreen extends BaseScreenDecorated {
                   text: TextSpan(children: [
                 TextSpan(
                   text: 'Don\'t have an Account? ',
-                  style: textTheme.labelSmall,
+                  style: textTheme.labelMedium,
                 ),
                 TextSpan(
                   text: 'Sign Up',
                   style:
-                      textTheme.labelMedium?.copyWith(color: greenPrimaryColor),
+                      textTheme.labelLarge?.copyWith(color: greenPrimaryColor),
                 ),
               ])),
             ),

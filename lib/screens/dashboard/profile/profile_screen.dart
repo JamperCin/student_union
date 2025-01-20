@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:student_union/core-ui/widgets/top_header_widget.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/dashboard/profile/profile_controller.dart';
+
 class ProfileScreen extends BaseScreenStandard {
   final _controller = Get.put(ProfileController());
 
@@ -112,6 +113,9 @@ class ProfileScreen extends BaseScreenStandard {
               ),
               SizedBox(height: appDimen.dimen(20)),
               CardContainerWidget(
+                padding: EdgeInsets.symmetric(
+                  vertical: appDimen.dimen(1),
+                ),
                 child: Column(
                   children: [
                     ProfileMenuWidget(
@@ -129,5 +133,4 @@ class ProfileScreen extends BaseScreenStandard {
       ],
     );
   }
-
 }

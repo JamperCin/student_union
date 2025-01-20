@@ -17,35 +17,43 @@ class AboutScreen extends BaseScreenStandard {
 
   @override
   Widget body(BuildContext context) {
-    return SingleChildScrollView(
+    return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: appDimen.dimen(24),
         vertical: appDimen.dimen(16),
       ),
-      child: Column(
-        children: [
-          AssetImageWidget(asset: intro2),
-          SizedBox(height: appDimen.dimen(20)),
-          RichText(
-              text: TextSpan(
-            children: [
-              TextSpan(text: "The ", style: textTheme.bodySmall),
-              TextSpan(
-                  text: "Student Union (SU) ", style: textTheme.bodyLarge),
-              TextSpan(
-                text: "is a dedicated platform designed to connect and "
-                    "empower students across Ghana. It serves as a hub for accessing"
-                    " vital resources, engaging in community activities, and "
-                    "staying informed about union events and initiatives."
-                    "\n\nWith features like easy donations, daily devotionals, "
-                    "and inspiring faith-based content, the app is built to support "
-                    "students' academic, spiritual, and social growth. Together, "
-                    "let’s create a stronger, united student community.",
-                style: textTheme.bodySmall,
-              ),
-            ],
-          )),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AssetImageWidget(
+              asset: icSu,
+              height: appDimen.dimen(400),
+              width: appDimen.dimen(300),
+            ),
+            SizedBox(height: appDimen.dimen(20)),
+            RichText(
+                text: TextSpan(
+              children: [
+                TextSpan(text: "The ", style: textTheme.bodySmall),
+                TextSpan(
+                    text: "Scripture Union (SU) ", style: textTheme.bodyLarge),
+                TextSpan(
+                  text: "is a dedicated platform designed to connect and "
+                      "empower students across Ghana. It serves as a hub for accessing"
+                      " vital resources, engaging in community activities, and "
+                      "staying informed about union events and initiatives."
+                      "\n\nWith features like easy donations, daily devotionals, "
+                      "and inspiring faith-based content, the app is built to support "
+                      "students' academic, spiritual, and social growth. Together, "
+                      "let’s create a stronger, united student community.",
+                  style: textTheme.bodySmall,
+                ),
+              ],
+            )),
+          ],
+        ),
       ),
     );
   }

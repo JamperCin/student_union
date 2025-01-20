@@ -51,7 +51,7 @@ class MainDashboardScreen extends BaseScreenStandard {
       color: colorScheme.onSurface,
       padding: EdgeInsets.only(
         bottom: appDimen.dimen(5),
-        top: appDimen.dimen(-5),
+        top: appDimen.dimen(5),
       ),
       margin: EdgeInsets.zero,
       elevation: 5,
