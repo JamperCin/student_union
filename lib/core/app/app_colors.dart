@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-var primaryGreenColor = const Color(0xFF1C6F15);
+var primaryGreenColor = const Color(0xFF014C16);
+var primaryGreenColorDeep = const Color(0xFF015418);
 var disabledGreenColor = const Color(0xFFA8E29F);
 var greenFaded = const Color(0xFFC8E8C2);
 var tertiaryGreenColor = const Color(0xFF137359);
@@ -9,6 +10,8 @@ var secondaryGreenColor = const Color(0xFF7CD838);
 var introColor1 = const Color(0xFFFFDB9C);
 var introColor2 = const Color(0xFFCCDBF2);
 var introColor3 = const Color(0xFFEFE9CC);
+
+var secondary = const Color(0xFFDFA910);
 
 ///
 var orangePrimaryColor = const Color(0xFFFF4D00);
@@ -20,7 +23,7 @@ var orangeQuadColor = const Color(0xFFFFE6DB);
 var greyPrimaryColor = const Color(0xFFA5A1A1);
 var greySecondaryColor = const Color(0xFFE9E9E9);
 var greyTertiaryColor = const Color(0xFFE4E4E4);
-var greyTertiaryLightColor = const Color(0xFFF1F0F0);
+var greyTertiaryLightColor = const Color(0xFFDAD8D8);
 var dividerColor = const Color(0xFFBAB8B8);
 var greenPrimaryColor = const Color(0xFF16A34A);
 var greenSecondaryColor = const Color(0xFF2AA952);

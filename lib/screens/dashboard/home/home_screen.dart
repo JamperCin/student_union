@@ -1,4 +1,4 @@
-import 'package:core_module/core/def/global_definitions.dart';
+import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';

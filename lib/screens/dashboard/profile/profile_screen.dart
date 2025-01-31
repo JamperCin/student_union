@@ -1,5 +1,5 @@
-import 'package:core_module/core/def/global_definitions.dart';
-import 'package:core_module/core/res/assets_image_path.dart';
+import 'package:core_module/core/def/global_def.dart';
+import 'package:core_module/core/res/assets_path.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/card_container_widget.dart';
 import 'package:core_module/core_ui/widgets/profile_menu_widget.dart';

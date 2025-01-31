@@ -63,16 +63,17 @@ ThemeData lightMode = ThemeData(
     //
     onPrimary: secondaryGreenColor,
     primaryContainer: orangeQuadColor,
-    primaryFixedDim: orangeXColor,
+    primaryFixedDim: primaryGreenColorDeep,
     primaryFixed: orangeFadeColor,
 
     ///Secondary colors
-    secondary: greyPrimaryColor,
+    secondary: secondary,
     onSecondary: greySecondaryColor,
     secondaryContainer: greyTertiaryColor,
 
     ///Tertiary colors
     tertiary: whiteColor,
+    tertiaryContainer: greyPrimaryColor,
 
     ///Error
     error: redColor,

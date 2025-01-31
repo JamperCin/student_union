@@ -1,4 +1,4 @@
-import 'package:core_module/core/def/global_definitions.dart';
+import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/model/local/bottom_bar_model.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/bottom_app_bar_widget.dart';

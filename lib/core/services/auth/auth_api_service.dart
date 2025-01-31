@@ -1,8 +1,9 @@
 import 'dart:collection';
 
-import 'package:core_module/core/def/global_definitions.dart';
+import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/model/remote/base_response_model.dart';
 import 'package:core_module/core/services/base_api_service.dart';
+import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/services/auth/auth_api_interface.dart';
 
 class AuthApiService extends BaseApiService implements AuthApiInterface {

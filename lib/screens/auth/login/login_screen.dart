@@ -1,6 +1,8 @@
-import 'package:core_module/core/def/global_definitions.dart';
+import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_dec.dart';
+import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/snippets/third_party_auth/third_party_auth_widget.dart';
+import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/divider_widget.dart';
 import 'package:core_module/core_ui/widgets/text_button_widget.dart';
@@ -21,15 +23,39 @@ class LoginScreen extends BaseScreenDecorated {
   }
 
   @override
+  Color backgroundColor(BuildContext context) {
+    return Colors.transparent;
+  }
+
+  @override
+  Positioned decoBackPosition() {
+    return Positioned.fill(
+      child: AssetImageWidget(
+        height: appDimen.screenHeight ,
+        width: appDimen.screenWidth ,
+        asset: icBackground,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  @override
   Widget page(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Center(
+            child: AssetImageWidget(
+              height: appDimen.dimen(150),
+              width: appDimen.dimen(200),
+              asset: icSuWhite,
+            ),
+          ),
           SizedBox(height: appDimen.dimen(20)),
           Text(
             'Log In',
-            style: textTheme.headlineMedium,
+            style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
           ),
           SizedBox(height: appDimen.dimen(20)),
           Text(

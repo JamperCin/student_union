@@ -1,4 +1,4 @@
-import 'package:core_module/core/def/global_definitions.dart';
+import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';

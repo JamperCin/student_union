@@ -1,12 +1,11 @@
 import 'package:core_module/core/model/local/bottom_bar_model.dart';
-import 'package:core_module/core/res/assets_image_path.dart';
+import 'package:core_module/core/res/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:get/get.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
-import 'package:student_union/core/services/user/user_api_service.dart';
 
 
 class DashboardController extends BaseController {

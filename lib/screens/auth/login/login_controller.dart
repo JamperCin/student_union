@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:core_module/core/def/global_definitions.dart';
+import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/text_controller_ext.dart';
 import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +9,6 @@ import 'package:student_union/core/services/auth/auth_api_service.dart';
 import 'package:student_union/screens/auth/forgot_password/forgot_password_screen.dart';
 import 'package:student_union/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:student_union/screens/dashboard/main_dashboard_screen.dart';
-
-
 
 class LoginController extends BaseController {
   var emailTxtCtrl = TextEditingController();
