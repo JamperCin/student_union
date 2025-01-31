@@ -14,7 +14,7 @@ final appRoute = [
 ];
 
 BaseScreenImpl _getPage() {
-  if (!appPreference.isIntroShown()) {
+  if (appPreference.isIntroShown()) {
 
     if (!appPreference.isLogin()) {
       return LoginScreen();

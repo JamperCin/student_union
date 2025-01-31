@@ -1,6 +1,7 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_dec.dart';
 import 'package:core_module/core_ui/snippets/third_party_auth/third_party_auth_widget.dart';
+import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/checkbox_widget.dart';
 import 'package:core_module/core_ui/widgets/divider_widget.dart';
@@ -15,13 +16,40 @@ class SignUpScreen extends BaseScreenDecorated {
   final _controller = Get.put(SignUpController());
 
   @override
+  String decoPageAsset() {
+    return icSu;
+  }
+
+  @override
   bool showAppBar() {
     return true;
   }
 
   @override
-  String decoPageAsset() {
-    return icSu;
+  Color appBarBackgroundColor(BuildContext context) {
+    return backgroundColor(context);
+  }
+
+  @override
+  Color backgroundColor(BuildContext context) {
+    return colorScheme.primary;
+  }
+
+  @override
+  Color appBarIconColor(BuildContext context) {
+    return colorScheme.tertiary;
+  }
+
+  @override
+  Positioned decoBackPosition() {
+    return Positioned.fill(
+      child: AssetImageWidget(
+        height: appDimen.screenHeight,
+        width: appDimen.screenWidth,
+        asset: icBackground,
+        fit: BoxFit.cover,
+      ),
+    );
   }
 
   @override
@@ -30,49 +58,56 @@ class SignUpScreen extends BaseScreenDecorated {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Create Account",
-            style: textTheme.displayMedium,
+          Center(
+            child: AssetImageWidget(
+              height: appDimen.dimen(180),
+              width: appDimen.dimen(250),
+              asset: icSu,
+            ),
           ),
-          SizedBox(height: appDimen.dimen(5)),
+          SizedBox(height: appDimen.dimen(20)),
           Text(
-            "Fill in your information below or register wih your social account",
-            style: textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w300),
+            'Hello!',
+            style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
           ),
-          SizedBox(height: appDimen.dimen(60)),
+          SizedBox(height: appDimen.dimen(1)),
+          Text(
+            'Sign Up to continue',
+            style: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+          ),
+          SizedBox(height: appDimen.dimen(40)),
           TextFieldWidget(
             labelText: 'Full Name',
             hintText: 'Ex. John Doe',
+            labelStyle:
+                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
           ),
           SizedBox(height: appDimen.dimen(10)),
-          // TextFieldWidget.withPhoneNumber(
-          //   labelText: 'Phone number',
-          //   hintText: '000 0000 0000',
-          // ),
-          // SizedBox(height: appDimen.dimen(10)),
           TextFieldWidget(
             labelText: 'Email',
             hintText: 'example@mail.com',
+            labelStyle:
+                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
           ),
           SizedBox(height: appDimen.dimen(10)),
           TextFieldWidget.withPassword(
             labelText: 'Password',
             hintText: '********',
+            labelStyle:
+                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
           ),
-          // SizedBox(height: appDimen.dimen(10)),
-          // DayMonthPickerWidget(
-          //   labelText: 'Select your date of birth',
-          //   dayCtrl: _controller.dayCtrl,
-          //   monthCtrl: _controller.monthCtrl,
-          // ),
           SizedBox(height: appDimen.dimen(1)),
           CheckboxWidget(
             text: 'Agree with Terms And Conditions',
+            unCheckedValue: colorScheme.tertiary,
+            activeColor: colorScheme.secondary,
             onChange: _controller.onTermsAndCondOnClick,
+            style: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
           ),
-          SizedBox(height: appDimen.dimen(20)),
+          SizedBox(height: appDimen.dimen(50)),
           ButtonWidget(
-            text: "Sign Up",
+            backgroundColor: colorScheme.secondary,
+            text: "SIGN UP",
             onTap: () {
               _controller.onSignUpOnClick(context);
             },
@@ -85,21 +120,21 @@ class SignUpScreen extends BaseScreenDecorated {
                 text: TextSpan(children: [
                   TextSpan(
                     text: 'Already have an Account? ',
-                    style: textTheme.labelMedium,
+                    style: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
                   ),
                   TextSpan(
                     text: 'Sign In',
-                    style: textTheme.bodyMedium?.copyWith(color: Colors.blue),
+                    style:textTheme.labelMedium?.copyWith(color: colorScheme.secondary),
                   ),
                 ]),
               ),
             ),
           ),
           SizedBox(height: appDimen.dimen(20)),
-          const DividerWidget.withChild(text: 'Or Sign Up With'),
-          SizedBox(height: appDimen.dimen(20)),
-          const ThirdPartyAuthWidget(),
-          SizedBox(height: appDimen.dimen(20)),
+          // const DividerWidget.withChild(text: 'Or Sign Up With'),
+          // SizedBox(height: appDimen.dimen(20)),
+          // const ThirdPartyAuthWidget(),
+          // SizedBox(height: appDimen.dimen(20)),
         ],
       ),
     );

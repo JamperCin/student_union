@@ -1,16 +1,12 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_dec.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
-import 'package:core_module/core_ui/snippets/third_party_auth/third_party_auth_widget.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
-import 'package:core_module/core_ui/widgets/divider_widget.dart';
 import 'package:core_module/core_ui/widgets/text_button_widget.dart';
 import 'package:core_module/core_ui/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/login/login_controller.dart';
 
@@ -24,7 +20,7 @@ class LoginScreen extends BaseScreenDecorated {
 
   @override
   Color backgroundColor(BuildContext context) {
-    return Colors.transparent;
+    return colorScheme.primary;
   }
 
   @override
@@ -47,25 +43,26 @@ class LoginScreen extends BaseScreenDecorated {
         children: [
           Center(
             child: AssetImageWidget(
-              height: appDimen.dimen(150),
-              width: appDimen.dimen(200),
-              asset: icSuWhite,
+              height: appDimen.dimen(180),
+              width: appDimen.dimen(250),
+              asset: icSu,
             ),
           ),
           SizedBox(height: appDimen.dimen(20)),
           Text(
-            'Log In',
+            'Hello!',
             style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
           ),
-          SizedBox(height: appDimen.dimen(20)),
+          SizedBox(height: appDimen.dimen(1)),
           Text(
-            'Log in to StudentUnion App with your email address and password',
-            style: textTheme.labelSmall,
+            'Sign In to continue',
+            style: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
           ),
           SizedBox(height: appDimen.dimen(40)),
           TextFieldWidget(
             labelText: 'Email',
             hintText: 'Email Eg. example@gmail.com',
+            labelStyle: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixIcon: Icon(
               Icons.email_outlined,
               color: colorScheme.onPrimary,
@@ -79,27 +76,30 @@ class LoginScreen extends BaseScreenDecorated {
             labelText: 'Password',
             hintText: 'Enter your password',
             controller: _controller.passwordTxtCtrl,
+            labelStyle: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
           ),
           SizedBox(height: appDimen.dimen(20)),
           Align(
             alignment: Alignment.centerRight,
             child: TextButtonWidget.withTextOnly(
               text: 'Forgot Password',
+              style: textTheme.bodyMedium?.copyWith(color: colorScheme.tertiary),
               onTap: _controller.onForgotPasswordClicked,
             ),
           ),
           SizedBox(height: appDimen.dimen(40)),
           ButtonWidget(
+            backgroundColor: colorScheme.secondary,
             onTap: () {
               _controller.onLoginOnClick(context);
             },
-            text: 'Login',
+            text: 'SIGN IN',
           ),
           SizedBox(height: appDimen.dimen(20)),
-          const DividerWidget.withChild(text: 'Or'),
+         // const DividerWidget.withChild(text: 'Or'),
           SizedBox(height: appDimen.dimen(20)),
-          const ThirdPartyAuthWidget(),
-          SizedBox(height: appDimen.dimen(20)),
+         // const ThirdPartyAuthWidget(),
+         // SizedBox(height: appDimen.dimen(20)),
           Center(
             child: TextButtonWidget(
               onTap: _controller.onSignUpClicked,
@@ -107,12 +107,12 @@ class LoginScreen extends BaseScreenDecorated {
                   text: TextSpan(children: [
                 TextSpan(
                   text: 'Don\'t have an Account? ',
-                  style: textTheme.labelMedium,
+                  style: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
                 ),
                 TextSpan(
                   text: 'Sign Up',
                   style:
-                      textTheme.labelLarge?.copyWith(color: greenPrimaryColor),
+                      textTheme.labelMedium?.copyWith(color: colorScheme.secondary),
                 ),
               ])),
             ),

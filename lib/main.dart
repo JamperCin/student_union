@@ -27,7 +27,7 @@ void main() async {
   // Set status bar color
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: orangePrimaryColor, // Set the status bar color
+      statusBarColor: primaryGreenColor, // Set the status bar color
       statusBarBrightness:
           Brightness.light, // For iOS (light text on status bar)
       statusBarIconBrightness:

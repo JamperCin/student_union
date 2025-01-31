@@ -96,65 +96,61 @@ class IntroScreen extends BaseScreenStandard {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Flexible(
-              flex: 1,
-              child: SizedBox(width: appDimen.screenWidth),
+            TextButtonWidget(
+              text: "",
+              style: textTheme.labelMedium,
+              onTap: () {},
             ),
-            Flexible(
-              flex: 0,
-              child: Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButtonWidget.withCircularBorder(
-                      iconSize: 20,
-                      icon: Icons.arrow_back_ios,
-                      iconColor: _introController.pageIndex.value != 0
-                          ? colorScheme.primary
-                          : colorScheme.shadow,
-                      borderColor: Colors.transparent,
-                      iconPadding: 2,
-                      onTap: () {
-                        if (_introController.pageIndex.value != 0) {
-                          _introController.onGoToPrevious(_pageController);
-                        }
-                      },
-                    ),
-                    SizedBox(width: appDimen.dimen(10)),
-                    FittedBox(
-                        child: PodWidget(
-                      podLength: _introController.introData.length,
-                      inActiveColor: colorScheme.tertiaryContainer,
-                      currentIndex: _introController.pageIndex,
-                      onTap: (index) {
-                        _pageController.animateToPage(
-                          index,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.decelerate,
-                        );
-                      },
-                    )),
-                    SizedBox(width: appDimen.dimen(10)),
-                    IconButtonWidget.withCircularBorder(
-                      icon: Icons.arrow_forward_ios,
-                      iconSize: 20,
-                      iconPadding: 2,
-                      iconColor: colorScheme.primary,
-                      borderColor: Colors.transparent,
-                      onTap: () {
-                        _introController.onGoToNext(_pageController);
-                      },
-                    ),
-                  ],
-                ),
+            Obx(
+                  () => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButtonWidget.withCircularBorder(
+                    iconSize: 20,
+                    icon: Icons.arrow_back_ios,
+                    iconColor: _introController.pageIndex.value != 0
+                        ? colorScheme.primary
+                        : colorScheme.shadow,
+                    borderColor: Colors.transparent,
+                    iconPadding: 2,
+                    onTap: () {
+                      if (_introController.pageIndex.value != 0) {
+                        _introController.onGoToPrevious(_pageController);
+                      }
+                    },
+                  ),
+                  SizedBox(width: appDimen.dimen(10)),
+                  FittedBox(
+                      child: PodWidget(
+                        podLength: _introController.introData.length,
+                        inActiveColor: colorScheme.tertiaryContainer,
+                        currentIndex: _introController.pageIndex,
+                        onTap: (index) {
+                          _pageController.animateToPage(
+                            index,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.decelerate,
+                          );
+                        },
+                      )),
+                  SizedBox(width: appDimen.dimen(10)),
+                  IconButtonWidget.withCircularBorder(
+                    icon: Icons.arrow_forward_ios,
+                    iconSize: 20,
+                    iconPadding: 2,
+                    iconColor: colorScheme.primary,
+                    borderColor: Colors.transparent,
+                    onTap: () {
+                      _introController.onGoToNext(_pageController);
+                    },
+                  ),
+                ],
               ),
             ),
-            Flexible(
-              flex: 1,
-              child: TextButtonWidget(
-                text: "Skip",style: textTheme.labelMedium,
-                onTap: _introController.onSkipOnClick,
-              ),
+            TextButtonWidget(
+              text: "Skip",
+              style: textTheme.labelMedium,
+              onTap: _introController.onSkipOnClick,
             )
           ],
         ),

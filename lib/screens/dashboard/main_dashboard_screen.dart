@@ -31,13 +31,13 @@ class MainDashboardScreen extends BaseScreenStandard {
           _controller.bottomBarMenuList.firstWhere((e) => e.isSelected == true);
 
       switch (model.text) {
-        case "Devotion":
+        case "Devotional":
           return AddDevotionScreen();
-        case "Donate":
+        case "Donation":
           return DonationsScreen();
-        case "News":
+        case "News Update":
           return NewsScreen();
-        case "Profile":
+        case "More":
           return ProfileScreen();
         default:
           return HomeScreen();
@@ -64,6 +64,8 @@ class MainDashboardScreen extends BaseScreenStandard {
               children: [
                 ..._controller.bottomBarMenuList.value.map((model) {
                   return BottomAppBarWidget(
+                    activeColor: colorScheme.secondary,
+                    inActiveColor: colorScheme.primary,
                     model: model,
                     onTap: () {
                       _controller.onBottomMenuOnClick(model);

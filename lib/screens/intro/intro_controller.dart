@@ -16,17 +16,17 @@ class IntroController extends BaseController {
     const IntroModel(
       mainText: 'Daily Quiet Time',
       subText:
-          'Make time with God daily by using one of the devotional guides to help you read the Bible, Pray, and Make notes.',
+          'Make time with God daily by using one \nof the devotional guides to help you \nread the Bible, Pray, and Make notes.',
       assetName: intro2,
     ),
     const IntroModel(
       assetName: intro1,
       mainText: 'Donate To SU GHANA',
-      subText: 'Come on board to support SU Ghana Ministry as we disciple and nurture children, youth and families.',
+      subText: 'Come on board to support SU Ghana \nMinistry as we disciple and nurture children, \nyouth and families.',
     ),
     const IntroModel(
       mainText: 'Community Updates & News',
-      subText: 'Join the SU community globally, receive updates on the SU Ghana Ministry, and engage with fellow SU members.',
+      subText: 'Join the SU community globally, receive \nupdates on the SU Ghana Ministry, and \nengage with fellow SU members.',
       assetName: intro3,
     ),
     // const IntroModel(

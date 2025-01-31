@@ -20,29 +20,29 @@ class DashboardController extends BaseController {
   ///List of menu for the bottom navigation bar
   RxList<BottomBarModel> bottomBarMenuList = [
     BottomBarModel(
-      asset: icDevotion,
+      asset: icHomeIcon,
       text: 'Home',
       isSelected: true,
       key: GlobalKey<AnimatorWidgetState>(),
     ),
     BottomBarModel(
-      asset: icAddDevotion,
-      text: 'Devotion',
+      asset: icDevotion,
+      text: 'Devotional',
       key: GlobalKey<AnimatorWidgetState>(),
     ),
     BottomBarModel(
       asset: icDonate,
-      text: 'Donate',
+      text: 'Donation',
       key: GlobalKey<AnimatorWidgetState>(),
     ),
     BottomBarModel(
       asset: icNews,
-      text: "News",
+      text: "News Update",
       key: GlobalKey<AnimatorWidgetState>(),
     ),
     BottomBarModel(
       asset: icProfile,
-      text: "Profile",
+      text: "More",
       key: GlobalKey<AnimatorWidgetState>(),
     ),
   ].obs;
