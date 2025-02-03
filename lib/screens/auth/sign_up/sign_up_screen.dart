@@ -26,6 +26,11 @@ class SignUpScreen extends BaseScreenDecorated {
   }
 
   @override
+  double decoPageTopPadding() {
+    return appDimen.dimen(1);
+  }
+
+  @override
   Color appBarBackgroundColor(BuildContext context) {
     return backgroundColor(context);
   }
@@ -60,7 +65,7 @@ class SignUpScreen extends BaseScreenDecorated {
         children: [
           Center(
             child: AssetImageWidget(
-              height: appDimen.dimen(180),
+              height: appDimen.dimen(150),
               width: appDimen.dimen(250),
               asset: icSu,
             ),
