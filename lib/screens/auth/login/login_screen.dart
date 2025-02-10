@@ -27,8 +27,8 @@ class LoginScreen extends BaseScreenDecorated {
   Positioned decoBackPosition() {
     return Positioned.fill(
       child: AssetImageWidget(
-        height: appDimen.screenHeight ,
-        width: appDimen.screenWidth ,
+        height: appDimen.screenHeight,
+        width: appDimen.screenWidth,
         asset: icBackground,
         fit: BoxFit.cover,
       ),
@@ -62,12 +62,18 @@ class LoginScreen extends BaseScreenDecorated {
           TextFieldWidget(
             labelText: 'Email',
             hintText: 'Email Eg. example@gmail.com',
-            labelStyle: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
-            prefixIcon: Icon(
-              Icons.email_outlined,
-              color: colorScheme.onPrimary,
-              size: appDimen.dimen(18),
+            labelStyle:
+                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            prefixIcon: AssetImageWidget(
+              asset: icEmailInput,
+              height: 5,
+              width: 5,
             ),
+            // prefixIcon: Icon(
+            //   Icons.email_outlined,
+            //   color: colorScheme.onPrimary,
+            //   size: appDimen.dimen(18),
+            // ),
             keyboardType: TextInputType.emailAddress,
             controller: _controller.emailTxtCtrl,
           ),
@@ -76,14 +82,16 @@ class LoginScreen extends BaseScreenDecorated {
             labelText: 'Password',
             hintText: 'Enter your password',
             controller: _controller.passwordTxtCtrl,
-            labelStyle: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            labelStyle:
+                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
           ),
           SizedBox(height: appDimen.dimen(20)),
           Align(
             alignment: Alignment.centerRight,
             child: TextButtonWidget.withTextOnly(
               text: 'Forgot Password',
-              style: textTheme.bodyMedium?.copyWith(color: colorScheme.tertiary),
+              style:
+                  textTheme.bodyMedium?.copyWith(color: colorScheme.tertiary),
               onTap: _controller.onForgotPasswordClicked,
             ),
           ),
@@ -96,10 +104,10 @@ class LoginScreen extends BaseScreenDecorated {
             text: 'SIGN IN',
           ),
           SizedBox(height: appDimen.dimen(20)),
-         // const DividerWidget.withChild(text: 'Or'),
+          // const DividerWidget.withChild(text: 'Or'),
           SizedBox(height: appDimen.dimen(20)),
-         // const ThirdPartyAuthWidget(),
-         // SizedBox(height: appDimen.dimen(20)),
+          // const ThirdPartyAuthWidget(),
+          // SizedBox(height: appDimen.dimen(20)),
           Center(
             child: TextButtonWidget(
               onTap: _controller.onSignUpClicked,
@@ -107,12 +115,13 @@ class LoginScreen extends BaseScreenDecorated {
                   text: TextSpan(children: [
                 TextSpan(
                   text: 'Don\'t have an Account? ',
-                  style: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+                  style: textTheme.labelSmall
+                      ?.copyWith(color: colorScheme.tertiary),
                 ),
                 TextSpan(
                   text: 'Sign Up',
-                  style:
-                      textTheme.labelMedium?.copyWith(color: colorScheme.secondary),
+                  style: textTheme.labelMedium
+                      ?.copyWith(color: colorScheme.secondary),
                 ),
               ])),
             ),

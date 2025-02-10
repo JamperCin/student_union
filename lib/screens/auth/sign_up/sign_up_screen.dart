@@ -86,6 +86,11 @@ class SignUpScreen extends BaseScreenDecorated {
             hintText: 'Ex. John Doe',
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            prefixIcon: AssetImageWidget(
+              asset: icProfileInput,
+              height: appDimen.dimen(10),
+              width: appDimen.dimen(10),
+            ),
           ),
           SizedBox(height: appDimen.dimen(10)),
           TextFieldWidget(
@@ -93,6 +98,11 @@ class SignUpScreen extends BaseScreenDecorated {
             hintText: 'example@mail.com',
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            prefixIcon: AssetImageWidget(
+              asset: icEmailInput,
+              height: appDimen.dimen(2),
+              width: appDimen.dimen(2),
+            ),
           ),
           SizedBox(height: appDimen.dimen(10)),
           TextFieldWidget.withPassword(
@@ -100,6 +110,11 @@ class SignUpScreen extends BaseScreenDecorated {
             hintText: '********',
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            prefixIcon: AssetImageWidget(
+              asset: icPasswordInput,
+              height: appDimen.dimen(10),
+              width: appDimen.dimen(10),
+            ),
           ),
           SizedBox(height: appDimen.dimen(1)),
           CheckboxWidget(
@@ -125,11 +140,13 @@ class SignUpScreen extends BaseScreenDecorated {
                 text: TextSpan(children: [
                   TextSpan(
                     text: 'Already have an Account? ',
-                    style: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+                    style: textTheme.labelSmall
+                        ?.copyWith(color: colorScheme.tertiary),
                   ),
                   TextSpan(
                     text: 'Sign In',
-                    style:textTheme.labelMedium?.copyWith(color: colorScheme.secondary),
+                    style: textTheme.labelMedium
+                        ?.copyWith(color: colorScheme.secondary),
                   ),
                 ]),
               ),

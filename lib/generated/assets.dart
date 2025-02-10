@@ -2,6 +2,8 @@
 class Assets {
   Assets._();
 
+  static const String assetsImagesIcDonate = 'assets/images/ic_donate.svg';
+  static const String assetsImagesIcNews = 'assets/images/ic_news.svg';
   static const String dataEnv = 'assets/data/env.json';
   static const String gothamGothamrndBold = 'assets/fonts/gotham/gothamrnd_bold.otf';
   static const String gothamGothamrndBook = 'assets/fonts/gotham/gothamrnd_book.otf';
@@ -10,19 +12,22 @@ class Assets {
   static const String imagesIcAbout = 'assets/images/ic_about.png';
   static const String imagesIcAddDevotion = 'assets/images/ic_add_devotion.png';
   static const String imagesIcBackground = 'assets/images/ic_background.png';
-  static const String imagesIcDevotion = 'assets/images/ic_devotion.png';
+  static const String imagesIcDevotion = 'assets/images/ic_devotion.svg';
   static const String imagesIcDonate = 'assets/images/ic_donate.png';
+  static const String imagesIcEmail = 'assets/images/ic_email.svg';
+  static const String imagesIcHome = 'assets/images/ic_home.svg';
   static const String imagesIcIntro1 = 'assets/images/ic_intro_1.png';
   static const String imagesIcIntro2 = 'assets/images/ic_intro_2.png';
   static const String imagesIcIntro3 = 'assets/images/ic_intro_3.png';
+  static const String imagesIcMore = 'assets/images/ic_more.svg';
   static const String imagesIcNews = 'assets/images/ic_news.png';
+  static const String imagesIcPassword = 'assets/images/ic_password.svg';
+  static const String imagesIcProfileInput = 'assets/images/ic_profile_input.svg';
+  static const String imagesIcSplash = 'assets/images/ic_splash.png';
+  static const String imagesIcSplashLogo = 'assets/images/ic_splash_logo.png';
   static const String imagesIcSu = 'assets/images/ic_su.png';
   static const String imagesIcSuLarge = 'assets/images/ic_su_large.jpeg';
   static const String imagesIcSuWhite = 'assets/images/ic_su_white.png';
-  static const String imagesIntro1 = 'assets/images/intro_1.svg';
-  static const String imagesIntro2 = 'assets/images/intro_2.svg';
-  static const String imagesIntro3 = 'assets/images/intro_3.svg';
-  static const String imagesIntro4 = 'assets/images/intro_4.svg';
   static const String sfUiSfBold = 'assets/fonts/sf_ui/sf_bold.otf';
   static const String sfUiSfHeavy = 'assets/fonts/sf_ui/sf_heavy.otf';
   static const String sfUiSfLight = 'assets/fonts/sf_ui/sf_light.otf';

@@ -118,10 +118,10 @@ packages:
     description:
       path: "packages/core_module"
       ref: HEAD
-      resolved-ref: "0d6046fe48a22aab362fedcce7205d1b47fcd6e6"
+      resolved-ref: "7850d62b0dbfaba923a70ef2a1778ea66d568aa8"
       url: "https://github.com/JamperCin/core_package"
     source: git
-    version: "1.2.2"
+    version: "1.2.3"
   cross_file:
     dependency: transitive
     description:
@@ -305,6 +305,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  gap:
+    dependency: "direct main"
+    description:
+      name: gap
+      sha256: f19387d4e32f849394758b91377f9153a1b41d79513ef7668c088c77dbc6955d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   geocoding:
     dependency: transitive
     description:
@@ -906,10 +914,10 @@ packages:
     dependency: transitive
     description:
       name: vector_graphics
-      sha256: "7ed22c21d7fdcc88dd6ba7860384af438cd220b251ad65dfc142ab722fabef61"
+      sha256: "44cc7104ff32563122a929e4620cf3efd584194eec6d1d913eb5ba593dbcf6de"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.16"
+    version: "1.1.18"
   vector_graphics_codec:
     dependency: transitive
     description:
