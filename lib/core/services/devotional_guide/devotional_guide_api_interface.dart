@@ -1,0 +1,6 @@
+import 'package:student_union/core/model/devotional_guide_model.dart';
+
+abstract class DevotionalGuideApiInterface {
+  Future<List<DevotionalGuideModel>> fetchListOfDevotionalGuide();
+  Future<List<DevotionalGuideModel>> fetchListOfCoreMinistries();
+}

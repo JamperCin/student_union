@@ -29,14 +29,11 @@ class TopHeaderWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
-      height: appDimen.screenHeight * 0.18,
       width: appDimen.screenWidth,
       color: colorScheme.surface,
-      padding: EdgeInsets.only(
-        top: appDimen.dimen(5),
-        right: appDimen.dimen(10),
-        left: appDimen.dimen(10),
-        bottom: appDimen.dimen(2),
+      padding: EdgeInsets.symmetric(
+        horizontal: appDimen.dimen(10),
+        vertical: appDimen.dimen(5),
       ),
       child: Obx(
         () => Row(

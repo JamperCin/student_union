@@ -50,13 +50,15 @@ class MainDashboardScreen extends BaseScreenStandard {
     return CardContainerWidget(
       color: colorScheme.onSurface,
       padding: EdgeInsets.only(
-        bottom: appDimen.dimen(5),
-        top: appDimen.dimen(5),
+        bottom: appDimen.dimen(20),
+        top: appDimen.dimen(8),
+        right: appDimen.dimen(5),
+        left: appDimen.dimen(5),
       ),
       margin: EdgeInsets.zero,
       elevation: 5,
       child: Obx(
-            () => Column(
+        () => Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
@@ -67,6 +69,7 @@ class MainDashboardScreen extends BaseScreenStandard {
                     activeColor: colorScheme.secondary,
                     inActiveColor: colorScheme.primary,
                     model: model,
+                    style: textTheme.labelMedium?.copyWith(fontSize: appDimen.dimen(8)),
                     onTap: () {
                       _controller.onBottomMenuOnClick(model);
                     },

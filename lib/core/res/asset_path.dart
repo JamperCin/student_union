@@ -20,3 +20,4 @@ const icBackground = "$_rootPath/ic_background.png";
 const icProfileInput = "$_rootPath/ic_profile_input.svg";
 const icEmailInput = "$_rootPath/ic_email.svg";
 const icPasswordInput = "$_rootPath/ic_password.svg";
+const icCoreMinistry = "$_rootPath/ic_ministry.svg";

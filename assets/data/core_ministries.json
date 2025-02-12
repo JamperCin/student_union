@@ -1,0 +1,22 @@
+{
+  "success" : true,
+  "data": {
+    "ministries" : [
+      {
+        "title": "School Ministry",
+        "description": "Brief Summary, For each day, the devotional guide provides a summary of the chapter, a memory verse",
+        "image": "https://nuriakenya.com/wp-content/uploads/2021/06/Daily-Pursuit2.jpg"
+      },
+      {
+        "title": "Camp and Conferences Ministry",
+        "description": "Buy Pressure to Purpose: Answers 4 Life 30 Day Devotional Book Online at Low Prices in India | Pressure to Purpose: Answers 4 Life 30 Day Devotional Review",
+        "image": "https://m.media-amazon.com/images/I/61rkYiyx8mL._AC_UF1000,1000_QL80_.jpg"
+      },
+      {
+        "title": "Bible Society Ministry",
+        "description": "Buy Pressure to Purpose: Answers 4 Life 30 Day Devotional Book Online at Low Prices in India | Pressure to Purpose: Answers 4 Life 30 Day Devotional Review",
+        "image": "https://m.media-amazon.com/images/I/61hqnBiQo8L._AC_UF1000,1000_QL80_.jpg"
+      }
+    ]
+  }
+}

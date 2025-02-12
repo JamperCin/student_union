@@ -4,7 +4,10 @@ class Assets {
 
   static const String assetsImagesIcDonate = 'assets/images/ic_donate.svg';
   static const String assetsImagesIcNews = 'assets/images/ic_news.svg';
+  static const String dataCoreMinistries = 'assets/data/core_ministries.json';
+  static const String dataDevotionalGuide = 'assets/data/devotional_guide.json';
   static const String dataEnv = 'assets/data/env.json';
+  static const String dataUpcomingEvents = 'assets/data/upcoming_events.json';
   static const String gothamGothamrndBold = 'assets/fonts/gotham/gothamrnd_bold.otf';
   static const String gothamGothamrndBook = 'assets/fonts/gotham/gothamrnd_book.otf';
   static const String gothamGothamrndLight = 'assets/fonts/gotham/gothamrnd_light.otf';
@@ -19,6 +22,7 @@ class Assets {
   static const String imagesIcIntro1 = 'assets/images/ic_intro_1.png';
   static const String imagesIcIntro2 = 'assets/images/ic_intro_2.png';
   static const String imagesIcIntro3 = 'assets/images/ic_intro_3.png';
+  static const String imagesIcMinistry = 'assets/images/ic_ministry.svg';
   static const String imagesIcMore = 'assets/images/ic_more.svg';
   static const String imagesIcNews = 'assets/images/ic_news.png';
   static const String imagesIcPassword = 'assets/images/ic_password.svg';

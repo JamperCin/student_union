@@ -11,6 +11,8 @@ import 'package:student_union/core/app/app_theme.dart';
 import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
+import 'package:student_union/core/services/devotional_guide/devotional_guide_api_service.dart';
+import 'package:student_union/core/services/upcoming_events/upcoming_events_api_service.dart';
 import 'package:student_union/core/services/user/user_api_service.dart';
 
 void main() async {
@@ -49,6 +51,8 @@ Future<void> _initializeApp() async {
   );
   userApiService = UserApiService();
   appPreference = AppPreference();
+  devGuideService = DevotionalGuideApiService();
+  upcomingEventsApiService = UpcomingEventsApiService();
 
 }
 
