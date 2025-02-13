@@ -16,12 +16,14 @@ class Assets {
   static const String imagesIcAddDevotion = 'assets/images/ic_add_devotion.png';
   static const String imagesIcBackground = 'assets/images/ic_background.png';
   static const String imagesIcDevotion = 'assets/images/ic_devotion.svg';
+  static const String imagesIcDevotionBg = 'assets/images/ic_devotion_bg.png';
   static const String imagesIcDonate = 'assets/images/ic_donate.png';
   static const String imagesIcEmail = 'assets/images/ic_email.svg';
   static const String imagesIcHome = 'assets/images/ic_home.svg';
   static const String imagesIcIntro1 = 'assets/images/ic_intro_1.png';
   static const String imagesIcIntro2 = 'assets/images/ic_intro_2.png';
   static const String imagesIcIntro3 = 'assets/images/ic_intro_3.png';
+  static const String imagesIcIntro4 = 'assets/images/ic_intro_4.png';
   static const String imagesIcMinistry = 'assets/images/ic_ministry.svg';
   static const String imagesIcMore = 'assets/images/ic_more.svg';
   static const String imagesIcNews = 'assets/images/ic_news.png';

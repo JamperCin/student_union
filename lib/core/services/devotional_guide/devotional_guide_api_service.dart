@@ -29,17 +29,5 @@ class DevotionalGuideApiService extends BaseApiService
     return results;
   }
 
-  @override
-  Future<List<DevotionalGuideModel>> fetchListOfCoreMinistries() async{
-    await Future.delayed(const Duration(seconds: 2));
-    final results = await FileUtils().fetchList<DevotionalGuideModel>(
-      path: "assets/data/core_ministries.json",
-      objectKey: 'data',
-      key: 'ministries',
-      parser: (json) => DevotionalGuideModel.fromJson(json),
-    );
 
-    debugPrint("Mini : ${results.toString()}");
-    return results;
-  }
 }

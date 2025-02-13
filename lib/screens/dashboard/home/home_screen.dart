@@ -5,7 +5,9 @@ import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:student_union/core-ui/widgets/core_ministries_widget.dart';
+import 'package:student_union/core-ui/widgets/daily_devotion_widget.dart' show DailyDevotionWidget;
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
+import 'package:student_union/core-ui/widgets/news_update_widget.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core-ui/widgets/top_header_widget.dart';
 import 'package:student_union/core-ui/widgets/upcoming_events_widget.dart';
@@ -23,7 +25,9 @@ class HomeScreen extends BaseScreenStandard {
   Widget body(BuildContext context) {
     return Column(
       children: [
-        const TopHeaderWidget(),
+        TopHeaderWidget(
+          onSearchOnClick: () {},
+        ),
         Expanded(
           child: Container(
             padding: EdgeInsets.all(appDimen.dimen(10)),
@@ -40,11 +44,15 @@ class HomeScreen extends BaseScreenStandard {
   Widget _homeBody(BuildContext context) {
     return ListView(
       children: [
+        const DailyDevotionWidget(),
+        Gap(10.dp()),
         const DevotionalGuideWidget(),
         Gap(10.dp()),
         const UpcomingEventsWidget(),
         Gap(10.dp()),
         const CoreMinistriesWidget(),
+        Gap(10.dp()),
+        const NewsUpdateWidget(),
       ],
     );
   }

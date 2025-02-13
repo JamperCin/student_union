@@ -27,7 +27,7 @@ class CoreMinistriesWidget extends StatelessWidget {
         TitleTextWidget(text: "Core Ministries"),
         Gap(5.dp()),
         FutureBuilder(
-            future: devGuideService.fetchListOfCoreMinistries(),
+            future: coreMinistryApiService.fetchListOfCoreMinistries(),
             builder: (context, data) {
               return (data.hasData && data.data != null)
                   ? _ministryGridWidget(context, data.data!)
@@ -50,7 +50,8 @@ class CoreMinistriesWidget extends StatelessWidget {
         itemBuilder: (context, index, realIndex) {
           DevotionalGuideModel model = list[index];
           return CardContainerWidget(
-            padding: EdgeInsets.symmetric(horizontal: 5.dp()),
+            padding: EdgeInsets.all(5.dp()),
+            margin: EdgeInsets.only(top: 7.dp(), right: 5.dp(), left: 5.dp(), bottom: 5.dp()),
             child: Column(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -60,15 +61,24 @@ class CoreMinistriesWidget extends StatelessWidget {
                   width: 100.dp(),
                 ),
                 Gap(10.dp()),
-                Text(
-                  model.title,
-                  style: textTheme.labelMedium
-                      ?.copyWith(color: colorScheme.primary, fontSize: 10.dp()),
-                  textAlign: TextAlign.center,
+                SizedBox(
+                  height: 40.dp(),
+                  child: RichText(
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: model.title,
+                              style: textTheme.labelMedium
+                                  ?.copyWith(fontSize: 8.dp()))
+                        ],
+                      )),
                 ),
                 Gap(10.dp()),
                 ButtonWidget(
                   onTap: () {},
+                  height: 35.dp(),
                   text: 'Donate',
                 ),
               ],

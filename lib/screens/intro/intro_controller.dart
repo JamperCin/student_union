@@ -29,12 +29,11 @@ class IntroController extends BaseController {
       subText: 'Join the SU community globally, receive \nupdates on the SU Ghana Ministry, and \nengage with fellow SU members.',
       assetName: intro3,
     ),
-    // const IntroModel(
-    //   mainText: 'Start Your Day with Devotion',
-    //   subText:
-    //   'Begin each day with guided devotions and scripture reflections to keep you spiritually grounded and motivated.',
-    //   assetName: intro4,
-    // ),
+    const IntroModel(
+      mainText: 'Counseling & Prayers',
+      subText: 'Get in touch with our seasoned Counsellors and well-trained Social Media Missionaries, who will provide godly guidance, prayer, and counsel to you in your time of need.',
+      assetName: intro4,
+    ),
   ];
 
   void onPageChanged(int newIndex) {

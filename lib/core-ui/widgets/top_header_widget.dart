@@ -86,6 +86,7 @@ class TopHeaderWidget extends StatelessWidget {
                     iconPadding: 2,
                     //backgroundColor: colorScheme.inversePrimary.withOpacity(0.5),
                     // borderColor: Colors.transparent,
+                    iconColor: colorScheme.primary,
                     onTap: onSearchOnClick,
                   ),
                 if (onSearchOnClick != null) Gap(appDimen.dimen(1)),
