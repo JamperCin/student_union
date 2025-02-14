@@ -11,16 +11,28 @@ import 'package:student_union/core-ui/widgets/title_text_widget.dart'
     show TitleTextWidget;
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/news_update_model.dart';
+import 'package:student_union/screens/dashboard/news/news_screen.dart';
 
 class NewsUpdateWidget extends StatelessWidget {
-  const NewsUpdateWidget({super.key});
+  final bool withDetails;
+
+  const NewsUpdateWidget({super.key}): withDetails = false;
+
+  NewsUpdateWidget.withDetails() : withDetails =true;
 
   @override
   Widget build(BuildContext context) {
+    return withDetails ? _newsWithDetails() : _newsWithLessDetails();
+  }
+
+  Widget _newsWithLessDetails(){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const TitleTextWidget(text: "News Updates"),
+         TitleTextWidget(text: "News Updates", onTap: (){
+           navUtils.fireTarget(NewsScreen(), model: const NewsUpdateModel());
+
+         },),
         Gap(5.dp()),
         FutureBuilder(
             future: newsUpdateApiService.fetchNewsUpdate(),
@@ -31,6 +43,16 @@ class NewsUpdateWidget extends StatelessWidget {
             }),
       ],
     );
+  }
+
+  Widget _newsWithDetails(){
+    return FutureBuilder(
+        future: newsUpdateApiService.fetchNewsUpdate(),
+        builder: (context, data) {
+          return (data.hasData && data.data != null)
+              ? _newsUpdateWidget(context, data.data!)
+              : ShimmerWidget(width: appDimen.screenWidth);
+        });
   }
 
   Widget _newsUpdateWidget(BuildContext context, List<NewsUpdateModel> list) {

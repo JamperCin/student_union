@@ -18,7 +18,7 @@ class UpcomingEventsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const TitleTextWidget(text: "Upcoming Events"),
+         TitleTextWidget(text: "Upcoming Events", onTap: (){},),
         Gap(5.dp()),
         FutureBuilder(
             future: upcomingEventsApiService.fetchUpcomingEvents(),
