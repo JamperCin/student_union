@@ -5,7 +5,7 @@ import 'package:student_union/core/services/news_update/news_update_api_interfac
 
 class NewsUpdateApiService extends BaseApiService implements NewsUpdateApiInterface{
   static NewsUpdateApiService? _instance;
-  final path = "assets/data/upcoming_events.json";
+  final path = "assets/data/news_updates.json";
 
   NewsUpdateApiService._();
 
@@ -19,7 +19,7 @@ class NewsUpdateApiService extends BaseApiService implements NewsUpdateApiInterf
     final results = await FileUtils().fetchList<NewsUpdateModel>(
       path: path,
       objectKey: 'data',
-      key: 'events',
+      key: 'news',
       parser: (json) => NewsUpdateModel.fromJson(json),
     );
 

@@ -5,6 +5,7 @@ class Assets {
   static const String assetsImagesIcDonate = 'assets/images/ic_donate.svg';
   static const String assetsImagesIcNews = 'assets/images/ic_news.svg';
   static const String dataCoreMinistries = 'assets/data/core_ministries.json';
+  static const String dataDailyUpdates = 'assets/data/news_updates.json';
   static const String dataDevotionalGuide = 'assets/data/devotional_guide.json';
   static const String dataEnv = 'assets/data/env.json';
   static const String dataUpcomingEvents = 'assets/data/upcoming_events.json';

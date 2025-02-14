@@ -1,7 +1,9 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_ui/widgets/card_container_widget.dart';
-import 'package:core_module/core_ui/widgets/container_widget.dart' show ContainerWidget;
+import 'package:core_module/core_ui/widgets/container_widget.dart'
+    show ContainerWidget;
+import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:core_module/core_ui/widgets/shimmer_widget.dart'
     show ShimmerWidget;
@@ -16,51 +18,111 @@ import 'package:student_union/screens/dashboard/news/news_screen.dart';
 class NewsUpdateWidget extends StatelessWidget {
   final bool withDetails;
 
-  const NewsUpdateWidget({super.key}): withDetails = false;
+  const NewsUpdateWidget({super.key}) : withDetails = false;
 
-  NewsUpdateWidget.withDetails() : withDetails =true;
+  const NewsUpdateWidget.withDetails() : withDetails = true;
 
   @override
   Widget build(BuildContext context) {
-    return withDetails ? _newsWithDetails() : _newsWithLessDetails();
-  }
-
-  Widget _newsWithLessDetails(){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-         TitleTextWidget(text: "News Updates", onTap: (){
-           navUtils.fireTarget(NewsScreen(), model: const NewsUpdateModel());
-
-         },),
-        Gap(5.dp()),
-        FutureBuilder(
-            future: newsUpdateApiService.fetchNewsUpdate(),
-            builder: (context, data) {
-              return (data.hasData && data.data != null)
-                  ? _newsUpdateWidget(context, data.data!)
-                  : ShimmerWidget(width: appDimen.screenWidth);
-            }),
-      ],
-    );
-  }
-
-  Widget _newsWithDetails(){
     return FutureBuilder(
         future: newsUpdateApiService.fetchNewsUpdate(),
         builder: (context, data) {
           return (data.hasData && data.data != null)
-              ? _newsUpdateWidget(context, data.data!)
-              : ShimmerWidget(width: appDimen.screenWidth);
+              ? (withDetails
+                  ? _newsWithDetails(context, data.data!)
+                  : _newsWithLessDetails(context, data.data!))
+              : ShimmerWidget.withList(length: 4);
         });
   }
 
-  Widget _newsUpdateWidget(BuildContext context, List<NewsUpdateModel> list) {
+  /// This is the widget that displays news updates with MORE details
+  Widget _newsWithDetails(BuildContext context, List<NewsUpdateModel> list) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return Column(
       children: [
+        ...list.map((e) => CardContainerWidget(
+              elevation: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      NetworkImageWidget(
+                        url: e.image,
+                        height: 70.dp(),
+                        width: 70.dp(),
+                        borderRadius: 5,
+                        placeHolderWidget: ContainerWidget(
+                          height: 70.dp(),
+                          width: 70.dp(),
+                        ),
+                      ),
+                      Gap(5.dp()),
+                      RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                            text: e.title,
+                            style: textTheme.labelMedium
+                                ?.copyWith(color: colorScheme.primary))
+                      ])),
+                    ],
+                  ),
+                  Gap(5.dp()),
+                  RichText(
+                      text: TextSpan(children: [
+                    TextSpan(
+                        text: e.description,
+                        style: textTheme.labelSmall?.copyWith(fontSize: 8.dp()))
+                  ])),
+                  Gap(5.dp()),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '3 hours ago',
+                        style: textTheme.labelMedium?.copyWith(
+                            fontSize: 8.dp(),
+                            color: colorScheme.tertiaryContainer),
+                      ),
+                      Row(
+                        children: [
+                          IconButtonWidget(
+                            icon: Icons.share,
+                            iconColor: colorScheme.primary,
+                          ),
+                          Gap(5.dp()),
+                          IconButtonWidget(
+                            icon: Icons.volume_up,
+                            iconColor: colorScheme.primary,
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )),
+      ],
+    );
+  }
+
+  /// This is the widget that displays news updates with less details
+  Widget _newsWithLessDetails(
+      BuildContext context, List<NewsUpdateModel> list) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Column(
+      children: [
+        TitleTextWidget(
+          text: "News Updates",
+          onTap: () {
+            navUtils.fireTarget(NewsScreen(), model: NewsUpdateModel());
+          },
+        ),
         ...list.map((e) => CardContainerWidget(
               elevation: 1,
               child: Row(
@@ -97,8 +159,9 @@ class NewsUpdateWidget extends StatelessWidget {
                         Gap(5.dp()),
                         Text(
                           '3 hours ago',
-                          style:
-                              textTheme.labelMedium?.copyWith(fontSize: 8.dp(), color: colorScheme.tertiaryContainer),
+                          style: textTheme.labelMedium?.copyWith(
+                              fontSize: 8.dp(),
+                              color: colorScheme.tertiaryContainer),
                         )
                       ],
                     ),
