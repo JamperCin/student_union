@@ -214,7 +214,7 @@ packages:
     description:
       path: "packages/core_module"
       ref: HEAD
-      resolved-ref: "31228b72a9edfb1db1661806f648d7be6d02aa6d"
+      resolved-ref: aa2fdc9545a3decf8374e7ec22bcf30041e63b9a
       url: "https://github.com/JamperCin/core_package"
     source: git
     version: "1.2.4"
