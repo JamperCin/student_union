@@ -36,6 +36,11 @@ class SignUpScreen extends BaseScreenDecorated {
   }
 
   @override
+  Color decoBgBlurColor(BuildContext context) {
+    return Colors.transparent;
+  }
+
+  @override
   Color backgroundColor(BuildContext context) {
     return colorScheme.primary;
   }

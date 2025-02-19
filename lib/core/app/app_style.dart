@@ -6,7 +6,7 @@ import 'app_colors.dart';
 const double _wordSpacing = 1.5;
 const double _height = 1.3;
 const double _letterSpacing = 0.2;
-const String _fontFamily = "SfUI"; //"Gotham";
+const String _fontFamily = "Avenirl";//"SfUI"; //"Gotham";
 
 ///=================== L  I  G  H  T     M  O  D  E  =========================
 ///===========================================================================

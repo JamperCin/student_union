@@ -24,6 +24,11 @@ class LoginScreen extends BaseScreenDecorated {
   }
 
   @override
+  Color decoBgBlurColor(BuildContext context) {
+    return Colors.transparent;
+  }
+
+  @override
   Positioned decoBackPosition() {
     return Positioned.fill(
       child: AssetImageWidget(

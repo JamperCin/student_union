@@ -113,6 +113,27 @@ flutter:
           weight: 200
         - asset: assets/fonts/sf_ui/sf_heavy.otf
           weight: 800
+
+    - family: Avenirl
+      fonts:
+        - asset: assets/fonts/avenir/avenirl_light.otf
+          weight: 100
+        - asset: assets/fonts/avenir/avenirl_light_oblique.otf
+          weight: 200
+        - asset: assets/fonts/avenir/avenirl_oblique.otf
+          weight: 300
+        - asset: assets/fonts/avenir/avenirl_medium.otf
+          weight: 400
+        - asset: assets/fonts/avenir/avenirl_medium_oblique.otf
+          weight: 500
+        - asset: assets/fonts/avenir/avenirl_book.otf
+          weight: 600
+        - asset: assets/fonts/avenir/avenirL_book_oblique.otf
+          weight: 700
+        - asset: assets/fonts/avenir/avenirl_heavy.otf
+          weight: 800
+        - asset: assets/fonts/avenir/avenirl_heavy_oblique.otf
+          weight: 900
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

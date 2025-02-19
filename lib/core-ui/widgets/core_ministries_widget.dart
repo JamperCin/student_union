@@ -24,7 +24,7 @@ class CoreMinistriesWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TitleTextWidget(text: "Core Ministries"),
+        const TitleTextWidget(text: "Core Ministries"),
         Gap(5.dp()),
         FutureBuilder(
             future: coreMinistryApiService.fetchListOfCoreMinistries(),

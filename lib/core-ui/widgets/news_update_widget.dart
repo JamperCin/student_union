@@ -17,10 +17,19 @@ import 'package:student_union/screens/dashboard/news/news_screen.dart';
 
 class NewsUpdateWidget extends StatelessWidget {
   final bool withDetails;
+  final GestureTapCallback? onShareOnTap;
+  final GestureTapCallback? onReadTap;
 
-  const NewsUpdateWidget({super.key}) : withDetails = false;
+  const NewsUpdateWidget({super.key})
+      : withDetails = false,
+        onReadTap = null,
+        onShareOnTap = null;
 
-  const NewsUpdateWidget.withDetails() : withDetails = true;
+  const NewsUpdateWidget.withDetails({
+    super.key,
+    this.onReadTap,
+    this.onShareOnTap,
+  }) : withDetails = true;
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +70,20 @@ class NewsUpdateWidget extends StatelessWidget {
                         ),
                       ),
                       Gap(5.dp()),
-                      RichText(
-                          text: TextSpan(children: [
-                        TextSpan(
-                            text: e.title,
-                            style: textTheme.labelMedium
-                                ?.copyWith(color: colorScheme.primary))
-                      ])),
+                      Flexible(
+                        child: RichText(
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: e.title,
+                                  style: textTheme.labelMedium
+                                      ?.copyWith(color: colorScheme.primary))
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   Gap(5.dp()),
@@ -77,7 +93,7 @@ class NewsUpdateWidget extends StatelessWidget {
                         text: e.description,
                         style: textTheme.labelSmall?.copyWith(fontSize: 8.dp()))
                   ])),
-                  Gap(5.dp()),
+                  // Gap(2.dp()),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -92,11 +108,13 @@ class NewsUpdateWidget extends StatelessWidget {
                           IconButtonWidget(
                             icon: Icons.share,
                             iconColor: colorScheme.primary,
+                            onTap: onShareOnTap,
                           ),
                           Gap(5.dp()),
                           IconButtonWidget(
                             icon: Icons.volume_up,
                             iconColor: colorScheme.primary,
+                            onTap: onReadTap,
                           )
                         ],
                       )

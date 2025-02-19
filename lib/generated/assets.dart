@@ -4,10 +4,22 @@ class Assets {
 
   static const String assetsImagesIcDonate = 'assets/images/ic_donate.svg';
   static const String assetsImagesIcNews = 'assets/images/ic_news.svg';
+  static const String avenirAvenirLTStdBlack = 'assets/fonts/avenir/avenirl_black.otf';
+  static const String avenirAvenirLTStdBlackOblique = 'assets/fonts/avenir/avenirl_black_oblique.otf';
+  static const String avenirAvenirLTStdBook = 'assets/fonts/avenir/avenirl_book.otf';
+  static const String avenirAvenirLTStdBookOblique = 'assets/fonts/avenir/avenirL_book_oblique.otf';
+  static const String avenirAvenirLTStdHeavy = 'assets/fonts/avenir/avenirl_heavy.otf';
+  static const String avenirAvenirLTStdHeavyOblique = 'assets/fonts/avenir/avenirl_heavy_oblique.otf';
+  static const String avenirAvenirLTStdLight = 'assets/fonts/avenir/avenirl_light.otf';
+  static const String avenirAvenirLTStdLightOblique = 'assets/fonts/avenir/avenirl_light_oblique.otf';
+  static const String avenirAvenirLTStdMedium = 'assets/fonts/avenir/avenirl_medium.otf';
+  static const String avenirAvenirLTStdMediumOblique = 'assets/fonts/avenir/avenirl_medium_oblique.otf';
+  static const String avenirAvenirLTStdOblique = 'assets/fonts/avenir/avenirl_oblique.otf';
+  static const String avenirAvenirLTStdRoman = 'assets/fonts/avenir/avenirl_roman.otf';
   static const String dataCoreMinistries = 'assets/data/core_ministries.json';
-  static const String dataDailyUpdates = 'assets/data/news_updates.json';
   static const String dataDevotionalGuide = 'assets/data/devotional_guide.json';
   static const String dataEnv = 'assets/data/env.json';
+  static const String dataNewsUpdates = 'assets/data/news_updates.json';
   static const String dataUpcomingEvents = 'assets/data/upcoming_events.json';
   static const String gothamGothamrndBold = 'assets/fonts/gotham/gothamrnd_bold.otf';
   static const String gothamGothamrndBook = 'assets/fonts/gotham/gothamrnd_book.otf';
