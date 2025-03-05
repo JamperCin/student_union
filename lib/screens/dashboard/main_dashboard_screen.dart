@@ -69,7 +69,7 @@ class MainDashboardScreen extends BaseScreenStandard {
                     activeColor: colorScheme.secondary,
                     inActiveColor: colorScheme.primary,
                     model: model,
-                    style: textTheme.labelMedium?.copyWith(fontSize: appDimen.dimen(8)),
+                    style: textTheme.labelMedium?.copyWith(fontSize: appDimen.dimen(10)),
                     onTap: () {
                       _controller.onBottomMenuOnClick(model);
                     },

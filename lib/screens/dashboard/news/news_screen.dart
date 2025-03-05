@@ -14,13 +14,22 @@ class NewsScreen extends BaseScreenStandard {
   }
 
   @override
+  double appBarElevation() {
+    return 10;
+  }
+
+  @override
   String appBarTitle() {
     return "News Update";
   }
 
   @override
+  TextStyle? appBarTitleStyle(BuildContext context) {
+    return super.appBarTitleStyle(context)?.copyWith(fontWeight: FontWeight.w700);
+  }
+
+  @override
   Widget? appBarLeadingIcon(BuildContext context) {
-    print("BAr 2==> $showAppBarIcon");
     return showAppBarIcon
         ? super.appBarLeadingIcon(context)
         : const SizedBox.shrink();

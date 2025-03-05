@@ -89,6 +89,11 @@ class LoginScreen extends BaseScreenDecorated {
             controller: _controller.passwordTxtCtrl,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            prefixIcon: AssetImageWidget(
+              asset: icPasswordInput,
+              height: appDimen.dimen(10),
+              width: appDimen.dimen(10),
+            ),
           ),
           SizedBox(height: appDimen.dimen(20)),
           Align(

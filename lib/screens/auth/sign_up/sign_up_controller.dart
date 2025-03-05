@@ -29,7 +29,7 @@ class SignUpController extends BaseController {
   void onTermsAndCondOnClick(bool isChecked) {}
 
   Future<void> onSignUpOnClick(BuildContext context) async {
-    const LoaderWidget().showProgressIndicator(context: context);
+     LoaderWidget().showProgressIndicator(context: context);
     //TODO final response = await authService.login(params);
     await Future.delayed(const Duration(seconds: 2));
     const LoaderWidget().hideProgress();

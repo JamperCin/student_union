@@ -33,7 +33,7 @@ class DailyDevotionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ContainerWidget(
-          backgroundImage: icDevotionBg,
+          backgroundImage: icDevotionBg,borderColor: Colors.transparent,
           padding: EdgeInsets.symmetric(horizontal: 5.dp(), vertical: 8.dp()),
           width: appDimen.screenWidth,
           child: Column(
