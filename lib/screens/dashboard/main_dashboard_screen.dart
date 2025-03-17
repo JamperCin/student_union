@@ -6,7 +6,7 @@ import 'package:core_module/core_ui/widgets/card_container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_union/screens/dashboard/dashboard_controller.dart';
-import 'package:student_union/screens/dashboard/devotion/add_devotion_screen.dart';
+import 'package:student_union/screens/dashboard/devotion/devotion_screen.dart';
 import 'package:student_union/screens/dashboard/donate/donations_screen.dart';
 import 'package:student_union/screens/dashboard/home/home_screen.dart';
 import 'package:student_union/screens/dashboard/news/news_screen.dart';
@@ -32,7 +32,7 @@ class MainDashboardScreen extends BaseScreenStandard {
 
       switch (model.text) {
         case "Devotional":
-          return AddDevotionScreen();
+          return DevotionsScreen();
         case "Donation":
           return DonationsScreen();
         case "News Update":

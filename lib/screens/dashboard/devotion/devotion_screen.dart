@@ -2,15 +2,16 @@ import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core/model/local/base_object.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
-import 'package:core_module/core_ui/widgets/container_widget.dart';
+import 'package:core_module/core_ui/widgets/drop_down_widget.dart';
+import 'package:core_module/core_ui/widgets/tab_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:student_union/core-ui/widgets/title_text_widget.dart';
+import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
 
 import '../../../core/model/news_update_model.dart';
 import 'devotion_controller.dart';
 
-class AddDevotionScreen extends BaseScreenStandard {
+class DevotionsScreen extends BaseScreenStandard {
   final _controller = Get.put(DevotionController());
   bool showAppBarIcon = false;
 
@@ -34,7 +35,7 @@ class AddDevotionScreen extends BaseScreenStandard {
     return "Devotionals";
   }
 
-  @override
+  /*@override
   PreferredSizeWidget appBar(BuildContext context) {
     return AppBar(
       elevation: 10,
@@ -49,7 +50,7 @@ class AddDevotionScreen extends BaseScreenStandard {
           ),
       actions: actions(),
     );
-  }
+  }*/
 
   @override
   TextStyle? appBarTitleStyle(BuildContext context) {
@@ -78,33 +79,9 @@ class AddDevotionScreen extends BaseScreenStandard {
   @override
   List<Widget> actions() {
     return [
-      ContainerWidget(
-        padding: EdgeInsets.symmetric(horizontal: 10.dp()),
-        height: 40.dp(),
-        margin: EdgeInsets.only(right: 5.dp()),
-        borderColor: colorScheme.primary,
-        child: Obx(
-          ()=> DropdownButton<String>(
-            value: _controller.selectedYear.value,
-            //icon: Icon(Icons.arrow_drop_down),
-            iconSize: 24.dp(),
-            elevation: 16,
-            style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary),
-            underline: Container(
-              height: 0,
-              color: Colors.transparent,
-            ),
-            onChanged: (String? newValue) {
-              _controller.selectedYear.value = newValue!;
-            },
-            items: _controller.list.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-        ),
+      DropDownWidget(
+        selectedItem: _controller.selectedYear,
+        list: _controller.list,
       )
     ];
   }
@@ -113,9 +90,25 @@ class AddDevotionScreen extends BaseScreenStandard {
   Widget body(BuildContext context) {
     return Column(
       children: [
-        TitleTextWidget(text: "text"),
         Gap(5.dp()),
-
+        TabBarWidget(
+          tabs: const [
+            Tab(text: "Available Books"),
+            Tab(text: "Purchased Books"),
+          ],
+          onTap: (index) {
+            _controller.bookTypeFilter.value =
+                index == 0 ? "available" : "purchased";
+          },
+        ),
+        Expanded(
+          child: Obx(() => _controller.bookTypeFilter.value.isNotEmpty
+              ? DevotionalGuideWidget.withVerticalGrid(
+                  bookFilter: _controller.bookTypeFilter.value,
+                  yearFilter: _controller.selectedYear.value,
+                )
+              : const SizedBox.shrink()),
+        )
       ],
     );
   }

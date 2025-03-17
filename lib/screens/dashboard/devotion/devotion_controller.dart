@@ -4,6 +4,7 @@ import 'package:student_union/core/base/base_controller.dart';
 
 class DevotionController extends BaseController {
   RxString selectedYear = "${DateTime.now().year}".obs;
+  RxString bookTypeFilter = "available".obs;
 
 
 
