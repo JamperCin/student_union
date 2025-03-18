@@ -1,7 +1,12 @@
+import 'dart:collection';
+
 import 'package:core_module/core/def/global_def.dart';
+import 'package:core_module/core/extensions/double_extension.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
+import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
+import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:core_module/core_ui/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +24,8 @@ class DevotionalGuideWidget extends StatelessWidget {
 
   const DevotionalGuideWidget({super.key, this.onTap})
       : horizontalGrid = true,
-        yearFilter = null,bookFilter = null,
+        yearFilter = null,
+        bookFilter = null,
         verticalGrid = false;
 
   const DevotionalGuideWidget.withVerticalGrid({
@@ -50,12 +56,20 @@ class DevotionalGuideWidget extends StatelessWidget {
     }
 
     if (verticalGrid) {
+      HashMap<String,Object> param = HashMap();
+      param.putIfAbsent("bookType", ()=> bookFilter ?? "");
+      param.putIfAbsent("year", ()=> yearFilter ?? "");
+
+
       return FutureBuilder(
-          future: devGuideService.fetchListOfDevotionalGuide(),
+          future: devGuideService.fetchListOfDevotionalGuide(param: param),
           builder: (context, data) {
-            return (data.hasData && data.data != null)
+            return (data.hasData && data.data != null && data.data!.isNotEmpty)
                 ? _gridViewDevotion(data.data!)
-                : ShimmerWidget.withGrid();
+                : ShimmerWidget.withGrid(
+                    height: appDimen.dimen(80),
+                    width: appDimen.dimen(50),
+                  );
           });
     }
 
@@ -72,8 +86,8 @@ class DevotionalGuideWidget extends StatelessWidget {
             child: NetworkImageWidget(
               height: appDimen.dimen(280),
               width: appDimen.dimen(200),
-              onTap: (){
-                if(onTap != null)onTap!(model);
+              onTap: () {
+                if (onTap != null) onTap!(model);
               },
               url: model.image,
               placeHolderWidget: ContainerWidget(
@@ -96,20 +110,33 @@ class DevotionalGuideWidget extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: 5,
       crossAxisSpacing: 5,
+      childAspectRatio: 0.6,
       children: [
         ...list.map((e) => Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.dp(), vertical: 10.dp()),
-              child: NetworkImageWidget(
-                height: appDimen.dimen(250),
-                width: appDimen.dimen(180),
-                onTap: (){
-                  if(onTap != null)onTap!(e);
-                },
-                url: e.image,
-                placeHolderWidget: ContainerWidget(
-                  height: appDimen.dimen(250),
-                  width: appDimen.dimen(180),
-                ),
+              padding:
+                  EdgeInsets.symmetric(horizontal: 5.dp(), vertical: 10.dp()),
+              child: Column(
+                children: [
+                  NetworkImageWidget(
+                    height: appDimen.dimen(280),
+                    width: appDimen.dimen(200),
+                    onTap: () {
+                      if (onTap != null) onTap!(e);
+                    },
+                    url: e.image,
+                    placeHolderWidget: ContainerWidget(
+                      height: appDimen.dimen(280),
+                      width: appDimen.dimen(200),
+                    ),
+                  ),
+                  Gap(5.dp()),
+                  ButtonWidget.withOutLine(
+                    text: "${e.currency} ${e.amount.toDecimalPlaces()}",
+                    onTap: () {
+                      if (onTap != null) onTap!(e);
+                    },
+                  )
+                ],
               ),
             ))
       ],

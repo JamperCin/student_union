@@ -23,6 +23,8 @@ mixin _$DevotionalGuideModel {
   String get image => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  String get currency => throw _privateConstructorUsedError;
+  double get amount => throw _privateConstructorUsedError;
 
   /// Serializes this DevotionalGuideModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +42,12 @@ abstract class $DevotionalGuideModelCopyWith<$Res> {
           $Res Function(DevotionalGuideModel) then) =
       _$DevotionalGuideModelCopyWithImpl<$Res, DevotionalGuideModel>;
   @useResult
-  $Res call({String image, String description, String title});
+  $Res call(
+      {String image,
+      String description,
+      String title,
+      String currency,
+      double amount});
 }
 
 /// @nodoc
@@ -62,6 +69,8 @@ class _$DevotionalGuideModelCopyWithImpl<$Res,
     Object? image = null,
     Object? description = null,
     Object? title = null,
+    Object? currency = null,
+    Object? amount = null,
   }) {
     return _then(_value.copyWith(
       image: null == image
@@ -76,6 +85,14 @@ class _$DevotionalGuideModelCopyWithImpl<$Res,
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -88,7 +105,12 @@ abstract class _$$DevotionalGuideModelImplCopyWith<$Res>
       __$$DevotionalGuideModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String image, String description, String title});
+  $Res call(
+      {String image,
+      String description,
+      String title,
+      String currency,
+      double amount});
 }
 
 /// @nodoc
@@ -107,6 +129,8 @@ class __$$DevotionalGuideModelImplCopyWithImpl<$Res>
     Object? image = null,
     Object? description = null,
     Object? title = null,
+    Object? currency = null,
+    Object? amount = null,
   }) {
     return _then(_$DevotionalGuideModelImpl(
       image: null == image
@@ -121,6 +145,14 @@ class __$$DevotionalGuideModelImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -129,7 +161,11 @@ class __$$DevotionalGuideModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DevotionalGuideModelImpl implements _DevotionalGuideModel {
   const _$DevotionalGuideModelImpl(
-      {this.image = "", this.description = "", this.title = ""});
+      {this.image = "",
+      this.description = "",
+      this.title = "",
+      this.currency = "GHS",
+      this.amount = 0.0});
 
   factory _$DevotionalGuideModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DevotionalGuideModelImplFromJson(json);
@@ -143,10 +179,16 @@ class _$DevotionalGuideModelImpl implements _DevotionalGuideModel {
   @override
   @JsonKey()
   final String title;
+  @override
+  @JsonKey()
+  final String currency;
+  @override
+  @JsonKey()
+  final double amount;
 
   @override
   String toString() {
-    return 'DevotionalGuideModel(image: $image, description: $description, title: $title)';
+    return 'DevotionalGuideModel(image: $image, description: $description, title: $title, currency: $currency, amount: $amount)';
   }
 
   @override
@@ -157,12 +199,16 @@ class _$DevotionalGuideModelImpl implements _DevotionalGuideModel {
             (identical(other.image, image) || other.image == image) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.title, title) || other.title == title));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency) &&
+            (identical(other.amount, amount) || other.amount == amount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, image, description, title);
+  int get hashCode =>
+      Object.hash(runtimeType, image, description, title, currency, amount);
 
   /// Create a copy of DevotionalGuideModel
   /// with the given fields replaced by the non-null parameter values.
@@ -186,7 +232,9 @@ abstract class _DevotionalGuideModel implements DevotionalGuideModel {
   const factory _DevotionalGuideModel(
       {final String image,
       final String description,
-      final String title}) = _$DevotionalGuideModelImpl;
+      final String title,
+      final String currency,
+      final double amount}) = _$DevotionalGuideModelImpl;
 
   factory _DevotionalGuideModel.fromJson(Map<String, dynamic> json) =
       _$DevotionalGuideModelImpl.fromJson;
@@ -197,6 +245,10 @@ abstract class _DevotionalGuideModel implements DevotionalGuideModel {
   String get description;
   @override
   String get title;
+  @override
+  String get currency;
+  @override
+  double get amount;
 
   /// Create a copy of DevotionalGuideModel
   /// with the given fields replaced by the non-null parameter values.

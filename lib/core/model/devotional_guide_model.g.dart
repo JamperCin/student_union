@@ -12,6 +12,8 @@ _$DevotionalGuideModelImpl _$$DevotionalGuideModelImplFromJson(
       image: json['image'] as String? ?? "",
       description: json['description'] as String? ?? "",
       title: json['title'] as String? ?? "",
+      currency: json['currency'] as String? ?? "GHS",
+      amount: (json['amount'] as num?)?.toDouble() ?? 0.0,
     );
 
 Map<String, dynamic> _$$DevotionalGuideModelImplToJson(
@@ -20,4 +22,6 @@ Map<String, dynamic> _$$DevotionalGuideModelImplToJson(
       'image': instance.image,
       'description': instance.description,
       'title': instance.title,
+      'currency': instance.currency,
+      'amount': instance.amount,
     };
