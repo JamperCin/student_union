@@ -78,7 +78,7 @@ class NewsUpdateWidget extends StatelessWidget {
                             children: [
                               TextSpan(
                                   text: e.title,
-                                  style: textTheme.labelMedium
+                                  style: textTheme.labelLarge
                                       ?.copyWith(color: colorScheme.primary))
                             ],
                           ),

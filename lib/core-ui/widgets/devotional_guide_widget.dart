@@ -48,7 +48,7 @@ class DevotionalGuideWidget extends StatelessWidget {
               future: devGuideService.fetchListOfDevotionalGuide(),
               builder: (context, data) {
                 return (data.hasData && data.data != null)
-                    ? _devotionGridWidget(data.data!)
+                    ? _horizontalDisplayWidget(data.data!)
                     : ShimmerWidget(width: appDimen.screenWidth);
               }),
         ],
@@ -76,7 +76,7 @@ class DevotionalGuideWidget extends StatelessWidget {
     return const SizedBox.shrink();
   }
 
-  Widget _devotionGridWidget(List<DevotionalGuideModel> list) {
+  Widget _horizontalDisplayWidget(List<DevotionalGuideModel> list) {
     return CarouselSlider.builder(
         itemCount: list.length,
         itemBuilder: (context, index, realIndex) {
@@ -132,6 +132,7 @@ class DevotionalGuideWidget extends StatelessWidget {
                   Gap(5.dp()),
                   ButtonWidget.withOutLine(
                     text: "${e.currency} ${e.amount.toDecimalPlaces()}",
+                    width: appDimen.dimen(200),
                     onTap: () {
                       if (onTap != null) onTap!(e);
                     },

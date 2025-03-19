@@ -5,7 +5,8 @@ import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:student_union/core-ui/widgets/core_ministries_widget.dart';
-import 'package:student_union/core-ui/widgets/daily_devotion_widget.dart' show DailyDevotionWidget;
+import 'package:student_union/core-ui/widgets/daily_devotion_widget.dart'
+    show DailyDevotionWidget;
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
 import 'package:student_union/core-ui/widgets/news_update_widget.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
@@ -46,11 +47,11 @@ class HomeScreen extends BaseScreenStandard {
       children: [
         const DailyDevotionWidget(),
         Gap(10.dp()),
-        const DevotionalGuideWidget(),
+        DevotionalGuideWidget(onTap: _controller.onDevotionTap),
         Gap(10.dp()),
         const UpcomingEventsWidget(),
         Gap(10.dp()),
-        const CoreMinistriesWidget(),
+        CoreMinistriesWidget(onTap: _controller.onDonationOnClick),
         Gap(10.dp()),
         const NewsUpdateWidget(),
       ],

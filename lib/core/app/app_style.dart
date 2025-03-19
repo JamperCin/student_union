@@ -29,7 +29,7 @@ TextStyle labelSmallTextLightModeStyle = TextStyle(
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w200,
   fontFamily: _fontFamily,
-  fontSize: appDimen.dimen(12),
+  fontSize: appDimen.dimen(14),
   wordSpacing: _wordSpacing,
   height: _height,
   letterSpacing: _letterSpacing,

@@ -22,4 +22,12 @@ const icEmailInput = "$_rootPath/ic_email.svg";
 const icPasswordInput = "$_rootPath/ic_password.svg";
 const icCoreMinistry = "$_rootPath/ic_ministry.svg";
 const icDevotionBg = "$_rootPath/ic_devotion_bg.png";
+const icPlay = "$_rootPath/ic_play.svg";
+const icChat = "$_rootPath/ic_chat.svg";
+const icEdit = "$_rootPath/ic_edit.svg";
+const icLogOutIcon = "$_rootPath/ic_log_out.svg";
+const icPray = "$_rootPath/ic_prayer.svg";
+const icProfileCircular = "$_rootPath/ic_profile.svg";
+const icReadBible = "$_rootPath/ic_read_bible.svg";
+const icSettingsIcon = "$_rootPath/ic_settings_icon.svg";
 

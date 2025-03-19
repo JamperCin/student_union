@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
 
-import '../../../core/model/news_update_model.dart';
-import 'devotion_controller.dart';
+import '../../../../core/model/news_update_model.dart';
+import '../controller/devotion_controller.dart';
 
 class DevotionsScreen extends BaseScreenStandard {
   final _controller = Get.put(DevotionController());
@@ -106,6 +106,7 @@ class DevotionsScreen extends BaseScreenStandard {
               ? DevotionalGuideWidget.withVerticalGrid(
                   bookFilter: _controller.bookTypeFilter.value,
                   yearFilter: _controller.selectedYear.value,
+            onTap: _controller.onDevotionTap,
                 )
               : const SizedBox.shrink()),
         )
