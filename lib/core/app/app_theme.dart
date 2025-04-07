@@ -97,4 +97,37 @@ ThemeData lightMode = ThemeData(
 ThemeData darkMode = lightMode.copyWith(
   brightness: Brightness.dark,
   dialogBackgroundColor: darkColor,
+  colorScheme: ColorScheme(
+    brightness: Brightness.dark,
+    primary: whiteColor,
+    onPrimary: secondaryGreenColor,
+    secondary: secondary,
+    onSecondary: secondary,
+    error: redColor,
+    onError: redColor,
+    surface: darkColor,
+    onSurface: darkBrownColor,
+    tertiary: darkColor,
+  ),
+  textTheme: TextTheme(
+    labelSmall: labelSmallTextLightModeStyle.copyWith(color: whiteColor),
+    labelMedium: labelMediumTextLightModeStyle.copyWith(color: whiteColor),
+    labelLarge: labelLargeTextLightModeStyle.copyWith(color: whiteColor),
+    //
+    bodySmall: bodySmallTextLightModeStyle.copyWith(color: whiteColor),
+    bodyLarge: bodyLargeTextLightModeStyle.copyWith(color: whiteColor),
+    bodyMedium: bodyMediumTextLightModeStyle.copyWith(color: whiteColor),
+
+    displayLarge: displayLargeTextLightModeStyle.copyWith(color: whiteColor),
+    displayMedium: displayMediumTextLightModeStyle.copyWith(color: whiteColor),
+    displaySmall: displaySmallTextLightModeStyle.copyWith(color: whiteColor),
+    //
+    headlineLarge: headingLargeTextLightModeStyle.copyWith(color: whiteColor),
+    headlineMedium: headingMediumTextLightModeStyle.copyWith(color: whiteColor),
+    headlineSmall: headingSmallTextLightModeStyle.copyWith(color: whiteColor),
+    //
+    titleLarge: titleLargeTextLightModeStyle.copyWith(color: whiteColor),
+    titleMedium: titleMediumTextLightModeStyle.copyWith(color: whiteColor),
+    titleSmall: titleSmallTextLightModeStyle.copyWith(color: whiteColor),
+  ),
 );

@@ -66,16 +66,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    appDimen = AppDimens(context);
+    appDimen = AppDimens(context,constantMultiplier: 1.7);
 
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Scripture Union',
-      initialRoute: rootRoute,
-      getPages: appRoute,
-      theme: lightMode,
-      darkTheme: darkMode,
-      // home: MyHomePage(),
+    return Obx(
+      ()=> GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Scripture Union',
+        initialRoute: rootRoute,
+        getPages: appRoute,
+        theme: isDarkTheme.value ? darkMode : lightMode,
+        darkTheme: darkMode,
+        // home: MyHomePage(),
+      ),
     );
   }
 }

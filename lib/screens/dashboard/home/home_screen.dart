@@ -47,7 +47,7 @@ class HomeScreen extends BaseScreenStandard {
       children: [
         const DailyDevotionWidget(),
         Gap(10.dp()),
-        DevotionalGuideWidget(onTap: _controller.onDevotionTap),
+        DevotionalGuideWidget.withAvailableBooks(onTap: _controller.onDevotionTap),
         Gap(10.dp()),
         const UpcomingEventsWidget(),
         Gap(10.dp()),

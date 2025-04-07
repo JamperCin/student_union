@@ -7,6 +7,7 @@ import 'package:core_module/core_ui/widgets/tab_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
+import 'package:student_union/core/enums/book_type.dart';
 
 import '../../../../core/model/news_update_model.dart';
 import '../controller/devotion_controller.dart';
@@ -95,20 +96,26 @@ class DevotionsScreen extends BaseScreenStandard {
           tabs: const [
             Tab(text: "Available Books"),
             Tab(text: "Purchased Books"),
+
           ],
           onTap: (index) {
             _controller.bookTypeFilter.value =
-                index == 0 ? "available" : "purchased";
+                index == 0 ? BookType.availableBooks : BookType.purchasedBooks;
           },
         ),
         Expanded(
-          child: Obx(() => _controller.bookTypeFilter.value.isNotEmpty
-              ? DevotionalGuideWidget.withVerticalGrid(
-                  bookFilter: _controller.bookTypeFilter.value,
-                  yearFilter: _controller.selectedYear.value,
-            onTap: _controller.onDevotionTap,
-                )
-              : const SizedBox.shrink()),
+          child: Obx(
+            () => _controller.bookTypeFilter.value == BookType.availableBooks
+                ? DevotionalGuideWidget.withAvailableBooks(
+                    yearFilter: _controller.selectedYear.value,
+                    onTap: _controller.onDevotionTap,
+                    axis: Axis.vertical,
+                  )
+                : DevotionalGuideWidget.withPurchasedBooks(
+                    yearFilter: _controller.selectedYear.value,
+                    onTap: _controller.onDevotionTap,
+                  ),
+          ),
         )
       ],
     );

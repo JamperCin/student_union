@@ -33,10 +33,11 @@ class LoginController extends BaseController {
 
   ///OnClick listener to the LogIn Button
   void onLoginOnClick(BuildContext context) {
-    if (validationUtils.validateEntryEmail(emailTxtCtrl) &&
-        validationUtils.validateDataEntry(passwordTxtCtrl)) {
-      _initLoginRequest(context);
-    }
+    navUtils.fireTarget(MainDashboardScreen());
+    // if (validationUtils.validateEntryEmail(emailTxtCtrl) &&
+    //     validationUtils.validateDataEntry(passwordTxtCtrl)) {
+    //   _initLoginRequest(context);
+    // }
   }
 
   ///Initialise the login request to the Api

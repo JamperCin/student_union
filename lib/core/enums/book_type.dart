@@ -1,0 +1,3 @@
+enum BookType{
+  availableBooks, purchasedBooks
+}

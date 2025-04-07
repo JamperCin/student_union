@@ -1,4 +1,5 @@
 import 'package:core_module/core/def/global_def.dart';
+import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_dec.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
@@ -71,8 +72,8 @@ class LoginScreen extends BaseScreenDecorated {
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixIcon: AssetImageWidget(
               asset: icEmailInput,
-              height: 5,
-              width: 5,
+              height: 5.dp(),
+              width: 5.dp(),
             ),
             // prefixIcon: Icon(
             //   Icons.email_outlined,
@@ -91,8 +92,8 @@ class LoginScreen extends BaseScreenDecorated {
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixIcon: AssetImageWidget(
               asset: icPasswordInput,
-              height: appDimen.dimen(10),
-              width: appDimen.dimen(10),
+              height: 10.dp(),
+              width: 10.dp(),
             ),
           ),
           SizedBox(height: appDimen.dimen(20)),

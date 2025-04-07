@@ -41,7 +41,7 @@ class DashboardController extends BaseController {
       key: GlobalKey<AnimatorWidgetState>(),
     ),
     BottomBarModel(
-      asset: icProfile,
+      asset: icMenu,
       text: "More",
       key: GlobalKey<AnimatorWidgetState>(),
     ),

@@ -9,8 +9,8 @@ import 'package:student_union/screens/dashboard/dashboard_controller.dart';
 import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart';
 import 'package:student_union/screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
 import 'package:student_union/screens/dashboard/home/home_screen.dart';
+import 'package:student_union/screens/dashboard/more/more_screen.dart';
 import 'package:student_union/screens/dashboard/news/news_screen.dart';
-import 'package:student_union/screens/dashboard/profile/profile_screen.dart';
 
 class MainDashboardScreen extends BaseScreenStandard {
   final _controller = Get.put(DashboardController());
@@ -38,7 +38,7 @@ class MainDashboardScreen extends BaseScreenStandard {
         case "News Update":
           return NewsScreen();
         case "More":
-          return ProfileScreen();
+          return MoreScreen();
         default:
           return HomeScreen();
       }

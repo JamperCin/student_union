@@ -1,4 +1,5 @@
 import 'package:core_module/core/def/global_def.dart';
+import 'package:core_module/core/extensions/double_extension.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
@@ -11,7 +12,7 @@ import 'package:student_union/core/model/devotional_guide_model.dart';
 
 import '../controller/devotion_controller.dart';
 
-class DevotionDetailsScreen extends BaseScreenStandard{
+class DevotionDetailsScreen extends BaseScreenStandard {
   final _controller = Get.put(DevotionController());
 
   @override
@@ -44,12 +45,13 @@ class DevotionDetailsScreen extends BaseScreenStandard{
     final script = 'Deuteronomy 29:29';
 
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16.dp(), vertical: 14.dp()),
+      padding: EdgeInsets.symmetric(horizontal: 16.dp(), vertical: 14.dp()),
       child: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 16.dp(), vertical: 14.dp()),
+              padding:
+                  EdgeInsets.symmetric(horizontal: 16.dp(), vertical: 14.dp()),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -67,7 +69,8 @@ class DevotionDetailsScreen extends BaseScreenStandard{
                   ),
                   Gap(40.dp()),
                   RichText(
-                      text: TextSpan(children: [
+                    text: TextSpan(
+                      children: [
                         TextSpan(
                           text: getModel().description,
                           style: textTheme.labelMedium,
@@ -80,19 +83,34 @@ class DevotionDetailsScreen extends BaseScreenStandard{
                           text: lead,
                           style: textTheme.bodyMedium?.copyWith(
                             fontSize: 12.dp(),
-                            color: colorScheme.secondary,
-                            fontWeight: FontWeight.w800,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),TextSpan(
-                          text: script,
-                          style: textTheme.bodyMedium?.copyWith(
-                           //fontSize: 12.dp(),
                             fontWeight: FontWeight.w800,
                             fontStyle: FontStyle.italic,
                           ),
                         ),
-                      ])),
+                        TextSpan(
+                          text: script,
+                          style: textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Gap(20.dp()),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(text: "GHS ", style: textTheme.bodyLarge),
+                          TextSpan(
+                              text: getModel().amount.toDecimalPlaces(),
+                              style: textTheme.bodyLarge),
+                        ],
+                      ),
+                    ),
+                  ),
                   Gap(20.dp()),
                 ],
               ),
@@ -100,8 +118,8 @@ class DevotionDetailsScreen extends BaseScreenStandard{
           ),
           ButtonWidget(
               text: "Buy",
-              onTap: (){
-                 _controller.onInitiateBuyOnClick(context,getModel());
+              onTap: () {
+                _controller.onInitiateBuyOnClick(context, getModel());
               }),
           Gap(20.dp()),
         ],

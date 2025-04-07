@@ -16,67 +16,111 @@ import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/devotional_guide_model.dart';
 
 class DevotionalGuideWidget extends StatelessWidget {
-  final bool horizontalGrid;
-  final bool verticalGrid;
   final String? yearFilter;
-  final String? bookFilter;
+  final Axis? axis;
+  final bool isAvailableBooks;
+  final GestureTapCallback? onSeeMoreOnTap;
   final Function(DevotionalGuideModel)? onTap;
 
-  const DevotionalGuideWidget({super.key, this.onTap})
-      : horizontalGrid = true,
-        yearFilter = null,
-        bookFilter = null,
-        verticalGrid = false;
-
-  const DevotionalGuideWidget.withVerticalGrid({
+  const DevotionalGuideWidget.withAvailableBooks({
     super.key,
     this.yearFilter,
-    this.bookFilter,
     this.onTap,
-  })  : horizontalGrid = false,
-        verticalGrid = true;
+    this.onSeeMoreOnTap,
+    this.axis = Axis.horizontal,
+  }) : isAvailableBooks = true;
+
+  const DevotionalGuideWidget.withPurchasedBooks({
+    super.key,
+    this.yearFilter,
+    this.onTap,
+  })  : axis = null,
+        onSeeMoreOnTap = null,
+        isAvailableBooks = false;
 
   @override
   Widget build(BuildContext context) {
-    if (horizontalGrid) {
+    return isAvailableBooks ? _availableBooks() : _purchasedBooks();
+  }
+
+  Widget _availableBooks() {
+    if (axis == Axis.horizontal) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TitleTextWidget(text: "Devotional Guides"),
+          TitleTextWidget(text: "Devotional Guides", onTap: onSeeMoreOnTap),
           Gap(5.dp()),
           FutureBuilder(
               future: devGuideService.fetchListOfDevotionalGuide(),
               builder: (context, data) {
                 return (data.hasData && data.data != null)
-                    ? _horizontalDisplayWidget(data.data!)
+                    ? _horizontalDisplayOfAvailableBooksWidget(data.data!)
                     : ShimmerWidget(width: appDimen.screenWidth);
               }),
         ],
       );
-    }
-
-    if (verticalGrid) {
-      HashMap<String,Object> param = HashMap();
-      param.putIfAbsent("bookType", ()=> bookFilter ?? "");
-      param.putIfAbsent("year", ()=> yearFilter ?? "");
-
+    } else {
+      HashMap<String, Object> param = HashMap();
+      param.putIfAbsent("bookType", () => "");
+      param.putIfAbsent("year", () => yearFilter ?? "");
 
       return FutureBuilder(
           future: devGuideService.fetchListOfDevotionalGuide(param: param),
           builder: (context, data) {
             return (data.hasData && data.data != null && data.data!.isNotEmpty)
-                ? _gridViewDevotion(data.data!)
+                ? _gridViewDisplayOfAvailableBooksWidget(data.data!)
                 : ShimmerWidget.withGrid(
                     height: appDimen.dimen(80),
                     width: appDimen.dimen(50),
                   );
           });
     }
-
-    return const SizedBox.shrink();
   }
 
-  Widget _horizontalDisplayWidget(List<DevotionalGuideModel> list) {
+  Widget _purchasedBooks() {
+    return FutureBuilder(
+        future: devGuideService.fetchListOfDevotionalGuide(),
+        builder: (context, snapshot) {
+          return (snapshot.hasData &&
+                  snapshot.data != null &&
+                  snapshot.data!.isNotEmpty)
+              ? GridView.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 5,
+                  childAspectRatio: 0.7,
+                  children: [
+                    ...snapshot.data!.map((e) => Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 5.dp(), vertical: 10.dp()),
+                          child: Column(
+                            children: [
+                              NetworkImageWidget(
+                                height: appDimen.dimen(280),
+                                width: appDimen.dimen(200),
+                                onTap: () {
+                                  if (onTap != null) onTap!(e);
+                                },
+                                url: e.image,
+                                placeHolderWidget: ContainerWidget(
+                                  height: appDimen.dimen(280),
+                                  width: appDimen.dimen(200),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ))
+                  ],
+                )
+              : ShimmerWidget.withGrid(
+                  height: appDimen.dimen(80),
+                  width: appDimen.dimen(50),
+                );
+        });
+  }
+
+  Widget _horizontalDisplayOfAvailableBooksWidget(
+      List<DevotionalGuideModel> list) {
     return CarouselSlider.builder(
         itemCount: list.length,
         itemBuilder: (context, index, realIndex) {
@@ -105,7 +149,8 @@ class DevotionalGuideWidget extends StatelessWidget {
         ));
   }
 
-  Widget _gridViewDevotion(List<DevotionalGuideModel> list) {
+  Widget _gridViewDisplayOfAvailableBooksWidget(
+      List<DevotionalGuideModel> list) {
     return GridView.count(
       crossAxisCount: 2,
       mainAxisSpacing: 5,

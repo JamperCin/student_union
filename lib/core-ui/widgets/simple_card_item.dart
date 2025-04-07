@@ -17,6 +17,8 @@ class SimpleCardItem<T> extends StatelessWidget {
   final double? suffixAssetHeight;
   final double? suffixAssetWidth;
   final bool hasButton;
+  final double? elevation;
+  final Widget? suffixWidget;
   final T? model;
   final Function(T)? onTap;
 
@@ -27,6 +29,8 @@ class SimpleCardItem<T> extends StatelessWidget {
     this.suffixAsset,
     this.model,
     this.onTap,
+    this.elevation,
+    this.suffixWidget,
     this.prefixAssetHeight,
     this.prefixAssetWidth,
   })  : hasButton = false,
@@ -40,11 +44,13 @@ class SimpleCardItem<T> extends StatelessWidget {
     this.prefixAsset,
     this.suffixAsset,
     this.model,
+    this.elevation,
     this.onTap,
     this.prefixAssetHeight,
     this.prefixAssetWidth,
     this.buttonText,
   })  : hasButton = true,
+        suffixWidget = null,
         suffixAssetHeight = null,
         suffixAssetWidth = null;
 
@@ -58,6 +64,7 @@ class SimpleCardItem<T> extends StatelessWidget {
 
     return CardContainerWidget(
       padding: EdgeInsets.all(5.dp()),
+      elevation: elevation ?? 5,
       margin: EdgeInsets.only(
         top: 7.dp(),
         right: 5.dp(),
@@ -108,6 +115,7 @@ class SimpleCardItem<T> extends StatelessWidget {
         if (onTap != null) onTap!(model as T);
       },
       child: CardContainerWidget(
+        elevation: elevation ?? 5.0,
         padding: EdgeInsets.symmetric(horizontal: 10.dp(), vertical: 20.dp()),
         margin: EdgeInsets.symmetric(
           horizontal: 10.dp(),
@@ -131,11 +139,12 @@ class SimpleCardItem<T> extends StatelessWidget {
                   )),
             ),
             Gap(10.dp()),
-            AssetImageWidget(
-              asset: suffixAsset ?? icPlay,
-              height: suffixAssetHeight ?? 30.dp(),
-              width: suffixAssetWidth ?? 30.dp(),
-            ),
+            suffixWidget ??
+                AssetImageWidget(
+                  asset: suffixAsset ?? icPlay,
+                  height: suffixAssetHeight ?? 30.dp(),
+                  width: suffixAssetWidth ?? 30.dp(),
+                ),
           ],
         ),
       ),

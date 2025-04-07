@@ -30,4 +30,11 @@ const icPray = "$_rootPath/ic_prayer.svg";
 const icProfileCircular = "$_rootPath/ic_profile.svg";
 const icReadBible = "$_rootPath/ic_read_bible.svg";
 const icSettingsIcon = "$_rootPath/ic_settings_icon.svg";
+const icGhs = "$_rootPath/ic_ghs.svg";
+const icCamera = "$_rootPath/ic_camera.svg";
+const icDeleteAccount = "$_rootPath/ic_delete_account.svg";
+const icChangePassword = "$_rootPath/ic_change_password.svg";
+const icNotification  = "$_rootPath/ic_notification.svg";
+const icTheme  = "$_rootPath/ic_theme.svg";
+const icMenu  = "$_rootPath/ic_menu.svg";
 
