@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    appDimen = AppDimens(context,constantMultiplier: 1.7);
+    appDimen = AppDimens(context,constantMultiplier: 1.75);
 
     return Obx(
       ()=> GetMaterialApp(

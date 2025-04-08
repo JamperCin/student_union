@@ -68,8 +68,8 @@ class DonateToCoreMinistryScreen extends BaseScreenStandard {
               padding:  EdgeInsets.all(5.dp()),
               child: AssetImageWidget(
                 asset: icGhs,
-                height: 5.dp(),
-                width: 5.dp(),
+                height: 15.dp(),
+                width: 15.dp(),
               ),
             ),
           ),

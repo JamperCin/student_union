@@ -24,7 +24,7 @@ class TitleTextWidget extends StatelessWidget {
           TextButtonWidget.withTextOnly(
             onTap: onTap!,
             text: subText ?? 'See All',
-            style: textTheme.labelSmall?.copyWith(fontSize: 10.dp()),
+            style: textTheme.bodyMedium?.copyWith(),
           )
       ],
     );

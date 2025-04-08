@@ -62,6 +62,7 @@ class MoreScreen extends BaseScreenStandard {
             title: "Read Bible",
             prefixAsset: icReadBible,
             prefixAssetHeight: prefixSize,
+            onTap: _controller.onReadBibleOnClick,
           ),
          /* Gap(10.dp()),
           SimpleCardItem(
@@ -75,12 +76,12 @@ class MoreScreen extends BaseScreenStandard {
             prefixAsset: icPray,
             prefixAssetHeight: prefixSize,
           ),
-          Gap(10.dp()),
-          SimpleCardItem(
-            title: "Chat",
-            prefixAsset: icChat,
-            prefixAssetHeight: prefixSize,
-          ),
+          // Gap(10.dp()),
+          // SimpleCardItem(
+          //   title: "Chat",
+          //   prefixAsset: icChat,
+          //   prefixAssetHeight: prefixSize,
+          // ),
           Gap(10.dp()),
           SimpleCardItem(
             title: "Settings",
@@ -95,6 +96,10 @@ class MoreScreen extends BaseScreenStandard {
             title: "Log Out",
             prefixAsset: icLogOutIcon,
             prefixAssetHeight: prefixSize,
+            onTap: (v){
+              _controller.onLogOutOnClick(context);
+            },
+
           ),
           Gap(10.dp()),
         ],

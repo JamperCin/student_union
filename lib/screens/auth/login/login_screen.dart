@@ -7,6 +7,7 @@ import 'package:core_module/core_ui/widgets/text_button_widget.dart';
 import 'package:core_module/core_ui/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/login/login_controller.dart';
@@ -42,11 +43,16 @@ class LoginScreen extends BaseScreenDecorated {
   }
 
   @override
+  double decoPageTopPadding() {
+    return 0;
+  }
+  @override
   Widget page(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Gap(70.dp()),
           Center(
             child: AssetImageWidget(
               height: appDimen.dimen(180),
@@ -68,6 +74,7 @@ class LoginScreen extends BaseScreenDecorated {
           TextFieldWidget(
             labelText: 'Email',
             hintText: 'Email Eg. example@gmail.com',
+            focusColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixIcon: AssetImageWidget(
@@ -88,6 +95,7 @@ class LoginScreen extends BaseScreenDecorated {
             labelText: 'Password',
             hintText: 'Enter your password',
             controller: _controller.passwordTxtCtrl,
+            focusColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixIcon: AssetImageWidget(

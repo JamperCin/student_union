@@ -88,7 +88,7 @@ class DevotionalGuideWidget extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 5,
                   crossAxisSpacing: 5,
-                  childAspectRatio: 0.7,
+                  childAspectRatio: 0.6,
                   children: [
                     ...snapshot.data!.map((e) => Padding(
                           padding: EdgeInsets.symmetric(
@@ -155,7 +155,7 @@ class DevotionalGuideWidget extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: 5,
       crossAxisSpacing: 5,
-      childAspectRatio: 0.6,
+      childAspectRatio: 0.5,
       children: [
         ...list.map((e) => Padding(
               padding:
