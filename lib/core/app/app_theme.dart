@@ -103,6 +103,7 @@ ThemeData darkMode = lightMode.copyWith(
     onPrimary: secondaryGreenColor,
     secondary: secondary,
     onSecondary: secondary,
+    inverseSurface: whiteColor,
     error: redColor,
     onError: redColor,
     surface: darkColor,
@@ -129,5 +130,20 @@ ThemeData darkMode = lightMode.copyWith(
     titleLarge: titleLargeTextLightModeStyle.copyWith(color: whiteColor),
     titleMedium: titleMediumTextLightModeStyle.copyWith(color: whiteColor),
     titleSmall: titleSmallTextLightModeStyle.copyWith(color: whiteColor),
+  ),
+
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      elevation: 5.0,
+      backgroundColor: whiteColor,
+      textStyle: normalButtonLightModeStyle,
+      disabledForegroundColor: disabledGreenColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.horizontal(
+          left: Radius.circular(10),
+          right: Radius.circular(10),
+        ),
+      ),
+    ),
   ),
 );

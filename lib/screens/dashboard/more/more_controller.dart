@@ -13,13 +13,12 @@ import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/screens/auth/forgot_password/forgot_password_screen.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
-
 import 'package:student_union/screens/dashboard/donate/ui/donations_history_screen.dart';
 import 'package:student_union/screens/dashboard/more/about/about_screen.dart';
 import 'package:student_union/screens/dashboard/more/edit_profile/edit_profile_screen.dart';
 import 'package:student_union/screens/dashboard/more/faqs/faqs_screen.dart';
 import 'package:student_union/screens/dashboard/more/settings/ui/settings_screen.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'notifications/notificationsScreen.dart';
 
 class MoreController extends BaseController {
@@ -31,30 +30,8 @@ class MoreController extends BaseController {
     navUtils.fireTarget(EditProfileScreen());
   }
 
-  void onChangePasswordOnClick() {
-    navUtils.fireTarget(ForgotPasswordScreen());
-  }
-
-  void onDonationHistoryOnClick() {
-    navUtils.fireTarget(DonationsHistoryScreen());
-  }
-
-  void onNotificationOnClick() {
-    navUtils.fireTarget(NotificationsScreen());
-  }
-
   void onSettingsOnClick() {
     navUtils.fireTarget(SettingsScreen());
-  }
-
-  void onAboutOnClick() {
-    navUtils.fireTarget(AboutScreen());
-  }
-
-  void onInviteOnClick() {}
-
-  void onFaqOnClick() {
-    navUtils.fireTarget(FaqScreen());
   }
 
   void onLogOutOnClick(BuildContext context) {
@@ -62,7 +39,7 @@ class MoreController extends BaseController {
       context: context,
       title: "",
       subChild: Padding(
-        padding:  EdgeInsets.all(10.dp()),
+        padding: EdgeInsets.all(10.dp()),
         child: Column(
           children: [
             AssetImageWidget(
@@ -89,9 +66,24 @@ class MoreController extends BaseController {
     );
   }
 
-  void onReadBibleOnClick(v) {
+  Future<void> onReadBibleOnClick(v) async {
+    final youVersionScheme = Uri.parse('youversion://');
+    if (await canLaunchUrl(youVersionScheme)) {
+      await launchUrl(youVersionScheme);
+    } else {
+      navUtils.fireTarget(BaseWebView(),
+          model: WebModel(
+            url: "https://www.bible.com/bible/111/JHN.1.NIV",
+            title: "Read Bible",
+          ));
+    }
+  }
+
+  onCounsellingOnClick(v) {
     navUtils.fireTarget(BaseWebView(),
         model: WebModel(
-            url: "https://tawk.to/socialmediamissionary", title: "Read Bible"));
+          url: "https://tawk.to/socialmediamissionary",
+          title: "Counselling & Prayers",
+        ));
   }
 }

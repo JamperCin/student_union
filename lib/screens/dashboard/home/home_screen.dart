@@ -46,14 +46,23 @@ class HomeScreen extends BaseScreenStandard {
     return ListView(
       children: [
         const DailyDevotionWidget(),
-        Gap(10.dp()),
-        DevotionalGuideWidget.withAvailableBooks(onTap: _controller.onDevotionTap),
-        Gap(10.dp()),
+        Gap(20.dp()),
+        DevotionalGuideWidget.withAvailableBooks(
+          onTap: _controller.onDevotionTap,
+          onSeeMoreOnTap: _controller.onSeeMoreDevotionalBooks,
+        ),
+        Gap(20.dp()),
         const UpcomingEventsWidget(),
-        Gap(10.dp()),
-        CoreMinistriesWidget(onTap: _controller.onDonationOnClick),
-        Gap(10.dp()),
-        const NewsUpdateWidget(),
+        Gap(20.dp()),
+        CoreMinistriesWidget(
+          onTap: _controller.onDonationOnClick,
+          onSeeMore: _controller.onSeeMoreCoreMinistries,
+        ),
+        Gap(20.dp()),
+        NewsUpdateWidget(
+          onTap: _controller.onNewsUpdateTap,
+          onMoreOnTap: _controller.onMoreNewsOnClick,
+        ),
       ],
     );
   }

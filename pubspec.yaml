@@ -39,7 +39,9 @@ dependencies:
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   webview_flutter: ^4.8.0
+  url_launcher: ^6.3.1
   gap: ^3.0.1
+
   core_module:
     git:
       url: https://github.com/JamperCin/core_package

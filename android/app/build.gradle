@@ -15,7 +15,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.kodeit.student_union"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "28.0.13004108"//flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

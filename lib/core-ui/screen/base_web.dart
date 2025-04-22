@@ -87,6 +87,9 @@ class BaseWebView extends BaseScreenImpl {
       })
       ..setNavigationDelegate(
         NavigationDelegate(
+          onHttpAuthRequest: (HttpAuthRequest request) {
+
+          },
           onProgress: (int progress) {
             // Update loading bar.
           },

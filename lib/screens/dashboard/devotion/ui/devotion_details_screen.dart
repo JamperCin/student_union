@@ -39,8 +39,6 @@ class DevotionDetailsScreen extends BaseScreenStandard {
 
   @override
   Widget body(BuildContext context) {
-    final text =
-        'The secret things belong to the Lord our God, but the things revealed belong to us and to our children forever, that we may follow all the words of this law.';
     final lead = '—  ';
     final script = 'Deuteronomy 29:29';
 
@@ -121,7 +119,7 @@ class DevotionDetailsScreen extends BaseScreenStandard {
               onTap: () {
                 _controller.onInitiateBuyOnClick(context, getModel());
               }),
-          Gap(20.dp()),
+          Gap(30.dp()),
         ],
       ),
     );

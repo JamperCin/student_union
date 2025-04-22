@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
 import 'package:student_union/core/enums/book_type.dart';
+import 'package:student_union/core/model/devotional_guide_model.dart';
 
 import '../../../../core/model/news_update_model.dart';
 import '../controller/devotion_controller.dart';
@@ -70,7 +71,7 @@ class DevotionsScreen extends BaseScreenStandard {
   @override
   void setModel(BaseObject baseObject) {
     super.setModel(baseObject);
-    if (baseObject is NewsUpdateModel) {
+    if (baseObject is DevotionalGuideModel) {
       showAppBarIcon = true;
     } else {
       showAppBarIcon = false;
@@ -96,7 +97,6 @@ class DevotionsScreen extends BaseScreenStandard {
           tabs: const [
             Tab(text: "Available Books"),
             Tab(text: "Purchased Books"),
-
           ],
           onTap: (index) {
             _controller.bookTypeFilter.value =

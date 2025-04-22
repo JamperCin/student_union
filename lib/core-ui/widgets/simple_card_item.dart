@@ -61,6 +61,7 @@ class SimpleCardItem<T> extends StatelessWidget {
 
   Widget _hasButtonWidget(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return CardContainerWidget(
       padding: EdgeInsets.all(5.dp()),
@@ -77,19 +78,18 @@ class SimpleCardItem<T> extends StatelessWidget {
             asset: prefixAsset ?? icCoreMinistry,
             height: prefixAssetHeight ?? 60.dp(),
             width: prefixAssetWidth ?? 100.dp(),
+            assetColor: colorScheme.primary,
           ),
           Gap(10.dp()),
           SizedBox(
-            height: 40.dp(),
+            height: 60.dp(),
             child: RichText(
                 maxLines: 3,
                 textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
                 text: TextSpan(
                   children: [
-                    TextSpan(
-                        text: title,
-                        style:
-                            textTheme.labelMedium?.copyWith(fontSize: 8.dp()))
+                    TextSpan(text: title, style: textTheme.labelMedium)
                   ],
                 )),
           ),
@@ -128,6 +128,7 @@ class SimpleCardItem<T> extends StatelessWidget {
               asset: prefixAsset ?? icCoreMinistry,
               height: prefixAssetHeight ?? 40.dp(),
               width: prefixAssetWidth ?? 60.dp(),
+              assetColor: colorScheme.primary,
             ),
             Gap(10.dp()),
             Expanded(
@@ -144,6 +145,7 @@ class SimpleCardItem<T> extends StatelessWidget {
                   asset: suffixAsset ?? icPlay,
                   height: suffixAssetHeight ?? 30.dp(),
                   width: suffixAssetWidth ?? 30.dp(),
+                  assetColor: colorScheme.primary,
                 ),
           ],
         ),

@@ -75,6 +75,7 @@ class LoginScreen extends BaseScreenDecorated {
             labelText: 'Email',
             hintText: 'Email Eg. example@gmail.com',
             focusColor: colorScheme.tertiary,
+            borderColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixIcon: AssetImageWidget(
@@ -95,7 +96,8 @@ class LoginScreen extends BaseScreenDecorated {
             labelText: 'Password',
             hintText: 'Enter your password',
             controller: _controller.passwordTxtCtrl,
-            focusColor: colorScheme.tertiary,
+           // focusColor: colorScheme.tertiary,
+           // borderColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixIcon: AssetImageWidget(

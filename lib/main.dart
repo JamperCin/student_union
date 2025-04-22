@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
         initialRoute: rootRoute,
         getPages: appRoute,
         theme: isDarkTheme.value ? darkMode : lightMode,
-        darkTheme: darkMode,
+       // darkTheme: darkMode,
         // home: MyHomePage(),
       ),
     );

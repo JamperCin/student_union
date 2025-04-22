@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:student_union/core-ui/widgets/core_ministries_widget.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
+import 'package:student_union/core/model/core_ministry_model.dart';
 import 'package:student_union/core/model/donation_history_model.dart';
 
-import '../../news/news_screen.dart';
+import '../../news/ui/news_screen.dart';
 import '../controller/donations_controller.dart';
 
 class DonationCoreMinistriesScreen extends NewsScreen{
@@ -45,7 +46,7 @@ class DonationCoreMinistriesScreen extends NewsScreen{
   @override
   void setModel(BaseObject baseObject) {
     super.setModel(baseObject);
-    if (baseObject is DonationHistoryModel) {
+    if (baseObject is CoreMinistryModel) {
       showAppBarIcon = true;
     } else {
       showAppBarIcon = false;

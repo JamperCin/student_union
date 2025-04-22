@@ -1,0 +1,2 @@
+/Users/aninamankwah/Documents/Projects/Flutter/student_union/android/app/.cxx/RelWithDebInfo/2b6f6h4f/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/aninamankwah/Documents/Projects/Flutter/student_union/android/app/.cxx/RelWithDebInfo/2b6f6h4f/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -70,6 +70,7 @@ class DonateToCoreMinistryScreen extends BaseScreenStandard {
                 asset: icGhs,
                 height: 15.dp(),
                 width: 15.dp(),
+                assetColor: colorScheme.primary,
               ),
             ),
           ),

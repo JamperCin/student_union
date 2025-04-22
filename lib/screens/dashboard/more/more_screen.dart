@@ -75,6 +75,7 @@ class MoreScreen extends BaseScreenStandard {
             title: "Counselling & Prayers",
             prefixAsset: icPray,
             prefixAssetHeight: prefixSize,
+            onTap: _controller.onCounsellingOnClick,
           ),
           // Gap(10.dp()),
           // SimpleCardItem(

@@ -13,15 +13,20 @@ import 'package:student_union/core-ui/widgets/title_text_widget.dart'
     show TitleTextWidget;
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/news_update_model.dart';
-import 'package:student_union/screens/dashboard/news/news_screen.dart';
+import 'package:student_union/screens/dashboard/news/ui/news_screen.dart';
 
 class NewsUpdateWidget extends StatelessWidget {
   final bool withDetails;
-  final GestureTapCallback? onShareOnTap;
-  final GestureTapCallback? onReadTap;
+  final Function(NewsUpdateModel)? onShareOnTap;
+  final Function(NewsUpdateModel)? onReadTap;
+  final Function()? onMoreOnTap;
+  final Function(NewsUpdateModel)? onTap;
 
-  const NewsUpdateWidget({super.key})
-      : withDetails = false,
+  const NewsUpdateWidget({
+    super.key,
+    this.onTap,
+    this.onMoreOnTap,
+  })  : withDetails = false,
         onReadTap = null,
         onShareOnTap = null;
 
@@ -29,7 +34,9 @@ class NewsUpdateWidget extends StatelessWidget {
     super.key,
     this.onReadTap,
     this.onShareOnTap,
-  }) : withDetails = true;
+    this.onTap,
+  })  : withDetails = true,
+        onMoreOnTap = null;
 
   @override
   Widget build(BuildContext context) {
@@ -51,78 +58,98 @@ class NewsUpdateWidget extends StatelessWidget {
 
     return Column(
       children: [
-        ...list.map((e) => CardContainerWidget(
-              elevation: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      NetworkImageWidget(
-                        url: e.image,
-                        height: 70.dp(),
-                        width: 70.dp(),
-                        borderRadius: 5,
-                        placeHolderWidget: ContainerWidget(
+        ...list.map((e) => InkWell(
+          onTap: (){
+            if (onTap != null) {
+              onTap!(e);
+            }
+          },
+          child: CardContainerWidget(
+                elevation: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        NetworkImageWidget(
+                          url: e.image,
                           height: 70.dp(),
                           width: 70.dp(),
-                        ),
-                      ),
-                      Gap(5.dp()),
-                      Flexible(
-                        child: RichText(
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: e.title,
-                                  style: textTheme.labelLarge
-                                      ?.copyWith(color: colorScheme.primary))
-                            ],
+                          borderRadius: 5,
+                          placeHolderWidget: ContainerWidget(
+                            height: 70.dp(),
+                            width: 70.dp(),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Gap(5.dp()),
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                        text: e.description,
-                        style: textTheme.labelSmall?.copyWith(fontSize: 8.dp()))
-                  ])),
-                  // Gap(2.dp()),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '3 hours ago',
-                        style: textTheme.labelMedium?.copyWith(
-                            fontSize: 8.dp(),
-                            color: colorScheme.tertiaryContainer),
-                      ),
-                      Row(
-                        children: [
-                          IconButtonWidget(
-                            icon: Icons.share,
-                            iconColor: colorScheme.primary,
-                            onTap: onShareOnTap,
+                        Gap(5.dp()),
+                        Flexible(
+                          child: RichText(
+                            maxLines: 4,
+                            overflow: TextOverflow.ellipsis,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: e.title,
+                                    style: textTheme.labelLarge
+                                        ?.copyWith(color: colorScheme.primary))
+                              ],
+                            ),
                           ),
-                          Gap(5.dp()),
-                          IconButtonWidget(
-                            icon: Icons.volume_up,
-                            iconColor: colorScheme.primary,
-                            onTap: onReadTap,
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ],
+                        ),
+                      ],
+                    ),
+                    Gap(5.dp()),
+                    RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                          text: e.description,
+                          style:
+                              textTheme.labelSmall?.copyWith(fontSize: 12.dp()))
+                    ])),
+                    // Gap(2.dp()),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '3 hours ago',
+                          style: textTheme.labelMedium?.copyWith(
+                              fontSize: 10.dp(),
+                              color: colorScheme.tertiaryContainer),
+                        ),
+                        Row(
+                          children: [
+                            IconButtonWidget(
+                              icon: Icons.share,
+                              iconSize: 20,
+                              iconColor: colorScheme.primary,
+                              onTap: () {
+                                if (onShareOnTap != null) {
+                                  onShareOnTap!(e);
+                                }
+                              },
+                            ),
+                            Gap(5.dp()),
+                            IconButtonWidget(
+                              icon: Icons.volume_up,
+                              iconSize: 23,
+                              iconColor: colorScheme.primary,
+                              onTap: () {
+                                if (onReadTap != null) {
+                                  onReadTap!(e);
+                                }
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-            )),
+        )),
       ],
     );
   }
@@ -135,12 +162,7 @@ class NewsUpdateWidget extends StatelessWidget {
 
     return Column(
       children: [
-        TitleTextWidget(
-          text: "News Updates",
-          onTap: () {
-            navUtils.fireTarget(NewsScreen(), model: NewsUpdateModel());
-          },
-        ),
+        TitleTextWidget(text: "News Updates", onTap: onMoreOnTap),
         ...list.map((e) => CardContainerWidget(
               elevation: 1,
               child: Row(
@@ -164,21 +186,27 @@ class NewsUpdateWidget extends StatelessWidget {
                             maxLines: 1,
                             text: TextSpan(children: [
                               TextSpan(
-                                  text: e.title, style: textTheme.labelMedium)
+                                text: e.title,
+                                style: textTheme.labelMedium
+                                    ?.copyWith(fontWeight: FontWeight.w600),
+                              )
                             ])),
                         RichText(
-                            maxLines: 2,
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: e.description,
-                                  style: textTheme.labelSmall
-                                      ?.copyWith(fontSize: 8.dp()))
-                            ])),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: e.description,
+                                    style: textTheme.labelSmall
+                                        ?.copyWith(fontSize: 12.dp()))
+                              ],
+                            )),
                         Gap(5.dp()),
                         Text(
                           '3 hours ago',
                           style: textTheme.labelMedium?.copyWith(
-                              fontSize: 8.dp(),
+                              fontSize: 10.dp(),
                               color: colorScheme.tertiaryContainer),
                         )
                       ],

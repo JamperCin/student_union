@@ -44,13 +44,10 @@ class CoreMinistriesWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TitleTextWidget(
-            text: "Core Ministries",
-            onTap: onSeeMore ??
-                () {
-                  navUtils.fireTarget(DonationCoreMinistriesScreen(),
-                      model: const CoreMinistryModel());
-                }),
-        Gap(5.dp()),
+          text: "Core Ministries",
+          onTap: onSeeMore,
+        ),
+        Gap(10.dp()),
         FutureBuilder(
             future: coreMinistryApiService.fetchListOfCoreMinistries(),
             builder: (context, data) {
@@ -70,7 +67,7 @@ class CoreMinistriesWidget extends StatelessWidget {
                         height: 220.dp(),
                         enableInfiniteScroll: false,
                         initialPage: data.data!.length > 1 ? 1 : 0,
-                        viewportFraction: 0.4,
+                        viewportFraction: 0.5,
                       ))
                   : ShimmerWidget(width: appDimen.screenWidth);
             }),
@@ -97,6 +94,4 @@ class CoreMinistriesWidget extends StatelessWidget {
       },
     );
   }
-
-
 }
