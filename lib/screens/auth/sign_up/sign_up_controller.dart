@@ -1,8 +1,13 @@
+import 'dart:collection';
+
 import 'package:core_module/core/def/global_def.dart';
+import 'package:core_module/core/extensions/text_controller_ext.dart';
+import 'package:core_module/core_ui/snippets/places_search/places_picker_widget.dart';
 import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_union/core/base/base_controller.dart';
+import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
 import 'package:student_union/screens/dashboard/main_dashboard_screen.dart';
 
@@ -11,36 +16,62 @@ class SignUpController extends BaseController {
       "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
           .obs;
 
-  TextEditingController dayCtrl = TextEditingController();
-  TextEditingController monthCtrl = TextEditingController();
+  TextEditingController emailTxtCtrl = TextEditingController();
+  TextEditingController fullNameCtrl = TextEditingController();
+  TextEditingController passwordTxtCtrl = TextEditingController();
 
   ///Go to the Login Screen
   void onSignInOnClick() {
-    // Get.to(() => LoginScreen());
     navUtils.fireTarget(LoginScreen());
   }
 
   ///Go to the Login Screen
-  void onContinueToProfileOnClick() {
-    //Get.to(() => SignUpProfileScreen());
-   // navUtils.fireTarget(SignUpProfileScreen());
+  // void onContinueToProfileOnClick() {
+  //   //Get.to(() => SignUpProfileScreen());
+  //  // navUtils.fireTarget(SignUpProfileScreen());
+  // }
+
+  void onTermsAndCondOnClick(bool isChecked) {
+    //PlacesPickerWidget.searchPlaces(onSearch: (p){});
   }
 
-  void onTermsAndCondOnClick(bool isChecked) {}
-
+  ///OnClick listener to the sigUn Button
   Future<void> onSignUpOnClick(BuildContext context) async {
-     LoaderWidget().showProgressIndicator(context: context);
-    //TODO final response = await authService.login(params);
-    await Future.delayed(const Duration(seconds: 2));
+    if (validationUtils.validateDataEntry(fullNameCtrl,
+            err: 'Full name required') &&
+        validationUtils.validateEntryEmail(emailTxtCtrl) &&
+        validationUtils.validateDataEntry(passwordTxtCtrl, err: 'Password required')) {
+      _initSignUpRequest(context);
+    }
+  }
+
+  ///Initialise the Sign Up request to the Api
+  Future<void> _initSignUpRequest(BuildContext context) async {
+    HashMap<String, Object> params = HashMap();
+    params.putIfAbsent("email", () => emailTxtCtrl.getData());
+    params.putIfAbsent("password", () => passwordTxtCtrl.getData());
+    params.putIfAbsent("name", () => fullNameCtrl.getData());
+
+    const LoaderWidget().showProgressIndicator(context: context);
+    final response = await authApiService.signUp(params);
     const LoaderWidget().hideProgress();
 
-    navUtils.fireTarget(MainDashboardScreen());
+    debugPrint("Response: ${response?.toJson().toString()}");
+
+    if (response != null && response.token != null) {
+      appPreference.setToken(response.token!);
+      appPreference.setUser(response.user);
+      navUtils.fireTargetOff(MainDashboardScreen());
+    }else{
+      snackBarSnippet.snackBarError(response?.errors?.first ?? "Sorry, something went wrong. Kindly try again");
+    }
   }
 
   void onPickProfilePic() {}
 
   void onCompleteProfileOnClick() {
     //Get.to(() => OtpVerificationScreen());
-   // navUtils.fireTarget(OtpVerificationScreen());
+    // navUtils.fireTarget(OtpVerificationScreen());
   }
 }
+

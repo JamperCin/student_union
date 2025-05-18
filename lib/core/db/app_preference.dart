@@ -6,6 +6,7 @@ import 'package:core_module/core/utils/map_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core/model/remote/base_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:student_union/core/model/remote/sign_up_response.dart';
 
 class AppPreference {
   static AppPreference? _instance;
@@ -146,53 +147,23 @@ class AppPreference {
     }
   }
 
-  // void saveUserDetails(Customer customer) {
-  //   if (customer.phoneNumber.isEmpty) {
-  //     return;
-  //   }
-  //
-  //   setString(USER_DETAILS, MapUtils().convertEncode(customer));
-
-    // preference.setString(EMAIL, customer.email);
-    //
-    // preference.setString(DATE_JOINED, customer.joinedSince);
-    //
-    // preference.setString(PHONE_NUMBER, customer.phoneNumber);
-    // preference.setBool(IS_USER_ACTIVE, customer.active);
-    // preference.setBool(IS_USER_BLOCKED, customer.blocked);
-    //
-    // preference.setInt(USER_ID, customer.id);
-    //
-    // preference.setString(
-    //     VERIFIED_TOKEN, customer.verificationToken);
-    //
-    // Person? person = customer.person;
-    //
-    // if (person != null) {
-    //   preference.setInt(PERSON_TYPE_ID, person.personTypeId);
-    //   preference.setInt(PERSON_ID, person.personId);
-    //
-    //   preference.setString(PERSON_TYPE, person.personType);
-    //
-    //   preference.setString(PROFILE_PIC, person.profilePicUrl);
-    //
-    //   preference.setString(FIRST_NAME, person.firstName);
-    //   preference.setString(LAST_NAME, person.surname);
-    //   preference.setString(FULL_NAME, person.fullName);
-    // }
- // }
-
-  // void savePrimeWalletDetails(Account account) {
-  //   setString(PRIME_WALLET, MapUtils().convertEncode(account));
-  //
-  //   /*preference.setDouble(PRIME_WALLET_BALANCE, account.availableBalance);
-  //
-  //   preference.setString(PRIME_WALLET_CURRENCY, account.currency);
-  //
-  //   preference.setInt(PRIME_WALLET_ID, account.id);*/
-  // }
-
   void setToken(String token) {
     setString(TOKEN, token);
+    // appDbPreference.setToken(token);
+  }
+
+  void setUser(User? user) {
+    if (user != null) {
+      setString(USER_DETAILS, MapUtils().convertEncode(user));
+    }
+  }
+
+  User? getUser() {
+    String json = getString(USER_DETAILS);
+    if (json.isNotEmpty) {
+      return MapUtils().convertDecode(json);
+    } else {
+      return null;
+    }
   }
 }

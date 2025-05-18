@@ -1,0 +1,2 @@
+/Users/aninamankwah/Documents/Projects/Flutter/student_union/android/app/.cxx/Debug/5602s1c5/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/aninamankwah/Documents/Projects/Flutter/student_union/android/app/.cxx/Debug/5602s1c5/arm64-v8a/CMakeFiles/rebuild_cache.dir

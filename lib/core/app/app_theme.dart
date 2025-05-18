@@ -82,6 +82,7 @@ ThemeData lightMode = ThemeData(
     ///Surface
     surface: whiteColor,
     onSurface: greySecondaryColor,
+    surfaceBright: darkBrownColor,
 
     ///Inverse surface
     inverseSurface: darkColor,
@@ -99,7 +100,7 @@ ThemeData darkMode = lightMode.copyWith(
   dialogBackgroundColor: darkColor,
   colorScheme: ColorScheme(
     brightness: Brightness.dark,
-    primary: whiteColor,
+    primary: primaryGreenColor,
     onPrimary: secondaryGreenColor,
     secondary: secondary,
     onSecondary: secondary,

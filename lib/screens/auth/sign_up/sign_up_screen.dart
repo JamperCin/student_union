@@ -89,6 +89,7 @@ class SignUpScreen extends BaseScreenDecorated {
           TextFieldWidget(
             labelText: 'Full Name',
             hintText: 'Ex. John Doe',
+            controller: _controller.fullNameCtrl,
             focusColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
@@ -102,6 +103,7 @@ class SignUpScreen extends BaseScreenDecorated {
           TextFieldWidget(
             labelText: 'Email',
             hintText: 'example@mail.com',
+            controller: _controller.emailTxtCtrl,
             focusColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
@@ -115,6 +117,7 @@ class SignUpScreen extends BaseScreenDecorated {
           TextFieldWidget.withPassword(
             labelText: 'Password',
             hintText: '********',
+            controller: _controller.passwordTxtCtrl,
             focusColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),

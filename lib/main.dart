@@ -17,6 +17,8 @@ import 'package:student_union/core/services/news_update/news_update_api_service.
 import 'package:student_union/core/services/upcoming_events/upcoming_events_api_service.dart';
 import 'package:student_union/core/services/user/user_api_service.dart';
 
+import 'core/services/auth/auth_api_service.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -57,6 +59,7 @@ Future<void> _initializeApp() async {
   upcomingEventsApiService = UpcomingEventsApiService();
   coreMinistryApiService = CoreMinistriesApiService();
   newsUpdateApiService = NewsUpdateApiService();
+  authApiService = AuthApiService();
 
 }
 

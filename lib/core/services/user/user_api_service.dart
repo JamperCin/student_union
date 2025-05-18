@@ -20,7 +20,7 @@ class UserApiService extends BaseApiService implements UserApiInterface {
   @override
   Future<CustomerModel> fetchUserDetails() async {
      userDetails.value = await _apiService?.getRequest<CustomerModel>(
-          api: 'prime.sika/v1/users/customer/details?',
+          api: 'customer_dashboard/v1/news?',
            parser: (json) =>  CustomerModel.fromJson(json['data']['user_details']),
         ) ??
         const CustomerModel();
