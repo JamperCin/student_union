@@ -24,6 +24,10 @@ mixin _$NewsUpdateModel {
   String get description => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get content => throw _privateConstructorUsedError;
+  String get author => throw _privateConstructorUsedError;
 
   /// Serializes this NewsUpdateModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +45,15 @@ abstract class $NewsUpdateModelCopyWith<$Res> {
           NewsUpdateModel value, $Res Function(NewsUpdateModel) then) =
       _$NewsUpdateModelCopyWithImpl<$Res, NewsUpdateModel>;
   @useResult
-  $Res call({String title, String description, String createdAt, String image});
+  $Res call(
+      {String title,
+      String description,
+      String createdAt,
+      String image,
+      String url,
+      int id,
+      String content,
+      String author});
 }
 
 /// @nodoc
@@ -63,6 +75,10 @@ class _$NewsUpdateModelCopyWithImpl<$Res, $Val extends NewsUpdateModel>
     Object? description = null,
     Object? createdAt = null,
     Object? image = null,
+    Object? url = null,
+    Object? id = null,
+    Object? content = null,
+    Object? author = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -81,6 +97,22 @@ class _$NewsUpdateModelCopyWithImpl<$Res, $Val extends NewsUpdateModel>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -93,7 +125,15 @@ abstract class _$$NewsUpdateModelImplCopyWith<$Res>
       __$$NewsUpdateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String description, String createdAt, String image});
+  $Res call(
+      {String title,
+      String description,
+      String createdAt,
+      String image,
+      String url,
+      int id,
+      String content,
+      String author});
 }
 
 /// @nodoc
@@ -113,6 +153,10 @@ class __$$NewsUpdateModelImplCopyWithImpl<$Res>
     Object? description = null,
     Object? createdAt = null,
     Object? image = null,
+    Object? url = null,
+    Object? id = null,
+    Object? content = null,
+    Object? author = null,
   }) {
     return _then(_$NewsUpdateModelImpl(
       title: null == title
@@ -131,6 +175,22 @@ class __$$NewsUpdateModelImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -142,7 +202,11 @@ class _$NewsUpdateModelImpl implements _NewsUpdateModel {
       {this.title = "",
       this.description = "",
       this.createdAt = "",
-      this.image = ""});
+      this.image = "",
+      this.url = "",
+      this.id = 0,
+      this.content = "",
+      this.author = ""});
 
   factory _$NewsUpdateModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewsUpdateModelImplFromJson(json);
@@ -159,10 +223,22 @@ class _$NewsUpdateModelImpl implements _NewsUpdateModel {
   @override
   @JsonKey()
   final String image;
+  @override
+  @JsonKey()
+  final String url;
+  @override
+  @JsonKey()
+  final int id;
+  @override
+  @JsonKey()
+  final String content;
+  @override
+  @JsonKey()
+  final String author;
 
   @override
   String toString() {
-    return 'NewsUpdateModel(title: $title, description: $description, createdAt: $createdAt, image: $image)';
+    return 'NewsUpdateModel(title: $title, description: $description, createdAt: $createdAt, image: $image, url: $url, id: $id, content: $content, author: $author)';
   }
 
   @override
@@ -175,13 +251,17 @@ class _$NewsUpdateModelImpl implements _NewsUpdateModel {
                 other.description == description) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.image, image) || other.image == image));
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.author, author) || other.author == author));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, description, createdAt, image);
+  int get hashCode => Object.hash(runtimeType, title, description, createdAt,
+      image, url, id, content, author);
 
   /// Create a copy of NewsUpdateModel
   /// with the given fields replaced by the non-null parameter values.
@@ -205,7 +285,11 @@ abstract class _NewsUpdateModel implements NewsUpdateModel {
       {final String title,
       final String description,
       final String createdAt,
-      final String image}) = _$NewsUpdateModelImpl;
+      final String image,
+      final String url,
+      final int id,
+      final String content,
+      final String author}) = _$NewsUpdateModelImpl;
 
   factory _NewsUpdateModel.fromJson(Map<String, dynamic> json) =
       _$NewsUpdateModelImpl.fromJson;
@@ -218,6 +302,14 @@ abstract class _NewsUpdateModel implements NewsUpdateModel {
   String get createdAt;
   @override
   String get image;
+  @override
+  String get url;
+  @override
+  int get id;
+  @override
+  String get content;
+  @override
+  String get author;
 
   /// Create a copy of NewsUpdateModel
   /// with the given fields replaced by the non-null parameter values.

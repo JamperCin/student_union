@@ -27,7 +27,9 @@ class HomeScreen extends BaseScreenStandard {
     return Column(
       children: [
         TopHeaderWidget(
-          onSearchOnClick: () {},
+          onSearchOnClick: _controller.onSearchOnClick,
+          onNotifyOnClick: _controller.onNotificationOnClick,
+          onProfileOnClick: _controller.onProfileOnClick,
         ),
         Expanded(
           child: Container(
@@ -52,12 +54,12 @@ class HomeScreen extends BaseScreenStandard {
           onSeeMoreOnTap: _controller.onSeeMoreDevotionalBooks,
         ),
         Gap(20.dp()),
-        const UpcomingEventsWidget(),
+        //const UpcomingEventsWidget(),
         Gap(20.dp()),
-        CoreMinistriesWidget(
-          onTap: _controller.onDonationOnClick,
-          onSeeMore: _controller.onSeeMoreCoreMinistries,
-        ),
+        // CoreMinistriesWidget(
+        //   onTap: _controller.onDonationOnClick,
+        //   onSeeMore: _controller.onSeeMoreCoreMinistries,
+        // ),
         Gap(20.dp()),
         NewsUpdateWidget(
           onTap: _controller.onNewsUpdateTap,

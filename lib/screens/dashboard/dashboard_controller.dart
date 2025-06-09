@@ -12,7 +12,7 @@ class DashboardController extends BaseController {
   ///Initialise this when the main dashboard is called
   Future<void> initData() async {
     await Future.delayed(const Duration(milliseconds: 180));
-    await userApiService.fetchUserDetails();
+    //todo await userApiService.fetchUserDetails();
   }
 
   ///List of menu for the bottom navigation bar

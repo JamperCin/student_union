@@ -17,43 +17,36 @@ class AuthApiService extends BaseApiService implements AuthApiInterface {
     return _apiService ??= AuthApiService._();
   }
 
-
   ///-------------------- A P I    C A L L S --------------------------
 
   @override
-  Future<BaseResponseModel?> login(HashMap<String, Object> params) async {
-    final results = await _apiService?.postRequest<BaseResponseModel>(
-            api: 'login',
-            param: params,
-            tokenHeader: false,
-            showToast: true,
-            parser: (json) {
-              return BaseResponseModel.fromJson(json);
-            });
+  Future<SignUpResponse?> login(HashMap<String, Object> params) async {
+    final results = await _apiService?.postRequest<SignUpResponse>(
+      api: 'login',
+      param: params,
+      tokenHeader: false,
+      showToast: true,
+      parser: (json) => SignUpResponse.fromJson(json),
+    );
 
     return results;
   }
 
   @override
-  Future<SignUpResponse?> signUp(HashMap<String, Object> params) async{
+  Future<SignUpResponse?> signUp(HashMap<String, Object> params) async {
     final results = await _apiService?.postRequest<SignUpResponse>(
-        api: 'signup',
-        param: params,
-        tokenHeader: false,
-        showToast: true,
-        parser: (json) {
-          debugPrint("JSON ---> $json");
-          return SignUpResponse.fromJson(json);
-        });
+      api: 'signup',
+      param: params,
+      tokenHeader: false,
+      parser: (json) => SignUpResponse.fromJson(json),
+    );
 
     return results;
   }
-
 
   @override
   Future<BaseResponseModel?> signOut(HashMap<String, Object> params) {
     // TODO: implement signOut
     throw UnimplementedError();
   }
-
 }

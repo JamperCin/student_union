@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/double_extension.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
+import 'package:core_module/core/extensions/string_extension.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
@@ -101,7 +102,8 @@ class DevotionalGuideWidget extends StatelessWidget {
                                 onTap: () {
                                   if (onTap != null) onTap!(e);
                                 },
-                                url: e.image,
+                                url: e.thumbnail,
+                                fit: BoxFit.cover,
                                 placeHolderWidget: ContainerWidget(
                                   height: appDimen.dimen(280),
                                   width: appDimen.dimen(200),
@@ -133,7 +135,8 @@ class DevotionalGuideWidget extends StatelessWidget {
               onTap: () {
                 if (onTap != null) onTap!(model);
               },
-              url: model.image,
+              url: model.thumbnail,
+              fit: BoxFit.cover,
               placeHolderWidget: ContainerWidget(
                 height: appDimen.dimen(280),
                 width: appDimen.dimen(200),
@@ -168,7 +171,8 @@ class DevotionalGuideWidget extends StatelessWidget {
                     onTap: () {
                       if (onTap != null) onTap!(e);
                     },
-                    url: e.image,
+                    url: e.thumbnail,
+                    fit: BoxFit.cover,
                     placeHolderWidget: ContainerWidget(
                       height: appDimen.dimen(280),
                       width: appDimen.dimen(200),

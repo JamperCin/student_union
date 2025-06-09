@@ -10,11 +10,15 @@ part 'devotional_guide_model.freezed.dart';
 @freezed
 class DevotionalGuideModel extends BaseObject with _$DevotionalGuideModel {
   const factory DevotionalGuideModel({
-    @Default("") String image,
+    @Default("") String thumbnail,
+    @Default("") String url,
     @Default("") String description,
     @Default("") String title,
+    @Default("") String name,
+    @Default("") String author,
+    @Default("") String year,
     @Default("GHS") String currency,
-    @Default(0.0) double amount,
+    @Default("0.00") String amount,
 }) = _DevotionalGuideModel;
 
   factory DevotionalGuideModel.fromJson(Map<String, dynamic> json) =>

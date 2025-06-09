@@ -9,7 +9,7 @@ abstract class AuthApiInterface {
   ///Login into the prime app using already registered credentials
   ///@param [params]
   ///[params] should have both username and password
-  Future<BaseResponseModel?> login(HashMap<String, Object> params);
+  Future<SignUpResponse?> login(HashMap<String, Object> params);
 
 
   ///Sign up user onto the Prime platform

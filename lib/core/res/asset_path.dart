@@ -37,4 +37,5 @@ const icChangePassword = "$_rootPath/ic_change_password.svg";
 const icNotification  = "$_rootPath/ic_notification.svg";
 const icTheme  = "$_rootPath/ic_theme.svg";
 const icMenu  = "$_rootPath/ic_menu.svg";
+const icUserIc  = "$_rootPath/ic_user.png";
 

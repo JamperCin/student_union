@@ -1,19 +1,25 @@
 import 'package:core_module/core/def/global_def.dart';
+import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
+import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:student_union/core/def/global_access.dart';
 
+import '../../core/res/asset_path.dart';
+
 class TopHeaderWidget extends StatelessWidget {
   final VoidCallback? onNotifyOnClick;
   final VoidCallback? onSearchOnClick;
+  final VoidCallback? onProfileOnClick;
   final bool displayEmail;
 
   const TopHeaderWidget({
     super.key,
     this.onNotifyOnClick,
+    this.onProfileOnClick,
     this.onSearchOnClick,
   }) : displayEmail = false;
 
@@ -21,6 +27,7 @@ class TopHeaderWidget extends StatelessWidget {
     super.key,
     this.onNotifyOnClick,
     this.onSearchOnClick,
+    this.onProfileOnClick,
   }) : displayEmail = true;
 
   @override
@@ -39,42 +46,46 @@ class TopHeaderWidget extends StatelessWidget {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                NetworkImageWidget.withCircular(
-                  url: userApiService.profilePic.value,
-                  radius: appDimen.dimen(40),
-                ),
-                SizedBox(width: appDimen.dimen(5)),
-                if (displayEmail)
-                  RichText(
-                      text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'John Doe',
-                        style: textTheme.titleLarge,
-                      ),
-                      TextSpan(
-                        text: '\nmyemail@gmail.com',
-                        style: textTheme.labelSmall,
-                      )
-                    ],
-                  ))
-                else
-                  RichText(
-                      text: TextSpan(
-                    children: [
-                      TextSpan(text: 'Welcome', style: textTheme.titleLarge),
-                      const TextSpan(text: '\n'),
-                      TextSpan(
-                        text: 'John Doe',
-                        style: textTheme.bodyMedium
-                            ?.copyWith(color: colorScheme.primary),
-                      ),
-                      TextSpan(text: '  👋', style: textTheme.bodyLarge),
-                    ],
-                  )),
-              ],
+            InkWell(
+              onTap: onProfileOnClick,
+              child: Row(
+                children: [
+                  NetworkImageWidget.withCircular(
+                    url: userApiService.profilePic.value,
+                    radius: appDimen.dimen(40),
+                    placeholder: icUserIc,
+                  ),
+                  SizedBox(width: appDimen.dimen(5)),
+                  if (displayEmail)
+                    RichText(
+                        text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: appPreference.getUser()?.name ?? '',
+                          style: textTheme.titleLarge,
+                        ),
+                        TextSpan(
+                          text: appPreference.getUser()?.email ?? '',
+                          style: textTheme.labelSmall,
+                        )
+                      ],
+                    ))
+                  else
+                    RichText(
+                        text: TextSpan(
+                      children: [
+                        TextSpan(text: 'Welcome', style: textTheme.titleLarge),
+                        const TextSpan(text: '\n'),
+                        TextSpan(
+                          text: appPreference.getUser()?.name ?? '',
+                          style: textTheme.bodyMedium
+                              ?.copyWith(color: colorScheme.primary),
+                        ),
+                        TextSpan(text: '  👋', style: textTheme.bodyLarge),
+                      ],
+                    )),
+                ],
+              ),
             ),
             SizedBox(width: appDimen.dimen(5)),
             Row(
@@ -90,13 +101,14 @@ class TopHeaderWidget extends StatelessWidget {
                     onTap: onSearchOnClick,
                   ),
                 if (onSearchOnClick != null) Gap(appDimen.dimen(1)),
-                IconButtonWidget(
-                  icon: Icons.notifications_none,
-                  iconSize: 25,
-                  iconPadding: 2,
-                  iconColor: colorScheme.primary,
-                  onTap: onNotifyOnClick,
-                ),
+                if (onNotifyOnClick != null)
+                  IconButtonWidget(
+                    icon: Icons.notifications_none,
+                    iconSize: 25,
+                    iconPadding: 2,
+                    iconColor: colorScheme.primary,
+                    onTap: onNotifyOnClick,
+                  ),
               ],
             ),
           ],

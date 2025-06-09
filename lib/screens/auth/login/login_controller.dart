@@ -18,8 +18,8 @@ class LoginController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    // emailTxtCtrl.text = "jampercola@gmail.com";
-    // passwordTxtCtrl.text = "Cola360";
+    emailTxtCtrl.text = "jampercola@gmail.com";
+    passwordTxtCtrl.text = "asdfghjkl";
   }
 
   void onSignUpClicked() {
@@ -48,8 +48,15 @@ class LoginController extends BaseController {
     final response = await authApiService.login(params);
     const LoaderWidget().hideProgress();
 
-    if (response != null && response.success) {
+    if (response != null && response.token != null) {
+      appPreference.setToken(response.token!);
+      appPreference.setUser(response.user);
       navUtils.fireTargetOff(MainDashboardScreen());
+    }else{
+      snackBarSnippet.snackBarError(response?.errors?.first ?? "Sorry, something went wrong. Kindly try again");
     }
+    // if (response != null && response.success) {
+    //   navUtils.fireTargetOff(MainDashboardScreen());
+    // }
   }
 }

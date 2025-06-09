@@ -12,56 +12,19 @@ class AppPreference {
   static AppPreference? _instance;
   late SharedPreferences preference;
 
-  // final String FULL_NAME = "full_name";
-  // final String FIRST_NAME = "first_name";
-  // final String LAST_NAME = "surname";
-  // final String EMAIL = "email";
-  // final String GENDER = "gender";
   final String PHONE_NUMBER = "telephone";
 
   // final String COUNTRY = "country";
   final String USER_DETAILS = "_USER_DETAILS";
   final String FOR_NAME = "forname";
 
-  // final String USERNAME = "username";
+   final String PROFILE_IMAGE = "profile_image";
   // final String ADDRESS = "address";
   final String PASSWORD = "password";
   final String TOKEN = "token";
   final String IS_LOGIN = "is_login";
   final String IS_INTRO_SHOWN = "is_intro";
-
-  // final String NEED_VERIFICATION = "need_verification";
-  // final String IS_USER_ACTIVE = "IS_USER_ACTIVE";
-  // final String IS_USER_BLOCKED = "IS_USER_BLOCKED";
-  // final String PERSON_ID = "PERSON_ID";
-  // final String USER_ID = "USER_ID";
-  // final String PERSON_TYPE_ID = "PERSON_TYPE_ID";
-  // final String PERSON_TYPE = "PERSON_TYPE";
-  // final String VERIFIED_TOKEN = "VERIFIED_TOKEN";
-  // final String SECURITY_PIN = "SECURITY_PIN";
-  // final String MENU_CAT_LIST = "MENU_CAT_LIST";
-  // final String CONTACT_PERMISSION_ALLOWED = "CONTACT_PERMISSION_ALLOWED";
-  // final String SECURITY_QUESTIONS = "SECURITY_QUESTIONS_ADDED";
-  // final String PROFILE_PIC = "profile_pic_url";
-  // final String PRIME_WALLET_BALANCE = "prime_wallet_balance";
   final String PRIME_WALLET = "prime_wallet_";
-
-  // final String PRIME_WALLET_CURRENCY = "prime_wallet_currency";
-  // final String PRIME_WALLET_ID = "prime_wallet_id";
-  // final String IS_REVIEW_POP_SHOWN = "IS_REVIEW_POP_SHOWN";
-  // final String IS_GIFTING_INTRO_SHOWN = "IS_GIFTING_INTRO_SHOWN";
-  // final String IS_RE_GIFTING_INTRO_SHOWN = "IS_RE_GIFTING_INTRO_SHOWN";
-  // final String FCM = "prime_fcm_token";
-  // final String NOTIFY_DAILY_REMINDER = "NOTIFY_DAILY_REMINDER";
-  // final String PLACES = "PLACES_SUGGESTED";
-  // final String SELECTED_LOCATION = "SELECTED_LOCATION";
-  // final String LOCATION = "LOCATION";
-  // final String DATE_JOINED = "DATE_JOINED";
-  // final String DAILY_TIP = "DAILY_TIP";
-  // final String PREF_LOCATION = "PREF_LOCATION";
-  // final String PREF_LOCATION_LIST = "PREF_LOCATION_LIST";
-  // final String IMAGE_PERMISSION_ALLOWED = "IMAGE_PERMISSION_ALLOWED";
-  // final String LOCATION_PERMISSION_ALLOWED = "LOCATION_PERMISSION_ALLOWED";
 
   AppPreference._();
 
@@ -149,7 +112,6 @@ class AppPreference {
 
   void setToken(String token) {
     setString(TOKEN, token);
-    // appDbPreference.setToken(token);
   }
 
   void setUser(User? user) {
@@ -158,12 +120,16 @@ class AppPreference {
     }
   }
 
-  User? getUser() {
-    String json = getString(USER_DETAILS);
+  T? getSavedObject<T>(String key, T Function(dynamic) parser) {
+    String json = getString(key);
     if (json.isNotEmpty) {
-      return MapUtils().convertDecode(json);
+      return MapUtils().stringToObject(json, parser);
     } else {
       return null;
     }
+  }
+
+  User? getUser() {
+    return getSavedObject<User>(USER_DETAILS, (json) => User.fromJson(json));
   }
 }

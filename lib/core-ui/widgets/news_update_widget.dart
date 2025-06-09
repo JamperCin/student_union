@@ -163,58 +163,61 @@ class NewsUpdateWidget extends StatelessWidget {
     return Column(
       children: [
         TitleTextWidget(text: "News Updates", onTap: onMoreOnTap),
-        ...list.map((e) => CardContainerWidget(
-              elevation: 1,
-              child: Row(
-                children: [
-                  NetworkImageWidget(
-                    url: e.image,
-                    height: 70.dp(),
-                    width: 70.dp(),
-                    placeHolderWidget: ContainerWidget(
+        ...list.map((e) => InkWell(
+          onTap: ()=> onTap?.call(e),
+          child: CardContainerWidget(
+                elevation: 1,
+                child: Row(
+                  children: [
+                    NetworkImageWidget(
+                      url: e.image,
                       height: 70.dp(),
                       width: 70.dp(),
+                      placeHolderWidget: ContainerWidget(
+                        height: 70.dp(),
+                        width: 70.dp(),
+                      ),
                     ),
-                  ),
-                  Gap(5.dp()),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                            maxLines: 1,
-                            text: TextSpan(children: [
-                              TextSpan(
-                                text: e.title,
-                                style: textTheme.labelMedium
-                                    ?.copyWith(fontWeight: FontWeight.w600),
-                              )
-                            ])),
-                        RichText(
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            text: TextSpan(
-                              children: [
+                    Gap(5.dp()),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RichText(
+                              maxLines: 1,
+                              text: TextSpan(children: [
                                 TextSpan(
-                                    text: e.description,
-                                    style: textTheme.labelSmall
-                                        ?.copyWith(fontSize: 12.dp()))
-                              ],
-                            )),
-                        Gap(5.dp()),
-                        Text(
-                          '3 hours ago',
-                          style: textTheme.labelMedium?.copyWith(
-                              fontSize: 10.dp(),
-                              color: colorScheme.tertiaryContainer),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                                  text: e.title,
+                                  style: textTheme.labelMedium
+                                      ?.copyWith(fontWeight: FontWeight.w600),
+                                )
+                              ])),
+                          RichText(
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                      text: e.description,
+                                      style: textTheme.labelSmall
+                                          ?.copyWith(fontSize: 12.dp()))
+                                ],
+                              )),
+                          Gap(5.dp()),
+                          Text(
+                            '3 hours ago',
+                            style: textTheme.labelMedium?.copyWith(
+                                fontSize: 10.dp(),
+                                color: colorScheme.tertiaryContainer),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            )),
+        )),
       ],
     );
   }

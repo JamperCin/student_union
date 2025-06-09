@@ -11,15 +11,10 @@ import 'package:get/get.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/model/local/web_model.dart';
-import 'package:student_union/screens/auth/forgot_password/forgot_password_screen.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
-import 'package:student_union/screens/dashboard/donate/ui/donations_history_screen.dart';
-import 'package:student_union/screens/dashboard/more/about/about_screen.dart';
-import 'package:student_union/screens/dashboard/more/edit_profile/edit_profile_screen.dart';
-import 'package:student_union/screens/dashboard/more/faqs/faqs_screen.dart';
+import 'package:student_union/screens/dashboard/more/profile/profile_screen.dart';
 import 'package:student_union/screens/dashboard/more/settings/ui/settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'notifications/notificationsScreen.dart';
 
 class MoreController extends BaseController {
   RxString profilePic =
@@ -27,7 +22,7 @@ class MoreController extends BaseController {
           .obs;
 
   void onEditProfileOnClick() {
-    navUtils.fireTarget(EditProfileScreen());
+    navUtils.fireTarget(ProfileScreen());
   }
 
   void onSettingsOnClick() {

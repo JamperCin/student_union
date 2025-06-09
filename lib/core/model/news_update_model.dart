@@ -10,6 +10,10 @@ class NewsUpdateModel extends BaseObject with _$NewsUpdateModel {
     @Default("") String description,
     @Default("") String createdAt,
     @Default("") String image,
+    @Default("") String url,
+    @Default(0) int id,
+    @Default("") String content,
+    @Default("") String author,
 }) = _NewsUpdateModel;
 
   factory NewsUpdateModel.fromJson(Map<String, dynamic> json) =>

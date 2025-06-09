@@ -11,7 +11,7 @@ class DevotionalGuideApiService extends BaseApiService
     implements DevotionalGuideApiInterface {
   static DevotionalGuideApiService? _instance;
   final path = "assets/data/devotional_guide.json";
-  final RxList<DevotionalGuideModel> devotionalGuideList = <DevotionalGuideModel>[].obs;
+  //final RxList<DevotionalGuideModel> devotionalGuideList = <DevotionalGuideModel>[].obs;
 
   DevotionalGuideApiService._();
 
@@ -20,21 +20,18 @@ class DevotionalGuideApiService extends BaseApiService
   }
 
   @override
-  Future<List<DevotionalGuideModel>> fetchListOfDevotionalGuide({HashMap? param}) async {
-    debugPrint("Making request --> : ${param.toString()}");
-    devotionalGuideList.clear();
-    await Future.delayed(const Duration(seconds: 2));
-    final results = await FileUtils().fetchList<DevotionalGuideModel>(
-      path: path,
-      objectKey: 'data',
-      key: 'devotions',
-      parser: (json) => DevotionalGuideModel.fromJson(json),
-    );
+  Future<List<DevotionalGuideModel>> fetchListOfDevotionalGuide(
+      {HashMap? param}) async {
+   // devotionalGuideList.clear();
 
-    debugPrint("Devotions : ${results.toString()}");
-    devotionalGuideList.value = results;
+    final results = await _instance?.getListRequest<DevotionalGuideModel>(
+      api: "customer/v1/books",
+      key: 'books',
+      parser: (json) => DevotionalGuideModel.fromJson(json),
+    ) ?? [];
+
+   // debugPrint("Devotions : ${results.toString()}");
+    //devotionalGuideList.value = results;
     return results;
   }
-
-
 }

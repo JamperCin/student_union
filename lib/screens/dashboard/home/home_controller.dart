@@ -5,6 +5,7 @@ import 'package:student_union/core/model/devotional_guide_model.dart';
 import 'package:student_union/core/model/news_update_model.dart';
 import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart';
 import 'package:student_union/screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
+import 'package:student_union/screens/dashboard/more/profile/profile_screen.dart';
 
 import '../../../core/model/core_ministry_model.dart';
 import '../../../core/model/local/web_model.dart';
@@ -22,16 +23,16 @@ class HomeController extends BaseController{
     navUtils.fireTarget(DonateToCoreMinistryScreen(), model: model);
   }
 
-  onDevotionTap(DevotionalGuideModel model) {
+  void onDevotionTap(DevotionalGuideModel model) {
     navUtils.fireTarget(DevotionDetailsScreen(), model: model);
   }
 
-  onNewsUpdateTap(NewsUpdateModel news) {
+  void onNewsUpdateTap(NewsUpdateModel news) {
     navUtils.fireTarget(
       BaseWebView(),
       model: WebModel(
-        url: "https://www.catholic.org/bible/daily_reading/",
-        title: "News Update",
+        url: news.url,//"https://www.catholic.org/bible/daily_reading/",
+        title: news.title.isEmpty ? "News Update" : news.title,
       ),
     );
   }
@@ -48,5 +49,17 @@ class HomeController extends BaseController{
   void onSeeMoreDevotionalBooks() {
     navUtils.fireTarget(DevotionsScreen(),
         model: const DevotionalGuideModel());
+  }
+
+  void onSearchOnClick() {
+
+  }
+
+  void onNotificationOnClick() {
+
+  }
+
+  void onProfileOnClick() {
+    navUtils.fireTarget(ProfileScreen());
   }
 }

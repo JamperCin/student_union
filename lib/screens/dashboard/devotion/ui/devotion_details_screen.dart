@@ -1,6 +1,7 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/double_extension.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
+import 'package:core_module/core/extensions/string_extension.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
@@ -55,7 +56,7 @@ class DevotionDetailsScreen extends BaseScreenStandard {
                 children: [
                   Center(
                     child: NetworkImageWidget(
-                      url: getModel().image,
+                      url: getModel().thumbnail,
                       width: appDimen.screenWidth * 0.7,
                       height: appDimen.screenHeight * 0.5,
                       fit: BoxFit.cover,

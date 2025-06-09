@@ -7,9 +7,8 @@ class UserApiService extends BaseApiService implements UserApiInterface {
   static UserApiService? _apiService;
 
   Rx<CustomerModel> userDetails = const CustomerModel().obs;
-  RxString profilePic =
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D'
-          .obs;
+  RxString profilePic = ''.obs;
+      //'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D'.obs;
 
   UserApiService._();
 
