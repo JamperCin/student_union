@@ -4,7 +4,7 @@ import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
 import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:core_module/core_module.dart';
 import 'package:student_union/core/res/asset_path.dart';
 
 class DailyDevotionWidget extends StatelessWidget {

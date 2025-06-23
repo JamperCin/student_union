@@ -38,4 +38,9 @@ const icNotification  = "$_rootPath/ic_notification.svg";
 const icTheme  = "$_rootPath/ic_theme.svg";
 const icMenu  = "$_rootPath/ic_menu.svg";
 const icUserIc  = "$_rootPath/ic_user.png";
+const icCalendar  = "$_rootPath/ic_calendar.svg";
+const icCancel  = "$_rootPath/ic_cancel.svg";
+const icWarn  = "$_rootPath/ic_warn.png";
+const icSuccess  = "$_rootPath/ic_success.svg";
+const icOrders  = "$_rootPath/ic_orders.svg";
 

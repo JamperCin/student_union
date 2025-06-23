@@ -1,16 +1,15 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/res/assets_path.dart';
+import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/bottom_sheet_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/model/local/web_model.dart';
+import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
 import 'package:student_union/screens/dashboard/more/profile/profile_screen.dart';
 import 'package:student_union/screens/dashboard/more/settings/ui/settings_screen.dart';
@@ -66,19 +65,23 @@ class MoreController extends BaseController {
     if (await canLaunchUrl(youVersionScheme)) {
       await launchUrl(youVersionScheme);
     } else {
-      navUtils.fireTarget(BaseWebView(),
-          model: WebModel(
-            url: "https://www.bible.com/bible/111/JHN.1.NIV",
-            title: "Read Bible",
-          ));
+      navUtils.fireTarget(
+        BaseWebView(
+            model: WebModel(
+          url: "https://www.bible.com/bible/111/JHN.1.NIV",
+          title: "Read Bible",
+        )),
+      );
     }
   }
 
   onCounsellingOnClick(v) {
-    navUtils.fireTarget(BaseWebView(),
-        model: WebModel(
-          url: "https://tawk.to/socialmediamissionary",
-          title: "Counselling & Prayers",
-        ));
+    navUtils.fireTarget(
+      BaseWebView(
+          model: WebModel(
+        url: "https://tawk.to/socialmediamissionary",
+        title: "Counselling & Prayers",
+      )),
+    );
   }
 }

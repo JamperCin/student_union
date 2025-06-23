@@ -1,0 +1,94 @@
+{
+  "transactions": [
+    {
+      "transactionId": "TXN100001",
+      "created_at": "2025-05-15T14:32:00",
+      "amount": 150.00,
+      "currency": "GHS",
+      "transactionType": "Deposit",
+      "name": "School Ministry",
+      "status": "Success"
+    },
+    {
+      "transactionId": "TXN100002",
+      "created_at": "2025-05-14T09:45:00",
+      "amount": 80.50,
+      "currency": "GHS",
+      "transactionType": "Cash Out",
+      "name": "Camp and Conferences Ministry",
+      "status": "Success"
+    },
+    {
+      "transactionId": "TXN100003",
+      "created_at": "2025-05-13T18:20:00",
+      "amount": 200.00,
+      "currency": "GHS",
+      "transactionType": "Transfer",
+      "name": "Bible And Christian Ministry",
+      "status": "Pending"
+    },
+    {
+      "transactionId": "TXN100004",
+      "created_at": "2025-05-12T11:10:00",
+      "amount": 1200.75,
+      "currency": "GHS",
+      "transactionType": "Income",
+      "name": "Camp and Conferences Ministry",
+      "status": "Success"
+    },
+    {
+      "transactionId": "TXN100005",
+      "created_at": "2025-05-11T16:05:00",
+      "amount": 300.00,
+      "currency": "GHS",
+      "transactionType": "Cash Out",
+      "name": "Community Fellowship & Prayer Warriors",
+      "status": "Failed"
+    },
+    {
+      "transactionId": "TXN100006",
+      "created_at": "2025-05-10T10:22:00",
+      "amount": 50.00,
+      "currency": "GHS",
+      "transactionType": "Transfer",
+      "name": "School Ministry",
+      "status": "Success"
+    },
+    {
+      "transactionId": "TXN100007",
+      "created_at": "2025-05-09T12:40:00",
+      "amount": 220.10,
+      "currency": "GHS",
+      "transactionType": "Deposit",
+      "name": "Bible And Christian Ministry",
+      "status": "Success"
+    },
+    {
+      "transactionId": "TXN100008",
+      "created_at": "2025-05-08T08:00:00",
+      "amount": 670.00,
+      "currency": "GHS",
+      "transactionType": "Income",
+      "name": "Community Fellowship & Prayer Warriors",
+      "status": "Success"
+    },
+    {
+      "transactionId": "TXN100009",
+      "created_at": "2025-05-07T19:15:00",
+      "amount": 145.75,
+      "currency": "GHS",
+      "transactionType": "Cash Out",
+      "name": "School Ministry",
+      "status": "Pending"
+    },
+    {
+      "transactionId": "TXN100010",
+      "created_at": "2025-05-06T13:33:00",
+      "amount": 89.99,
+      "currency": "GHS",
+      "transactionType": "Transfer",
+      "name": "Community Fellowship & Prayer Warriors",
+      "status": "Success"
+    }
+  ]
+}

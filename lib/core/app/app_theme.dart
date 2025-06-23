@@ -4,8 +4,8 @@ import 'package:student_union/core/app/app_style.dart';
 import 'app_colors.dart';
 
 ThemeData lightMode = ThemeData(
-  dialogBackgroundColor: whiteColor,
   brightness: Brightness.light,
+  primarySwatch: Colors.green,
   textTheme: TextTheme(
     labelSmall: labelSmallTextLightModeStyle,
     labelMedium: labelMediumTextLightModeStyle,
@@ -54,7 +54,7 @@ ThemeData lightMode = ThemeData(
       ),
     ),
   ),
-  colorScheme: ColorScheme(
+  colorScheme: ColorScheme.light(
     brightness: Brightness.light,
 
     ///primary colors and inverted color
@@ -65,6 +65,7 @@ ThemeData lightMode = ThemeData(
     primaryContainer: orangeQuadColor,
     primaryFixedDim: primaryGreenColorDeep,
     primaryFixed: orangeFadeColor,
+    onPrimaryContainer: disabledGreenColor,
 
     ///Secondary colors
     secondary: secondary,
@@ -81,7 +82,7 @@ ThemeData lightMode = ThemeData(
 
     ///Surface
     surface: whiteColor,
-    onSurface: greySecondaryColor,
+    onSurface: darkColor,
     surfaceBright: darkBrownColor,
 
     ///Inverse surface
@@ -93,6 +94,35 @@ ThemeData lightMode = ThemeData(
     outlineVariant: darkBrownColor,
     surfaceDim: dividerColor,
   ),
+  datePickerTheme: DatePickerThemeData(
+   // backgroundColor: Colors.red,
+    todayBackgroundColor: WidgetStateProperty.all(Colors.white),
+    dayBackgroundColor: WidgetStateProperty.all(primaryGreenColor),
+    // dayShape: WidgetStateProperty.all(
+    //   RoundedRectangleBorder(
+    //     borderRadius: BorderRadius.circular(12),side: BorderSide(color: Colors.red)
+    //   ),
+    // ),
+    // weekdayStyle: bodyMediumTextLightModeStyle,
+    // headerBackgroundColor: primaryGreenColor,
+    // headerForegroundColor: Colors.black,
+    // headerHeadlineStyle: bodyLargeTextLightModeStyle,
+    // dayStyle: bodyMediumTextLightModeStyle,
+    // todayForegroundColor: WidgetStateProperty.all(secondary),
+    // yearForegroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+    //   if (states.contains(WidgetState.disabled)) {
+    //     return Colors.grey; // Faint for disabled days
+    //   }
+    //   return Colors.black; // Normal active days
+    // }),
+    // dayForegroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+    //   if (states.contains(WidgetState.disabled)) {
+    //     return Colors.grey; // Faint for disabled days
+    //   }
+    //   return Colors.black; // Normal active days
+    // }),
+  ),
+  dialogTheme: DialogThemeData(backgroundColor: whiteColor),
 );
 
 ThemeData darkMode = lightMode.copyWith(
@@ -132,7 +162,6 @@ ThemeData darkMode = lightMode.copyWith(
     titleMedium: titleMediumTextLightModeStyle.copyWith(color: whiteColor),
     titleSmall: titleSmallTextLightModeStyle.copyWith(color: whiteColor),
   ),
-
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 5.0,

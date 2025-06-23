@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 var primaryGreenColor = const Color(0xFF014C16);
 var primaryGreenColorDeep = const Color(0xFF015418);
 var disabledGreenColor = const Color(0xFFA8E29F);
+var devotionGreenColor = const Color(0xFFC0ECCC);
 var greenFaded = const Color(0xFFC8E8C2);
 var tertiaryGreenColor = const Color(0xFF137359);
 var lineColor = const Color(0x00000000);

@@ -1,21 +1,16 @@
 import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/model/local/base_object.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/drop_down_widget.dart';
 import 'package:core_module/core_ui/widgets/tab_bar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
 import 'package:student_union/core/enums/book_type.dart';
-import 'package:student_union/core/model/devotional_guide_model.dart';
 
-import '../../../../core/model/news_update_model.dart';
 import '../controller/devotion_controller.dart';
 
 class DevotionsScreen extends BaseScreenStandard {
   final _controller = Get.put(DevotionController());
-  bool showAppBarIcon = false;
 
   @override
   bool showAppBar() {
@@ -37,45 +32,12 @@ class DevotionsScreen extends BaseScreenStandard {
     return "Devotionals";
   }
 
-  /*@override
-  PreferredSizeWidget appBar(BuildContext context) {
-    return AppBar(
-      elevation: 10,
-      toolbarHeight: appBarHeight(),
-      backgroundColor: appBarBackgroundColor(context),
-      leading: appBarLeadingIcon(context),
-      surfaceTintColor: appBarBackgroundColor(context),
-      title: appBarTitleWidget(context) ??
-          Text(
-            appBarTitle(),
-            style: appBarTitleStyle(context),
-          ),
-      actions: actions(),
-    );
-  }*/
 
   @override
   TextStyle? appBarTitleStyle(BuildContext context) {
     return super
         .appBarTitleStyle(context)
         ?.copyWith(fontWeight: FontWeight.w700);
-  }
-
-  @override
-  Widget? appBarLeadingIcon(BuildContext context) {
-    return showAppBarIcon
-        ? super.appBarLeadingIcon(context)
-        : const SizedBox.shrink();
-  }
-
-  @override
-  void setModel(BaseObject baseObject) {
-    super.setModel(baseObject);
-    if (baseObject is DevotionalGuideModel) {
-      showAppBarIcon = true;
-    } else {
-      showAppBarIcon = false;
-    }
   }
 
   @override
@@ -113,7 +75,7 @@ class DevotionsScreen extends BaseScreenStandard {
                   )
                 : DevotionalGuideWidget.withPurchasedBooks(
                     yearFilter: _controller.selectedYear.value,
-                    onTap: _controller.onDevotionTap,
+                    onTap: _controller.onPurchasedBookOnClick,
                   ),
           ),
         )

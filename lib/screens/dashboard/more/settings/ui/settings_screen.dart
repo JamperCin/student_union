@@ -2,7 +2,7 @@ import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/widgets/simple_card_item.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';

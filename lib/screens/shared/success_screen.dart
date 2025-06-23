@@ -1,12 +1,12 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/res/assets_path.dart';
+import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:student_union/core/model/success_model.dart';
+import 'package:student_union/core/model/local/success_model.dart';
+import 'package:student_union/core/res/asset_path.dart';
 
 class SuccessScreen extends BaseScreenStandard {
   final GestureTapCallback? onTap;

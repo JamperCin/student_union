@@ -10,7 +10,7 @@ import 'package:core_module/core_ui/widgets/container_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:core_module/core_ui/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:core_module/core_module.dart';
 import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';

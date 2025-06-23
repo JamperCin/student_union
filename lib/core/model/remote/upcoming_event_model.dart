@@ -1,3 +1,4 @@
+import 'package:core_module/core/model/local/base_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'upcoming_event_model.freezed.dart';
@@ -5,7 +6,7 @@ part 'upcoming_event_model.g.dart';
 
 
 @freezed
-class UpcomingEventModel with _$UpcomingEventModel {
+class UpcomingEventModel extends BaseObject with _$UpcomingEventModel {
   const factory UpcomingEventModel({
     @Default("") String image,
     @Default("") String description,

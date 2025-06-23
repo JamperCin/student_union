@@ -1,7 +1,7 @@
 import 'package:core_module/core/services/base_api_service.dart';
 import 'package:core_module/core/utils/file_utils.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:student_union/core/model/upcoming_event_model.dart';
+import 'package:student_union/core/model/remote/upcoming_event_model.dart';
 import 'package:student_union/core/services/upcoming_events/upcoming_events_api_interface.dart';
 
 class UpcomingEventsApiService extends BaseApiService implements UpcomingEventsApiInterface{
@@ -19,8 +19,8 @@ class UpcomingEventsApiService extends BaseApiService implements UpcomingEventsA
     await Future.delayed(const Duration(seconds: 2));
     final results = await FileUtils().fetchList<UpcomingEventModel>(
       path: path,
-      objectKey: 'data',
-      key: 'events',
+      key: 'data',
+      secondaryKey: 'events',
       parser: (json) => UpcomingEventModel.fromJson(json),
     );
 

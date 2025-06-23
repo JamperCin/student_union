@@ -8,6 +8,8 @@ import 'package:core_module/core/model/remote/base_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:student_union/core/model/remote/sign_up_response.dart';
 
+import '../model/remote/customer_model.dart';
+
 class AppPreference {
   static AppPreference? _instance;
   late SharedPreferences preference;
@@ -114,9 +116,10 @@ class AppPreference {
     setString(TOKEN, token);
   }
 
-  void setUser(User? user) {
+  void setUser(CustomerModel? user) {
     if (user != null) {
       setString(USER_DETAILS, MapUtils().convertEncode(user));
+      appDbPreference.saveItem<CustomerModel>(item: user, key: USER_DETAILS);
     }
   }
 
@@ -129,7 +132,7 @@ class AppPreference {
     }
   }
 
-  User? getUser() {
-    return getSavedObject<User>(USER_DETAILS, (json) => User.fromJson(json));
+  CustomerModel? getUser() {
+    return getSavedObject<CustomerModel>(USER_DETAILS, (json) => CustomerModel.fromJson(json));
   }
 }

@@ -12,7 +12,7 @@ import 'package:gap/gap.dart' show Gap;
 import 'package:student_union/core-ui/widgets/title_text_widget.dart'
     show TitleTextWidget;
 import 'package:student_union/core/def/global_access.dart';
-import 'package:student_union/core/model/news_update_model.dart';
+import 'package:student_union/core/model/remote/news_update_model.dart';
 import 'package:student_union/screens/dashboard/news/ui/news_screen.dart';
 
 class NewsUpdateWidget extends StatelessWidget {
@@ -160,7 +160,7 @@ class NewsUpdateWidget extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return Column(
+    return list.isEmpty ? const SizedBox.shrink() : Column(
       children: [
         TitleTextWidget(text: "News Updates", onTap: onMoreOnTap),
         ...list.map((e) => InkWell(

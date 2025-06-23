@@ -1,6 +1,6 @@
 import 'package:core_module/core/services/base_api_service.dart';
 import 'package:get/get.dart';
-import 'package:student_union/core/model/customer_model.dart';
+import 'package:student_union/core/model/remote/customer_model.dart';
 import 'package:student_union/core/services/user/user_api_interface.dart';
 
 class UserApiService extends BaseApiService implements UserApiInterface {
@@ -19,12 +19,10 @@ class UserApiService extends BaseApiService implements UserApiInterface {
   @override
   Future<CustomerModel> fetchUserDetails() async {
      userDetails.value = await _apiService?.getRequest<CustomerModel>(
-          api: 'customer_dashboard/v1/news?',
-           parser: (json) =>  CustomerModel.fromJson(json['data']['user_details']),
+          api: 'customer/v1/profile?',
+           parser: (json) =>  CustomerModel.fromJson(json),
         ) ??
         const CustomerModel();
-
-    //appPreference.saveUserDetails(results);
     return userDetails.value;
   }
 }

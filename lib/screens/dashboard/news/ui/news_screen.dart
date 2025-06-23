@@ -4,7 +4,7 @@ import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/widgets/news_update_widget.dart';
-import 'package:student_union/core/model/news_update_model.dart';
+import 'package:student_union/core/model/remote/news_update_model.dart';
 
 import '../controller/news_controller.dart';
 
@@ -34,23 +34,23 @@ class NewsScreen extends BaseScreenStandard {
         ?.copyWith(fontWeight: FontWeight.w700);
   }
 
-  @override
-  Widget? appBarLeadingIcon(BuildContext context) {
-    return showAppBarIcon
-        ? super.appBarLeadingIcon(context)
-        : const SizedBox.shrink();
-  }
-
-  @override
-  void setModel(BaseObject baseObject) {
-    super.setModel(baseObject);
-    if (baseObject is NewsUpdateModel) {
-      showAppBarIcon = true;
-    } else {
-      showAppBarIcon = false;
-    }
-    print("BAr ==> $showAppBarIcon");
-  }
+  // @override
+  // Widget? appBarLeadingIcon(BuildContext context) {
+  //   return showAppBarIcon
+  //       ? super.appBarLeadingIcon(context)
+  //       : const SizedBox.shrink();
+  // }
+  //
+  // @override
+  // void setModel(BaseObject baseObject) {
+  //   super.setModel(baseObject);
+  //   if (baseObject is NewsUpdateModel) {
+  //     showAppBarIcon = true;
+  //   } else {
+  //     showAppBarIcon = false;
+  //   }
+  //   print("BAr ==> $showAppBarIcon");
+  // }
 
   @override
   Widget body(BuildContext context) {

@@ -8,12 +8,12 @@ import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:student_union/core/model/devotional_guide_model.dart';
+import 'package:core_module/core_module.dart';
+import 'package:student_union/core/model/remote/devotional_book_model.dart';
 
 import '../controller/devotion_controller.dart';
 
-class DevotionDetailsScreen extends BaseScreenStandard {
+class BuyDevotionalBookScreen extends BaseScreenStandard {
   final _controller = Get.put(DevotionController());
 
   @override
@@ -34,8 +34,8 @@ class DevotionDetailsScreen extends BaseScreenStandard {
   }
 
   @override
-  DevotionalGuideModel getModel() {
-    return super.getModel() as DevotionalGuideModel;
+  DevotionalBookModel getModel() {
+    return super.getModel() as DevotionalBookModel;
   }
 
   @override
@@ -104,7 +104,7 @@ class DevotionDetailsScreen extends BaseScreenStandard {
                         children: [
                           TextSpan(text: "GHS ", style: textTheme.bodyLarge),
                           TextSpan(
-                              text: getModel().amount.toDecimalPlaces(),
+                              text: getModel().price.toDecimalPlaces(),
                               style: textTheme.bodyLarge),
                         ],
                       ),
@@ -118,7 +118,7 @@ class DevotionDetailsScreen extends BaseScreenStandard {
           ButtonWidget(
               text: "Buy",
               onTap: () {
-                _controller.onInitiateBuyOnClick(context, getModel());
+                _controller.confirmPayment(context, getModel());
               }),
           Gap(30.dp()),
         ],

@@ -1,9 +1,9 @@
 import 'package:core_module/core/model/local/base_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'success_model.freezed.dart';
-
 part 'success_model.g.dart';
+
+part 'success_model.freezed.dart';
 
 @freezed
 class SuccessModel extends BaseObject with _$SuccessModel {

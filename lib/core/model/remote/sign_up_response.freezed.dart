@@ -23,7 +23,7 @@ mixin _$SignUpResponse {
   @JsonKey(name: 'token')
   String? get token => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
-  User? get user => throw _privateConstructorUsedError;
+  CustomerModel? get user => throw _privateConstructorUsedError;
   @JsonKey(name: 'status')
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'errors')
@@ -47,11 +47,11 @@ abstract class $SignUpResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'token') String? token,
-      @JsonKey(name: 'user') User? user,
+      @JsonKey(name: 'user') CustomerModel? user,
       @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'errors') List<String>? errors});
 
-  $UserCopyWith<$Res>? get user;
+  $CustomerModelCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -82,7 +82,7 @@ class _$SignUpResponseCopyWithImpl<$Res, $Val extends SignUpResponse>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as CustomerModel?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -98,12 +98,12 @@ class _$SignUpResponseCopyWithImpl<$Res, $Val extends SignUpResponse>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res>? get user {
+  $CustomerModelCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
-    return $UserCopyWith<$Res>(_value.user!, (value) {
+    return $CustomerModelCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -119,12 +119,12 @@ abstract class _$$SignUpResponseImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'token') String? token,
-      @JsonKey(name: 'user') User? user,
+      @JsonKey(name: 'user') CustomerModel? user,
       @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'errors') List<String>? errors});
 
   @override
-  $UserCopyWith<$Res>? get user;
+  $CustomerModelCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -153,7 +153,7 @@ class __$$SignUpResponseImplCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as CustomerModel?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -184,7 +184,7 @@ class _$SignUpResponseImpl implements _SignUpResponse {
   final String? token;
   @override
   @JsonKey(name: 'user')
-  final User? user;
+  final CustomerModel? user;
   @override
   @JsonKey(name: 'status')
   final String? status;
@@ -240,7 +240,7 @@ class _$SignUpResponseImpl implements _SignUpResponse {
 abstract class _SignUpResponse implements SignUpResponse {
   const factory _SignUpResponse(
           {@JsonKey(name: 'token') final String? token,
-          @JsonKey(name: 'user') final User? user,
+          @JsonKey(name: 'user') final CustomerModel? user,
           @JsonKey(name: 'status') final String? status,
           @JsonKey(name: 'errors') final List<String>? errors}) =
       _$SignUpResponseImpl;
@@ -253,7 +253,7 @@ abstract class _SignUpResponse implements SignUpResponse {
   String? get token;
   @override
   @JsonKey(name: 'user')
-  User? get user;
+  CustomerModel? get user;
   @override
   @JsonKey(name: 'status')
   String? get status;
@@ -266,178 +266,5 @@ abstract class _SignUpResponse implements SignUpResponse {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignUpResponseImplCopyWith<_$SignUpResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
-}
-
-/// @nodoc
-mixin _$User {
-  @JsonKey(name: 'name')
-  String? get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'email')
-  String? get email => throw _privateConstructorUsedError;
-
-  /// Serializes this User to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'email') String? email});
-}
-
-/// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
-    implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = freezed,
-    Object? email = freezed,
-  }) {
-    return _then(_value.copyWith(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$UserImplCopyWith(
-          _$UserImpl value, $Res Function(_$UserImpl) then) =
-      __$$UserImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'email') String? email});
-}
-
-/// @nodoc
-class __$$UserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$UserImpl>
-    implements _$$UserImplCopyWith<$Res> {
-  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = freezed,
-    Object? email = freezed,
-  }) {
-    return _then(_$UserImpl(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$UserImpl implements _User {
-  const _$UserImpl(
-      {@JsonKey(name: 'name') this.name, @JsonKey(name: 'email') this.email});
-
-  factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserImplFromJson(json);
-
-  @override
-  @JsonKey(name: 'name')
-  final String? name;
-  @override
-  @JsonKey(name: 'email')
-  final String? email;
-
-  @override
-  String toString() {
-    return 'User(name: $name, email: $email)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UserImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, name, email);
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _User implements User {
-  const factory _User(
-      {@JsonKey(name: 'name') final String? name,
-      @JsonKey(name: 'email') final String? email}) = _$UserImpl;
-
-  factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
-
-  @override
-  @JsonKey(name: 'name')
-  String? get name;
-  @override
-  @JsonKey(name: 'email')
-  String? get email;
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

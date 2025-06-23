@@ -7,7 +7,7 @@ import 'package:core_module/core_ui/widgets/text_button_widget.dart';
 import 'package:core_module/core_ui/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:gap/gap.dart';
+import 'package:core_module/core_module.dart';
 import 'package:get/get.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/login/login_controller.dart';

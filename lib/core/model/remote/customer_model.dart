@@ -14,6 +14,10 @@ class CustomerModel extends BaseObject with _$CustomerModel {
   const factory CustomerModel({
     @Default("") String name,
     @Default("") String email,
+    @JsonKey(name: 'account_type')@Default("") String accountType,
+    @JsonKey(name: 'created_at')@Default("") String createdAt,
+    @JsonKey(name: 'updated_at')@Default("") String updatedAt,
+    @Default("") String status,
     @Default("") String profilePic,
 }) = _CustomerModel;
 

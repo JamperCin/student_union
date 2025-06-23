@@ -25,7 +25,6 @@ class AuthApiService extends BaseApiService implements AuthApiInterface {
       api: 'login',
       param: params,
       tokenHeader: false,
-      showToast: true,
       parser: (json) => SignUpResponse.fromJson(json),
     );
 
@@ -45,8 +44,14 @@ class AuthApiService extends BaseApiService implements AuthApiInterface {
   }
 
   @override
-  Future<BaseResponseModel?> signOut(HashMap<String, Object> params) {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<BaseResponseModel?> signOut(HashMap<String, Object> params) async{
+    final results = await _apiService?.postRequest<BaseResponseModel>(
+      api: 'signout',
+      param: params,
+      tokenHeader: false,
+      parser: (json) => BaseResponseModel.fromJson(json),
+    );
+
+    return results;
   }
 }

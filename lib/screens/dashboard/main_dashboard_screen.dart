@@ -48,7 +48,7 @@ class MainDashboardScreen extends BaseScreenStandard {
   @override
   Widget bottomNavigationBar(BuildContext context) {
     return CardContainerWidget(
-      color: colorScheme.onSurface,
+      color: colorScheme.onSecondary,
       padding: EdgeInsets.only(
         bottom: appDimen.dimen(20),
         top: appDimen.dimen(8),

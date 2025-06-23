@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_impl.dart';
@@ -7,15 +8,12 @@ import 'package:get/get.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-
 class BaseWebView extends BaseScreenImpl {
   RxBool isPageLoading = true.obs;
   late WebViewController wCtrl;
+  final WebModel model;
 
-  @override
-  WebModel getModel() {
-    return baseObject as WebModel;
-  }
+  BaseWebView({required this.model});
 
   @override
   TextStyle? appBarTitleStyle(BuildContext context) {
@@ -27,10 +25,10 @@ class BaseWebView extends BaseScreenImpl {
   @override
   List<Widget> actions() {
     return [
-      getModel().onDoneOnclick != null
+      model.onDoneOnclick != null
           ? InkWell(
               onTap: () {
-                getModel().onDoneOnclick!();
+                model.onDoneOnclick!();
               },
               child: Padding(
                 padding: EdgeInsets.only(
@@ -40,7 +38,8 @@ class BaseWebView extends BaseScreenImpl {
                 ),
                 child: Text(
                   "Done",
-                  style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary),
+                  style: textTheme.bodyMedium
+                      ?.copyWith(color: colorScheme.primary),
                 ),
               ),
             )
@@ -50,7 +49,7 @@ class BaseWebView extends BaseScreenImpl {
 
   @override
   bool showAppBar() {
-    return true;
+    return model.showAppBar;
   }
 
   @override
@@ -60,7 +59,7 @@ class BaseWebView extends BaseScreenImpl {
 
   @override
   String appBarTitle() {
-    return getModel().title ?? "";
+    return model.title ?? "";
   }
 
   @override
@@ -77,6 +76,28 @@ class BaseWebView extends BaseScreenImpl {
     );
   }
 
+  Uri? _getContent() {
+    return model.uri ??
+        (model.content != null
+            ? Uri.dataFromString(
+                '''
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>body { font-family: sans-serif; padding: 16px; }</style>
+              </head>
+              <body>
+                ${model.content ?? ''}
+                </body>
+              </html>
+              ''',
+                mimeType: 'text/html',
+                encoding: Encoding.getByName('utf-8'),
+              )
+            : null);
+  }
+
   WebViewController getWebController() {
     final controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -87,9 +108,7 @@ class BaseWebView extends BaseScreenImpl {
       })
       ..setNavigationDelegate(
         NavigationDelegate(
-          onHttpAuthRequest: (HttpAuthRequest request) {
-
-          },
+          onHttpAuthRequest: (HttpAuthRequest request) {},
           onProgress: (int progress) {
             // Update loading bar.
           },
@@ -114,7 +133,7 @@ class BaseWebView extends BaseScreenImpl {
           },
         ),
       )
-      ..loadRequest(Uri.parse(getModel().url ?? ''));
+      ..loadRequest(_getContent() ?? Uri.parse(model.url ?? ''));
 
     return controller;
   }

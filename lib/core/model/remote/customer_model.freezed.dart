@@ -22,6 +22,13 @@ CustomerModel _$CustomerModelFromJson(Map<String, dynamic> json) {
 mixin _$CustomerModel {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'account_type')
+  String get accountType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  String get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  String get updatedAt => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
   String get profilePic => throw _privateConstructorUsedError;
 
   /// Serializes this CustomerModel to a JSON map.
@@ -40,7 +47,14 @@ abstract class $CustomerModelCopyWith<$Res> {
           CustomerModel value, $Res Function(CustomerModel) then) =
       _$CustomerModelCopyWithImpl<$Res, CustomerModel>;
   @useResult
-  $Res call({String name, String email, String profilePic});
+  $Res call(
+      {String name,
+      String email,
+      @JsonKey(name: 'account_type') String accountType,
+      @JsonKey(name: 'created_at') String createdAt,
+      @JsonKey(name: 'updated_at') String updatedAt,
+      String status,
+      String profilePic});
 }
 
 /// @nodoc
@@ -60,6 +74,10 @@ class _$CustomerModelCopyWithImpl<$Res, $Val extends CustomerModel>
   $Res call({
     Object? name = null,
     Object? email = null,
+    Object? accountType = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? status = null,
     Object? profilePic = null,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +88,22 @@ class _$CustomerModelCopyWithImpl<$Res, $Val extends CustomerModel>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountType: null == accountType
+          ? _value.accountType
+          : accountType // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as String,
       profilePic: null == profilePic
           ? _value.profilePic
@@ -87,7 +121,14 @@ abstract class _$$CustomerModelImplCopyWith<$Res>
       __$$CustomerModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String email, String profilePic});
+  $Res call(
+      {String name,
+      String email,
+      @JsonKey(name: 'account_type') String accountType,
+      @JsonKey(name: 'created_at') String createdAt,
+      @JsonKey(name: 'updated_at') String updatedAt,
+      String status,
+      String profilePic});
 }
 
 /// @nodoc
@@ -105,6 +146,10 @@ class __$$CustomerModelImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? email = null,
+    Object? accountType = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? status = null,
     Object? profilePic = null,
   }) {
     return _then(_$CustomerModelImpl(
@@ -115,6 +160,22 @@ class __$$CustomerModelImplCopyWithImpl<$Res>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountType: null == accountType
+          ? _value.accountType
+          : accountType // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as String,
       profilePic: null == profilePic
           ? _value.profilePic
@@ -128,7 +189,13 @@ class __$$CustomerModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CustomerModelImpl implements _CustomerModel {
   const _$CustomerModelImpl(
-      {this.name = "", this.email = "", this.profilePic = ""});
+      {this.name = "",
+      this.email = "",
+      @JsonKey(name: 'account_type') this.accountType = "",
+      @JsonKey(name: 'created_at') this.createdAt = "",
+      @JsonKey(name: 'updated_at') this.updatedAt = "",
+      this.status = "",
+      this.profilePic = ""});
 
   factory _$CustomerModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomerModelImplFromJson(json);
@@ -140,12 +207,24 @@ class _$CustomerModelImpl implements _CustomerModel {
   @JsonKey()
   final String email;
   @override
+  @JsonKey(name: 'account_type')
+  final String accountType;
+  @override
+  @JsonKey(name: 'created_at')
+  final String createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  final String updatedAt;
+  @override
+  @JsonKey()
+  final String status;
+  @override
   @JsonKey()
   final String profilePic;
 
   @override
   String toString() {
-    return 'CustomerModel(name: $name, email: $email, profilePic: $profilePic)';
+    return 'CustomerModel(name: $name, email: $email, accountType: $accountType, createdAt: $createdAt, updatedAt: $updatedAt, status: $status, profilePic: $profilePic)';
   }
 
   @override
@@ -155,13 +234,21 @@ class _$CustomerModelImpl implements _CustomerModel {
             other is _$CustomerModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.accountType, accountType) ||
+                other.accountType == accountType) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.profilePic, profilePic) ||
                 other.profilePic == profilePic));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, email, profilePic);
+  int get hashCode => Object.hash(runtimeType, name, email, accountType,
+      createdAt, updatedAt, status, profilePic);
 
   /// Create a copy of CustomerModel
   /// with the given fields replaced by the non-null parameter values.
@@ -183,6 +270,10 @@ abstract class _CustomerModel implements CustomerModel {
   const factory _CustomerModel(
       {final String name,
       final String email,
+      @JsonKey(name: 'account_type') final String accountType,
+      @JsonKey(name: 'created_at') final String createdAt,
+      @JsonKey(name: 'updated_at') final String updatedAt,
+      final String status,
       final String profilePic}) = _$CustomerModelImpl;
 
   factory _CustomerModel.fromJson(Map<String, dynamic> json) =
@@ -192,6 +283,17 @@ abstract class _CustomerModel implements CustomerModel {
   String get name;
   @override
   String get email;
+  @override
+  @JsonKey(name: 'account_type')
+  String get accountType;
+  @override
+  @JsonKey(name: 'created_at')
+  String get createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  String get updatedAt;
+  @override
+  String get status;
   @override
   String get profilePic;
 

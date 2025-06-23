@@ -1,9 +1,7 @@
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core/model/local/bottom_bar_model.dart';
-import 'package:core_module/core/res/assets_path.dart';
+import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animator/flutter_animator.dart';
-import 'package:get/get.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
@@ -12,7 +10,7 @@ class DashboardController extends BaseController {
   ///Initialise this when the main dashboard is called
   Future<void> initData() async {
     await Future.delayed(const Duration(milliseconds: 180));
-    //todo await userApiService.fetchUserDetails();
+    await fetchUserDetails();
   }
 
   ///List of menu for the bottom navigation bar
@@ -56,5 +54,10 @@ class DashboardController extends BaseController {
         .toList();
 
     model.key?.currentState?.forward();
+  }
+
+  Future<void> fetchUserDetails() async {
+    final user = await userApiService.fetchUserDetails();
+    appPreference.setUser(user);
   }
 }

@@ -1,23 +1,18 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
-import 'package:core_module/core_ui/widgets/button_widget.dart';
-import 'package:core_module/core_ui/widgets/card_container_widget.dart';
 import 'package:core_module/core_ui/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/widgets/simple_card_item.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
+import 'package:student_union/core/model/remote/campaign_model.dart';
 
-import '../../core/model/core_ministry_model.dart';
-import '../../core/res/asset_path.dart';
-import '../../screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
 
 class CoreMinistriesWidget extends StatelessWidget {
   final bool horizontalGrid;
-  final Function(CoreMinistryModel)? onTap;
+  final Function(CampaignModel)? onTap;
   final GestureTapCallback? onSeeMore;
 
   const CoreMinistriesWidget({
@@ -49,14 +44,14 @@ class CoreMinistriesWidget extends StatelessWidget {
         ),
         Gap(10.dp()),
         FutureBuilder(
-            future: coreMinistryApiService.fetchListOfCoreMinistries(),
+            future: campaignApiService.fetchListOfCoreMinistries(),
             builder: (context, data) {
               return (data.hasData && data.data != null)
                   ? CarouselSlider.builder(
                       itemCount: data.data?.length,
                       itemBuilder: (context, index, realIndex) {
-                        CoreMinistryModel model = data.data![index];
-                        return SimpleCardItem<CoreMinistryModel>.withButton(
+                        CampaignModel model = data.data![index];
+                        return SimpleCardItem<CampaignModel>.withButton(
                           title: model.title,
                           onTap: onTap,
                           model: model,
@@ -77,13 +72,13 @@ class CoreMinistriesWidget extends StatelessWidget {
 
   Widget _donationsScreen(BuildContext context) {
     return FutureBuilder(
-      future: coreMinistryApiService.fetchListOfCoreMinistries(),
+      future: campaignApiService.fetchListOfCoreMinistries(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         return (snapshot.hasData && snapshot.data != null)
             ? ListView(
                 children: [
                   ...snapshot.data
-                      .map((model) => SimpleCardItem<CoreMinistryModel>(
+                      .map((model) => SimpleCardItem<CampaignModel>(
                             title: model.title,
                             model: model,
                             onTap: onTap,

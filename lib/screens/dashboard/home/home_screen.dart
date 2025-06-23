@@ -3,12 +3,13 @@ import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/widgets/core_ministries_widget.dart';
 import 'package:student_union/core-ui/widgets/daily_devotion_widget.dart'
     show DailyDevotionWidget;
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
 import 'package:student_union/core-ui/widgets/news_update_widget.dart';
+import 'package:student_union/core-ui/widgets/payment_history_widget.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core-ui/widgets/top_header_widget.dart';
 import 'package:student_union/core-ui/widgets/upcoming_events_widget.dart';
@@ -54,17 +55,19 @@ class HomeScreen extends BaseScreenStandard {
           onSeeMoreOnTap: _controller.onSeeMoreDevotionalBooks,
         ),
         Gap(20.dp()),
-        //const UpcomingEventsWidget(),
+        const UpcomingEventsWidget(),
         Gap(20.dp()),
-        // CoreMinistriesWidget(
-        //   onTap: _controller.onDonationOnClick,
-        //   onSeeMore: _controller.onSeeMoreCoreMinistries,
-        // ),
+        CoreMinistriesWidget(
+          onTap: _controller.onDonationOnClick,
+          onSeeMore: _controller.onSeeMoreCoreMinistries,
+        ),
         Gap(20.dp()),
         NewsUpdateWidget(
           onTap: _controller.onNewsUpdateTap,
           onMoreOnTap: _controller.onMoreNewsOnClick,
         ),
+        Gap(20.dp()),
+        PaymentHistoryWidget(onSeeMoreOnTap: _controller.onSeeMorePaymentHistory,),
       ],
     );
   }
