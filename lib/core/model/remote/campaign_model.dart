@@ -11,6 +11,7 @@ class CampaignModel extends BaseObject with _$CampaignModel {
   const factory CampaignModel({
     @JsonKey(name: 'image_url')@Default("") String image,
     @Default("") String description,
+    @Default("") String currency,
     @Default(0) int id,
     @JsonKey(name: 'goal_amount')@Default("") String goalAmount,
     @JsonKey(name: 'campaign_type')@Default("") String campaignType,

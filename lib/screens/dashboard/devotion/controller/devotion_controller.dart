@@ -3,11 +3,10 @@ import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core/extensions/string_extension.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/bottom_sheet_widget.dart';
+import 'package:core_module/core_ui/widgets/confirm_transaction_layout.dart';
 import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
-import 'package:student_union/core-ui/widgets/confirm_transaction_layout.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/enums/book_type.dart';
@@ -26,7 +25,7 @@ class DevotionController extends BaseController {
   List<String> get list =>
       List<String>.generate(5 + 1, (index) => "${DateTime.now().year - index}");
 
-  onDevotionTap(DevotionalBookModel model) {
+ void onDevotionTap(DevotionalBookModel model) {
     navUtils.fireTarget(
       model.purchased
           ? PurchasedBookDetailsScreen()
@@ -99,14 +98,6 @@ class DevotionController extends BaseController {
     if (results.authUrl != null) {
       navToPaymentScreen(results.authUrl ?? '');
     }
-
-    // navUtils.fireTargetOff(
-    //   SuccessScreen(),
-    //   model: SuccessModel(
-    //     title: "Success",
-    //     message: "You have successfully purchased this devotion with title ${model.title}",
-    //   ),
-    // );
   }
 
   void navToPaymentScreen(String url) {

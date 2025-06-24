@@ -10,6 +10,7 @@ _$CampaignModelImpl _$$CampaignModelImplFromJson(Map<String, dynamic> json) =>
     _$CampaignModelImpl(
       image: json['image_url'] as String? ?? "",
       description: json['description'] as String? ?? "",
+      currency: json['currency'] as String? ?? "",
       id: (json['id'] as num?)?.toInt() ?? 0,
       goalAmount: json['goal_amount'] as String? ?? "",
       campaignType: json['campaign_type'] as String? ?? "",
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$CampaignModelImplToJson(_$CampaignModelImpl instance) =>
     <String, dynamic>{
       'image_url': instance.image,
       'description': instance.description,
+      'currency': instance.currency,
       'id': instance.id,
       'goal_amount': instance.goalAmount,
       'campaign_type': instance.campaignType,

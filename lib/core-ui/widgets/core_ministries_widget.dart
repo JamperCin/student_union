@@ -9,7 +9,6 @@ import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/campaign_model.dart';
 
-
 class CoreMinistriesWidget extends StatelessWidget {
   final bool horizontalGrid;
   final Function(CampaignModel)? onTap;
@@ -35,37 +34,45 @@ class CoreMinistriesWidget extends StatelessWidget {
   }
 
   Widget _coreMinistriesScreen(BuildContext context) {
+    return FutureBuilder(
+        future: campaignApiService.fetchListOfCoreMinistries(),
+        builder: (context, data) {
+          return (data.hasData && data.data != null)
+              ? _horizontalGridItem(context, data.data!)
+              : ShimmerWidget.withList(length: 1);
+        });
+  }
+
+  Widget _horizontalGridItem(BuildContext context, List<CampaignModel> list) {
+    if (list.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Gap(20.dp()),
         TitleTextWidget(
           text: "Core Ministries",
           onTap: onSeeMore,
         ),
         Gap(10.dp()),
-        FutureBuilder(
-            future: campaignApiService.fetchListOfCoreMinistries(),
-            builder: (context, data) {
-              return (data.hasData && data.data != null)
-                  ? CarouselSlider.builder(
-                      itemCount: data.data?.length,
-                      itemBuilder: (context, index, realIndex) {
-                        CampaignModel model = data.data![index];
-                        return SimpleCardItem<CampaignModel>.withButton(
-                          title: model.title,
-                          onTap: onTap,
-                          model: model,
-                        );
-                      },
-                      options: CarouselOptions(
-                        scrollPhysics: const BouncingScrollPhysics(),
-                        height: 220.dp(),
-                        enableInfiniteScroll: false,
-                        initialPage: data.data!.length > 1 ? 1 : 0,
-                        viewportFraction: 0.5,
-                      ))
-                  : ShimmerWidget(width: appDimen.screenWidth);
-            }),
+        CarouselSlider.builder(
+            itemCount: list.length,
+            itemBuilder: (context, index, realIndex) {
+              CampaignModel model = list[index];
+              return SimpleCardItem<CampaignModel>.withButton(
+                title: model.title,
+                onTap: onTap,
+                model: model,
+              );
+            },
+            options: CarouselOptions(
+              scrollPhysics: const BouncingScrollPhysics(),
+              height: 220.dp(),
+              enableInfiniteScroll: false,
+              initialPage: list.length > 1 ? 1 : 0,
+              viewportFraction: 0.5,
+            )),
       ],
     );
   }
@@ -77,12 +84,11 @@ class CoreMinistriesWidget extends StatelessWidget {
         return (snapshot.hasData && snapshot.data != null)
             ? ListView(
                 children: [
-                  ...snapshot.data
-                      .map((model) => SimpleCardItem<CampaignModel>(
-                            title: model.title,
-                            model: model,
-                            onTap: onTap,
-                          )),
+                  ...snapshot.data.map((model) => SimpleCardItem<CampaignModel>(
+                        title: model.title,
+                        model: model,
+                        onTap: onTap,
+                      )),
                 ],
               )
             : ShimmerWidget.withList();

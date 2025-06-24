@@ -64,6 +64,7 @@ class DevotionsScreen extends BaseScreenStandard {
             _controller.bookTypeFilter.value =
                 index == 0 ? BookType.availableBooks : BookType.purchasedBooks;
           },
+          initialIndex: _controller.bookTypeFilter.value == BookType.availableBooks ? 0 : 1,
         ),
         Expanded(
           child: Obx(

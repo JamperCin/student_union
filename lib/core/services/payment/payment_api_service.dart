@@ -25,7 +25,8 @@ class PaymentApiService extends BaseApiService implements PaymentApiInterface {
     );
 
     // final results = await _instance?.getListRequest<PaymentModel>(
-    //   api: "customer/v1/payments",
+    //   api: "customer/v1/payments?",
+    //    key: "payments"
     //   parser: (json) => PaymentModel.fromJson(json),
     // );
 

@@ -23,6 +23,7 @@ mixin _$CampaignModel {
   @JsonKey(name: 'image_url')
   String get image => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String get currency => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'goal_amount')
   String get goalAmount => throw _privateConstructorUsedError;
@@ -53,6 +54,7 @@ abstract class $CampaignModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'image_url') String image,
       String description,
+      String currency,
       int id,
       @JsonKey(name: 'goal_amount') String goalAmount,
       @JsonKey(name: 'campaign_type') String campaignType,
@@ -78,6 +80,7 @@ class _$CampaignModelCopyWithImpl<$Res, $Val extends CampaignModel>
   $Res call({
     Object? image = null,
     Object? description = null,
+    Object? currency = null,
     Object? id = null,
     Object? goalAmount = null,
     Object? campaignType = null,
@@ -93,6 +96,10 @@ class _$CampaignModelCopyWithImpl<$Res, $Val extends CampaignModel>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -133,6 +140,7 @@ abstract class _$$CampaignModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'image_url') String image,
       String description,
+      String currency,
       int id,
       @JsonKey(name: 'goal_amount') String goalAmount,
       @JsonKey(name: 'campaign_type') String campaignType,
@@ -156,6 +164,7 @@ class __$$CampaignModelImplCopyWithImpl<$Res>
   $Res call({
     Object? image = null,
     Object? description = null,
+    Object? currency = null,
     Object? id = null,
     Object? goalAmount = null,
     Object? campaignType = null,
@@ -171,6 +180,10 @@ class __$$CampaignModelImplCopyWithImpl<$Res>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -206,6 +219,7 @@ class _$CampaignModelImpl implements _CampaignModel {
   const _$CampaignModelImpl(
       {@JsonKey(name: 'image_url') this.image = "",
       this.description = "",
+      this.currency = "",
       this.id = 0,
       @JsonKey(name: 'goal_amount') this.goalAmount = "",
       @JsonKey(name: 'campaign_type') this.campaignType = "",
@@ -222,6 +236,9 @@ class _$CampaignModelImpl implements _CampaignModel {
   @override
   @JsonKey()
   final String description;
+  @override
+  @JsonKey()
+  final String currency;
   @override
   @JsonKey()
   final int id;
@@ -243,7 +260,7 @@ class _$CampaignModelImpl implements _CampaignModel {
 
   @override
   String toString() {
-    return 'CampaignModel(image: $image, description: $description, id: $id, goalAmount: $goalAmount, campaignType: $campaignType, createdAt: $createdAt, accountId: $accountId, title: $title)';
+    return 'CampaignModel(image: $image, description: $description, currency: $currency, id: $id, goalAmount: $goalAmount, campaignType: $campaignType, createdAt: $createdAt, accountId: $accountId, title: $title)';
   }
 
   @override
@@ -254,6 +271,8 @@ class _$CampaignModelImpl implements _CampaignModel {
             (identical(other.image, image) || other.image == image) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.goalAmount, goalAmount) ||
                 other.goalAmount == goalAmount) &&
@@ -268,7 +287,7 @@ class _$CampaignModelImpl implements _CampaignModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, image, description, id,
+  int get hashCode => Object.hash(runtimeType, image, description, currency, id,
       goalAmount, campaignType, createdAt, accountId, title);
 
   /// Create a copy of CampaignModel
@@ -291,6 +310,7 @@ abstract class _CampaignModel implements CampaignModel {
   const factory _CampaignModel(
       {@JsonKey(name: 'image_url') final String image,
       final String description,
+      final String currency,
       final int id,
       @JsonKey(name: 'goal_amount') final String goalAmount,
       @JsonKey(name: 'campaign_type') final String campaignType,
@@ -306,6 +326,8 @@ abstract class _CampaignModel implements CampaignModel {
   String get image;
   @override
   String get description;
+  @override
+  String get currency;
   @override
   int get id;
   @override

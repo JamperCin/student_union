@@ -1,5 +1,6 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
+import 'package:core_module/core/utils/date_time_utils.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
@@ -11,76 +12,95 @@ import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/upcoming_event_model.dart';
 
 class UpcomingEventsWidget extends StatelessWidget {
-  const UpcomingEventsWidget({super.key});
+  final Function(UpcomingEventModel)? onTap;
+
+  const UpcomingEventsWidget({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-         TitleTextWidget(text: "Upcoming Events", onTap: (){},),
-        Gap(5.dp()),
-        FutureBuilder(
-            future: upcomingEventsApiService.fetchUpcomingEvents(),
-            builder: (context, data) {
-              return (data.hasData && data.data != null)
-                  ? _eventsGridWidget(context, data.data!)
-                  : ShimmerWidget(width: appDimen.screenWidth);
-            }),
-      ],
-    );
+    return FutureBuilder(
+        future: upcomingEventsApiService.fetchUpcomingEvents(),
+        builder: (context, data) {
+          return (data.hasData && data.data != null)
+              ? _eventsGridWidget(context, data.data!)
+              : ShimmerWidget.withList(length: 1);
+        });
   }
 
   Widget _eventsGridWidget(
     BuildContext context,
     List<UpcomingEventModel> list,
   ) {
+
+    if(list.isEmpty){
+      return const SizedBox.shrink();
+    }
+
+    return Column(
+      children: [
+        Gap(20.dp()),
+        TitleTextWidget(
+          text: "Upcoming Events",
+          onTap: () {},
+        ),
+        Gap(5.dp()),
+        CarouselSlider.builder(
+            itemCount: list.length,
+            itemBuilder: (context, index, realIndex) {
+              UpcomingEventModel model = list[index];
+              return _eventItemWidget(context, model);
+            },
+            options: CarouselOptions(
+              scrollPhysics: const BouncingScrollPhysics(),
+              height: 210.dp(),
+              enableInfiniteScroll: false,
+              initialPage: list.length > 1 ? 1 : 0,
+              viewportFraction: 0.8,
+            )),
+      ],
+    );
+  }
+
+  Widget _eventItemWidget(BuildContext context, UpcomingEventModel model) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final height = 180.dp();
 
-    return CarouselSlider.builder(
-        itemCount: list.length,
-        itemBuilder: (context, index, realIndex) {
-          UpcomingEventModel model = list[index];
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.dp()),
-            child: Column(
+    return InkWell(
+      onTap: () => onTap?.call(model),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5.dp()),
+        child: Column(
+          children: [
+            NetworkImageWidget(
+              height: height,
+              width: appDimen.screenWidth,
+              url: model.image,
+              fit: BoxFit.fitWidth,
+              placeHolderWidget: ContainerWidget(
+                height: height,
+                width: appDimen.screenWidth,
+              ),
+            ),
+            Gap(2.dp()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                NetworkImageWidget(
-                  height: height,
-                  width: appDimen.screenWidth,
-                  url: model.image,
-                  fit: BoxFit.fitWidth,
-                  placeHolderWidget: ContainerWidget(
-                    height: height,
-                    width: appDimen.screenWidth,
-                  ),
+                Text(
+                  model.name,
+                  style:
+                  textTheme.labelSmall?.copyWith(fontSize: 8.dp()),
                 ),
-                Gap(2.dp()),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      model.title,
-                      style: textTheme.labelSmall?.copyWith(fontSize: 8.dp()),
-                    ),
-                    Text(
-                      model.date,
-                      style: textTheme.labelMedium?.copyWith(fontSize: 8.dp()),
-                    )
-                  ],
+                Text(
+                 DateTimeUtils().formatDate( model.date, format: "dd MMM, yyyy"),
+                  style:
+                  textTheme.labelMedium?.copyWith(fontSize: 8.dp()),
                 )
               ],
-            ),
-          );
-        },
-        options: CarouselOptions(
-          scrollPhysics: const BouncingScrollPhysics(),
-          height: height + 30.dp(),
-          enableInfiniteScroll: false,
-          initialPage: list.length > 1 ? 1 : 0,
-          viewportFraction: 0.8,
-        ));
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

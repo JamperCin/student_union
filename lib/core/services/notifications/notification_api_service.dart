@@ -15,9 +15,11 @@ class NotificationApiService extends BaseApiService
   }
 
   @override
-  Future<List<NotificationModel>> fetchNotifications({HashMap? map}) async{
+  Future<List<NotificationModel>> fetchNotifications({Map<String,dynamic>? param}) async{
     final results = await _instance?.getListRequest<NotificationModel>(
       api: "customer/v1/notifications",
+      key: "notifications",
+      param: param,
       parser: (json) => NotificationModel.fromJson(json),
     );
 

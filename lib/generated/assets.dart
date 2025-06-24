@@ -45,6 +45,7 @@ class Assets {
   static const String devotionalGuideDevotionalGuideApiService = 'lib/core/services/devotional_guide/devotional_guide_api_service.dart';
   static const String enumsBookType = 'lib/core/enums/book_type.dart';
   static const String enumsPaymentType = 'lib/core/enums/payment_type.dart';
+  static const String eventsEventDetailsScreen = 'lib/screens/dashboard/events/event_details_screen.dart';
   static const String faqsFaqsScreen = 'lib/screens/dashboard/more/faqs/faqs_screen.dart';
   static const String forgotPasswordForgotPasswordController = 'lib/screens/auth/forgot_password/forgot_password_controller.dart';
   static const String forgotPasswordForgotPasswordScreen = 'lib/screens/auth/forgot_password/forgot_password_screen.dart';
@@ -114,6 +115,7 @@ class Assets {
   static const String newsUpdateNewsUpdateApiService = 'lib/core/services/news_update/news_update_api_service.dart';
   static const String notificationsNotificationApiInterface = 'lib/core/services/notifications/notification_api_interface.dart';
   static const String notificationsNotificationApiService = 'lib/core/services/notifications/notification_api_service.dart';
+  static const String notificationsNotificationController = 'lib/screens/dashboard/more/notifications/notification_controller.dart';
   static const String notificationsNotificationsScreen = 'lib/screens/dashboard/more/notifications/notificationsScreen.dart';
   static const String paymentPaymentApiInterface = 'lib/core/services/payment/payment_api_interface.dart';
   static const String paymentPaymentApiService = 'lib/core/services/payment/payment_api_service.dart';
@@ -147,6 +149,8 @@ class Assets {
   static const String remoteSignUpResponse.freezed = 'lib/core/model/remote/sign_up_response.freezed.dart';
   static const String remoteSignUpResponse.g = 'lib/core/model/remote/sign_up_response.g.dart';
   static const String remoteTodaysDevotion = 'lib/core/model/remote/todays_devotion.dart';
+  static const String remoteTodaysDevotion.freezed = 'lib/core/model/remote/todays_devotion.freezed.dart';
+  static const String remoteTodaysDevotion.g = 'lib/core/model/remote/todays_devotion.g.dart';
   static const String remoteUpcomingEventModel = 'lib/core/model/remote/upcoming_event_model.dart';
   static const String remoteUpcomingEventModel.freezed = 'lib/core/model/remote/upcoming_event_model.freezed.dart';
   static const String remoteUpcomingEventModel.g = 'lib/core/model/remote/upcoming_event_model.g.dart';
@@ -163,6 +167,7 @@ class Assets {
   static const String sharedSuccessScreen = 'lib/screens/shared/success_screen.dart';
   static const String signUpSignUpController = 'lib/screens/auth/sign_up/sign_up_controller.dart';
   static const String signUpSignUpScreen = 'lib/screens/auth/sign_up/sign_up_screen.dart';
+  static const String speechToVoiceTextToSpeechApi = 'lib/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
   static const String uiBuyDevotionalBookScreen = 'lib/screens/dashboard/devotion/ui/buy_devotional_book_screen.dart';
   static const String uiDevotionScreen = 'lib/screens/dashboard/devotion/ui/devotion_screen.dart';
   static const String uiDonateToCoreMinistryScreen = 'lib/screens/dashboard/donate/ui/donate_to_core_ministry_screen.dart';

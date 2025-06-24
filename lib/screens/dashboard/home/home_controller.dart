@@ -1,12 +1,18 @@
 import 'package:core_module/core/def/global_def.dart';
+import 'package:core_module/core_ui/widgets/bottom_sheet_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/model/remote/campaign_model.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 import 'package:student_union/core/model/remote/news_update_model.dart';
+import 'package:student_union/core/model/remote/upcoming_event_model.dart';
 import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart';
+import 'package:student_union/screens/dashboard/devotion/ui/purchased_book_details_screen.dart';
 import 'package:student_union/screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
 import 'package:student_union/screens/dashboard/donate/ui/donations_history_screen.dart';
+import 'package:student_union/screens/dashboard/events/event_details_screen.dart';
+import 'package:student_union/screens/dashboard/more/notifications/notificationsScreen.dart';
 import 'package:student_union/screens/dashboard/more/profile/profile_screen.dart';
 
 import '../../../core/model/local/web_model.dart';
@@ -24,7 +30,12 @@ class HomeController extends BaseController {
   }
 
   void onDevotionTap(DevotionalBookModel model) {
-    navUtils.fireTarget(BuyDevotionalBookScreen(), model: model);
+    navUtils.fireTarget(
+      model.purchased
+          ? PurchasedBookDetailsScreen()
+          : BuyDevotionalBookScreen(),
+      model: model,
+    );
   }
 
   void onNewsUpdateTap(NewsUpdateModel news) {
@@ -52,7 +63,9 @@ class HomeController extends BaseController {
 
   void onSearchOnClick() {}
 
-  void onNotificationOnClick() {}
+  void onNotificationOnClick() {
+    navUtils.fireTarget(NotificationsScreen());
+  }
 
   void onProfileOnClick() {
     navUtils.fireTarget(ProfileScreen());
@@ -60,5 +73,17 @@ class HomeController extends BaseController {
 
   void onSeeMorePaymentHistory() {
     navUtils.fireTarget(DonationsHistoryScreen());
+  }
+
+  void onReadMoreOfDevotionalBook(DevotionalBookModel book) {
+    navUtils.fireTarget(PurchasedBookDetailsScreen(), model: book);
+  }
+
+  onUpcomingEventTap(BuildContext context, UpcomingEventModel event) {
+    BottomSheetWidget(
+      context: context,
+      height: appDimen.screenHeight * 0.6,
+      child: EventDetailsScreen(event),
+    );
   }
 }

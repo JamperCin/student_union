@@ -20,10 +20,22 @@ UpcomingEventModel _$UpcomingEventModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UpcomingEventModel {
+  @JsonKey(name: 'image_url')
   String get image => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get location => throw _privateConstructorUsedError;
+  @JsonKey(name: 'event_status')
+  String get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'current_state')
+  String get state => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   String get date => throw _privateConstructorUsedError;
+  @JsonKey(name: 'start_datetime')
+  String get startDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'end_datetime')
+  String get endDate => throw _privateConstructorUsedError;
 
   /// Serializes this UpcomingEventModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +53,17 @@ abstract class $UpcomingEventModelCopyWith<$Res> {
           UpcomingEventModel value, $Res Function(UpcomingEventModel) then) =
       _$UpcomingEventModelCopyWithImpl<$Res, UpcomingEventModel>;
   @useResult
-  $Res call({String image, String description, String title, String date});
+  $Res call(
+      {@JsonKey(name: 'image_url') String image,
+      int id,
+      String description,
+      String name,
+      String location,
+      @JsonKey(name: 'event_status') String status,
+      @JsonKey(name: 'current_state') String state,
+      @JsonKey(name: 'created_at') String date,
+      @JsonKey(name: 'start_datetime') String startDate,
+      @JsonKey(name: 'end_datetime') String endDate});
 }
 
 /// @nodoc
@@ -60,26 +82,56 @@ class _$UpcomingEventModelCopyWithImpl<$Res, $Val extends UpcomingEventModel>
   @override
   $Res call({
     Object? image = null,
+    Object? id = null,
     Object? description = null,
-    Object? title = null,
+    Object? name = null,
+    Object? location = null,
+    Object? status = null,
+    Object? state = null,
     Object? date = null,
+    Object? startDate = null,
+    Object? endDate = null,
   }) {
     return _then(_value.copyWith(
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as String,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
+              as String,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -93,7 +145,17 @@ abstract class _$$UpcomingEventModelImplCopyWith<$Res>
       __$$UpcomingEventModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String image, String description, String title, String date});
+  $Res call(
+      {@JsonKey(name: 'image_url') String image,
+      int id,
+      String description,
+      String name,
+      String location,
+      @JsonKey(name: 'event_status') String status,
+      @JsonKey(name: 'current_state') String state,
+      @JsonKey(name: 'created_at') String date,
+      @JsonKey(name: 'start_datetime') String startDate,
+      @JsonKey(name: 'end_datetime') String endDate});
 }
 
 /// @nodoc
@@ -110,26 +172,56 @@ class __$$UpcomingEventModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? image = null,
+    Object? id = null,
     Object? description = null,
-    Object? title = null,
+    Object? name = null,
+    Object? location = null,
+    Object? status = null,
+    Object? state = null,
     Object? date = null,
+    Object? startDate = null,
+    Object? endDate = null,
   }) {
     return _then(_$UpcomingEventModelImpl(
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as String,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
+              as String,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -139,30 +231,54 @@ class __$$UpcomingEventModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UpcomingEventModelImpl implements _UpcomingEventModel {
   const _$UpcomingEventModelImpl(
-      {this.image = "",
+      {@JsonKey(name: 'image_url') this.image = "",
+      this.id = 0,
       this.description = "",
-      this.title = "",
-      this.date = ""});
+      this.name = "",
+      this.location = "",
+      @JsonKey(name: 'event_status') this.status = "",
+      @JsonKey(name: 'current_state') this.state = "",
+      @JsonKey(name: 'created_at') this.date = "",
+      @JsonKey(name: 'start_datetime') this.startDate = "",
+      @JsonKey(name: 'end_datetime') this.endDate = ""});
 
   factory _$UpcomingEventModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UpcomingEventModelImplFromJson(json);
 
   @override
-  @JsonKey()
+  @JsonKey(name: 'image_url')
   final String image;
+  @override
+  @JsonKey()
+  final int id;
   @override
   @JsonKey()
   final String description;
   @override
   @JsonKey()
-  final String title;
+  final String name;
   @override
   @JsonKey()
+  final String location;
+  @override
+  @JsonKey(name: 'event_status')
+  final String status;
+  @override
+  @JsonKey(name: 'current_state')
+  final String state;
+  @override
+  @JsonKey(name: 'created_at')
   final String date;
+  @override
+  @JsonKey(name: 'start_datetime')
+  final String startDate;
+  @override
+  @JsonKey(name: 'end_datetime')
+  final String endDate;
 
   @override
   String toString() {
-    return 'UpcomingEventModel(image: $image, description: $description, title: $title, date: $date)';
+    return 'UpcomingEventModel(image: $image, id: $id, description: $description, name: $name, location: $location, status: $status, state: $state, date: $date, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -171,15 +287,24 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
         (other.runtimeType == runtimeType &&
             other is _$UpcomingEventModelImpl &&
             (identical(other.image, image) || other.image == image) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.date, date) || other.date == date));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, image, description, title, date);
+  int get hashCode => Object.hash(runtimeType, image, id, description, name,
+      location, status, state, date, startDate, endDate);
 
   /// Create a copy of UpcomingEventModel
   /// with the given fields replaced by the non-null parameter values.
@@ -200,22 +325,47 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
 
 abstract class _UpcomingEventModel implements UpcomingEventModel {
   const factory _UpcomingEventModel(
-      {final String image,
-      final String description,
-      final String title,
-      final String date}) = _$UpcomingEventModelImpl;
+          {@JsonKey(name: 'image_url') final String image,
+          final int id,
+          final String description,
+          final String name,
+          final String location,
+          @JsonKey(name: 'event_status') final String status,
+          @JsonKey(name: 'current_state') final String state,
+          @JsonKey(name: 'created_at') final String date,
+          @JsonKey(name: 'start_datetime') final String startDate,
+          @JsonKey(name: 'end_datetime') final String endDate}) =
+      _$UpcomingEventModelImpl;
 
   factory _UpcomingEventModel.fromJson(Map<String, dynamic> json) =
       _$UpcomingEventModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'image_url')
   String get image;
+  @override
+  int get id;
   @override
   String get description;
   @override
-  String get title;
+  String get name;
   @override
+  String get location;
+  @override
+  @JsonKey(name: 'event_status')
+  String get status;
+  @override
+  @JsonKey(name: 'current_state')
+  String get state;
+  @override
+  @JsonKey(name: 'created_at')
   String get date;
+  @override
+  @JsonKey(name: 'start_datetime')
+  String get startDate;
+  @override
+  @JsonKey(name: 'end_datetime')
+  String get endDate;
 
   /// Create a copy of UpcomingEventModel
   /// with the given fields replaced by the non-null parameter values.

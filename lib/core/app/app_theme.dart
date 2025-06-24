@@ -130,10 +130,10 @@ ThemeData darkMode = lightMode.copyWith(
   dialogBackgroundColor: darkColor,
   colorScheme: ColorScheme(
     brightness: Brightness.dark,
-    primary: primaryGreenColor,
+    primary: whiteColor,
     onPrimary: secondaryGreenColor,
     secondary: secondary,
-    onSecondary: secondary,
+    onSecondary: darkBrownColor,
     inverseSurface: whiteColor,
     error: redColor,
     onError: redColor,

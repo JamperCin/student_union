@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:core_module/core/extensions/int_extension.dart';
+import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_impl.dart';
 import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -117,14 +117,14 @@ class BaseWebView extends BaseScreenImpl {
               isPageLoading.value = true;
             }
 
-            print("Its started loading ==> $url");
+            debugPrint("Its started loading ==> $url");
           },
           onPageFinished: (String url) {
             if (isPageLoading.value) {
               isPageLoading.value = false;
             }
 
-            print("Its done loading ==> $url");
+           // print("Its done loading ==> $url");
           },
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},

@@ -7,11 +7,18 @@ part 'upcoming_event_model.g.dart';
 
 @freezed
 class UpcomingEventModel extends BaseObject with _$UpcomingEventModel {
+
   const factory UpcomingEventModel({
-    @Default("") String image,
+    @JsonKey(name: 'image_url')@Default("") String image,
+    @Default(0) int id,
     @Default("") String description,
-    @Default("") String title,
-    @Default("") String date,
+    @Default("") String name,
+    @Default("") String location,
+    @JsonKey(name: 'event_status')@Default("") String status,
+    @JsonKey(name: 'current_state')@Default("") String state,
+    @JsonKey(name: 'created_at')@Default("") String date,
+    @JsonKey(name: 'start_datetime')@Default("") String startDate,
+    @JsonKey(name: 'end_datetime')@Default("") String endDate,
   }) = _UpcomingEventModel;
 
   factory UpcomingEventModel.fromJson(Map<String, dynamic> json) =>

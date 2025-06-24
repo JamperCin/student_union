@@ -50,10 +50,19 @@ class MoreScreen extends BaseScreenStandard {
       child: Column(
         children: [
           SimpleCardItem(
+            title: "About",
+            prefixAsset: icAbout,
+            prefixAssetHeight: prefixSize,
+            onTap: (v) {
+              _controller.onAboutOnClick();
+            },
+          ),
+          Gap(10.dp()),
+          SimpleCardItem(
             title: "Profile",
             prefixAsset: icProfileCircular,
             prefixAssetHeight: prefixSize,
-            onTap: (v){
+            onTap: (v) {
               _controller.onEditProfileOnClick();
             },
           ),
@@ -64,7 +73,7 @@ class MoreScreen extends BaseScreenStandard {
             prefixAssetHeight: prefixSize,
             onTap: _controller.onReadBibleOnClick,
           ),
-         /* Gap(10.dp()),
+          /* Gap(10.dp()),
           SimpleCardItem(
             title: "Highlights",
             prefixAsset: icEdit,
@@ -88,7 +97,7 @@ class MoreScreen extends BaseScreenStandard {
             title: "Settings",
             prefixAsset: icSettingsIcon,
             prefixAssetHeight: prefixSize,
-            onTap: (v){
+            onTap: (v) {
               _controller.onSettingsOnClick();
             },
           ),
@@ -97,10 +106,9 @@ class MoreScreen extends BaseScreenStandard {
             title: "Log Out",
             prefixAsset: icLogOutIcon,
             prefixAssetHeight: prefixSize,
-            onTap: (v){
+            onTap: (v) {
               _controller.onLogOutOnClick(context);
             },
-
           ),
           Gap(10.dp()),
         ],

@@ -10,10 +10,6 @@ import 'package:student_union/core/services/devotional_guide/devotional_guide_ap
 class DevotionalGuideApiService extends BaseApiService
     implements DevotionalGuideApiInterface {
   static DevotionalGuideApiService? _instance;
-  final path = "assets/data/devotional_guide.json";
-
-  RxList<DevotionalBookModel> availableBooks = <DevotionalBookModel>[].obs;
-  RxList<DevotionalBookModel> purchasedBooks = <DevotionalBookModel>[].obs;
 
   DevotionalGuideApiService._();
 
@@ -45,14 +41,5 @@ class DevotionalGuideApiService extends BaseApiService
         ) ??
         [];
     return results;
-
-   //  final results = await FileUtils().fetchList<DevotionalBookModel>(
-   //    path: path,
-   //    key: "data",
-   //    secondaryKey: "devotions",
-   //    parser: (json) => DevotionalBookModel.fromJson(json),
-   //  );
-   //
-   // return results;
   }
 }

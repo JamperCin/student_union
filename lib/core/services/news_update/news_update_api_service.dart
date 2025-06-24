@@ -3,9 +3,9 @@ import 'package:core_module/core/utils/file_utils.dart' show FileUtils;
 import 'package:student_union/core/model/remote/news_update_model.dart';
 import 'package:student_union/core/services/news_update/news_update_api_interface.dart';
 
-class NewsUpdateApiService extends BaseApiService implements NewsUpdateApiInterface {
+class NewsUpdateApiService extends BaseApiService
+    implements NewsUpdateApiInterface {
   static NewsUpdateApiService? _instance;
-
 
   NewsUpdateApiService._();
 
@@ -14,13 +14,22 @@ class NewsUpdateApiService extends BaseApiService implements NewsUpdateApiInterf
   }
 
   @override
-  Future<List<NewsUpdateModel>> fetchNewsUpdate() async {
+  Future<List<NewsUpdateModel>> fetchNewsUpdate(
+      {Map<String, Object>? param}) async {
     final results = await _instance?.getListRequest<NewsUpdateModel>(
           api: 'customer/v1/news',
           key: 'news',
+          param: param,
           parser: (json) => NewsUpdateModel.fromJson(json),
         ) ??
         [];
+
+    // final results = await FileUtils().fetchList<NewsUpdateModel>(
+    //   path: 'assets/data/news_updates.json',
+    //   key: 'data',
+    //   secondaryKey: 'news',
+    //   parser: (json) => NewsUpdateModel.fromJson(json),
+    // );
 
     return results;
   }

@@ -4,13 +4,13 @@ import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/bottom_sheet_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
+import 'package:student_union/screens/dashboard/more/about/about_screen.dart';
 import 'package:student_union/screens/dashboard/more/profile/profile_screen.dart';
 import 'package:student_union/screens/dashboard/more/settings/ui/settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -31,7 +31,8 @@ class MoreController extends BaseController {
   void onLogOutOnClick(BuildContext context) {
     BottomSheetWidget(
       context: context,
-      title: "",
+      height: appDimen.screenHeight * 0.4,
+      title: "Log Out",
       subChild: Padding(
         padding: EdgeInsets.all(10.dp()),
         child: Column(
@@ -47,12 +48,12 @@ class MoreController extends BaseController {
               style: Theme.of(context).textTheme.bodySmall,
             ),
             Gap(30.dp()),
-            ButtonWidget.withOutLine(
+            ButtonWidget(
               onTap: () {
                 navUtils.fireTargetOff(LoginScreen());
               },
-              borderColor: Theme.of(context).colorScheme.error,
-              text: "Yes",
+              backgroundColor: Theme.of(context).colorScheme.error,
+              text: "Log Out",
             )
           ],
         ),
@@ -83,5 +84,9 @@ class MoreController extends BaseController {
         title: "Counselling & Prayers",
       )),
     );
+  }
+
+  void onAboutOnClick() {
+    navUtils.fireTarget(AboutScreen());
   }
 }

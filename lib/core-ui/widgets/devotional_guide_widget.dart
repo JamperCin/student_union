@@ -55,13 +55,11 @@ class DevotionalGuideWidget extends StatelessWidget {
           builder: (context, data) {
             return (data.hasData && data.data != null)
                 ? _horizontalDisplayOfAvailableBooksWidget(data.data!)
-                : ShimmerWidget(width: appDimen.screenWidth);
+                : ShimmerWidget.withList(length: 1);
           });
     }
 
     ///Return available books in a vertical grid
-
-    //reset
     page = 1;
 
     Map<String, dynamic>? param;
@@ -72,10 +70,9 @@ class DevotionalGuideWidget extends StatelessWidget {
       };
     }
 
-
     return FutureBuilder(
         future: devGuideService.fetchDevotionalBooks(param: param),
-        key: ValueKey(param.toString()),
+        key: ValueKey(Uuid().v4()),
         builder: (context, data) {
           return (data.hasData && data.data != null)
               ? _gridViewDisplayOfAvailableBooksWidget(data.data!)
@@ -87,9 +84,7 @@ class DevotionalGuideWidget extends StatelessWidget {
   }
 
   Widget _purchasedBooks() {
-    devGuideService.purchasedBooks.value.clear();
-
-    Map<String, dynamic>? param;
+     Map<String, dynamic>? param;
     if (yearFilter != null) {
       param = {
         "year": yearFilter,
@@ -99,27 +94,19 @@ class DevotionalGuideWidget extends StatelessWidget {
 
     return FutureBuilder(
         future: devGuideService.fetchPurchasedBooks(param: param),
+        key: ValueKey(Uuid().v4()),
         builder: (context, snapshot) {
           return (snapshot.hasData && snapshot.data != null)
               ? _purchasedBooksWidget(snapshot.data!)
-              : snapshot.hasData && snapshot.data!.isEmpty
-                  ? const NoDataWidget(
-                      title: 'Purchased Books',
-                      asset: icOrders,
-                      description:
-                          'Your purchased books appear here. You don\'t have any purchased books yet.',
-                    )
-                  : ShimmerWidget.withGrid(
-                      height: appDimen.dimen(80),
-                      width: appDimen.dimen(50),
-                    );
+              : ShimmerWidget.withGrid(
+                  height: appDimen.dimen(80),
+                  width: appDimen.dimen(50),
+                );
         });
   }
 
   Widget _purchasedBooksWidget(List<DevotionalBookModel> list) {
-    devGuideService.purchasedBooks.value.addAll(list);
-
-    if (devGuideService.purchasedBooks.isEmpty) {
+    if (list.isEmpty) {
       return const NoDataWidget(
         title: 'Purchased Books',
         asset: icOrders,
@@ -129,26 +116,24 @@ class DevotionalGuideWidget extends StatelessWidget {
     }
 
     return ListViewWidget<DevotionalBookModel>.withGridView(
-      items: devGuideService.purchasedBooks,
-      parser: (book) {
-        return NetworkImageWidget(
-          height: appDimen.dimen(280),
-          width: appDimen.screenWidth,
-          onTap: () {
-            onTap?.call(book);
-          },
-          url: book.thumbnail,
-          fit: BoxFit.cover,
-          placeHolderWidget: ContainerWidget(
+        items: list.obs,
+        parser: (book) {
+          return NetworkImageWidget(
             height: appDimen.dimen(280),
-            width: appDimen.dimen(200),
-          ),
-        );
-      },
-      onLoadMore: () {
-        devGuideService.fetchPurchasedBooks();
-      },
-    );
+            width: appDimen.screenWidth,
+            onTap: () {
+              onTap?.call(book);
+            },
+            url: book.thumbnail,
+            fit: BoxFit.cover,
+            placeHolderWidget: ContainerWidget(
+              height: appDimen.dimen(280),
+              width: appDimen.dimen(200),
+            ),
+          );
+        },
+        onLoadMore: () => _onLoadMorePurchasedBooks(page = page + 1),
+        onRefresh: () => _onLoadMorePurchasedBooks(page = 1));
   }
 
   Widget _horizontalDisplayOfAvailableBooksWidget(
@@ -158,6 +143,7 @@ class DevotionalGuideWidget extends StatelessWidget {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Gap(20.dp()),
               TitleTextWidget(text: "Devotional Guides", onTap: onSeeMoreOnTap),
               Gap(5.dp()),
               CarouselSlider.builder(
@@ -193,13 +179,8 @@ class DevotionalGuideWidget extends StatelessWidget {
 
   Widget _gridViewDisplayOfAvailableBooksWidget(
       List<DevotionalBookModel> list) {
-    if(page == 1){
-      devGuideService.availableBooks.clear();
-    }
 
-    devGuideService.availableBooks.value.addAll(list);
-
-    if (devGuideService.availableBooks.isEmpty) {
+    if (list.isEmpty) {
       return const NoDataWidget(
         title: 'Devotional Guides',
         asset: icOrders,
@@ -208,52 +189,51 @@ class DevotionalGuideWidget extends StatelessWidget {
       );
     }
 
-    return Obx(
-      () => ListViewWidget<DevotionalBookModel>.withGridView(
-        items: devGuideService.availableBooks.value,
-        isLoadingMore: isLoadingAvailableBooks.value,
-        onLoadMore: _onLoadMoreAvailableBooks,
-        parser: (book) {
-          return InkWell(
-            onTap: (){
-              onTap?.call(book);
-            },
-            child: Column(
-              children: [
-                NetworkImageWidget(
+    return ListViewWidget<DevotionalBookModel>.withGridView(
+      items: list.obs,
+      onLoadMore:()=> _onLoadMoreAvailableBooks(page = page + 1),
+      onRefresh: () => _onLoadMoreAvailableBooks(page = 1),
+      parser: (book) {
+        return InkWell(
+          onTap: () {
+            onTap?.call(book);
+          },
+          child: Column(
+            children: [
+              NetworkImageWidget(
+                height: appDimen.dimen(280),
+                width: appDimen.dimen(200),
+                onTap: () {
+                  onTap?.call(book);
+                },
+                url: book.thumbnail,
+                fit: BoxFit.cover,
+                placeHolderWidget: ContainerWidget(
                   height: appDimen.dimen(280),
                   width: appDimen.dimen(200),
-                  onTap: () {
-                    onTap?.call(book);
-                  },
-                  url: book.thumbnail,
-                  fit: BoxFit.cover,
-                  placeHolderWidget: ContainerWidget(
-                    height: appDimen.dimen(280),
-                    width: appDimen.dimen(200),
-                  ),
                 ),
-                Gap(5.dp()),
-                ButtonWidget.withOutLine(
-                  text: book.purchased ? 'PURCHASED' : "${book.currency} ${book.price.toDecimalPlaces()}",
-                  width: appDimen.dimen(200),
-                  onTap: () {
-                    onTap?.call(book);
-                  },
-                )
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+              Gap(5.dp()),
+              ButtonWidget.withOutLine(
+                text: book.purchased
+                    ? 'PURCHASED'
+                    : "${book.currency} ${book.price.toDecimalPlaces()}",
+                width: appDimen.dimen(200),
+                onTap: () {
+                  onTap?.call(book);
+                },
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 
+  ///Load more Available books
+  Future<List<DevotionalBookModel>> _onLoadMoreAvailableBooks(int page) async {
 
-  Future<void> _onLoadMoreAvailableBooks() async {
-    page++;
-    isLoadingAvailableBooks.value = true;
-    HashMap<String, Object>? param;
+    Map<String, Object>? param;
 
     if (yearFilter != null) {
       param = HashMap();
@@ -261,9 +241,19 @@ class DevotionalGuideWidget extends StatelessWidget {
       param.putIfAbsent("page", () => page.toString());
     }
 
-    final results = await devGuideService.fetchDevotionalBooks(param: param);
-    isLoadingAvailableBooks.value = false;
-    devGuideService.availableBooks.value.addAll(results);
+    return await devGuideService.fetchDevotionalBooks(param: param);
   }
 
+  ///Load more Purchased books
+  Future<List<DevotionalBookModel>> _onLoadMorePurchasedBooks(int page) async {
+    Map<String, Object>? param;
+
+    if (yearFilter != null) {
+      param = HashMap();
+      param.putIfAbsent("year", () => yearFilter!);
+      param.putIfAbsent("page", () => page.toString());
+    }
+
+    return await devGuideService.fetchPurchasedBooks(param: param);
+  }
 }

@@ -1,4 +1,6 @@
 import 'package:core_module/core/def/global_def.dart';
+import 'package:core_module/core/extensions/int_extension.dart';
+import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +31,12 @@ class AboutScreen extends BaseScreenStandard {
           children: [
             AssetImageWidget(
               asset: icSu,
-              height: appDimen.dimen(400),
-              width: appDimen.dimen(300),
+              height: 180.dp(),
+              width: 250.dp(),
             ),
-            SizedBox(height: appDimen.dimen(20)),
+            Gap(5.dp()),
+            Text('Scripture Union 1.0.0', style: textTheme.bodyMedium),
+            Gap(40.dp()),
             RichText(
                 text: TextSpan(
               children: [

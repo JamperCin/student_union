@@ -78,7 +78,8 @@ class DonateToCoreMinistryScreen extends BaseScreenStandard {
           ButtonWidget(
               text: "Proceed",
               onTap: () {
-                _controller.onInitiateDonateOnClick(context, getModel());
+                dismissKeyBoard(context);
+                _controller.confirmDonation(context, getModel());
               }),
           Gap(40.dp()),
         ],

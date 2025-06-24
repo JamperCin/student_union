@@ -28,15 +28,18 @@ class PaymentHistoryWidget extends StatelessWidget {
         return snapshot.hasData
             ? Column(
                 children: [
+                  Gap(20.dp()),
                   if (onSeeMoreOnTap != null)
                     TitleTextWidget(
-                        text: "Donation History", onTap: onSeeMoreOnTap),
+                      text: "Donation History",
+                      onTap: onSeeMoreOnTap,
+                    ),
                   if (onSeeMoreOnTap != null) Gap(5.dp()),
                   ...snapshot.data!
                       .map((d) => _transactionItemWidget(context, d)),
                 ],
               )
-            : ShimmerWidget.withList();
+            : ShimmerWidget.withList(length: onSeeMoreOnTap != null ? 1 : 5);
       },
     );
   }

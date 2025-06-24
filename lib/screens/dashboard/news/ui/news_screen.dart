@@ -34,35 +34,11 @@ class NewsScreen extends BaseScreenStandard {
         ?.copyWith(fontWeight: FontWeight.w700);
   }
 
-  // @override
-  // Widget? appBarLeadingIcon(BuildContext context) {
-  //   return showAppBarIcon
-  //       ? super.appBarLeadingIcon(context)
-  //       : const SizedBox.shrink();
-  // }
-  //
-  // @override
-  // void setModel(BaseObject baseObject) {
-  //   super.setModel(baseObject);
-  //   if (baseObject is NewsUpdateModel) {
-  //     showAppBarIcon = true;
-  //   } else {
-  //     showAppBarIcon = false;
-  //   }
-  //   print("BAr ==> $showAppBarIcon");
-  // }
 
   @override
   Widget body(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16.dp()),
-      child: ListView(
-        children: [
-          NewsUpdateWidget.withDetails(
-            onTap: _controller.onNewsUpdateTap,
-          )
-        ],
-      ),
+    return NewsUpdateWidget.withDetails(
+      onTap: _controller.onNewsUpdateTap,
     );
   }
 }
