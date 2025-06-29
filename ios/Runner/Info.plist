@@ -42,5 +42,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+    <string>Scripture Union app requires camera access to take photos for profile picture.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Scripture Union app needs photo access to upload images for profile picture.</string>
 </dict>
 </plist>

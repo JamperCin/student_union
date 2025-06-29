@@ -14,7 +14,7 @@ import 'package:core_module/core_module.dart';
 import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
-import 'package:student_union/screens/dashboard/more/profile/profile_controller.dart';
+import 'package:student_union/screens/dashboard/more/profile/controller/profile_controller.dart';
 
 class ProfileScreen extends BaseScreenStandard {
   final _controller = Get.put(ProfileController());
@@ -78,7 +78,10 @@ class ProfileScreen extends BaseScreenStandard {
             ),
           ),
           Gap(70.dp()),
-          ButtonWidget(text: "Save", onTap: _controller.onSaveOnClick),
+          ButtonWidget(
+            text: "Save",
+            onTap:()=> _controller.onConfirmUpdate(context),
+          ),
           Gap(20.dp()),
         ],
       ),

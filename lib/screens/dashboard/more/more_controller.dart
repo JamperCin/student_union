@@ -11,7 +11,7 @@ import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
 import 'package:student_union/screens/dashboard/more/about/about_screen.dart';
-import 'package:student_union/screens/dashboard/more/profile/profile_screen.dart';
+import 'package:student_union/screens/dashboard/more/profile/ui/profile_screen.dart';
 import 'package:student_union/screens/dashboard/more/settings/ui/settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 

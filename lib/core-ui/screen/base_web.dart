@@ -4,8 +4,10 @@ import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_impl.dart';
 import 'package:core_module/core_ui/widgets/loader_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/model/local/web_model.dart';
+import 'package:student_union/core/res/asset_path.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class BaseWebView extends BaseScreenImpl {
@@ -64,6 +66,13 @@ class BaseWebView extends BaseScreenImpl {
 
   @override
   Widget body(BuildContext context) {
+    if (kIsWeb) {
+      return const NoDataWidget(
+        asset: icReadBible,
+        title: 'No applicable to read on web browser',
+        description: 'You cannot read this book on web browser',
+      );
+    }
     return Stack(
       children: [
         WebViewWidget(controller: getWebController()),
@@ -124,7 +133,7 @@ class BaseWebView extends BaseScreenImpl {
               isPageLoading.value = false;
             }
 
-           // print("Its done loading ==> $url");
+            // print("Its done loading ==> $url");
           },
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},

@@ -42,4 +42,16 @@ class DevotionalGuideApiService extends BaseApiService
         [];
     return results;
   }
+
+  @override
+  Future<List<DevotionalBookModel>> fetchDailyDevotion({Map<String, dynamic>? param}) async{
+    final results = await _instance?.getListRequest<DevotionalBookModel>(
+      api: "customer/v1/purchased_devotions/today",
+      key: 'devotions',
+      param: param,
+      parser: (json) => DevotionalBookModel.fromJson(json),
+    ) ??
+        [];
+    return results;
+  }
 }

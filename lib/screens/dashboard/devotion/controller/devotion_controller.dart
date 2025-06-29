@@ -42,10 +42,10 @@ class DevotionController extends BaseController {
       context: context,
       height: appDimen.screenHeight * 0.4,
       child: ConfirmTransactionLayout(
-        title: "Confirm Purchase",
+        title: "Confirm Purchase",crossAxisAlignment: CrossAxisAlignment.center,
         titleStyle: textTheme.titleMedium?.copyWith(color: colorScheme.primary),
         subTitle:
-            "Kindly confirm the purchase of ${model.name} with the amount of GHS ${model.price} below",
+            "Kindly confirm the purchase of this devotional guide with the amount specified below",
         buttonTitle: "Proceed",
         onTap: () => _initiatePayment(context, model),
         child: Center(
@@ -95,12 +95,11 @@ class DevotionController extends BaseController {
 
     final results = await paymentApiService.makePaymentOfBook(param);
     const LoaderWidget().hideProgress();
-    if (results.authUrl != null) {
-      navToPaymentScreen(results.authUrl ?? '');
-    }
+    navToPaymentScreen(results.authUrl);
   }
 
   void navToPaymentScreen(String url) {
+    if(url.isEmpty) return;
     navUtils.fireTarget(
       BaseWebView(
         model: WebModel(

@@ -25,6 +25,7 @@ class AuthApiService extends BaseApiService implements AuthApiInterface {
       api: 'login',
       param: params,
       tokenHeader: false,
+      showToast: true,
       parser: (json) => SignUpResponse.fromJson(json),
     );
 
@@ -37,6 +38,7 @@ class AuthApiService extends BaseApiService implements AuthApiInterface {
       api: 'signup',
       param: params,
       tokenHeader: false,
+      showToast: true,
       parser: (json) => SignUpResponse.fromJson(json),
     );
 

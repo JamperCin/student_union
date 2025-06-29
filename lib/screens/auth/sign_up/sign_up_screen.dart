@@ -93,11 +93,7 @@ class SignUpScreen extends BaseScreenDecorated {
             focusColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
-            prefixIcon: AssetImageWidget(
-              asset: icProfileInput,
-              height: appDimen.dimen(10),
-              width: appDimen.dimen(10),
-            ),
+            prefixAsset: icProfileInput,
           ),
           SizedBox(height: appDimen.dimen(10)),
           TextFieldWidget(
@@ -107,11 +103,7 @@ class SignUpScreen extends BaseScreenDecorated {
             focusColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
-            prefixIcon: AssetImageWidget(
-              asset: icEmailInput,
-              height: appDimen.dimen(2),
-              width: appDimen.dimen(2),
-            ),
+            prefixAsset: icEmailInput,
           ),
           SizedBox(height: appDimen.dimen(10)),
           TextFieldWidget.withPassword(
@@ -121,11 +113,7 @@ class SignUpScreen extends BaseScreenDecorated {
             focusColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
-            prefixIcon: AssetImageWidget(
-              asset: icPasswordInput,
-              height: appDimen.dimen(10),
-              width: appDimen.dimen(10),
-            ),
+            prefixAsset: icPasswordInput,
           ),
           SizedBox(height: appDimen.dimen(1)),
           CheckboxWidget(

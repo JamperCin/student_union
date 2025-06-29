@@ -116,8 +116,8 @@ class DevotionalGuideWidget extends StatelessWidget {
     }
 
     return ListViewWidget<DevotionalBookModel>.withGridView(
-        items: list.obs,
-        parser: (book) {
+        list: list,
+        listItemWidget: (book) {
           return NetworkImageWidget(
             height: appDimen.dimen(280),
             width: appDimen.screenWidth,
@@ -190,10 +190,10 @@ class DevotionalGuideWidget extends StatelessWidget {
     }
 
     return ListViewWidget<DevotionalBookModel>.withGridView(
-      items: list.obs,
+      list: list.obs,
       onLoadMore:()=> _onLoadMoreAvailableBooks(page = page + 1),
       onRefresh: () => _onLoadMoreAvailableBooks(page = 1),
-      parser: (book) {
+      listItemWidget: (book) {
         return InkWell(
           onTap: () {
             onTap?.call(book);

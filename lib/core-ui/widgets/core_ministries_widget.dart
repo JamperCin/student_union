@@ -1,6 +1,8 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
+import 'package:core_module/core_ui/widgets/list_view_widget.dart';
+import 'package:core_module/core_ui/widgets/no_data_widget.dart';
 import 'package:core_module/core_ui/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
@@ -8,6 +10,7 @@ import 'package:student_union/core-ui/widgets/simple_card_item.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/campaign_model.dart';
+import 'package:student_union/core/res/asset_path.dart';
 
 class CoreMinistriesWidget extends StatelessWidget {
   final bool horizontalGrid;
@@ -82,16 +85,29 @@ class CoreMinistriesWidget extends StatelessWidget {
       future: campaignApiService.fetchListOfCoreMinistries(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         return (snapshot.hasData && snapshot.data != null)
-            ? ListView(
-                children: [
-                  ...snapshot.data.map((model) => SimpleCardItem<CampaignModel>(
-                        title: model.title,
-                        model: model,
-                        onTap: onTap,
-                      )),
-                ],
-              )
+            ? _campaignsLayout(context, snapshot.data)
             : ShimmerWidget.withList();
+      },
+    );
+  }
+
+  Widget _campaignsLayout(BuildContext context, List<CampaignModel> list) {
+    if (list.isEmpty) {
+      return const NoDataWidget(
+        asset: icCoreMinistry,
+        title: "No core ministries available",
+        description:
+            "Core ministries created appears here.There are no core ministries at the moment.",
+      );
+    }
+    return ListViewWidget(
+      list: list,
+      listItemWidget: (model) {
+        return SimpleCardItem<CampaignModel>(
+          title: model.title,
+          model: model,
+          onTap: onTap,
+        );
       },
     );
   }

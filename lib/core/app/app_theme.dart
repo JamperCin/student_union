@@ -83,7 +83,9 @@ ThemeData lightMode = ThemeData(
     ///Surface
     surface: whiteColor,
     onSurface: darkColor,
-    surfaceBright: darkBrownColor,
+    surfaceBright: greyTertiaryColor,
+    surfaceContainerHighest: greyTertiaryColor,
+    surfaceContainerLow: dividerColor,
 
     ///Inverse surface
     inverseSurface: darkColor,
@@ -138,8 +140,13 @@ ThemeData darkMode = lightMode.copyWith(
     error: redColor,
     onError: redColor,
     surface: darkColor,
+    surfaceDim: greyPrimaryColor,
     onSurface: darkBrownColor,
-    tertiary: darkColor,
+    tertiary: whiteColor,
+
+    surfaceBright: greyPodActiveColor,
+    surfaceContainerHighest: darkBrownColor,
+    surfaceContainerLow: dividerColor,
   ),
   textTheme: TextTheme(
     labelSmall: labelSmallTextLightModeStyle.copyWith(color: whiteColor),

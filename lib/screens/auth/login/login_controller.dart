@@ -55,10 +55,7 @@ class LoginController extends BaseController {
       appPreference.setToken(response.token!);
       appPreference.setUser(response.user);
       navUtils.fireTargetOff(MainDashboardScreen());
-    }else{
-      snackBarSnippet.snackBarError(response?.errors?.first ?? "Sorry, something went wrong. Kindly try again");
     }
-    // navUtils.fireTargetOff(MainDashboardScreen());
   }
 
 }

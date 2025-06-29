@@ -36,7 +36,7 @@ class DonationsController extends BaseController {
         title: "Confirm Donation",
         titleStyle: textTheme.titleMedium?.copyWith(color: colorScheme.primary),
         subTitle:
-        "Kindly confirm your donation to ${model.title} with the amount stated below",
+            "Kindly confirm your donation to ${model.title} with the amount stated below",
         buttonTitle: "Proceed",
         onTap: () => _initiateDonation(context, model),
         child: Center(
@@ -83,18 +83,23 @@ class DonationsController extends BaseController {
     }
     Map<String, dynamic> param = {
       "payment_type": PaymentType.campaign_donation.name,
-      "metadata": {"campaign_id": model.id, "note": "Donations"}
+      "metadata": {
+        "campaign_id": model.id,
+        "note": "Donations",
+        "amount": amountTxt.text.toString(),
+      },
+
     };
 
     const LoaderWidget().showProgressIndicator(context: context);
     final results = await paymentApiService.makePaymentOfBook(param);
-    if (results.authUrl != null) {
-      navToPaymentScreen(results.authUrl ?? '');
-    }
+    navToPaymentScreen(results.authUrl);
     const LoaderWidget().hideProgress();
   }
 
   void navToPaymentScreen(String url) {
+    if (url.isEmpty) return;
+
     navUtils.fireTarget(
       BaseWebView(
         model: WebModel(

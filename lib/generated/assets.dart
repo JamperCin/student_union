@@ -26,9 +26,11 @@ class Assets {
   static const String baseBaseController = 'lib/core/base/base_controller.dart';
   static const String campaignsCampaignsApiInterface = 'lib/core/services/campaigns/campaigns_api_interface.dart';
   static const String campaignsCampaignsApiService = 'lib/core/services/campaigns/campaigns_api_service.dart';
+  static const String controllerDeleteAccountController = 'lib/screens/dashboard/more/profile/controller/delete_account_controller.dart';
   static const String controllerDevotionController = 'lib/screens/dashboard/devotion/controller/devotion_controller.dart';
   static const String controllerDonationsController = 'lib/screens/dashboard/donate/controller/donations_controller.dart';
   static const String controllerNewsController = 'lib/screens/dashboard/news/controller/news_controller.dart';
+  static const String controllerProfileController = 'lib/screens/dashboard/more/profile/controller/profile_controller.dart';
   static const String controllerPurchasedBookController = 'lib/screens/dashboard/devotion/controller/purchased_book_controller.dart';
   static const String controllerSettingsController = 'lib/screens/dashboard/more/settings/controller/settings_controller.dart';
   static const String dashboardDashboardController = 'lib/screens/dashboard/dashboard_controller.dart';
@@ -64,6 +66,7 @@ class Assets {
   static const String imagesIcCancel = 'assets/images/ic_cancel.svg';
   static const String imagesIcChangePassword = 'assets/images/ic_change_password.svg';
   static const String imagesIcChat = 'assets/images/ic_chat.svg';
+  static const String imagesIcDanger = 'assets/images/ic_danger.png';
   static const String imagesIcDeleteAccount = 'assets/images/ic_delete_account.svg';
   static const String imagesIcDevotion = 'assets/images/ic_devotion.svg';
   static const String imagesIcDevotionBg = 'assets/images/ic_devotion_bg.png';
@@ -119,8 +122,6 @@ class Assets {
   static const String notificationsNotificationsScreen = 'lib/screens/dashboard/more/notifications/notificationsScreen.dart';
   static const String paymentPaymentApiInterface = 'lib/core/services/payment/payment_api_interface.dart';
   static const String paymentPaymentApiService = 'lib/core/services/payment/payment_api_service.dart';
-  static const String profileProfileController = 'lib/screens/dashboard/more/profile/profile_controller.dart';
-  static const String profileProfileScreen = 'lib/screens/dashboard/more/profile/profile_screen.dart';
   static const String remoteCampaignModel = 'lib/core/model/remote/campaign_model.dart';
   static const String remoteCampaignModel.freezed = 'lib/core/model/remote/campaign_model.freezed.dart';
   static const String remoteCampaignModel.g = 'lib/core/model/remote/campaign_model.g.dart';
@@ -142,6 +143,12 @@ class Assets {
   static const String remoteNotificationModel = 'lib/core/model/remote/notification_model.dart';
   static const String remoteNotificationModel.freezed = 'lib/core/model/remote/notification_model.freezed.dart';
   static const String remoteNotificationModel.g = 'lib/core/model/remote/notification_model.g.dart';
+  static const String remotePayableMeta = 'lib/core/model/remote/payable_meta.dart';
+  static const String remotePayableMeta.freezed = 'lib/core/model/remote/payable_meta.freezed.dart';
+  static const String remotePayableMeta.g = 'lib/core/model/remote/payable_meta.g.dart';
+  static const String remotePaymentInfoMeta = 'lib/core/model/remote/payment_info_meta.dart';
+  static const String remotePaymentInfoMeta.freezed = 'lib/core/model/remote/payment_info_meta.freezed.dart';
+  static const String remotePaymentInfoMeta.g = 'lib/core/model/remote/payment_info_meta.g.dart';
   static const String remotePaymentModel = 'lib/core/model/remote/payment_model.dart';
   static const String remotePaymentModel.freezed = 'lib/core/model/remote/payment_model.freezed.dart';
   static const String remotePaymentModel.g = 'lib/core/model/remote/payment_model.g.dart';
@@ -169,12 +176,14 @@ class Assets {
   static const String signUpSignUpScreen = 'lib/screens/auth/sign_up/sign_up_screen.dart';
   static const String speechToVoiceTextToSpeechApi = 'lib/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
   static const String uiBuyDevotionalBookScreen = 'lib/screens/dashboard/devotion/ui/buy_devotional_book_screen.dart';
+  static const String uiDeleteAccountProfileScreen = 'lib/screens/dashboard/more/profile/ui/delete_account_profile_screen.dart';
   static const String uiDevotionScreen = 'lib/screens/dashboard/devotion/ui/devotion_screen.dart';
   static const String uiDonateToCoreMinistryScreen = 'lib/screens/dashboard/donate/ui/donate_to_core_ministry_screen.dart';
   static const String uiDonationsCoreMinistriesScreen = 'lib/screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
   static const String uiDonationsHistoryScreen = 'lib/screens/dashboard/donate/ui/donations_history_screen.dart';
   static const String uiNewsDetailsScreen = 'lib/screens/dashboard/news/ui/news_details_screen.dart';
   static const String uiNewsScreen = 'lib/screens/dashboard/news/ui/news_screen.dart';
+  static const String uiProfileScreen = 'lib/screens/dashboard/more/profile/ui/profile_screen.dart';
   static const String uiPurchasedBookDetailsScreen = 'lib/screens/dashboard/devotion/ui/purchased_book_details_screen.dart';
   static const String uiSettingsScreen = 'lib/screens/dashboard/more/settings/ui/settings_screen.dart';
   static const String upcomingEventsUpcomingEventsApiInterface = 'lib/core/services/upcoming_events/upcoming_events_api_interface.dart';

@@ -28,7 +28,7 @@ class HomeScreen extends BaseScreenStandard {
     return Column(
       children: [
         TopHeaderWidget(
-          onSearchOnClick: _controller.onSearchOnClick,
+         // onSearchOnClick: _controller.onSearchOnClick,
           onNotifyOnClick: _controller.onNotificationOnClick,
           onProfileOnClick: _controller.onProfileOnClick,
         ),

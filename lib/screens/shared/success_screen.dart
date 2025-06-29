@@ -27,14 +27,15 @@ class SuccessScreen extends BaseScreenStandard {
           Gap(appDimen.screenHeight * 0.15),
           AssetImageWidget(
             asset: icSuccess,
-            height: 250.dp(),
+            height: 220.dp(),
             width: 250.dp(),
           ),
-          Gap(20.dp()),
+          Gap(50.dp()),
           Text(
             getModel().title,
+            textAlign: TextAlign.center,
             style:
-                textTheme.headlineLarge?.copyWith(color: colorScheme.primary),
+                textTheme.displayLarge?.copyWith(color: colorScheme.primary),
           ),
           Gap(20.dp()),
           Text(

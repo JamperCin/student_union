@@ -5,10 +5,7 @@ import 'package:student_union/core/services/user/user_api_interface.dart';
 
 class UserApiService extends BaseApiService implements UserApiInterface {
   static UserApiService? _apiService;
-
-  Rx<CustomerModel> userDetails = const CustomerModel().obs;
   RxString profilePic = ''.obs;
-      //'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D'.obs;
 
   UserApiService._();
 
@@ -18,11 +15,34 @@ class UserApiService extends BaseApiService implements UserApiInterface {
 
   @override
   Future<CustomerModel> fetchUserDetails() async {
-     userDetails.value = await _apiService?.getRequest<CustomerModel>(
+    final results = await _apiService?.getRequest<CustomerModel>(
           api: 'customer/v1/profile?',
-           parser: (json) =>  CustomerModel.fromJson(json),
+          parser: (json) => CustomerModel.fromJson(json),
         ) ??
         const CustomerModel();
-    return userDetails.value;
+    return results;
+  }
+
+  @override
+  Future<CustomerModel> updateUserDetails(Map<String, Object> params) async{
+    final results = await _apiService?.putRequest<CustomerModel>(
+      api: 'customer/v1/profile?',
+      param: params,
+      showToast: true,
+      parser: (json) => CustomerModel.fromJson(json),
+    ) ?? const CustomerModel();
+
+    return results;
+  }
+
+  @override
+  Future<CustomerModel> deleteUserDetails() async{
+    final results = await _apiService?.deleteRequest<CustomerModel>(
+      api: 'customer/v1/profile?',
+      showToast: true,
+      parser: (json) => CustomerModel.fromJson(json),
+    ) ?? const CustomerModel();
+
+    return results;
   }
 }

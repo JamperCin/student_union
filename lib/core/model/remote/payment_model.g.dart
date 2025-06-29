@@ -8,32 +8,34 @@ part of 'payment_model.dart';
 
 _$PaymentModelImpl _$$PaymentModelImplFromJson(Map<String, dynamic> json) =>
     _$PaymentModelImpl(
-      transactionId: json['transactionId'] as String?,
-      amount: (json['amount'] as num?)?.toDouble(),
-      currency: json['currency'] as String?,
-      ref: json['ref'] as String?,
-      name: json['name'] as String?,
-      status: json['status'] as String?,
-      transactionType: json['transactionType'] as String?,
-      authUrl: json['authorization_url'] as String?,
-      campaignId: (json['campaign_id'] as num?)?.toInt(),
-      createdAt: json['created_at'] as String?,
-      narration: json['narration'] as String?,
-      bookId: (json['book_id'] as num?)?.toInt(),
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      amount: json['amount'] as String? ?? "0.0",
+      status: json['status'] as String? ?? "",
+      reference: json['reference'] as String? ?? "",
+      paymentType: json['payment_type'] as String? ?? "",
+      createdAt: json['created_at'] as String? ?? "",
+      currency: json['currency'] as String? ?? "GHS",
+      authUrl: json['authorization_url'] as String? ?? "",
+      payableMeta: json['payable_meta'] == null
+          ? null
+          : PayableMeta.fromJson(json['payable_meta'] as Map<String, dynamic>),
+      paymentInfoMeta: json['metadata'] == null
+          ? null
+          : PaymentInfoMeta.fromJson(json['metadata'] as Map<String, dynamic>),
+      campaignId: (json['campaign_id'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$PaymentModelImplToJson(_$PaymentModelImpl instance) =>
     <String, dynamic>{
-      'transactionId': instance.transactionId,
+      'id': instance.id,
       'amount': instance.amount,
-      'currency': instance.currency,
-      'ref': instance.ref,
-      'name': instance.name,
       'status': instance.status,
-      'transactionType': instance.transactionType,
-      'authorization_url': instance.authUrl,
-      'campaign_id': instance.campaignId,
+      'reference': instance.reference,
+      'payment_type': instance.paymentType,
       'created_at': instance.createdAt,
-      'narration': instance.narration,
-      'book_id': instance.bookId,
+      'currency': instance.currency,
+      'authorization_url': instance.authUrl,
+      'payable_meta': instance.payableMeta,
+      'metadata': instance.paymentInfoMeta,
+      'campaign_id': instance.campaignId,
     };

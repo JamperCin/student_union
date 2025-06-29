@@ -4,6 +4,7 @@ import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/card_container_widget.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart'
     show ContainerWidget;
+import 'package:core_module/core_ui/widgets/divider_widget.dart';
 import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
 import 'package:core_module/core_ui/widgets/list_view_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
@@ -71,18 +72,18 @@ class NewsUpdateWidget extends StatelessWidget {
     }
 
     return ListViewWidget<NewsUpdateModel>(
-      items: list.obs,
+      list: list.obs,
       onLoadMore: () => _onLoadMoreNews(page = page + 1),
       onRefresh: () => _onLoadMoreNews(page = 1),
-      parser: (e) {
+      listItemWidget: (e) {
         return InkWell(
           onTap: () {
             if (onTap != null) {
               onTap!(e);
             }
           },
-          child: CardContainerWidget(
-            elevation: 1,
+          child: Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 24.dp(), vertical: 16.dp(),),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +134,7 @@ class NewsUpdateWidget extends StatelessWidget {
                       '3 hours ago',
                       style: textTheme.labelMedium?.copyWith(
                           fontSize: 10.dp(),
-                          color: colorScheme.tertiaryContainer),
+                          color: colorScheme.surfaceDim),
                     ),
                     Row(
                       children: [
@@ -161,7 +162,10 @@ class NewsUpdateWidget extends StatelessWidget {
                       ],
                     )
                   ],
-                )
+                ),
+                Gap(10.dp()),
+                DividerWidget(),
+                Gap(10.dp()),
               ],
             ),
           ),

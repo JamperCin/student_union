@@ -18,6 +18,7 @@ class SignUpController extends BaseController {
   TextEditingController emailTxtCtrl = TextEditingController();
   TextEditingController fullNameCtrl = TextEditingController();
   TextEditingController passwordTxtCtrl = TextEditingController();
+  bool isTermsAndCondChecked = false;
 
   ///Go to the Login Screen
   void onSignInOnClick() {
@@ -31,7 +32,7 @@ class SignUpController extends BaseController {
   // }
 
   void onTermsAndCondOnClick(bool isChecked) {
-    //PlacesPickerWidget.searchPlaces(onSearch: (p){});
+    isTermsAndCondChecked = isChecked;
   }
 
   ///OnClick listener to the sigUn Button
@@ -40,6 +41,10 @@ class SignUpController extends BaseController {
             err: 'Full name required') &&
         validationUtils.validateEntryEmail(emailTxtCtrl) &&
         validationUtils.validateDataEntry(passwordTxtCtrl, err: 'Password required')) {
+      if (!isTermsAndCondChecked) {
+        snackBarSnippet.snackBarError("Please accept the Terms and Conditions");
+        return;
+      }
       _initSignUpRequest(context);
     }
   }

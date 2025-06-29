@@ -4,6 +4,7 @@ import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:student_union/core/res/asset_path.dart';
 
 class AboutScreen extends BaseScreenStandard {
@@ -35,7 +36,14 @@ class AboutScreen extends BaseScreenStandard {
               width: 250.dp(),
             ),
             Gap(5.dp()),
-            Text('Scripture Union 1.0.0', style: textTheme.bodyMedium),
+            FutureBuilder(
+              future: PackageInfo.fromPlatform(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<PackageInfo> snapshot) {
+                return Text('Scripture Union ${snapshot.data?.version}',
+                    style: textTheme.bodyMedium);
+              },
+            ),
             Gap(40.dp()),
             RichText(
                 text: TextSpan(

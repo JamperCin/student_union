@@ -21,7 +21,7 @@ class DonationsHistoryScreen extends BaseScreenStandard {
         horizontal: 24.dp(),
         vertical: 16.dp(),
       ),
-      child: const PaymentHistoryWidget(),
+      child:  PaymentHistoryWidget(),
     );
   }
 }

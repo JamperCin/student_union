@@ -62,8 +62,8 @@ class SettingsScreen extends BaseScreenStandard {
                 onChanged: (isThemeDark) {
                   isDarkTheme.value = isThemeDark;
                 },
-                inactiveThumbColor: colorScheme.tertiary,
-                activeColor: colorScheme.tertiary,
+                inactiveThumbColor: colorScheme.surface,
+                activeColor: colorScheme.surface,
                 inactiveTrackColor: colorScheme.primary,
                 activeTrackColor: colorScheme.primary,
               ),
@@ -82,6 +82,9 @@ class SettingsScreen extends BaseScreenStandard {
             elevation: elevation,
             prefixAsset: icDeleteAccount,
             prefixAssetHeight: prefixSize,
+            onTap:(v){
+              _controller.onDeleteAccountOnClick(context);
+            } ,
           ),
           Gap(10.dp()),
         ],

@@ -33,10 +33,10 @@ class DailyDevotionWidget extends StatelessWidget {
     final formatDate = DateTimeUtils()
         .formatDate(DateTime.now().toString(), format: "yyyy-MM-dd");
 
-    final param = {"devotion_year_id": "25", "date": formatDate};
+    final param = {"date": "2025-06-22"};
 
     return FutureBuilder(
-      future: devGuideService.fetchPurchasedBooks(param: param),
+      future: devGuideService.fetchDailyDevotion(),
       builder: (BuildContext context,
           AsyncSnapshot<List<DevotionalBookModel>> snapshot) {
         return snapshot.hasData && snapshot.data != null

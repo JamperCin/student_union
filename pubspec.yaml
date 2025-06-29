@@ -40,6 +40,7 @@ dependencies:
   json_annotation: ^4.9.0
   webview_flutter: ^4.8.0
   flutter_tts: ^4.2.3
+  package_info_plus: ^8.3.0
   share_plus: ^11.0.0
   html: ^0.15.6
   url_launcher: ^6.3.1

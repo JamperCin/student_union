@@ -21,6 +21,12 @@ class PurchasedBookController extends BaseController {
 
   Future<void> setPurchasedBook(DevotionalBookModel book) async {
     this.book.value = book;
+    selectedDate = 'Today'.obs;
+    isLoadingContent = false.obs;
+    selectedDateTimeline = DateTimeUtils()
+        .formatDate(DateTime.now().toString(), format: "dd MMM, yyyy")
+        .obs;
+
     if(book.devotion == null) {
       await Future.delayed(const Duration(milliseconds: 30));
       _fetchDevotionContent(DateTimeUtils().formatDate(
@@ -45,6 +51,8 @@ class PurchasedBookController extends BaseController {
 
         _fetchDevotionContent(date.toString());
       },
+      okButtonTextStyle: Theme.of(context).textTheme.titleLarge,
+      cancelButtonTextStyle: Theme.of(context).textTheme.titleMedium,
     );
   }
 

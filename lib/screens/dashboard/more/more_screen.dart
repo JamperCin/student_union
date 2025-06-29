@@ -1,9 +1,10 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
+import 'package:core_module/core/model/local/dictionary_model.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
-import 'package:get/get.dart';
+import 'package:core_module/core_ui/widgets/button_switch_widget.dart';
 import 'package:student_union/core-ui/widgets/simple_card_item.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/dashboard/more/more_controller.dart';

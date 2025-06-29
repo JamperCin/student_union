@@ -20,25 +20,23 @@ PaymentModel _$PaymentModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PaymentModel {
-  @JsonKey(name: 'transactionId')
-  String? get transactionId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'amount')
-  double? get amount => throw _privateConstructorUsedError;
-  String? get currency => throw _privateConstructorUsedError;
-  String? get ref => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
-  @JsonKey(name: 'transactionType')
-  String? get transactionType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'authorization_url')
-  String? get authUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'campaign_id')
-  int? get campaignId => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get amount => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
+  String get reference => throw _privateConstructorUsedError;
+  @JsonKey(name: 'payment_type')
+  String get paymentType => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  String? get createdAt => throw _privateConstructorUsedError;
-  String? get narration => throw _privateConstructorUsedError;
-  @JsonKey(name: 'book_id')
-  int? get bookId => throw _privateConstructorUsedError;
+  String get createdAt => throw _privateConstructorUsedError;
+  String get currency => throw _privateConstructorUsedError;
+  @JsonKey(name: 'authorization_url')
+  String get authUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'payable_meta')
+  PayableMeta? get payableMeta => throw _privateConstructorUsedError;
+  @JsonKey(name: 'metadata')
+  PaymentInfoMeta? get paymentInfoMeta => throw _privateConstructorUsedError;
+  @JsonKey(name: 'campaign_id')
+  int get campaignId => throw _privateConstructorUsedError;
 
   /// Serializes this PaymentModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -57,18 +55,20 @@ abstract class $PaymentModelCopyWith<$Res> {
       _$PaymentModelCopyWithImpl<$Res, PaymentModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'transactionId') String? transactionId,
-      @JsonKey(name: 'amount') double? amount,
-      String? currency,
-      String? ref,
-      String? name,
-      String? status,
-      @JsonKey(name: 'transactionType') String? transactionType,
-      @JsonKey(name: 'authorization_url') String? authUrl,
-      @JsonKey(name: 'campaign_id') int? campaignId,
-      @JsonKey(name: 'created_at') String? createdAt,
-      String? narration,
-      @JsonKey(name: 'book_id') int? bookId});
+      {int id,
+      String amount,
+      String status,
+      String reference,
+      @JsonKey(name: 'payment_type') String paymentType,
+      @JsonKey(name: 'created_at') String createdAt,
+      String currency,
+      @JsonKey(name: 'authorization_url') String authUrl,
+      @JsonKey(name: 'payable_meta') PayableMeta? payableMeta,
+      @JsonKey(name: 'metadata') PaymentInfoMeta? paymentInfoMeta,
+      @JsonKey(name: 'campaign_id') int campaignId});
+
+  $PayableMetaCopyWith<$Res>? get payableMeta;
+  $PaymentInfoMetaCopyWith<$Res>? get paymentInfoMeta;
 }
 
 /// @nodoc
@@ -86,69 +86,92 @@ class _$PaymentModelCopyWithImpl<$Res, $Val extends PaymentModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? transactionId = freezed,
-    Object? amount = freezed,
-    Object? currency = freezed,
-    Object? ref = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
-    Object? transactionType = freezed,
-    Object? authUrl = freezed,
-    Object? campaignId = freezed,
-    Object? createdAt = freezed,
-    Object? narration = freezed,
-    Object? bookId = freezed,
+    Object? id = null,
+    Object? amount = null,
+    Object? status = null,
+    Object? reference = null,
+    Object? paymentType = null,
+    Object? createdAt = null,
+    Object? currency = null,
+    Object? authUrl = null,
+    Object? payableMeta = freezed,
+    Object? paymentInfoMeta = freezed,
+    Object? campaignId = null,
   }) {
     return _then(_value.copyWith(
-      transactionId: freezed == transactionId
-          ? _value.transactionId
-          : transactionId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      amount: freezed == amount
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as double?,
-      currency: freezed == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ref: freezed == ref
-          ? _value.ref
-          : ref // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: freezed == status
+              as String,
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      transactionType: freezed == transactionType
-          ? _value.transactionType
-          : transactionType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      authUrl: freezed == authUrl
-          ? _value.authUrl
-          : authUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      campaignId: freezed == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      createdAt: freezed == createdAt
+              as String,
+      reference: null == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentType: null == paymentType
+          ? _value.paymentType
+          : paymentType // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      narration: freezed == narration
-          ? _value.narration
-          : narration // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bookId: freezed == bookId
-          ? _value.bookId
-          : bookId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      authUrl: null == authUrl
+          ? _value.authUrl
+          : authUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      payableMeta: freezed == payableMeta
+          ? _value.payableMeta
+          : payableMeta // ignore: cast_nullable_to_non_nullable
+              as PayableMeta?,
+      paymentInfoMeta: freezed == paymentInfoMeta
+          ? _value.paymentInfoMeta
+          : paymentInfoMeta // ignore: cast_nullable_to_non_nullable
+              as PaymentInfoMeta?,
+      campaignId: null == campaignId
+          ? _value.campaignId
+          : campaignId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
+  }
+
+  /// Create a copy of PaymentModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PayableMetaCopyWith<$Res>? get payableMeta {
+    if (_value.payableMeta == null) {
+      return null;
+    }
+
+    return $PayableMetaCopyWith<$Res>(_value.payableMeta!, (value) {
+      return _then(_value.copyWith(payableMeta: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PaymentModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentInfoMetaCopyWith<$Res>? get paymentInfoMeta {
+    if (_value.paymentInfoMeta == null) {
+      return null;
+    }
+
+    return $PaymentInfoMetaCopyWith<$Res>(_value.paymentInfoMeta!, (value) {
+      return _then(_value.copyWith(paymentInfoMeta: value) as $Val);
+    });
   }
 }
 
@@ -161,18 +184,22 @@ abstract class _$$PaymentModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'transactionId') String? transactionId,
-      @JsonKey(name: 'amount') double? amount,
-      String? currency,
-      String? ref,
-      String? name,
-      String? status,
-      @JsonKey(name: 'transactionType') String? transactionType,
-      @JsonKey(name: 'authorization_url') String? authUrl,
-      @JsonKey(name: 'campaign_id') int? campaignId,
-      @JsonKey(name: 'created_at') String? createdAt,
-      String? narration,
-      @JsonKey(name: 'book_id') int? bookId});
+      {int id,
+      String amount,
+      String status,
+      String reference,
+      @JsonKey(name: 'payment_type') String paymentType,
+      @JsonKey(name: 'created_at') String createdAt,
+      String currency,
+      @JsonKey(name: 'authorization_url') String authUrl,
+      @JsonKey(name: 'payable_meta') PayableMeta? payableMeta,
+      @JsonKey(name: 'metadata') PaymentInfoMeta? paymentInfoMeta,
+      @JsonKey(name: 'campaign_id') int campaignId});
+
+  @override
+  $PayableMetaCopyWith<$Res>? get payableMeta;
+  @override
+  $PaymentInfoMetaCopyWith<$Res>? get paymentInfoMeta;
 }
 
 /// @nodoc
@@ -188,68 +215,63 @@ class __$$PaymentModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? transactionId = freezed,
-    Object? amount = freezed,
-    Object? currency = freezed,
-    Object? ref = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
-    Object? transactionType = freezed,
-    Object? authUrl = freezed,
-    Object? campaignId = freezed,
-    Object? createdAt = freezed,
-    Object? narration = freezed,
-    Object? bookId = freezed,
+    Object? id = null,
+    Object? amount = null,
+    Object? status = null,
+    Object? reference = null,
+    Object? paymentType = null,
+    Object? createdAt = null,
+    Object? currency = null,
+    Object? authUrl = null,
+    Object? payableMeta = freezed,
+    Object? paymentInfoMeta = freezed,
+    Object? campaignId = null,
   }) {
     return _then(_$PaymentModelImpl(
-      transactionId: freezed == transactionId
-          ? _value.transactionId
-          : transactionId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      amount: freezed == amount
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as double?,
-      currency: freezed == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ref: freezed == ref
-          ? _value.ref
-          : ref // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: freezed == status
+              as String,
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      transactionType: freezed == transactionType
-          ? _value.transactionType
-          : transactionType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      authUrl: freezed == authUrl
-          ? _value.authUrl
-          : authUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      campaignId: freezed == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      createdAt: freezed == createdAt
+              as String,
+      reference: null == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentType: null == paymentType
+          ? _value.paymentType
+          : paymentType // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      narration: freezed == narration
-          ? _value.narration
-          : narration // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bookId: freezed == bookId
-          ? _value.bookId
-          : bookId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      authUrl: null == authUrl
+          ? _value.authUrl
+          : authUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      payableMeta: freezed == payableMeta
+          ? _value.payableMeta
+          : payableMeta // ignore: cast_nullable_to_non_nullable
+              as PayableMeta?,
+      paymentInfoMeta: freezed == paymentInfoMeta
+          ? _value.paymentInfoMeta
+          : paymentInfoMeta // ignore: cast_nullable_to_non_nullable
+              as PaymentInfoMeta?,
+      campaignId: null == campaignId
+          ? _value.campaignId
+          : campaignId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -258,57 +280,58 @@ class __$$PaymentModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PaymentModelImpl implements _PaymentModel {
   const _$PaymentModelImpl(
-      {@JsonKey(name: 'transactionId') this.transactionId,
-      @JsonKey(name: 'amount') this.amount,
-      this.currency,
-      this.ref,
-      this.name,
-      this.status,
-      @JsonKey(name: 'transactionType') this.transactionType,
-      @JsonKey(name: 'authorization_url') this.authUrl,
-      @JsonKey(name: 'campaign_id') this.campaignId,
-      @JsonKey(name: 'created_at') this.createdAt,
-      this.narration,
-      @JsonKey(name: 'book_id') this.bookId});
+      {this.id = 0,
+      this.amount = "0.0",
+      this.status = "",
+      this.reference = "",
+      @JsonKey(name: 'payment_type') this.paymentType = "",
+      @JsonKey(name: 'created_at') this.createdAt = "",
+      this.currency = "GHS",
+      @JsonKey(name: 'authorization_url') this.authUrl = "",
+      @JsonKey(name: 'payable_meta') this.payableMeta,
+      @JsonKey(name: 'metadata') this.paymentInfoMeta,
+      @JsonKey(name: 'campaign_id') this.campaignId = 0});
 
   factory _$PaymentModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaymentModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'transactionId')
-  final String? transactionId;
+  @JsonKey()
+  final int id;
   @override
-  @JsonKey(name: 'amount')
-  final double? amount;
+  @JsonKey()
+  final String amount;
   @override
-  final String? currency;
+  @JsonKey()
+  final String status;
   @override
-  final String? ref;
+  @JsonKey()
+  final String reference;
   @override
-  final String? name;
-  @override
-  final String? status;
-  @override
-  @JsonKey(name: 'transactionType')
-  final String? transactionType;
-  @override
-  @JsonKey(name: 'authorization_url')
-  final String? authUrl;
-  @override
-  @JsonKey(name: 'campaign_id')
-  final int? campaignId;
+  @JsonKey(name: 'payment_type')
+  final String paymentType;
   @override
   @JsonKey(name: 'created_at')
-  final String? createdAt;
+  final String createdAt;
   @override
-  final String? narration;
+  @JsonKey()
+  final String currency;
   @override
-  @JsonKey(name: 'book_id')
-  final int? bookId;
+  @JsonKey(name: 'authorization_url')
+  final String authUrl;
+  @override
+  @JsonKey(name: 'payable_meta')
+  final PayableMeta? payableMeta;
+  @override
+  @JsonKey(name: 'metadata')
+  final PaymentInfoMeta? paymentInfoMeta;
+  @override
+  @JsonKey(name: 'campaign_id')
+  final int campaignId;
 
   @override
   String toString() {
-    return 'PaymentModel(transactionId: $transactionId, amount: $amount, currency: $currency, ref: $ref, name: $name, status: $status, transactionType: $transactionType, authUrl: $authUrl, campaignId: $campaignId, createdAt: $createdAt, narration: $narration, bookId: $bookId)';
+    return 'PaymentModel(id: $id, amount: $amount, status: $status, reference: $reference, paymentType: $paymentType, createdAt: $createdAt, currency: $currency, authUrl: $authUrl, payableMeta: $payableMeta, paymentInfoMeta: $paymentInfoMeta, campaignId: $campaignId)';
   }
 
   @override
@@ -316,42 +339,41 @@ class _$PaymentModelImpl implements _PaymentModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PaymentModelImpl &&
-            (identical(other.transactionId, transactionId) ||
-                other.transactionId == transactionId) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.currency, currency) ||
-                other.currency == currency) &&
-            (identical(other.ref, ref) || other.ref == ref) &&
-            (identical(other.name, name) || other.name == name) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.transactionType, transactionType) ||
-                other.transactionType == transactionType) &&
-            (identical(other.authUrl, authUrl) || other.authUrl == authUrl) &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId) &&
+            (identical(other.reference, reference) ||
+                other.reference == reference) &&
+            (identical(other.paymentType, paymentType) ||
+                other.paymentType == paymentType) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.narration, narration) ||
-                other.narration == narration) &&
-            (identical(other.bookId, bookId) || other.bookId == bookId));
+            (identical(other.currency, currency) ||
+                other.currency == currency) &&
+            (identical(other.authUrl, authUrl) || other.authUrl == authUrl) &&
+            (identical(other.payableMeta, payableMeta) ||
+                other.payableMeta == payableMeta) &&
+            (identical(other.paymentInfoMeta, paymentInfoMeta) ||
+                other.paymentInfoMeta == paymentInfoMeta) &&
+            (identical(other.campaignId, campaignId) ||
+                other.campaignId == campaignId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      transactionId,
+      id,
       amount,
-      currency,
-      ref,
-      name,
       status,
-      transactionType,
-      authUrl,
-      campaignId,
+      reference,
+      paymentType,
       createdAt,
-      narration,
-      bookId);
+      currency,
+      authUrl,
+      payableMeta,
+      paymentInfoMeta,
+      campaignId);
 
   /// Create a copy of PaymentModel
   /// with the given fields replaced by the non-null parameter values.
@@ -371,53 +393,49 @@ class _$PaymentModelImpl implements _PaymentModel {
 
 abstract class _PaymentModel implements PaymentModel {
   const factory _PaymentModel(
-      {@JsonKey(name: 'transactionId') final String? transactionId,
-      @JsonKey(name: 'amount') final double? amount,
-      final String? currency,
-      final String? ref,
-      final String? name,
-      final String? status,
-      @JsonKey(name: 'transactionType') final String? transactionType,
-      @JsonKey(name: 'authorization_url') final String? authUrl,
-      @JsonKey(name: 'campaign_id') final int? campaignId,
-      @JsonKey(name: 'created_at') final String? createdAt,
-      final String? narration,
-      @JsonKey(name: 'book_id') final int? bookId}) = _$PaymentModelImpl;
+      {final int id,
+      final String amount,
+      final String status,
+      final String reference,
+      @JsonKey(name: 'payment_type') final String paymentType,
+      @JsonKey(name: 'created_at') final String createdAt,
+      final String currency,
+      @JsonKey(name: 'authorization_url') final String authUrl,
+      @JsonKey(name: 'payable_meta') final PayableMeta? payableMeta,
+      @JsonKey(name: 'metadata') final PaymentInfoMeta? paymentInfoMeta,
+      @JsonKey(name: 'campaign_id') final int campaignId}) = _$PaymentModelImpl;
 
   factory _PaymentModel.fromJson(Map<String, dynamic> json) =
       _$PaymentModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'transactionId')
-  String? get transactionId;
+  int get id;
   @override
-  @JsonKey(name: 'amount')
-  double? get amount;
+  String get amount;
   @override
-  String? get currency;
+  String get status;
   @override
-  String? get ref;
+  String get reference;
   @override
-  String? get name;
-  @override
-  String? get status;
-  @override
-  @JsonKey(name: 'transactionType')
-  String? get transactionType;
-  @override
-  @JsonKey(name: 'authorization_url')
-  String? get authUrl;
-  @override
-  @JsonKey(name: 'campaign_id')
-  int? get campaignId;
+  @JsonKey(name: 'payment_type')
+  String get paymentType;
   @override
   @JsonKey(name: 'created_at')
-  String? get createdAt;
+  String get createdAt;
   @override
-  String? get narration;
+  String get currency;
   @override
-  @JsonKey(name: 'book_id')
-  int? get bookId;
+  @JsonKey(name: 'authorization_url')
+  String get authUrl;
+  @override
+  @JsonKey(name: 'payable_meta')
+  PayableMeta? get payableMeta;
+  @override
+  @JsonKey(name: 'metadata')
+  PaymentInfoMeta? get paymentInfoMeta;
+  @override
+  @JsonKey(name: 'campaign_id')
+  int get campaignId;
 
   /// Create a copy of PaymentModel
   /// with the given fields replaced by the non-null parameter values.

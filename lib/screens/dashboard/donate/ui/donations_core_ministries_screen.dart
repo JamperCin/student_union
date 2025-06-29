@@ -21,7 +21,6 @@ class DonationCoreMinistriesScreen extends NewsScreen {
 
   @override
   List<Widget> actions() {
-    // TODO: implement actions
     return [
       Padding(
         padding:  EdgeInsets.symmetric(horizontal: 16.dp(),),
@@ -34,17 +33,6 @@ class DonationCoreMinistriesScreen extends NewsScreen {
     ];
   }
 
-  // bool showAppBarIcon = false;
-
-  // @override
-  // bool showAppBar() {
-  //   return true;
-  // }
-  //
-  // @override
-  // double appBarElevation() {
-  //   return 10;
-  // }
 
   @override
   TextStyle? appBarTitleStyle(BuildContext context) {
@@ -53,39 +41,11 @@ class DonationCoreMinistriesScreen extends NewsScreen {
         ?.copyWith(fontWeight: FontWeight.w700);
   }
 
-  // @override
-  // Widget? appBarLeadingIcon(BuildContext context) {
-  //   return showAppBarIcon
-  //       ? super.appBarLeadingIcon(context)
-  //       : const SizedBox.shrink();
-  // }
-  //
-  // @override
-  // void setModel(BaseObject baseObject) {
-  //   super.setModel(baseObject);
-  //   if (baseObject is CoreMinistryModel) {
-  //     showAppBarIcon = true;
-  //   } else {
-  //     showAppBarIcon = false;
-  //   }
-  //   print("BAr ==> $showAppBarIcon");
-  // }
 
   @override
   Widget body(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16.dp()),
-      child: Column(
-        children: [
-          // TitleTextWidget(text: "Donate to our core minitries"),
-          // Gap(10.dp()),
-          Expanded(
-            child: CoreMinistriesWidget.withDonations(
-              onTap: _controller.onDonationOnClick,
-            ),
-          ),
-        ],
-      ),
+    return CoreMinistriesWidget.withDonations(
+      onTap: _controller.onDonationOnClick,
     );
   }
 }

@@ -16,43 +16,39 @@ class PaymentApiService extends BaseApiService implements PaymentApiInterface {
   }
 
   @override
-  Future<List<PaymentModel>> fetchPaymentHistory({Map<String,dynamic>? param}) async{
-    await Future.delayed(const Duration(seconds: 1));
-    final results = await FileUtils().fetchList<PaymentModel>(
-      path: 'assets/data/payment_history.json',
-      key: 'transactions',
-      parser: (json) => PaymentModel.fromJson(json),
-    );
-
-    // final results = await _instance?.getListRequest<PaymentModel>(
-    //   api: "customer/v1/payments?",
-    //    key: "payments"
-    //   parser: (json) => PaymentModel.fromJson(json),
-    // );
-
-   // debugPrint("results---> $results");
+  Future<List<PaymentModel>> fetchPaymentHistory(
+      {Map<String, dynamic>? param}) async {
+    final results = await _instance?.getListRequest<PaymentModel>(
+          api: "customer/v1/payments?",
+          key: "payments",
+          param: param,
+          parser: (json) => PaymentModel.fromJson(json),
+        ) ??
+        [];
 
     return results;
   }
 
   @override
-  Future<PaymentModel> makePaymentOfBook(Map<String,dynamic> param) async{
+  Future<PaymentModel> makePaymentOfBook(Map<String, dynamic> param) async {
     final results = await _instance?.postRequest<PaymentModel>(
-      api: "customer/v1/payments",
-      param: param,
-      showToast: true,
-      parser: (json) => PaymentModel.fromJson(json),
-    ) ?? const PaymentModel();
+          api: "customer/v1/payments",
+          param: param,
+          showToast: true,
+          parser: (json) => PaymentModel.fromJson(json),
+        ) ??
+        const PaymentModel();
 
     return results;
   }
 
   @override
-  Future<PaymentModel> makePaymentOfCampaign(Map<String,dynamic> param) async{
+  Future<PaymentModel> makePaymentOfCampaign(Map<String, dynamic> param) async {
     final results = await _instance?.postRequest<PaymentModel>(
-      api: "customer/v1/payments",
-      parser: (json) => PaymentModel.fromJson(json),
-    ) ?? const PaymentModel();
+          api: "customer/v1/payments",
+          parser: (json) => PaymentModel.fromJson(json),
+        ) ??
+        const PaymentModel();
 
     return results;
   }

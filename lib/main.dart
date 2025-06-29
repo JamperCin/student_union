@@ -50,7 +50,7 @@ Future<void> _initializeApp() async {
   await appPreference.initPreference();
   await CoreModule().init(
     envPath: icEnvPath,
-    defaultEnv: EnvType.staging,
+    defaultEnv: EnvType.production,
     loginScreen: 'LoginScreen',
     homePageScreen: 'MainDashboardScreen',
   );

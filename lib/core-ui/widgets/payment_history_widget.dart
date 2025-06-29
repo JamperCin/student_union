@@ -1,46 +1,82 @@
 import 'package:core_module/core/extensions/double_extension.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
+import 'package:core_module/core/extensions/string_extension.dart';
 import 'package:core_module/core/utils/date_time_utils.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
+import 'package:core_module/core_ui/widgets/list_view_widget.dart';
+import 'package:core_module/core_ui/widgets/no_data_widget.dart';
 import 'package:core_module/core_ui/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
+import 'package:student_union/core/enums/payment_type.dart';
 import 'package:student_union/core/model/remote/payment_model.dart';
 
 import '../../core/res/asset_path.dart';
 
 class PaymentHistoryWidget extends StatelessWidget {
   final GestureTapCallback? onSeeMoreOnTap;
+  final PaymentType paymentType;
+  int page = 1;
 
-  const PaymentHistoryWidget({super.key, this.onSeeMoreOnTap});
+  PaymentHistoryWidget({
+    super.key,
+    this.onSeeMoreOnTap,
+    this.paymentType = PaymentType.campaign_donation,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: paymentApiService.fetchPaymentHistory(),
+      future: _onLoadMorePayment(page = 1),
       builder: (
         BuildContext context,
         AsyncSnapshot<List<PaymentModel>> snapshot,
       ) {
-        return snapshot.hasData
-            ? Column(
-                children: [
-                  Gap(20.dp()),
-                  if (onSeeMoreOnTap != null)
-                    TitleTextWidget(
-                      text: "Donation History",
-                      onTap: onSeeMoreOnTap,
-                    ),
-                  if (onSeeMoreOnTap != null) Gap(5.dp()),
-                  ...snapshot.data!
-                      .map((d) => _transactionItemWidget(context, d)),
-                ],
-              )
+        return snapshot.hasData && snapshot.data != null
+            ? _transactionLayout(context, snapshot.data!)
             : ShimmerWidget.withList(length: onSeeMoreOnTap != null ? 1 : 5);
       },
+    );
+  }
+
+  Widget _transactionLayout(BuildContext context, List<PaymentModel> list) {
+    if (list.isEmpty) {
+      return onSeeMoreOnTap != null
+          ? const SizedBox.shrink()
+          : const NoDataWidget(
+              asset: icDonate,
+              title: "No donation history available",
+              description: "Once you start donating to campaigns and core"
+                  " ministries, your history will show up here. You don’t have any records just yet.",
+            );
+    }
+
+    return Column(
+      children: [
+        Gap(20.dp()),
+        if (onSeeMoreOnTap != null)
+          TitleTextWidget(
+            text: "Donation History",
+            onTap: onSeeMoreOnTap,
+          ),
+        if (onSeeMoreOnTap != null) Gap(5.dp()),
+        if (onSeeMoreOnTap != null)
+          ...list.map((e) => _transactionItemWidget(context, e)),
+        if (onSeeMoreOnTap == null)
+          Expanded(
+            child: ListViewWidget(
+              list: list,
+              onLoadMore: () => _onLoadMorePayment(page = page + 1),
+              onRefresh: () => _onLoadMorePayment(page = 1),
+              listItemWidget: (item) {
+                return _transactionItemWidget(context, item);
+              },
+            ),
+          )
+      ],
     );
   }
 
@@ -71,7 +107,31 @@ class PaymentHistoryWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(model.name ?? '', style: textTheme.labelLarge),
+                  RichText(
+                    maxLines: 1,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: model.payableMeta?.title,
+                          style: textTheme.labelLarge,
+                        )
+                      ],
+                    ),
+                  ),
+                  // RichText(
+                  //   maxLines: 1,
+                  //   text: TextSpan(
+                  //     children: [
+                  //       TextSpan(text: 'Ref: ', style: textTheme.labelSmall),
+                  //       TextSpan(
+                  //         text: model.reference,
+                  //         style: textTheme.labelMedium
+                  //             ?.copyWith(fontSize: 10.dp()),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  // Gap(2.dp()),
                   Text(
                     (DateTimeUtils().formatDate(model.createdAt ?? ''))
                         .toString(),
@@ -93,13 +153,13 @@ class PaymentHistoryWidget extends StatelessWidget {
                       TextSpan(
                         text: model.currency ?? '',
                         style: textTheme.labelMedium
-                            ?.copyWith(fontWeight: FontWeight.w600),
+                            ?.copyWith(fontWeight: FontWeight.w700),
                       ),
                       TextSpan(text: ' ', style: textTheme.bodyMedium),
                       TextSpan(
-                        text: model.amount?.toDecimalPlaces(),
+                        text: model.amount.toDecimalPlaces(),
                         style: textTheme.labelMedium
-                            ?.copyWith(fontWeight: FontWeight.w600),
+                            ?.copyWith(fontWeight: FontWeight.w700),
                       ),
                     ],
                   ),
@@ -132,5 +192,13 @@ class PaymentHistoryWidget extends StatelessWidget {
       default:
         return Colors.grey;
     }
+  }
+
+  Future<List<PaymentModel>> _onLoadMorePayment(int page) async {
+    Map<String, dynamic> param = {
+      "page": page.toString(),
+      "payment_type": paymentType.name,
+    };
+    return await paymentApiService.fetchPaymentHistory(param: param);
   }
 }

@@ -44,8 +44,11 @@ class DevotionsScreen extends BaseScreenStandard {
   List<Widget> actions() {
     return [
       DropDownWidget(
-        selectedItem: _controller.selectedYear,
+        initialItem: _controller.selectedYear.value,
         list: _controller.list,
+        onItemSelected: (value) {
+          _controller.selectedYear.value = value;
+        }
       )
     ];
   }
@@ -65,6 +68,7 @@ class DevotionsScreen extends BaseScreenStandard {
                 index == 0 ? BookType.availableBooks : BookType.purchasedBooks;
           },
           initialIndex: _controller.bookTypeFilter.value == BookType.availableBooks ? 0 : 1,
+          unselectedLabelColor: colorScheme.surfaceDim,
         ),
         Expanded(
           child: Obx(

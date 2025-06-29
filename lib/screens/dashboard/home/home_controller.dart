@@ -13,7 +13,7 @@ import 'package:student_union/screens/dashboard/donate/ui/donations_core_ministr
 import 'package:student_union/screens/dashboard/donate/ui/donations_history_screen.dart';
 import 'package:student_union/screens/dashboard/events/event_details_screen.dart';
 import 'package:student_union/screens/dashboard/more/notifications/notificationsScreen.dart';
-import 'package:student_union/screens/dashboard/more/profile/profile_screen.dart';
+import 'package:student_union/screens/dashboard/more/profile/ui/profile_screen.dart';
 
 import '../../../core/model/local/web_model.dart';
 import '../devotion/ui/buy_devotional_book_screen.dart';
@@ -39,6 +39,7 @@ class HomeController extends BaseController {
   }
 
   void onNewsUpdateTap(NewsUpdateModel news) {
+    if(news.url.isEmpty) return;
     navUtils.fireTarget(
       BaseWebView(
         model: WebModel(

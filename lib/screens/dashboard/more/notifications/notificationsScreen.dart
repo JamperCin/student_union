@@ -50,9 +50,9 @@ class NotificationsScreen extends BaseScreenStandard {
     }
 
     return ListViewWidget<NotificationModel>(
-      items: list.obs,
+      list: list,
       padding: EdgeInsets.symmetric(horizontal: 24.dp(), vertical: 20.dp()),
-      parser: (model) => _notificationItem(context, model),
+      listItemWidget: (model) => _notificationItem(context, model),
       onLoadMore: _controller.onLoadMore,
       onRefresh: _controller.onRefresh,
     );

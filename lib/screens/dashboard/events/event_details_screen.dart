@@ -20,7 +20,6 @@ class EventDetailsScreen extends BaseScreenStandard {
     return ConfirmTransactionLayout(
       title: event.name,
       buttonTitle: 'Close',
-      subTitle: event.description,
       child: Column(
         children: [
           NetworkImageWidget(
@@ -36,16 +35,21 @@ class EventDetailsScreen extends BaseScreenStandard {
           Gap(40.dp()),
           Align(
             alignment: Alignment.centerLeft,
+            child: Text(event.description, style: textTheme.bodySmall),
+          ),
+          Gap(20.dp()),
+          Align(
+            alignment: Alignment.centerLeft,
             child: RichText(
-              textAlign: TextAlign.start,
+                textAlign: TextAlign.start,
                 text: TextSpan(children: [
-              TextSpan(text: 'Start Date: ', style: textTheme.bodyMedium),
-              TextSpan(
-                  text: DateTimeUtils()
-                      .formatDate(event.startDate, format: "dd MMM, yyyy"),
-                  style:
-                      textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700))
-            ])),
+                  TextSpan(text: 'Start Date: ', style: textTheme.bodyMedium),
+                  TextSpan(
+                      text: DateTimeUtils()
+                          .formatDate(event.startDate, format: "dd MMM, yyyy"),
+                      style: textTheme.bodyLarge
+                          ?.copyWith(fontWeight: FontWeight.w700))
+                ])),
           ),
           Gap(20.dp()),
           Align(
@@ -57,8 +61,8 @@ class EventDetailsScreen extends BaseScreenStandard {
                   TextSpan(
                       text: DateTimeUtils()
                           .formatDate(event.endDate, format: "dd MMM, yyyy"),
-                      style:
-                      textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700))
+                      style: textTheme.bodyLarge
+                          ?.copyWith(fontWeight: FontWeight.w700))
                 ])),
           )
         ],
