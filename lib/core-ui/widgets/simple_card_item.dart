@@ -127,7 +127,7 @@ class SimpleCardItem<T> extends StatelessWidget {
             AssetImageWidget(
               asset: prefixAsset ?? icCoreMinistry,
               height: prefixAssetHeight ?? 40.dp(),
-              width: prefixAssetWidth ?? 60.dp(),
+              width: prefixAssetWidth ?? 40.dp(),
               assetColor: colorScheme.primary,
             ),
             Gap(10.dp()),

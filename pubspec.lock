@@ -214,7 +214,7 @@ packages:
     description:
       path: "packages/core_module"
       ref: HEAD
-      resolved-ref: d183d97827fe5d18057c25d29449cc80f1f0ff68
+      resolved-ref: "7214feacba6249466376fb1a36ed840f4dffaee1"
       url: "https://github.com/JamperCin/core_package"
     source: git
     version: "1.3.4"
@@ -426,7 +426,7 @@ packages:
     source: hosted
     version: "2.5.8"
   freezed_annotation:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: freezed_annotation
       sha256: c2e2d632dd9b8a2b7751117abcfc2b4888ecfe181bd9fca7170d9ef02e595fe2
@@ -602,7 +602,7 @@ packages:
     source: hosted
     version: "0.7.2"
   json_annotation:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: json_annotation
       sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"

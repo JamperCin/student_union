@@ -47,7 +47,7 @@ class SettingsScreen extends BaseScreenStandard {
             prefixAssetHeight: prefixSize,
             elevation: elevation,
             onTap: (v) {
-              _controller.onChangePasswordOnClick;
+              _controller.onChangePasswordOnClick();
             },
           ),
           Gap(10.dp()),
@@ -59,9 +59,7 @@ class SettingsScreen extends BaseScreenStandard {
             suffixWidget: Obx(
               () => Switch(
                 value: isDarkTheme.value,
-                onChanged: (isThemeDark) {
-                  isDarkTheme.value = isThemeDark;
-                },
+                onChanged: _controller.onThemeSwitch,
                 inactiveThumbColor: colorScheme.surface,
                 activeColor: colorScheme.surface,
                 inactiveTrackColor: colorScheme.primary,
@@ -69,13 +67,13 @@ class SettingsScreen extends BaseScreenStandard {
               ),
             ),
           ),
-          Gap(10.dp()),
-          SimpleCardItem(
-            title: "Notification Settings",
-            prefixAsset: icNotification,
-            prefixAssetHeight: prefixSize,
-            elevation: elevation,
-          ),
+          // Gap(10.dp()),
+          // SimpleCardItem(
+          //   title: "Notification Settings",
+          //   prefixAsset: icNotification,
+          //   prefixAssetHeight: prefixSize,
+          //   elevation: elevation,
+          // ),
           Gap(10.dp()),
           SimpleCardItem(
             title: "Delete Account",

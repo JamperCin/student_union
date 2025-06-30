@@ -66,6 +66,7 @@ class LoginScreen extends BaseScreenDecorated {
             style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
           ),
           SizedBox(height: appDimen.dimen(1)),
+
           Text(
             'Sign In to continue',
             style: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),

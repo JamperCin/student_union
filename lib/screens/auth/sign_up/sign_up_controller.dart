@@ -52,7 +52,7 @@ class SignUpController extends BaseController {
   ///Initialise the Sign Up request to the Api
   Future<void> _initSignUpRequest(BuildContext context) async {
     HashMap<String, Object> params = HashMap();
-    params.putIfAbsent("email", () => emailTxtCtrl.getData());
+    params.putIfAbsent("email", () => emailTxtCtrl.getData().toLowerCase());
     params.putIfAbsent("password", () => passwordTxtCtrl.getData());
     params.putIfAbsent("name", () => fullNameCtrl.getData());
 

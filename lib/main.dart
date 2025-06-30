@@ -48,6 +48,8 @@ Future<void> _initializeApp() async {
   await Future.delayed(const Duration(seconds: 1));
   appPreference = AppPreference();
   await appPreference.initPreference();
+  isDarkTheme.value = appPreference.getDarkTheme();
+
   await CoreModule().init(
     envPath: icEnvPath,
     defaultEnv: EnvType.production,

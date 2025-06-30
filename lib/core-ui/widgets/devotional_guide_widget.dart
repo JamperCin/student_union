@@ -24,6 +24,7 @@ class DevotionalGuideWidget extends StatelessWidget {
   final Function(DevotionalBookModel)? onTap;
   int page = 1;
   RxBool isLoadingAvailableBooks = false.obs;
+  late ColorScheme colorScheme;
 
   DevotionalGuideWidget.withAvailableBooks({
     super.key,
@@ -43,6 +44,7 @@ class DevotionalGuideWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    colorScheme = Theme.of(context).colorScheme;
     return isAvailableBooks ? _availableBooks() : _purchasedBooks();
   }
 
@@ -215,6 +217,8 @@ class DevotionalGuideWidget extends StatelessWidget {
               ),
               Gap(5.dp()),
               ButtonWidget.withOutLine(
+                backgroundColor: colorScheme.surface,
+                textColor: colorScheme.primary,
                 text: book.purchased
                     ? 'PURCHASED'
                     : "${book.currency} ${book.price.toDecimalPlaces()}",

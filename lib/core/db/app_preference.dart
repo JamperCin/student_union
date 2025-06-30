@@ -26,7 +26,7 @@ class AppPreference {
   final String TOKEN = "token";
   final String IS_LOGIN = "is_login";
   final String IS_INTRO_SHOWN = "is_intro";
-  final String PRIME_WALLET = "prime_wallet_";
+  final String THEME_TYPE = "is_dark_theme";
 
   AppPreference._();
 
@@ -135,4 +135,13 @@ class AppPreference {
   CustomerModel? getUser() {
     return getSavedObject<CustomerModel>(USER_DETAILS, (json) => CustomerModel.fromJson(json));
   }
+
+  void setDarkTheme(bool isThemeDark) {
+    setBool(THEME_TYPE, isThemeDark);
+  }
+
+  bool getDarkTheme() {
+    return getBool(THEME_TYPE);
+  }
+
 }

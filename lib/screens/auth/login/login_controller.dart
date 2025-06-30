@@ -9,7 +9,7 @@ import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
-import 'package:student_union/screens/auth/forgot_password/forgot_password_screen.dart';
+import 'package:student_union/screens/auth/forgot_password/ui/forgot_password_screen.dart';
 import 'package:student_union/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:student_union/screens/dashboard/main_dashboard_screen.dart';
 
@@ -17,12 +17,12 @@ class LoginController extends BaseController {
   var emailTxtCtrl = TextEditingController();
   var passwordTxtCtrl = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-    emailTxtCtrl.text = "jampercola@gmail.com";
-    passwordTxtCtrl.text = "asdfghjkl";
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   emailTxtCtrl.text = "jampercola@gmail.com";
+  //   passwordTxtCtrl.text = "asdfghjkl";
+  // }
 
   void onSignUpClicked() {
     navUtils.fireTarget(SignUpScreen());
@@ -44,7 +44,7 @@ class LoginController extends BaseController {
   Future<void> _initLoginRequest(BuildContext context) async {
 
     HashMap<String, Object> params = HashMap();
-    params.putIfAbsent("email", () => emailTxtCtrl.getData());
+    params.putIfAbsent("email", () => emailTxtCtrl.getData().toLowerCase());
     params.putIfAbsent("password", () => passwordTxtCtrl.getData());
 
     const LoaderWidget().showProgressIndicator(context: context);

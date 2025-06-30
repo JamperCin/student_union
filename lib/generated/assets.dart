@@ -29,10 +29,12 @@ class Assets {
   static const String controllerDeleteAccountController = 'lib/screens/dashboard/more/profile/controller/delete_account_controller.dart';
   static const String controllerDevotionController = 'lib/screens/dashboard/devotion/controller/devotion_controller.dart';
   static const String controllerDonationsController = 'lib/screens/dashboard/donate/controller/donations_controller.dart';
+  static const String controllerForgotPasswordController = 'lib/screens/auth/forgot_password/controller/forgot_password_controller.dart';
   static const String controllerNewsController = 'lib/screens/dashboard/news/controller/news_controller.dart';
   static const String controllerProfileController = 'lib/screens/dashboard/more/profile/controller/profile_controller.dart';
   static const String controllerPurchasedBookController = 'lib/screens/dashboard/devotion/controller/purchased_book_controller.dart';
   static const String controllerSettingsController = 'lib/screens/dashboard/more/settings/controller/settings_controller.dart';
+  static const String controllerVerifyCodeController = 'lib/screens/auth/forgot_password/controller/verify_code_controller.dart';
   static const String dashboardDashboardController = 'lib/screens/dashboard/dashboard_controller.dart';
   static const String dashboardMainDashboardScreen = 'lib/screens/dashboard/main_dashboard_screen.dart';
   static const String dataCoreMinistries = 'assets/data/core_ministries.json';
@@ -49,8 +51,6 @@ class Assets {
   static const String enumsPaymentType = 'lib/core/enums/payment_type.dart';
   static const String eventsEventDetailsScreen = 'lib/screens/dashboard/events/event_details_screen.dart';
   static const String faqsFaqsScreen = 'lib/screens/dashboard/more/faqs/faqs_screen.dart';
-  static const String forgotPasswordForgotPasswordController = 'lib/screens/auth/forgot_password/forgot_password_controller.dart';
-  static const String forgotPasswordForgotPasswordScreen = 'lib/screens/auth/forgot_password/forgot_password_screen.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String gothamGothamrndBold = 'assets/fonts/gotham/gothamrnd_bold.otf';
   static const String gothamGothamrndBook = 'assets/fonts/gotham/gothamrnd_book.otf';
@@ -181,11 +181,13 @@ class Assets {
   static const String uiDonateToCoreMinistryScreen = 'lib/screens/dashboard/donate/ui/donate_to_core_ministry_screen.dart';
   static const String uiDonationsCoreMinistriesScreen = 'lib/screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
   static const String uiDonationsHistoryScreen = 'lib/screens/dashboard/donate/ui/donations_history_screen.dart';
+  static const String uiForgotPasswordScreen = 'lib/screens/auth/forgot_password/ui/forgot_password_screen.dart';
   static const String uiNewsDetailsScreen = 'lib/screens/dashboard/news/ui/news_details_screen.dart';
   static const String uiNewsScreen = 'lib/screens/dashboard/news/ui/news_screen.dart';
   static const String uiProfileScreen = 'lib/screens/dashboard/more/profile/ui/profile_screen.dart';
   static const String uiPurchasedBookDetailsScreen = 'lib/screens/dashboard/devotion/ui/purchased_book_details_screen.dart';
   static const String uiSettingsScreen = 'lib/screens/dashboard/more/settings/ui/settings_screen.dart';
+  static const String uiVerifyCodeScreen = 'lib/screens/auth/forgot_password/ui/verify_code_screen.dart';
   static const String upcomingEventsUpcomingEventsApiInterface = 'lib/core/services/upcoming_events/upcoming_events_api_interface.dart';
   static const String upcomingEventsUpcomingEventsApiService = 'lib/core/services/upcoming_events/upcoming_events_api_service.dart';
   static const String userUserApiInterface = 'lib/core/services/user/user_api_interface.dart';

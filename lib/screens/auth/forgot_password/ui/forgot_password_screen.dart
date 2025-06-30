@@ -4,7 +4,8 @@ import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:student_union/screens/auth/forgot_password/forgot_password_controller.dart';
+import 'package:student_union/core/res/asset_path.dart';
+import 'package:student_union/screens/auth/forgot_password/controller/forgot_password_controller.dart';
 
 class ForgotPasswordScreen extends BaseScreenStandard {
   final _controller = Get.put(ForgotPasswordController());
@@ -41,13 +42,15 @@ class ForgotPasswordScreen extends BaseScreenStandard {
             hintText: 'Email Eg. example@gmail.com',
             keyboardType: TextInputType.emailAddress,
             controller: _controller.emailTxtCtrl,
+            prefixAsset: icEmailInput,
           ),
+
           SizedBox(height: appDimen.dimen(60)),
           ButtonWidget(
             onTap: () {
-              _controller.onSubmitEmail(context);
+              _controller.onConfirmEmail(context);
             },
-            text: 'Login',
+            text: 'Proceed',
           ),
           SizedBox(height: appDimen.dimen(20)),
         ],

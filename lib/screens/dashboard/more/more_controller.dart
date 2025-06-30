@@ -16,9 +16,9 @@ import 'package:student_union/screens/dashboard/more/settings/ui/settings_screen
 import 'package:url_launcher/url_launcher.dart';
 
 class MoreController extends BaseController {
-  RxString profilePic =
-      "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-          .obs;
+  // RxString profilePic =
+  //     "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+  //         .obs;
 
   void onEditProfileOnClick() {
     navUtils.fireTarget(ProfileScreen());
@@ -76,7 +76,7 @@ class MoreController extends BaseController {
     }
   }
 
-  onCounsellingOnClick(v) {
+  void onCounsellingOnClick(v) {
     navUtils.fireTarget(
       BaseWebView(
           model: WebModel(
