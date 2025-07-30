@@ -9,29 +9,13 @@ import 'package:student_union/core/enums/book_type.dart';
 
 import '../controller/devotion_controller.dart';
 
-class DevotionsScreen extends BaseScreenStandard {
+class DevotionsScreen extends BaseScreenWithTabs {
   final _controller = Get.put(DevotionController());
-
-  @override
-  bool showAppBar() {
-    return true;
-  }
-
-  @override
-  Color appBarBackgroundColor(BuildContext context) {
-    return colorScheme.tertiary;
-  }
-
-  @override
-  double appBarElevation() {
-    return 5;
-  }
 
   @override
   String appBarTitle() {
     return "Devotionals";
   }
-
 
   @override
   TextStyle? appBarTitleStyle(BuildContext context) {
@@ -44,47 +28,45 @@ class DevotionsScreen extends BaseScreenStandard {
   List<Widget> actions() {
     return [
       DropDownWidget(
-        initialItem: _controller.selectedYear.value,
-        list: _controller.list,
-        onItemSelected: (value) {
-          _controller.selectedYear.value = value;
-        }
-      )
+          initialItem: _controller.selectedYear.value,
+          list: _controller.list,
+          onItemSelected: (value) {
+            _controller.selectedYear.value = value;
+          })
     ];
   }
 
   @override
-  Widget body(BuildContext context) {
-    return Column(
-      children: [
-        Gap(5.dp()),
-        TabBarWidget(
-          tabs: const [
-            Tab(text: "Available Books"),
-            Tab(text: "Purchased Books"),
-          ],
-          onTap: (index) {
-            _controller.bookTypeFilter.value =
-                index == 0 ? BookType.availableBooks : BookType.purchasedBooks;
-          },
-          initialIndex: _controller.bookTypeFilter.value == BookType.availableBooks ? 0 : 1,
-          unselectedLabelColor: colorScheme.surfaceDim,
-        ),
-        Expanded(
-          child: Obx(
-            () => _controller.bookTypeFilter.value == BookType.availableBooks
-                ? DevotionalGuideWidget.withAvailableBooks(
-                    yearFilter: _controller.selectedYear.value,
-                    onTap: _controller.onDevotionTap,
-                    axis: Axis.vertical,
-                  )
-                : DevotionalGuideWidget.withPurchasedBooks(
-                    yearFilter: _controller.selectedYear.value,
-                    onTap: _controller.onPurchasedBookOnClick,
-                  ),
-          ),
-        )
-      ],
-    );
+  int initialIndex() {
+    return _controller.bookTypeFilter.value == BookType.availableBooks ? 0 : 1;
   }
+
+  @override
+  List<Widget> tabs() {
+    return [
+      const Tab(text: "Available Books"),
+      const Tab(text: "Purchased Books"),
+    ];
+  }
+
+
+  @override
+  List<Widget> tabsViews() {
+    return [
+      Obx(
+        () => DevotionalGuideWidget.withAvailableBooks(
+          yearFilter: _controller.selectedYear.value,
+          onTap: _controller.onDevotionTap,
+          axis: Axis.vertical,
+        ),
+      ),
+      Obx(
+        () => DevotionalGuideWidget.withPurchasedBooks(
+          yearFilter: _controller.selectedYear.value,
+          onTap: _controller.onPurchasedBookOnClick,
+        ),
+      )
+    ];
+  }
+
 }

@@ -83,7 +83,7 @@ class HomeController extends BaseController {
   onUpcomingEventTap(BuildContext context, UpcomingEventModel event) {
     BottomSheetWidget(
       context: context,
-      height: appDimen.screenHeight * 0.6,
+      height: appDimen.screenHeight * 0.8,
       child: EventDetailsScreen(event),
     );
   }

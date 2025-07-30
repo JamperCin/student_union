@@ -2,6 +2,7 @@ import 'package:core_module/core/app/app_dimens.dart';
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/enum/env_type.dart';
 import 'package:core_module/core_module.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,10 +19,15 @@ import 'package:student_union/core/services/notifications/notification_api_servi
 import 'package:student_union/core/services/payment/payment_api_service.dart';
 import 'package:student_union/core/services/upcoming_events/upcoming_events_api_service.dart';
 import 'package:student_union/core/services/user/user_api_service.dart';
+import 'package:student_union/firebase_options.dart';
 import 'core/services/auth/auth_api_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   if (kReleaseMode) {
     debugPrint = (String? message, {int? wrapWidth}) {};

@@ -46,6 +46,7 @@ class LoginScreen extends BaseScreenDecorated {
   double decoPageTopPadding() {
     return 0;
   }
+
   @override
   Widget page(BuildContext context) {
     return SingleChildScrollView(
@@ -75,19 +76,16 @@ class LoginScreen extends BaseScreenDecorated {
           TextFieldWidget(
             labelText: 'Email',
             hintText: 'Email Eg. example@gmail.com',
+            textCapitalization: TextCapitalization.none,
             focusColor: colorScheme.tertiary,
             borderColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
-            prefixIcon: AssetImageWidget(
-              asset: icEmailInput,
-              height: 5.dp(),
-              width: 5.dp(),
-            ),
-            // prefixIcon: Icon(
-            //   Icons.email_outlined,
-            //   color: colorScheme.onPrimary,
-            //   size: appDimen.dimen(18),
+            prefixAsset: icEmailInput,
+            // prefixIcon: AssetImageWidget(
+            //   asset: icEmailInput,
+            //   height: 5.dp(),
+            //   width: 5.dp(),
             // ),
             keyboardType: TextInputType.emailAddress,
             controller: _controller.emailTxtCtrl,
@@ -97,15 +95,14 @@ class LoginScreen extends BaseScreenDecorated {
             labelText: 'Password',
             hintText: 'Enter your password',
             controller: _controller.passwordTxtCtrl,
-           // focusColor: colorScheme.tertiary,
-           // borderColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
-            prefixIcon: AssetImageWidget(
-              asset: icPasswordInput,
-              height: 10.dp(),
-              width: 10.dp(),
-            ),
+            prefixAsset: icPasswordInput,
+            // prefixIcon: AssetImageWidget(
+            //   asset: icPasswordInput,
+            //   height: 10.dp(),
+            //   width: 10.dp(),
+            // ),
           ),
           SizedBox(height: appDimen.dimen(20)),
           Align(

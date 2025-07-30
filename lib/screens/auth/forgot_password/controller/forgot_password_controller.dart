@@ -3,10 +3,7 @@ import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
-import 'package:student_union/core/model/local/success_model.dart';
 import 'package:student_union/screens/auth/forgot_password/ui/verify_code_screen.dart';
-import 'package:student_union/screens/auth/login/login_screen.dart';
-import 'package:student_union/screens/shared/success_screen.dart';
 
 class ForgotPasswordController extends BaseController {
   final emailTxtCtrl = TextEditingController();

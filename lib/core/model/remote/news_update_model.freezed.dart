@@ -22,6 +22,7 @@ NewsUpdateModel _$NewsUpdateModelFromJson(Map<String, dynamic> json) {
 mixin _$NewsUpdateModel {
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
   String get createdAt => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
@@ -48,7 +49,7 @@ abstract class $NewsUpdateModelCopyWith<$Res> {
   $Res call(
       {String title,
       String description,
-      String createdAt,
+      @JsonKey(name: "created_at") String createdAt,
       String image,
       String url,
       int id,
@@ -128,7 +129,7 @@ abstract class _$$NewsUpdateModelImplCopyWith<$Res>
   $Res call(
       {String title,
       String description,
-      String createdAt,
+      @JsonKey(name: "created_at") String createdAt,
       String image,
       String url,
       int id,
@@ -201,7 +202,7 @@ class _$NewsUpdateModelImpl implements _NewsUpdateModel {
   const _$NewsUpdateModelImpl(
       {this.title = "",
       this.description = "",
-      this.createdAt = "",
+      @JsonKey(name: "created_at") this.createdAt = "",
       this.image = "",
       this.url = "",
       this.id = 0,
@@ -218,7 +219,7 @@ class _$NewsUpdateModelImpl implements _NewsUpdateModel {
   @JsonKey()
   final String description;
   @override
-  @JsonKey()
+  @JsonKey(name: "created_at")
   final String createdAt;
   @override
   @JsonKey()
@@ -284,7 +285,7 @@ abstract class _NewsUpdateModel implements NewsUpdateModel {
   const factory _NewsUpdateModel(
       {final String title,
       final String description,
-      final String createdAt,
+      @JsonKey(name: "created_at") final String createdAt,
       final String image,
       final String url,
       final int id,
@@ -299,6 +300,7 @@ abstract class _NewsUpdateModel implements NewsUpdateModel {
   @override
   String get description;
   @override
+  @JsonKey(name: "created_at")
   String get createdAt;
   @override
   String get image;

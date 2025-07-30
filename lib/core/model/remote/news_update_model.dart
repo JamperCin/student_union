@@ -8,7 +8,7 @@ class NewsUpdateModel extends BaseObject with _$NewsUpdateModel {
   const factory NewsUpdateModel({
     @Default("") String title,
     @Default("") String description,
-    @Default("") String createdAt,
+    @JsonKey(name: "created_at") @Default("") String createdAt,
     @Default("") String image,
     @Default("") String url,
     @Default(0) int id,

@@ -29,6 +29,7 @@ mixin _$CustomerModel {
   @JsonKey(name: 'updated_at')
   String get updatedAt => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'thumbnail_url')
   String get profilePic => throw _privateConstructorUsedError;
 
   /// Serializes this CustomerModel to a JSON map.
@@ -54,7 +55,7 @@ abstract class $CustomerModelCopyWith<$Res> {
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
       String status,
-      String profilePic});
+      @JsonKey(name: 'thumbnail_url') String profilePic});
 }
 
 /// @nodoc
@@ -128,7 +129,7 @@ abstract class _$$CustomerModelImplCopyWith<$Res>
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
       String status,
-      String profilePic});
+      @JsonKey(name: 'thumbnail_url') String profilePic});
 }
 
 /// @nodoc
@@ -195,7 +196,7 @@ class _$CustomerModelImpl implements _CustomerModel {
       @JsonKey(name: 'created_at') this.createdAt = "",
       @JsonKey(name: 'updated_at') this.updatedAt = "",
       this.status = "",
-      this.profilePic = ""});
+      @JsonKey(name: 'thumbnail_url') this.profilePic = ""});
 
   factory _$CustomerModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomerModelImplFromJson(json);
@@ -219,7 +220,7 @@ class _$CustomerModelImpl implements _CustomerModel {
   @JsonKey()
   final String status;
   @override
-  @JsonKey()
+  @JsonKey(name: 'thumbnail_url')
   final String profilePic;
 
   @override
@@ -268,13 +269,14 @@ class _$CustomerModelImpl implements _CustomerModel {
 
 abstract class _CustomerModel implements CustomerModel {
   const factory _CustomerModel(
-      {final String name,
-      final String email,
-      @JsonKey(name: 'account_type') final String accountType,
-      @JsonKey(name: 'created_at') final String createdAt,
-      @JsonKey(name: 'updated_at') final String updatedAt,
-      final String status,
-      final String profilePic}) = _$CustomerModelImpl;
+          {final String name,
+          final String email,
+          @JsonKey(name: 'account_type') final String accountType,
+          @JsonKey(name: 'created_at') final String createdAt,
+          @JsonKey(name: 'updated_at') final String updatedAt,
+          final String status,
+          @JsonKey(name: 'thumbnail_url') final String profilePic}) =
+      _$CustomerModelImpl;
 
   factory _CustomerModel.fromJson(Map<String, dynamic> json) =
       _$CustomerModelImpl.fromJson;
@@ -295,6 +297,7 @@ abstract class _CustomerModel implements CustomerModel {
   @override
   String get status;
   @override
+  @JsonKey(name: 'thumbnail_url')
   String get profilePic;
 
   /// Create a copy of CustomerModel

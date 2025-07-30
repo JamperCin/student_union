@@ -1,6 +1,7 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core/model/local/intro_model.dart';
+import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
 import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
@@ -43,57 +44,53 @@ class IntroScreen extends BaseScreenStandard {
             itemBuilder: (context, index) {
               IntroModel model = _introController.introData[index];
 
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(40),
-                      bottomRight: Radius.circular(40),
-                    ),
-                    child: AssetImageWidget(
-                      asset: model.assetName,
-                      width: appDimen.screenWidth,
-                      height: appDimen.screenHeight * 0.5,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  SizedBox(height: appDimen.dimen(20)),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: appDimen.dimen(10),
-                      right: appDimen.dimen(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        model.mainText,
-                        textAlign: TextAlign.center,
-                        style: textTheme.displayLarge
-                            ?.copyWith(color: colorScheme.primary),
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(40),
+                        bottomRight: Radius.circular(40),
+                      ),
+                      child: AssetImageWidget(
+                        asset: model.assetName,
+                        width: appDimen.screenWidth,
+                        height: appDimen.screenHeight * 0.68,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                  SizedBox(height: appDimen.dimen(20)),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: appDimen.dimen(10),
-                      right: appDimen.dimen(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        model.subText,
-                        style: textTheme.bodySmall,
-                        textAlign: TextAlign.center,
+                    Gap(20.dp()),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10.dp(), right: 10.dp()),
+                      child: Center(
+                        child: Text(
+                          model.mainText,
+                          textAlign: TextAlign.center,
+                          style: textTheme.displayLarge
+                              ?.copyWith(color: colorScheme.primary, fontSize: 30.dp(),),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    Gap(20.dp()),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10.dp(), right: 10.dp()),
+                      child: Center(
+                        child: Text(
+                          model.subText,
+                          style: textTheme.bodySmall,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),
         ),
-        SizedBox(height: appDimen.dimen(8)),
+        Gap(8.dp()),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -103,42 +100,42 @@ class IntroScreen extends BaseScreenStandard {
               onTap: () {},
             ),
             Obx(
-                  () => Row(
+              () => Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButtonWidget.withCircularBorder(
-                    iconSize: 20,
+                    iconSize: 20.dp(),
                     icon: Icons.arrow_back_ios,
                     iconColor: _introController.pageIndex.value != 0
                         ? colorScheme.primary
                         : colorScheme.shadow,
                     borderColor: Colors.transparent,
-                    iconPadding: 2,
+                    iconPadding: 2.dp(),
                     onTap: () {
                       if (_introController.pageIndex.value != 0) {
                         _introController.onGoToPrevious(_pageController);
                       }
                     },
                   ),
-                  SizedBox(width: appDimen.dimen(10)),
+                  Gap(10.dp()),
                   FittedBox(
                       child: PodWidget(
-                        podLength: _introController.introData.length,
-                        inActiveColor: colorScheme.tertiaryContainer,
-                        currentIndex: _introController.pageIndex,
-                        onTap: (index) {
-                          _pageController.animateToPage(
-                            index,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.decelerate,
-                          );
-                        },
-                      )),
+                    podLength: _introController.introData.length,
+                    inActiveColor: colorScheme.tertiaryContainer,
+                    currentIndex: _introController.pageIndex,
+                    onTap: (index) {
+                      _pageController.animateToPage(
+                        index,
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.decelerate,
+                      );
+                    },
+                  )),
                   SizedBox(width: appDimen.dimen(10)),
                   IconButtonWidget.withCircularBorder(
                     icon: Icons.arrow_forward_ios,
-                    iconSize: 20,
-                    iconPadding: 2,
+                    iconSize: 20.dp(),
+                    iconPadding: 2.dp(),
                     iconColor: colorScheme.primary,
                     borderColor: Colors.transparent,
                     onTap: () {
@@ -155,12 +152,12 @@ class IntroScreen extends BaseScreenStandard {
             )
           ],
         ),
-        SizedBox(height: appDimen.dimen(20)),
+        Gap(20.dp()),
       ],
     );
   }
 
-  Widget _pageBody(IntroModel model) {
+ /* Widget _pageBody(IntroModel model) {
     return Stack(
       children: [
         Positioned(
@@ -185,9 +182,9 @@ class IntroScreen extends BaseScreenStandard {
         ),
       ],
     );
-  }
+  }*/
 
-  Widget _notchIntroBody() {
+/*  Widget _notchIntroBody() {
     return Obx(
       () => Scaffold(
         backgroundColor:
@@ -291,5 +288,5 @@ class IntroScreen extends BaseScreenStandard {
         ),
       ),
     );
-  }
+  }*/
 }

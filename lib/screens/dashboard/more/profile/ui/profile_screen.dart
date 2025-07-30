@@ -40,6 +40,8 @@ class ProfileScreen extends BaseScreenStandard {
             url: appPreference.getString(AppPreference().PROFILE_IMAGE),
             radius: 100.dp(),
             containerSize: 140.dp(),
+            heroTag: "Profile_img_ui_xyz",
+            iconColor: colorScheme.surface,
             placeholder: icUserIc,
             onFileUploaded: _controller.onProfileImageUploaded,
             apiParser: (json) =>
@@ -80,6 +82,7 @@ class ProfileScreen extends BaseScreenStandard {
           Gap(70.dp()),
           ButtonWidget(
             text: "Save",
+            textColor: colorScheme.surface,
             onTap:()=> _controller.onConfirmUpdate(context),
           ),
           Gap(20.dp()),

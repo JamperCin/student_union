@@ -1,17 +1,44 @@
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core/model/local/bottom_bar_model.dart';
 import 'package:core_module/core_module.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
 
-class DashboardController extends BaseController with WidgetsBindingObserver{
+class DashboardController extends BaseController with WidgetsBindingObserver {
   ///Initialise this when the main dashboard is called
   Future<void> initData() async {
     await Future.delayed(const Duration(milliseconds: 180));
     await fetchUserDetails();
+    await checkForScreenUpdate();
+    await requestFcmToken();
+  }
+
+  Future<void> checkForScreenUpdate() async {
+    final event = Get.arguments;
+    if (event is EventTrigger) {
+      await Future.delayed(const Duration(milliseconds: 180));
+      onBottomMenuOnClick(BottomBarModel(text: event.screen));
+    }
+  }
+
+  Future<void> requestFcmToken() async{
+    final fcm = FirebaseMessaging.instance;
+    // Request permission (for iOS especially)
+    await fcm.requestPermission();
+
+    final token = await fcm.getToken();
+
+    final param = {
+      'user': {
+        "fcm_id": token,
+      }
+    };
+
+    await notificationApiService.registerFcmToken(param);
   }
 
   ///List of menu for the bottom navigation bar
@@ -54,12 +81,14 @@ class DashboardController extends BaseController with WidgetsBindingObserver{
         .map((e) => e.copyWith(isSelected: e.text == model.text))
         .toList();
 
-    model.key?.currentState?.forward();
+    final mod = bottomBarMenuList.firstWhere((e) => e.isSelected == true);
+    mod.key?.currentState?.forward();
   }
 
   Future<void> fetchUserDetails() async {
     final user = await userApiService.fetchUserDetails();
     appPreference.setUser(user);
+    userApiService.profilePic.value = user.profilePic;
   }
 
   @override
@@ -77,7 +106,10 @@ class DashboardController extends BaseController with WidgetsBindingObserver{
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.detached || state == AppLifecycleState.inactive || state == AppLifecycleState.hidden) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.detached ||
+        state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.hidden) {
       TextToSpeechApi().stop();
     }
   }

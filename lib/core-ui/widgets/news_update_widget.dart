@@ -1,5 +1,6 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
+import 'package:core_module/core/utils/date_time_utils.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/card_container_widget.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart'
@@ -67,12 +68,12 @@ class NewsUpdateWidget extends StatelessWidget {
         asset: icNews,
         title: "You have no news here",
         description:
-            'News update appears here. You do not have any news currently availabe.',
+            'News update appears here. You do not have any news currently available.',
       );
     }
 
     return ListViewWidget<NewsUpdateModel>(
-      list: list.obs,
+      list: list,
       onLoadMore: () => _onLoadMoreNews(page = page + 1),
       onRefresh: () => _onLoadMoreNews(page = 1),
       listItemWidget: (e) {
@@ -82,29 +83,33 @@ class NewsUpdateWidget extends StatelessWidget {
               onTap!(e);
             }
           },
-          child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 24.dp(), vertical: 16.dp(),),
-            child: Column(
+          child: CardContainerWidget(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.dp(),
+              vertical: 10.dp(),
+            ),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    NetworkImageWidget(
-                      url: e.image,
-                      height: 70.dp(),
-                      width: 70.dp(),
-                      borderRadius: 5,
-                      placeHolderWidget: ContainerWidget(
-                        height: 70.dp(),
-                        width: 70.dp(),
-                      ),
-                    ),
-                    Gap(5.dp()),
-                    Flexible(
-                      child: RichText(
+                NetworkImageWidget(
+                  url: e.image,
+                  height: 80.dp(),
+                  width: 80.dp(),
+                  borderRadius: 5,
+                  fit: BoxFit.cover,
+                  // placeHolderWidget: ContainerWidget(
+                  //   height: 80.dp(),
+                  //   width: 80.dp(),
+                  // ),
+                ),
+                Gap(10.dp()),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RichText(
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(
@@ -116,56 +121,53 @@ class NewsUpdateWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                      Gap(5.dp()),
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                              text: e.description,
+                              style: textTheme.labelSmall
+                                  ?.copyWith(fontSize: 12.dp()))
+                        ]),
+                      ),
+                      Gap(5.dp()),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            DateTimeUtils().formatDate(e.createdAt),
+                            style: textTheme.labelMedium?.copyWith(
+                                fontSize: 10.dp(),
+                                color: colorScheme.surfaceDim),
+                          ),
+                          Row(
+                            children: [
+                              if (onShareOnTap != null)
+                                IconButtonWidget(
+                                  icon: Icons.share,
+                                  iconSize: 20,
+                                  iconColor: colorScheme.primary,
+                                  onTap: () {
+                                    onShareOnTap?.call(e);
+                                  },
+                                ),
+                              Gap(5.dp()),
+                              if (onReadTap != null)
+                                IconButtonWidget(
+                                  icon: Icons.volume_up,
+                                  iconSize: 23,
+                                  iconColor: colorScheme.primary,
+                                  onTap: () {
+                                    onReadTap?.call(e);
+                                  },
+                                )
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                Gap(5.dp()),
-                RichText(
-                    text: TextSpan(children: [
-                  TextSpan(
-                      text: e.description,
-                      style: textTheme.labelSmall?.copyWith(fontSize: 12.dp()))
-                ])),
-                // Gap(2.dp()),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '3 hours ago',
-                      style: textTheme.labelMedium?.copyWith(
-                          fontSize: 10.dp(),
-                          color: colorScheme.surfaceDim),
-                    ),
-                    Row(
-                      children: [
-                        IconButtonWidget(
-                          icon: Icons.share,
-                          iconSize: 20,
-                          iconColor: colorScheme.primary,
-                          onTap: () {
-                            if (onShareOnTap != null) {
-                              onShareOnTap!(e);
-                            }
-                          },
-                        ),
-                        Gap(5.dp()),
-                        IconButtonWidget(
-                          icon: Icons.volume_up,
-                          iconSize: 23,
-                          iconColor: colorScheme.primary,
-                          onTap: () {
-                            if (onReadTap != null) {
-                              onReadTap!(e);
-                            }
-                          },
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Gap(10.dp()),
-                DividerWidget(),
-                Gap(10.dp()),
               ],
             ),
           ),
@@ -229,7 +231,7 @@ class NewsUpdateWidget extends StatelessWidget {
                                     )),
                                 Gap(5.dp()),
                                 Text(
-                                  '3 hours ago',
+                                  DateTimeUtils().formatDate(e.createdAt),
                                   style: textTheme.labelMedium?.copyWith(
                                       fontSize: 10.dp(),
                                       color: colorScheme.tertiaryContainer),

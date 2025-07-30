@@ -55,27 +55,28 @@ class CoreMinistriesWidget extends StatelessWidget {
       children: [
         Gap(20.dp()),
         TitleTextWidget(
-          text: "Core Ministries",
+          text: "Donations",
           onTap: onSeeMore,
         ),
         Gap(10.dp()),
         CarouselSlider.builder(
-            itemCount: list.length,
-            itemBuilder: (context, index, realIndex) {
-              CampaignModel model = list[index];
-              return SimpleCardItem<CampaignModel>.withButton(
-                title: model.title,
-                onTap: onTap,
-                model: model,
-              );
-            },
-            options: CarouselOptions(
-              scrollPhysics: const BouncingScrollPhysics(),
-              height: 220.dp(),
-              enableInfiniteScroll: false,
-              initialPage: list.length > 1 ? 1 : 0,
-              viewportFraction: 0.5,
-            )),
+          itemCount: list.length,
+          itemBuilder: (context, index, realIndex) {
+            CampaignModel model = list[index];
+            return SimpleCardItem<CampaignModel>.withButton(
+              title: model.title,
+              onTap: onTap,
+              model: model,
+            );
+          },
+          options: CarouselOptions(
+            scrollPhysics: const BouncingScrollPhysics(),
+            height: 220.dp(),
+            enableInfiniteScroll: false,
+            initialPage: list.length > 1 ? 1 : 0,
+            viewportFraction: 0.5,
+          ),
+        ),
       ],
     );
   }

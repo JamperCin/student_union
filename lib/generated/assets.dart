@@ -66,6 +66,7 @@ class Assets {
   static const String imagesIcCancel = 'assets/images/ic_cancel.svg';
   static const String imagesIcChangePassword = 'assets/images/ic_change_password.svg';
   static const String imagesIcChat = 'assets/images/ic_chat.svg';
+  static const String imagesIcCircularLogo = 'assets/images/ic_circular_logo.png';
   static const String imagesIcDanger = 'assets/images/ic_danger.png';
   static const String imagesIcDeleteAccount = 'assets/images/ic_delete_account.svg';
   static const String imagesIcDevotion = 'assets/images/ic_devotion.svg';
@@ -94,6 +95,7 @@ class Assets {
   static const String imagesIcReadBible = 'assets/images/ic_read_bible.svg';
   static const String imagesIcSettingsIcon = 'assets/images/ic_settings_icon.svg';
   static const String imagesIcSplash = 'assets/images/ic_splash.png';
+  static const String imagesIcSplashIcon = 'assets/images/ic_splash_icon.png';
   static const String imagesIcSplashLogo = 'assets/images/ic_splash_logo.png';
   static const String imagesIcSu = 'assets/images/ic_su.png';
   static const String imagesIcSuLarge = 'assets/images/ic_su_large.jpeg';
@@ -192,7 +194,6 @@ class Assets {
   static const String upcomingEventsUpcomingEventsApiService = 'lib/core/services/upcoming_events/upcoming_events_api_service.dart';
   static const String userUserApiInterface = 'lib/core/services/user/user_api_interface.dart';
   static const String userUserApiService = 'lib/core/services/user/user_api_service.dart';
-  static const String widgetsConfirmTransactionLayout = 'lib/core-ui/widgets/confirm_transaction_layout.dart';
   static const String widgetsCoreMinistriesWidget = 'lib/core-ui/widgets/core_ministries_widget.dart';
   static const String widgetsDailyDevotionWidget = 'lib/core-ui/widgets/daily_devotion_widget.dart';
   static const String widgetsDevotionalGuideWidget = 'lib/core-ui/widgets/devotional_guide_widget.dart';

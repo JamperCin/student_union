@@ -8,6 +8,7 @@ import 'package:student_union/screens/auth/login/login_screen.dart';
 import 'package:student_union/screens/shared/success_screen.dart';
 
 class VerifyCodeController extends BaseController {
+  ///On Pin Entry complete
   Future<void> onPinEntryComplete(BuildContext context, String code) async {
     const LoaderWidget().showProgressIndicator(context: context);
     final results = await userApiService.verifyOtpCode({

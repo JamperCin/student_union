@@ -2,9 +2,6 @@ import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core/extensions/string_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/bottom_sheet_widget.dart';
-import 'package:core_module/core_ui/widgets/confirm_transaction_layout.dart';
-import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
@@ -21,11 +18,12 @@ class DevotionController extends BaseController {
   RxString selectedYear = "${DateTime.now().year}".obs;
   Rx<BookType> bookTypeFilter = BookType.availableBooks.obs;
 
+
   ///Generate list of years starting from current year
   List<String> get list =>
       List<String>.generate(5 + 1, (index) => "${DateTime.now().year - index}");
 
- void onDevotionTap(DevotionalBookModel model) {
+  void onDevotionTap(DevotionalBookModel model) {
     navUtils.fireTarget(
       model.purchased
           ? PurchasedBookDetailsScreen()
@@ -33,6 +31,23 @@ class DevotionController extends BaseController {
       model: model,
     );
   }
+
+  @override
+  void onInit() {
+    super.onInit();
+    checkForScreenUpdate();
+
+  }
+
+  Future<void> checkForScreenUpdate() async {
+    final event = Get.arguments;
+    if (event is EventTrigger && event.bookType != null) {
+      await Future.delayed(const Duration(seconds: 1));
+      bookTypeFilter.value = event.bookType!;
+    }
+    debugPrint("Called here ${event.screen} --- ${event.bookType}");
+  }
+
 
   void confirmPayment(BuildContext context, DevotionalBookModel model) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -42,7 +57,8 @@ class DevotionController extends BaseController {
       context: context,
       height: appDimen.screenHeight * 0.4,
       child: ConfirmTransactionLayout(
-        title: "Confirm Purchase",crossAxisAlignment: CrossAxisAlignment.center,
+        title: "Confirm Purchase",
+        crossAxisAlignment: CrossAxisAlignment.center,
         titleStyle: textTheme.titleMedium?.copyWith(color: colorScheme.primary),
         subTitle:
             "Kindly confirm the purchase of this devotional guide with the amount specified below",
@@ -99,13 +115,18 @@ class DevotionController extends BaseController {
   }
 
   void navToPaymentScreen(String url) {
-    if(url.isEmpty) return;
+    if (url.isEmpty) return;
     navUtils.fireTarget(
       BaseWebView(
         model: WebModel(
           url: url,
           onDoneOnclick: () {
-            navUtils.fireTargetHome();
+            navUtils.fireTargetHome(
+              model: EventTrigger(
+                bookType: BookType.purchasedBooks,
+                screen: 'Devotional',
+              ),
+            );
           },
         ),
       ),

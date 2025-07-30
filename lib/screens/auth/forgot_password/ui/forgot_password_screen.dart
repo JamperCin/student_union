@@ -47,6 +47,7 @@ class ForgotPasswordScreen extends BaseScreenStandard {
 
           SizedBox(height: appDimen.dimen(60)),
           ButtonWidget(
+            textColor: colorScheme.surface,
             onTap: () {
               _controller.onConfirmEmail(context);
             },

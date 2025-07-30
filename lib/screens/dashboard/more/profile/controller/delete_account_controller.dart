@@ -32,7 +32,7 @@ class DeleteAccountController extends BaseController {
     snackBarSnippet.showCountdownSnackBar(
       context,
       actionWidget: const SizedBox.shrink(),
-      snackBackgroundColor: orangeXColor,
+      //snackBackgroundColor: orangeXColor,
       actionIconColor: Theme.of(context).colorScheme.tertiary,
       message: "Account deletion will begin in 5 seconds... ",
       onProgressCompletion: () => _initDeleteAccountRequest(context),
@@ -46,6 +46,8 @@ class DeleteAccountController extends BaseController {
     const LoaderWidget().hideProgress();
 
     if (results.success) {
+      appPreference.logOut();
+
       SuccessModel model = const SuccessModel(
         title: 'Account Deletion Successful',
         message: 'Your account has been successfully deleted.',

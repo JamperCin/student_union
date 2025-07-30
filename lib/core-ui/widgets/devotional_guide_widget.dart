@@ -1,15 +1,5 @@
 import 'dart:collection';
-
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/extensions/string_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/button_widget.dart';
-import 'package:core_module/core_ui/widgets/container_widget.dart';
-import 'package:core_module/core_ui/widgets/list_view_widget.dart';
-import 'package:core_module/core_ui/widgets/network_image_widget.dart';
-import 'package:core_module/core_ui/widgets/no_data_widget.dart';
-import 'package:core_module/core_ui/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
@@ -74,7 +64,7 @@ class DevotionalGuideWidget extends StatelessWidget {
 
     return FutureBuilder(
         future: devGuideService.fetchDevotionalBooks(param: param),
-        key: ValueKey(Uuid().v4()),
+        key: ValueKey(const Uuid().v4()),
         builder: (context, data) {
           return (data.hasData && data.data != null)
               ? _gridViewDisplayOfAvailableBooksWidget(data.data!)
@@ -96,7 +86,7 @@ class DevotionalGuideWidget extends StatelessWidget {
 
     return FutureBuilder(
         future: devGuideService.fetchPurchasedBooks(param: param),
-        key: ValueKey(Uuid().v4()),
+        key: ValueKey(const Uuid().v4()),
         builder: (context, snapshot) {
           return (snapshot.hasData && snapshot.data != null)
               ? _purchasedBooksWidget(snapshot.data!)

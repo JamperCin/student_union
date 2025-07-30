@@ -20,6 +20,7 @@ class EventDetailsScreen extends BaseScreenStandard {
     return ConfirmTransactionLayout(
       title: event.name,
       buttonTitle: 'Close',
+      displayCancelButton: false,
       child: Column(
         children: [
           NetworkImageWidget(

@@ -11,7 +11,7 @@ _$NewsUpdateModelImpl _$$NewsUpdateModelImplFromJson(
     _$NewsUpdateModelImpl(
       title: json['title'] as String? ?? "",
       description: json['description'] as String? ?? "",
-      createdAt: json['createdAt'] as String? ?? "",
+      createdAt: json['created_at'] as String? ?? "",
       image: json['image'] as String? ?? "",
       url: json['url'] as String? ?? "",
       id: (json['id'] as num?)?.toInt() ?? 0,
@@ -24,7 +24,7 @@ Map<String, dynamic> _$$NewsUpdateModelImplToJson(
     <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
-      'createdAt': instance.createdAt,
+      'created_at': instance.createdAt,
       'image': instance.image,
       'url': instance.url,
       'id': instance.id,

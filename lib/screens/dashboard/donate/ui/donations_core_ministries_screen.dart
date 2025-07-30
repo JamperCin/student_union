@@ -16,7 +16,7 @@ class DonationCoreMinistriesScreen extends NewsScreen {
 
   @override
   String appBarTitle() {
-    return "Donation";
+    return "Donations";
   }
 
   @override

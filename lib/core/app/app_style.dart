@@ -14,7 +14,7 @@ TextStyle normalButtonLightModeStyle = TextStyle(
   fontStyle: FontStyle.normal,
   fontFamily: _fontFamily,
   fontWeight: FontWeight.w700,
-  fontSize: appDimen.dimen(14),
+  fontSize: appDimen.dimen(16),
   wordSpacing: _wordSpacing,
   height: _height,
   letterSpacing: _letterSpacing,

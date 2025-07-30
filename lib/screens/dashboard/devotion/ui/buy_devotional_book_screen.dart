@@ -117,6 +117,7 @@ class BuyDevotionalBookScreen extends BaseScreenStandard {
           ),
           ButtonWidget(
               text: "Buy",
+              textColor: colorScheme.surface,
               onTap: () {
                 _controller.confirmPayment(context, getModel());
               }),

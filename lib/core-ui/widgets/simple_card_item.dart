@@ -19,6 +19,7 @@ class SimpleCardItem<T> extends StatelessWidget {
   final bool hasButton;
   final double? elevation;
   final Widget? suffixWidget;
+  final Widget? prefixWidget;
   final T? model;
   final Function(T)? onTap;
 
@@ -31,6 +32,7 @@ class SimpleCardItem<T> extends StatelessWidget {
     this.onTap,
     this.elevation,
     this.suffixWidget,
+    this.prefixWidget,
     this.prefixAssetHeight,
     this.prefixAssetWidth,
   })  : hasButton = false,
@@ -51,6 +53,7 @@ class SimpleCardItem<T> extends StatelessWidget {
     this.buttonText,
   })  : hasButton = true,
         suffixWidget = null,
+        prefixWidget = null,
         suffixAssetHeight = null,
         suffixAssetWidth = null;
 
@@ -74,12 +77,13 @@ class SimpleCardItem<T> extends StatelessWidget {
       ),
       child: Column(
         children: [
-          AssetImageWidget(
-            asset: prefixAsset ?? icCoreMinistry,
-            height: prefixAssetHeight ?? 60.dp(),
-            width: prefixAssetWidth ?? 100.dp(),
-            assetColor: colorScheme.primary,
-          ),
+
+              AssetImageWidget(
+                asset: prefixAsset ?? icCoreMinistry,
+                height: prefixAssetHeight ?? 60.dp(),
+                width: prefixAssetWidth ?? 100.dp(),
+                assetColor: colorScheme.primary,
+              ),
           Gap(10.dp()),
           SizedBox(
             height: 60.dp(),
@@ -98,6 +102,7 @@ class SimpleCardItem<T> extends StatelessWidget {
             onTap: () {
               if (onTap != null) onTap!(model as T);
             },
+            textColor: colorScheme.surface,
             height: 35.dp(),
             text: buttonText ?? 'Donate',
           ),
@@ -124,6 +129,7 @@ class SimpleCardItem<T> extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            prefixWidget ??
             AssetImageWidget(
               asset: prefixAsset ?? icCoreMinistry,
               height: prefixAssetHeight ?? 40.dp(),

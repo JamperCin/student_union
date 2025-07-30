@@ -77,6 +77,7 @@ class DonateToCoreMinistryScreen extends BaseScreenStandard {
           Gap(70.dp()),
           ButtonWidget(
               text: "Proceed",
+              textColor: colorScheme.surface,
               onTap: () {
                 dismissKeyBoard(context);
                 _controller.confirmDonation(context, getModel());

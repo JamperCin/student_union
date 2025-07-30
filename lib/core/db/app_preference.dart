@@ -118,6 +118,7 @@ class AppPreference {
 
   void setUser(CustomerModel? user) {
     if (user != null) {
+      setString(PROFILE_IMAGE, user.profilePic);
       setString(USER_DETAILS, MapUtils().convertEncode(user));
       appDbPreference.saveItem<CustomerModel>(item: user, key: USER_DETAILS);
     }
@@ -142,6 +143,10 @@ class AppPreference {
 
   bool getDarkTheme() {
     return getBool(THEME_TYPE);
+  }
+
+  void logOut() {
+    preference.clear();
   }
 
 }

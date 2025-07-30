@@ -18,6 +18,7 @@ class UserApiService extends BaseApiService implements UserApiInterface {
   Future<CustomerModel> fetchUserDetails() async {
     final results = await _apiService?.getRequest<CustomerModel>(
           api: 'customer/v1/profile?',
+          print: true,
           parser: (json) => CustomerModel.fromJson(json),
         ) ??
         const CustomerModel();
@@ -42,12 +43,7 @@ class UserApiService extends BaseApiService implements UserApiInterface {
     final results = await _apiService?.deleteRequest<BaseResponseModel>(
           api: 'customer/v1/profile?',
           showToast: true,
-          parser: (json) => const BaseResponseModel().copyWith(
-            data: {
-              'message': json['message'],
-              'success': true,
-            },
-          ),
+          parser: (json) => const BaseResponseModel(success: true),
         ) ??
         const BaseResponseModel();
 
@@ -68,16 +64,14 @@ class UserApiService extends BaseApiService implements UserApiInterface {
   }
 
   @override
-  Future<BaseResponseModel> verifyOtpCode(Map<String, Object> params) async{
+  Future<BaseResponseModel> verifyOtpCode(Map<String, Object> params) async {
     final results = await _apiService?.postRequest<BaseResponseModel>(
-      api: 'customer/v1/verify/code',
-      param: params,
-      parser: (json) => BaseResponseModel.fromJson(json),
-    ) ??
+          api: 'customer/v1/verify/code',
+          param: params,
+          parser: (json) => BaseResponseModel.fromJson(json),
+        ) ??
         const BaseResponseModel();
 
     return results;
   }
-
-
 }

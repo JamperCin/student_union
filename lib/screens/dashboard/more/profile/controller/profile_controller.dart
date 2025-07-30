@@ -9,30 +9,34 @@ import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/def/global_access.dart';
 
 class ProfileController extends BaseController {
+  String profilePic = "";
 
   ///
   ///Listener when a profile image is uploaded
   void onProfileImageUploaded(String url) {
-    appPreference.setString(AppPreference().PROFILE_IMAGE, url);
-    userApiService.profilePic.value = url;
+    profilePic = url;
   }
 
   Future<void> _initUpdate(BuildContext context) async {
     const LoaderWidget().showProgressIndicator(context: context);
 
-    Map<String, Object> params = {
-      "profile_image": userApiService.profilePic.value,
+    final params = {
+      'user': {
+        "thumbnail_url": profilePic,
+      }
     };
     final results = await userApiService.updateUserDetails(params);
     const LoaderWidget().hideProgress();
 
     if (results.profilePic.isNotEmpty) {
+      userApiService.profilePic.value = profilePic;
+      appPreference.setString(AppPreference().PROFILE_IMAGE, profilePic);
       snackBarSnippet.snackBarSuccess("Profile updated successfully");
     }
   }
 
   void onConfirmUpdate(BuildContext context) {
-    if (userApiService.profilePic.value.isEmpty) {
+    if (profilePic.isEmpty) {
       snackBarSnippet.snackBarError("Please first upload a profile image");
       return;
     }

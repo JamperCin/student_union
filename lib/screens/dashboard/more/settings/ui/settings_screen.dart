@@ -51,13 +51,17 @@ class SettingsScreen extends BaseScreenStandard {
             },
           ),
           Gap(10.dp()),
-          SimpleCardItem(
-            title: "Dark Theme",
-            prefixAsset: icTheme,
-            elevation: elevation,
-            prefixAssetHeight: prefixSize,
-            suffixWidget: Obx(
-              () => Switch(
+          Obx(
+            () => SimpleCardItem(
+              title: isDarkTheme.value ? "Light Theme" : "Dark Theme",
+              //prefixAsset: icTheme,
+              prefixWidget: Icon(
+                isDarkTheme.value ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
+                color: colorScheme.primary,
+              ),
+              elevation: elevation,
+              prefixAssetHeight: prefixSize,
+              suffixWidget: Switch(
                 value: isDarkTheme.value,
                 onChanged: _controller.onThemeSwitch,
                 inactiveThumbColor: colorScheme.surface,
@@ -80,9 +84,9 @@ class SettingsScreen extends BaseScreenStandard {
             elevation: elevation,
             prefixAsset: icDeleteAccount,
             prefixAssetHeight: prefixSize,
-            onTap:(v){
+            onTap: (v) {
               _controller.onDeleteAccountOnClick(context);
-            } ,
+            },
           ),
           Gap(10.dp()),
         ],

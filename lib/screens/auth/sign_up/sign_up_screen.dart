@@ -99,6 +99,7 @@ class SignUpScreen extends BaseScreenDecorated {
           TextFieldWidget(
             labelText: 'Email',
             hintText: 'example@mail.com',
+            textCapitalization: TextCapitalization.none,
             controller: _controller.emailTxtCtrl,
             focusColor: colorScheme.tertiary,
             labelStyle:

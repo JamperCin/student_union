@@ -14,7 +14,7 @@ _$CustomerModelImpl _$$CustomerModelImplFromJson(Map<String, dynamic> json) =>
       createdAt: json['created_at'] as String? ?? "",
       updatedAt: json['updated_at'] as String? ?? "",
       status: json['status'] as String? ?? "",
-      profilePic: json['profilePic'] as String? ?? "",
+      profilePic: json['thumbnail_url'] as String? ?? "",
     );
 
 Map<String, dynamic> _$$CustomerModelImplToJson(_$CustomerModelImpl instance) =>
@@ -25,5 +25,5 @@ Map<String, dynamic> _$$CustomerModelImplToJson(_$CustomerModelImpl instance) =>
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'status': instance.status,
-      'profilePic': instance.profilePic,
+      'thumbnail_url': instance.profilePic,
     };

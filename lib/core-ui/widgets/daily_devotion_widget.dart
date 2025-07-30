@@ -24,16 +24,15 @@ class DailyDevotionWidget extends StatelessWidget {
     this.onReadMoreOnTap,
   });
 
-  //final text = 'The secret things belong to the Lord our God, but the things revealed belong to us and to our children forever, that we may follow all the words of this law.';
   final lead = '—  ';
   //final script = 'Deuteronomy 29:29';
 
   @override
   Widget build(BuildContext context) {
-    final formatDate = DateTimeUtils()
-        .formatDate(DateTime.now().toString(), format: "yyyy-MM-dd");
-
-    final param = {"date": "2025-06-22"};
+    // final formatDate = DateTimeUtils()
+    //     .formatDate(DateTime.now().toString(), format: "yyyy-MM-dd");
+    //
+    // final param = {"date": formatDate};
 
     return FutureBuilder(
       future: devGuideService.fetchDailyDevotion(),
@@ -56,7 +55,7 @@ class DailyDevotionWidget extends StatelessWidget {
     }
 
     final devotion = list.first.devotion;
-    final content = html_parser.parse(devotion?.content ?? '').body?.text ?? '';
+    final content = devotion?.referenceText ?? ''; //html_parser.parse(devotion?.content ?? '').body?.text ?? '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
