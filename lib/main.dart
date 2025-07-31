@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:student_union/core/api/fcm_api.dart';
 import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/app/app_theme.dart';
@@ -25,9 +26,7 @@ import 'core/services/auth/auth_api_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await FcmApi().initializeFirebase();
 
   if (kReleaseMode) {
     debugPrint = (String? message, {int? wrapWidth}) {};

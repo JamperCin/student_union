@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String aboutAboutScreen = 'lib/screens/dashboard/more/about/about_screen.dart';
+  static const String apiFcmApi = 'lib/core/api/fcm_api.dart';
   static const String appAppColors = 'lib/core/app/app_colors.dart';
   static const String appAppRoutes = 'lib/core/app/app_routes.dart';
   static const String appAppStyle = 'lib/core/app/app_style.dart';
@@ -107,6 +108,7 @@ class Assets {
   static const String introIntroController = 'lib/screens/intro/intro_controller.dart';
   static const String introIntroScreen = 'lib/screens/intro/intro_screen.dart';
   static const String invitesInviteFriendScreen = 'lib/screens/dashboard/more/invites/invite_friend_screen.dart';
+  static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
   static const String localSuccessModel = 'lib/core/model/local/success_model.dart';
   static const String localSuccessModel.freezed = 'lib/core/model/local/success_model.freezed.dart';

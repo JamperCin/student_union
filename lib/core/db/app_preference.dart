@@ -24,6 +24,7 @@ class AppPreference {
   // final String ADDRESS = "address";
   final String PASSWORD = "password";
   final String TOKEN = "token";
+  final String FCM_TOKEN = "fcm_token";
   final String IS_LOGIN = "is_login";
   final String IS_INTRO_SHOWN = "is_intro";
   final String THEME_TYPE = "is_dark_theme";
@@ -147,6 +148,14 @@ class AppPreference {
 
   void logOut() {
     preference.clear();
+  }
+
+  String getFcmToken() {
+    return getString(FCM_TOKEN);
+  }
+
+  void setFcmToken(String token) {
+    setString(FCM_TOKEN, token);
   }
 
 }
