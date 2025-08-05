@@ -3,6 +3,7 @@ import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/enum/env_type.dart';
 import 'package:core_module/core_module.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,10 +24,17 @@ import 'package:student_union/core/services/user/user_api_service.dart';
 import 'package:student_union/firebase_options.dart';
 import 'core/services/auth/auth_api_service.dart';
 
+@pragma('vm:entry-point')
+Future<void> _firebaseBackgroundMessageHanlder(RemoteMessage msg) async {
+  await FcmApi().initializeFirebase();// Initialize Firebase if not already initialized
+  debugPrint("Background messaging ======>>>> ${msg.toMap().toString()}");
+  // Perform background tasks based on the message data
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await FcmApi().initializeFirebase();
+  FirebaseMessaging.onBackgroundMessage(_firebaseBackgroundMessageHanlder);
 
   if (kReleaseMode) {
     debugPrint = (String? message, {int? wrapWidth}) {};

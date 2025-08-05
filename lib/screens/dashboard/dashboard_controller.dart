@@ -4,6 +4,7 @@ import 'package:core_module/core_module.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
+import 'package:student_union/core/api/fcm_api.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
@@ -14,7 +15,7 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
     await Future.delayed(const Duration(milliseconds: 180));
     await fetchUserDetails();
     await checkForScreenUpdate();
-    await requestFcmToken();
+    await FcmApi().init();
   }
 
   Future<void> checkForScreenUpdate() async {

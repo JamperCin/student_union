@@ -10,8 +10,6 @@ import 'package:student_union/firebase_options.dart';
 class FcmApi {
   static FcmApi? _instance;
   late FirebaseMessaging _firebaseMessaging;
-  late BuildContext context;
-
 
   FcmApi._();
 
@@ -22,31 +20,23 @@ class FcmApi {
   ///Initialise Firebase
   /// Call this from [main.dart]
   Future<FirebaseApp> initializeFirebase() async {
-    return  await Firebase.initializeApp(
+    return await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
   }
 
-  Future<void> init(BuildContext context) async {
-    this.context = context;
+  Future<void> init() async {
     _firebaseMessaging = FirebaseMessaging.instance;
+    await _registerForeListeners();
 
     await _requestNotificationPermission();
-    await _registerForeAndBackgroundListeners();
   }
 
   ///Call this function to request for permission on IOS devices to show notifications
   ///Permission needs to be enabled or accepted by user before this function can be used
   Future<void> _requestNotificationPermission() async {
-    final settings = await _firebaseMessaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
+    final settings = await _firebaseMessaging.requestPermission();
+
     debugPrint('User granted permission: ${settings.authorizationStatus}');
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       await _checkForFcmToken();
@@ -55,10 +45,8 @@ class FcmApi {
 
   ///Get token from FCM
   Future<void> _checkForFcmToken() async {
-    await _firebaseMessaging.getToken().then((token) {
-      debugPrint("FCM TOKEN ==== \n $token");
-      if (token != null) _sendTokenToSerer(token);
-    });
+    final token = await _firebaseMessaging.getToken();
+    if (token != null) _sendTokenToSerer(token);
   }
 
   ///Send FCM Token to the server and save it locally to shared preference
@@ -73,12 +61,12 @@ class FcmApi {
       await notificationApiService.registerFcmToken(param);
       appPreference.setFcmToken(token);
     } else {
-      print("push registered");
+      debugPrint("FCM registered: $token");
     }
   }
 
   ///Listen to foreground notifications
-  Future<void> _registerForeAndBackgroundListeners() async {
+  Future<void> _registerForeListeners() async {
     //on Foreground
     FirebaseMessaging.onMessage.listen(_handleForeground);
 
@@ -88,7 +76,6 @@ class FcmApi {
 
   Future<void> _handleForeground(RemoteMessage msg) async {
     debugPrint("Foreground messaging ======>>>> ${msg.toMap().toString()}");
-
   }
 
   Future<void> _handleOnNotificationOnClick(RemoteMessage msg) async {
@@ -96,13 +83,5 @@ class FcmApi {
     if (initMess != null) {
       msg = initMess;
     }
-
-  }
-
-  Future<void> handleBackgroundMessageOnClick() async {
-    FirebaseMessaging.instance
-        .getInitialMessage()
-        .then((RemoteMessage? message) {});
-    print("HANDLING --->  NTN");
   }
 }
