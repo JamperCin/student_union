@@ -1,7 +1,6 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
 
 const double _wordSpacing = 1.5;
 const double _height = 1.3;

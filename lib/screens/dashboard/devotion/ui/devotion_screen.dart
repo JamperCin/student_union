@@ -1,8 +1,6 @@
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/drop_down_widget.dart';
-import 'package:core_module/core_ui/widgets/tab_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
 import 'package:student_union/core/enums/book_type.dart';
@@ -18,11 +16,33 @@ class DevotionsScreen extends BaseScreenWithTabs {
   }
 
   @override
+  Color appBarBackgroundColor(BuildContext context) {
+    return colorScheme.primary;
+  }
+
+  @override
+  Color appBarIconColor(BuildContext context) {
+    return colorScheme.surface;
+  }
+
+  @override
   TextStyle? appBarTitleStyle(BuildContext context) {
     return super
         .appBarTitleStyle(context)
-        ?.copyWith(fontWeight: FontWeight.w700);
+        ?.copyWith(fontWeight: FontWeight.w700, color: colorScheme.surface);
   }
+
+  @override
+  PreferredSizeWidget? appBarBottomWidget(BuildContext context) {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(48.dp()),
+      child: Material(
+        color: colorScheme.surface,
+        child:super.appBarBottomWidget(context),
+      ),
+    );
+  }
+
 
   @override
   List<Widget> actions() {

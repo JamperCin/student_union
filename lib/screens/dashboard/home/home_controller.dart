@@ -1,5 +1,4 @@
 import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core_ui/widgets/bottom_sheet_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
@@ -11,6 +10,7 @@ import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart
 import 'package:student_union/screens/dashboard/devotion/ui/purchased_book_details_screen.dart';
 import 'package:student_union/screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
 import 'package:student_union/screens/dashboard/donate/ui/donations_history_screen.dart';
+import 'package:student_union/screens/dashboard/events/all_events_screen.dart';
 import 'package:student_union/screens/dashboard/events/event_details_screen.dart';
 import 'package:student_union/screens/dashboard/more/notifications/notificationsScreen.dart';
 import 'package:student_union/screens/dashboard/more/profile/ui/profile_screen.dart';
@@ -80,11 +80,12 @@ class HomeController extends BaseController {
     navUtils.fireTarget(PurchasedBookDetailsScreen(), model: book);
   }
 
-  onUpcomingEventTap(BuildContext context, UpcomingEventModel event) {
-    BottomSheetWidget(
-      context: context,
-      height: appDimen.screenHeight * 0.8,
-      child: EventDetailsScreen(event),
-    );
+  void onUpcomingEventTap(BuildContext context, UpcomingEventModel event) {
+    navUtils.fireTarget(EventDetailsScreen(event));
+
+  }
+
+  void onSeeAllUpcomingEvents() {
+    navUtils.fireTarget(AllEventsScreen());
   }
 }

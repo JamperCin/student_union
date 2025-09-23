@@ -1,4 +1,3 @@
-import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_ui/widgets/text_button_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +18,7 @@ class TitleTextWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(text,
-            style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700)),
+            style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
         if (onTap != null)
           TextButtonWidget.withTextOnly(
             onTap: onTap!,

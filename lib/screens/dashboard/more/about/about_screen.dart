@@ -50,16 +50,10 @@ class AboutScreen extends BaseScreenStandard {
               children: [
                 TextSpan(text: "The ", style: textTheme.bodySmall),
                 TextSpan(
-                    text: "Scripture Union (SU) ", style: textTheme.bodyLarge),
+                    text: "Scripture Union (SU) Ghana ", style: textTheme.bodyLarge),
                 TextSpan(
-                  text: "is a dedicated platform designed to connect and "
-                      "empower students across Ghana. It serves as a hub for accessing"
-                      " vital resources, engaging in community activities, and "
-                      "staying informed about union events and initiatives."
-                      "\n\nWith features like easy donations, daily devotionals, "
-                      "and inspiring faith-based content, the app is built to support "
-                      "students' academic, spiritual, and social growth. Together, "
-                      "let’s create a stronger, united student community.",
+                  text: "is a Christian para-church organisation established in 1890. It is part of the global SU movement, which is active in more than 120 countries worldwide. SU Ghana aims to make God's Good News known to children, young people and families."
+                      "\n\nThis app is built to enable believers to read God’s Word daily and to be connected to the SU Community nationwide.",
                   style: textTheme.bodySmall,
                 ),
               ],

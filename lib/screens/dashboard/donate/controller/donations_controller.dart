@@ -38,6 +38,11 @@ class DonationsController extends BaseController {
         subTitle:
             "Kindly confirm your donation to ${model.title} with the amount stated below",
         buttonTitle: "Proceed",
+        cancelAssetColor: Theme.of(context).colorScheme.surface,
+        buttonStyle: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: Theme.of(context).colorScheme.surface),
         onTap: () => _initiateDonation(context, model),
         child: Center(
           child: Column(

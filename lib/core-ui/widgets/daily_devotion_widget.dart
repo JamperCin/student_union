@@ -1,17 +1,15 @@
-import 'dart:convert';
 
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/double_extension.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/utils/date_time_utils.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
 import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
 import 'package:core_module/core_ui/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
-import 'package:html/parser.dart' as html_parser;
 import 'package:share_plus/share_plus.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
+import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
@@ -60,6 +58,9 @@ class DailyDevotionWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Gap(20.dp()),
+        const TitleTextWidget(text: "Passage for Today"),
+        Gap(5.dp()),
         ContainerWidget(
           backgroundImage: icDevotionBg,
           borderColor: Colors.transparent,

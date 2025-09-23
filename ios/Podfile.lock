@@ -1,30 +1,30 @@
 PODS:
-  - Firebase/CoreOnly (12.0.0):
-    - FirebaseCore (~> 12.0.0)
-  - Firebase/Messaging (12.0.0):
+  - Firebase/CoreOnly (12.2.0):
+    - FirebaseCore (~> 12.2.0)
+  - Firebase/Messaging (12.2.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 12.0.0)
-  - firebase_core (4.0.0):
-    - Firebase/CoreOnly (= 12.0.0)
+    - FirebaseMessaging (~> 12.2.0)
+  - firebase_core (4.1.1):
+    - Firebase/CoreOnly (= 12.2.0)
     - Flutter
-  - firebase_messaging (16.0.0):
-    - Firebase/Messaging (= 12.0.0)
+  - firebase_messaging (16.0.2):
+    - Firebase/Messaging (= 12.2.0)
     - firebase_core
     - Flutter
-  - FirebaseCore (12.0.0):
-    - FirebaseCoreInternal (~> 12.0.0)
+  - FirebaseCore (12.2.0):
+    - FirebaseCoreInternal (~> 12.2.0)
     - GoogleUtilities/Environment (~> 8.1)
     - GoogleUtilities/Logger (~> 8.1)
-  - FirebaseCoreInternal (12.0.0):
+  - FirebaseCoreInternal (12.2.0):
     - "GoogleUtilities/NSData+zlib (~> 8.1)"
-  - FirebaseInstallations (12.0.0):
-    - FirebaseCore (~> 12.0.0)
+  - FirebaseInstallations (12.2.0):
+    - FirebaseCore (~> 12.2.0)
     - GoogleUtilities/Environment (~> 8.1)
     - GoogleUtilities/UserDefaults (~> 8.1)
     - PromisesObjC (~> 2.4)
-  - FirebaseMessaging (12.0.0):
-    - FirebaseCore (~> 12.0.0)
-    - FirebaseInstallations (~> 12.0.0)
+  - FirebaseMessaging (12.2.0):
+    - FirebaseCore (~> 12.2.0)
+    - FirebaseInstallations (~> 12.2.0)
     - GoogleDataTransport (~> 10.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
     - GoogleUtilities/Environment (~> 8.1)
@@ -156,13 +156,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
 
 SPEC CHECKSUMS:
-  Firebase: 800d487043c0557d9faed71477a38d9aafb08a41
-  firebase_core: c70f903d70ec229c08c2f49aba5a8c1338546d40
-  firebase_messaging: efa3a73cad64b05131bfe138c139a65e0daebe78
-  FirebaseCore: 055f4ab117d5964158c833f3d5e7ec6d91648d4a
-  FirebaseCoreInternal: dedc28e569a4be85f38f3d6af1070a2e12018d55
-  FirebaseInstallations: d4c7c958f99c8860d7fcece786314ae790e2f988
-  FirebaseMessaging: af49f8d7c0a3d2a017d9302c80946f45a7777dde
+  Firebase: 26f6f8d460603af3df970ad505b16b15f5e2e9a1
+  firebase_core: c92b2e526c46f625784f19c07121cd533536d0e7
+  firebase_messaging: ef6c722ea333105264ee17cf7df9ed5ee28d8485
+  FirebaseCore: 311c48a147ad4a0ab7febbaed89e8025c67510cd
+  FirebaseCoreInternal: 56ea29f3dad2894f81b060f706f9d53509b6ed3b
+  FirebaseInstallations: 3e884b01feabdf67582a80f3250425a00979b4ed
+  FirebaseMessaging: 43ec73bbfedd0c385a849bb91593ab4ad4b9e48e
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_local_notifications: ff50f8405aaa0ccdc7dcfb9022ca192e8ad9688f
   flutter_native_splash: df59bb2e1421aa0282cb2e95618af4dcb0c56c29
@@ -181,6 +181,6 @@ SPEC CHECKSUMS:
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   webview_flutter_wkwebview: a4af96a051138e28e29f60101d094683b9f82188
 
-PODFILE CHECKSUM: f204edcee9b79969f3502e96a9129d51479162d5
+PODFILE CHECKSUM: 73a41e644d6cd9cd09670c9dc3c9b2bd4db7ecee
 
 COCOAPODS: 1.16.2

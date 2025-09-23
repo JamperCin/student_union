@@ -1,5 +1,6 @@
 import 'package:core_module/core/model/remote/base_response_model.dart';
 import 'package:core_module/core/services/base_api_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:student_union/core/model/remote/customer_model.dart';
 import 'package:student_union/core/services/user/user_api_interface.dart';
@@ -19,9 +20,11 @@ class UserApiService extends BaseApiService implements UserApiInterface {
     final results = await _apiService?.getRequest<CustomerModel>(
           api: 'customer/v1/profile?',
           print: true,
-          parser: (json) => CustomerModel.fromJson(json),
+          parser: (json) => json.containsKey('errors') && json['errors'] == "Unauthorized User Access" ? const CustomerModel(status: "401") : CustomerModel.fromJson(json),
         ) ??
         const CustomerModel();
+
+    debugPrint("Results here ==> ${results.toJson()}");
     return results;
   }
 

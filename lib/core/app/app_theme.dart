@@ -133,6 +133,7 @@ ThemeData darkMode = lightMode.copyWith(
   colorScheme: ColorScheme(
     brightness: Brightness.dark,
     primary: whiteColor,
+    inversePrimary: greenFaded,
     onPrimary: secondaryGreenColor,
     secondary: secondary,
     onSecondary: darkBrownColor,

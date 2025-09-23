@@ -1,9 +1,6 @@
-import 'dart:collection';
 
 import 'package:core_module/core/services/base_api_service.dart';
-import 'package:core_module/core/utils/file_utils.dart';
 import 'package:core_module/core_module.dart';
-import 'package:flutter/material.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 import 'package:student_union/core/services/devotional_guide/devotional_guide_api_interface.dart';
 

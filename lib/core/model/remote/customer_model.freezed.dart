@@ -31,6 +31,8 @@ mixin _$CustomerModel {
   String get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'thumbnail_url')
   String get profilePic => throw _privateConstructorUsedError;
+  @JsonKey(name: 'fcm_id')
+  String get fcmToken => throw _privateConstructorUsedError;
 
   /// Serializes this CustomerModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,7 +57,8 @@ abstract class $CustomerModelCopyWith<$Res> {
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
       String status,
-      @JsonKey(name: 'thumbnail_url') String profilePic});
+      @JsonKey(name: 'thumbnail_url') String profilePic,
+      @JsonKey(name: 'fcm_id') String fcmToken});
 }
 
 /// @nodoc
@@ -80,6 +83,7 @@ class _$CustomerModelCopyWithImpl<$Res, $Val extends CustomerModel>
     Object? updatedAt = null,
     Object? status = null,
     Object? profilePic = null,
+    Object? fcmToken = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -110,6 +114,10 @@ class _$CustomerModelCopyWithImpl<$Res, $Val extends CustomerModel>
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
               as String,
+      fcmToken: null == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -129,7 +137,8 @@ abstract class _$$CustomerModelImplCopyWith<$Res>
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
       String status,
-      @JsonKey(name: 'thumbnail_url') String profilePic});
+      @JsonKey(name: 'thumbnail_url') String profilePic,
+      @JsonKey(name: 'fcm_id') String fcmToken});
 }
 
 /// @nodoc
@@ -152,6 +161,7 @@ class __$$CustomerModelImplCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? status = null,
     Object? profilePic = null,
+    Object? fcmToken = null,
   }) {
     return _then(_$CustomerModelImpl(
       name: null == name
@@ -182,6 +192,10 @@ class __$$CustomerModelImplCopyWithImpl<$Res>
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
               as String,
+      fcmToken: null == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -196,7 +210,8 @@ class _$CustomerModelImpl implements _CustomerModel {
       @JsonKey(name: 'created_at') this.createdAt = "",
       @JsonKey(name: 'updated_at') this.updatedAt = "",
       this.status = "",
-      @JsonKey(name: 'thumbnail_url') this.profilePic = ""});
+      @JsonKey(name: 'thumbnail_url') this.profilePic = "",
+      @JsonKey(name: 'fcm_id') this.fcmToken = ""});
 
   factory _$CustomerModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomerModelImplFromJson(json);
@@ -222,10 +237,13 @@ class _$CustomerModelImpl implements _CustomerModel {
   @override
   @JsonKey(name: 'thumbnail_url')
   final String profilePic;
+  @override
+  @JsonKey(name: 'fcm_id')
+  final String fcmToken;
 
   @override
   String toString() {
-    return 'CustomerModel(name: $name, email: $email, accountType: $accountType, createdAt: $createdAt, updatedAt: $updatedAt, status: $status, profilePic: $profilePic)';
+    return 'CustomerModel(name: $name, email: $email, accountType: $accountType, createdAt: $createdAt, updatedAt: $updatedAt, status: $status, profilePic: $profilePic, fcmToken: $fcmToken)';
   }
 
   @override
@@ -243,13 +261,15 @@ class _$CustomerModelImpl implements _CustomerModel {
                 other.updatedAt == updatedAt) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.profilePic, profilePic) ||
-                other.profilePic == profilePic));
+                other.profilePic == profilePic) &&
+            (identical(other.fcmToken, fcmToken) ||
+                other.fcmToken == fcmToken));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, email, accountType,
-      createdAt, updatedAt, status, profilePic);
+      createdAt, updatedAt, status, profilePic, fcmToken);
 
   /// Create a copy of CustomerModel
   /// with the given fields replaced by the non-null parameter values.
@@ -269,14 +289,14 @@ class _$CustomerModelImpl implements _CustomerModel {
 
 abstract class _CustomerModel implements CustomerModel {
   const factory _CustomerModel(
-          {final String name,
-          final String email,
-          @JsonKey(name: 'account_type') final String accountType,
-          @JsonKey(name: 'created_at') final String createdAt,
-          @JsonKey(name: 'updated_at') final String updatedAt,
-          final String status,
-          @JsonKey(name: 'thumbnail_url') final String profilePic}) =
-      _$CustomerModelImpl;
+      {final String name,
+      final String email,
+      @JsonKey(name: 'account_type') final String accountType,
+      @JsonKey(name: 'created_at') final String createdAt,
+      @JsonKey(name: 'updated_at') final String updatedAt,
+      final String status,
+      @JsonKey(name: 'thumbnail_url') final String profilePic,
+      @JsonKey(name: 'fcm_id') final String fcmToken}) = _$CustomerModelImpl;
 
   factory _CustomerModel.fromJson(Map<String, dynamic> json) =
       _$CustomerModelImpl.fromJson;
@@ -299,6 +319,9 @@ abstract class _CustomerModel implements CustomerModel {
   @override
   @JsonKey(name: 'thumbnail_url')
   String get profilePic;
+  @override
+  @JsonKey(name: 'fcm_id')
+  String get fcmToken;
 
   /// Create a copy of CustomerModel
   /// with the given fields replaced by the non-null parameter values.

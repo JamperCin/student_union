@@ -1,6 +1,5 @@
-platform :ios, '15.5'
+platform :ios, '15.0'
 
-# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
@@ -27,10 +26,12 @@ require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelpe
 flutter_ios_podfile_setup
 
 target 'Runner' do
-  # 🚫 Removed use_frameworks! so Flutter uses static linking
+  # ✅ either remove use_frameworks! completely, or:
+  use_frameworks! :linkage => :static
   use_modular_headers!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
   target 'RunnerTests' do
     inherit! :search_paths
   end
@@ -41,6 +42,9 @@ post_install do |installer|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '5.9'
       config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      # 🔽 This line ensures all pods use iOS 14+
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
     end
   end
 end
+

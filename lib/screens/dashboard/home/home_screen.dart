@@ -1,5 +1,4 @@
 import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'package:student_union/core-ui/widgets/daily_devotion_widget.dart'
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
 import 'package:student_union/core-ui/widgets/news_update_widget.dart';
 import 'package:student_union/core-ui/widgets/payment_history_widget.dart';
-import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core-ui/widgets/top_header_widget.dart';
 import 'package:student_union/core-ui/widgets/upcoming_events_widget.dart';
 import 'package:student_union/screens/dashboard/home/home_controller.dart';
@@ -28,7 +26,7 @@ class HomeScreen extends BaseScreenStandard {
     return Column(
       children: [
         TopHeaderWidget(
-         // onSearchOnClick: _controller.onSearchOnClick,
+          // onSearchOnClick: _controller.onSearchOnClick,
           onNotifyOnClick: _controller.onNotificationOnClick,
           onProfileOnClick: _controller.onProfileOnClick,
         ),
@@ -60,7 +58,10 @@ class HomeScreen extends BaseScreenStandard {
         ),
 
         ///Upcoming Events
-        UpcomingEventsWidget(onTap: (v) =>_controller.onUpcomingEventTap(context,v),),
+        UpcomingEventsWidget(
+          onTap: (v) => _controller.onUpcomingEventTap(context, v),
+          onSeeAllOnTap: _controller.onSeeAllUpcomingEvents,
+        ),
 
         ///Core Ministries or Campaigns
         CoreMinistriesWidget(
@@ -73,7 +74,6 @@ class HomeScreen extends BaseScreenStandard {
           onTap: _controller.onNewsUpdateTap,
           onMoreOnTap: _controller.onMoreNewsOnClick,
         ),
-
 
         ///Donations History
         PaymentHistoryWidget(

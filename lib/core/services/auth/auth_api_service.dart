@@ -1,10 +1,7 @@
 import 'dart:collection';
 
-import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/model/remote/base_response_model.dart';
 import 'package:core_module/core/services/base_api_service.dart';
-import 'package:flutter/material.dart';
-import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/sign_up_response.dart';
 import 'package:student_union/core/services/auth/auth_api_interface.dart';
 

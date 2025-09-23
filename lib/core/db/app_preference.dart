@@ -1,12 +1,6 @@
-import 'dart:collection';
 
-import 'package:core_module/core/db/app_db_preference.dart';
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/utils/map_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:core_module/core/model/remote/base_response_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:student_union/core/model/remote/sign_up_response.dart';
+import 'package:core_module/core_module.dart';
+import 'package:student_union/core/def/global_access.dart';
 
 import '../model/remote/customer_model.dart';
 
@@ -15,24 +9,21 @@ class AppPreference {
   late SharedPreferences preference;
 
   final String PHONE_NUMBER = "telephone";
-
-  // final String COUNTRY = "country";
   final String USER_DETAILS = "_USER_DETAILS";
-  final String FOR_NAME = "forname";
-
-   final String PROFILE_IMAGE = "profile_image";
-  // final String ADDRESS = "address";
+  final String PROFILE_IMAGE = "profile_image";
   final String PASSWORD = "password";
   final String TOKEN = "token";
   final String FCM_TOKEN = "fcm_token";
   final String IS_LOGIN = "is_login";
   final String IS_INTRO_SHOWN = "is_intro";
   final String THEME_TYPE = "is_dark_theme";
+  final String NOTIFICATION_COUNT = "notification_count";
 
   AppPreference._();
 
   Future<void> initPreference() async {
     preference = await SharedPreferences.getInstance();
+    notificationCount.value = getInt(NOTIFICATION_COUNT);
   }
 
   factory AppPreference() {
@@ -74,11 +65,19 @@ class AppPreference {
     return preference.getInt(key) ?? 0;
   }
 
-  ///----------------- H E L P E R     M E T H O D S  E N D S ----------------
+  void setInt(String key, int value) {
+    preference.setInt(key, value);
+  }
 
-  // String getToken() {
-  //   return "Bearer ${getString(TOKEN)}";
-  // }
+  void setDoubleList(String key, List<double> value) {
+    preference.setStringList(key, value.map((e) => e.toString()).toList());
+  }
+
+  List<double> getDoubleList(String key) {
+    return preference.getStringList(key)?.map((e) => double.parse(e)).toList() ?? [];
+  }
+
+  ///----------------- H E L P E R     M E T H O D S  E N D S ----------------
 
   bool isIntroShown() {
     return getBool(IS_INTRO_SHOWN);
@@ -88,30 +87,6 @@ class AppPreference {
     return getBool(IS_LOGIN);
   }
 
-  /*dynamic getSavedObject(String key) {
-    String json = getString(key);
-    if (json.isNotEmpty) {
-      return MapUtils().convertDecode(json);
-    } else {
-      return null;
-    }
-  }*/
-
-
-  void saveLoginDetails(
-    BaseResponseModel response, {
-    String? foreName,
-    String? password,
-  }) {
-    appDbPreference.setToken(response.data?['token']);
-    setBool(IS_LOGIN, true);
-    if (foreName != null) {
-      setString(PHONE_NUMBER, foreName);
-    }
-    if (password != null) {
-      setString(PASSWORD, password);
-    }
-  }
 
   void setToken(String token) {
     setString(TOKEN, token);
@@ -123,19 +98,17 @@ class AppPreference {
       setString(USER_DETAILS, MapUtils().convertEncode(user));
       appDbPreference.saveItem<CustomerModel>(item: user, key: USER_DETAILS);
     }
+    setBool(IS_LOGIN, true);
   }
 
-  T? getSavedObject<T>(String key, T Function(dynamic) parser) {
-    String json = getString(key);
-    if (json.isNotEmpty) {
-      return MapUtils().stringToObject(json, parser);
-    } else {
-      return null;
-    }
-  }
 
-  CustomerModel? getUser() {
-    return getSavedObject<CustomerModel>(USER_DETAILS, (json) => CustomerModel.fromJson(json));
+
+  CustomerModel getUser() {
+    return appDbPreference.getItem<CustomerModel>(
+      key: USER_DETAILS,
+      parser: (json) => CustomerModel.fromJson(json),
+      defaultValue: const CustomerModel(),
+    );
   }
 
   void setDarkTheme(bool isThemeDark) {
@@ -148,6 +121,7 @@ class AppPreference {
 
   void logOut() {
     preference.clear();
+    setBool(IS_INTRO_SHOWN, true);
   }
 
   String getFcmToken() {
@@ -158,4 +132,7 @@ class AppPreference {
     setString(FCM_TOKEN, token);
   }
 
+  void setNotificationCount( int value) {
+    setInt(NOTIFICATION_COUNT, value);
+  }
 }

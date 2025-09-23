@@ -1,11 +1,13 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:core_module/core/def/global_def.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/firebase_options.dart';
+import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart';
+import 'package:student_union/screens/dashboard/donate/ui/donations_history_screen.dart';
 
 class FcmApi {
   static FcmApi? _instance;
@@ -27,9 +29,8 @@ class FcmApi {
 
   Future<void> init() async {
     _firebaseMessaging = FirebaseMessaging.instance;
-    await _registerForeListeners();
-
     await _requestNotificationPermission();
+    await _registerListeners();
   }
 
   ///Call this function to request for permission on IOS devices to show notifications
@@ -58,15 +59,15 @@ class FcmApi {
         }
       };
 
-      await notificationApiService.registerFcmToken(param);
-      appPreference.setFcmToken(token);
+      final result = await notificationApiService.registerFcmToken(param);
+      if (result.fcmToken.isNotEmpty) appPreference.setFcmToken(token);
     } else {
       debugPrint("FCM registered: $token");
     }
   }
 
   ///Listen to foreground notifications
-  Future<void> _registerForeListeners() async {
+  Future<void> _registerListeners() async {
     //on Foreground
     FirebaseMessaging.onMessage.listen(_handleForeground);
 
@@ -74,14 +75,78 @@ class FcmApi {
     FirebaseMessaging.onMessageOpenedApp.listen(_handleOnNotificationOnClick);
   }
 
+  /// Handle foreground messages
+  /// This is called when the app is in the foreground and a notification is received
   Future<void> _handleForeground(RemoteMessage msg) async {
-    debugPrint("Foreground messaging ======>>>> ${msg.toMap().toString()}");
+    debugPrint(
+        "Foreground Running ====>> ${msg.notification?.toMap().toString()}");
+    notificationApi.showNotification(
+      id: 1,
+      title: msg.notification?.title,
+      body: msg.notification?.body,
+      payload: msg.data,
+    );
+    handleFcmMessage(msg);
   }
 
+  /// Handle notification click
+  /// This is called when the user clicks on a notification and the app is opened from a terminated state
   Future<void> _handleOnNotificationOnClick(RemoteMessage msg) async {
+    // Get the initial message if the app was opened from a terminated state
     final initMess = await FirebaseMessaging.instance.getInitialMessage();
     if (initMess != null) {
       msg = initMess;
+    }
+    // TODO: Handle the notification click
+  }
+
+  ///Handle all notifications at one central place
+  Future<void> handleFcmMessage(RemoteMessage msg) async {
+    notificationCount.value = notificationCount.value + 1;
+    appPreference.setNotificationCount(notificationCount.value);
+
+    Map<String, dynamic> data = msg.data;
+    debugPrint("Data ====>> ${data.toString()}");
+
+    String type = data.containsKey('payment_type') ? data['payment_type'] : '';
+    String status = data.containsKey('status') ? data['status'] : '';
+
+    // switch (type) {
+    //   case 'campaign_donation':
+    //     navUtils.fireTarget(DonationsHistoryScreen());
+    //     break;
+    //     case 'devotional_year_purchase':
+    //       navUtils.fireTarget(DevotionsScreen());
+    //       break;
+    //   default:
+    //     break;
+    //
+    // }
+  }
+
+  Future<void> handleNotificationInStack() async {
+    final msg = await FirebaseMessaging.instance.getInitialMessage();
+    if (msg != null) {
+      Map<String, dynamic> data = msg.data;
+      debugPrint("Data ====>> ${data.toString()}");
+
+      String type =
+          data.containsKey('payment_type') ? data['payment_type'] : '';
+      String status = data.containsKey('status') ? data['status'] : '';
+
+      switch (type) {
+        case 'campaign_donation':
+          navUtils.fireTarget(DonationsHistoryScreen());
+          break;
+        case 'devotional_year_purchase':
+          navUtils.fireTarget(DevotionsScreen());
+          break;
+        default:
+          break;
+      }
+    } else {
+      debugPrint("No notification in stack");
+      navUtils.fireTargetHome();
     }
   }
 }

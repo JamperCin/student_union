@@ -1,7 +1,6 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
-import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/local/success_model.dart';
@@ -19,6 +18,11 @@ class DeleteAccountController extends BaseController {
       child: ConfirmTransactionLayout(
         title: "Confirm deletion of account",
         displayCancelButton: false,
+        cancelAssetColor: Theme.of(context).colorScheme.surface,
+        buttonStyle: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: Theme.of(context).colorScheme.surface),
         titleStyle: Theme.of(context).textTheme.titleLarge,
         subTitle: "Are you sure you want to delete your account?",
         buttonTitle: 'Delete Account',

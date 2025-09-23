@@ -7,13 +7,14 @@ import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
+import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
+import 'package:student_union/core/utils/you_version_utils.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
 import 'package:student_union/screens/dashboard/more/about/about_screen.dart';
 import 'package:student_union/screens/dashboard/more/profile/ui/profile_screen.dart';
 import 'package:student_union/screens/dashboard/more/settings/ui/settings_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MoreController extends BaseController {
   // RxString profilePic =
@@ -49,9 +50,7 @@ class MoreController extends BaseController {
             ),
             Gap(30.dp()),
             ButtonWidget(
-              onTap: () {
-                navUtils.fireTargetOff(LoginScreen());
-              },
+              onTap: _onLogOutOnClick,
               backgroundColor: Theme.of(context).colorScheme.error,
               text: "Log Out",
             )
@@ -61,19 +60,14 @@ class MoreController extends BaseController {
     );
   }
 
+  void _onLogOutOnClick() {
+    appPreference.logOut();
+    navUtils.fireTargetOff(LoginScreen());
+  }
+
+
   Future<void> onReadBibleOnClick(v) async {
-    final youVersionScheme = Uri.parse('youversion://');
-    if (await canLaunchUrl(youVersionScheme)) {
-      await launchUrl(youVersionScheme);
-    } else {
-      navUtils.fireTarget(
-        BaseWebView(
-            model: WebModel(
-          url: "https://www.bible.com/bible/111/JHN.1.NIV",
-          title: "Read Bible",
-        )),
-      );
-    }
+    YouVersionUtils().openBibleReference();
   }
 
   void onCounsellingOnClick(v) {

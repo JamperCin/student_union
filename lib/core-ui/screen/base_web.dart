@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_impl.dart';
 import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,7 @@ import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class BaseWebView extends BaseScreenImpl {
+class BaseWebView extends BaseScreenStatefulStandard {
   RxBool isPageLoading = true.obs;
   late WebViewController wCtrl;
   final WebModel model;
@@ -75,7 +74,7 @@ class BaseWebView extends BaseScreenImpl {
     }
     return Stack(
       children: [
-        WebViewWidget(controller: getWebController()),
+        WebViewWidget(controller: wCtrl),
         Obx(
           () => isPageLoading.value
               ? const Center(child: LoaderWidget.withCircularIndicator())
@@ -107,13 +106,23 @@ class BaseWebView extends BaseScreenImpl {
             : null);
   }
 
+  @override
+  void initState(SingleTickerProviderStateMixin<StatefulWidget> vsync) {
+    super.initState(vsync);
+
+    wCtrl = getWebController();
+  }
+
   WebViewController getWebController() {
     final controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Colors.transparent)
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..addJavaScriptChannel('MessageInvoker', onMessageReceived: (s) {
-        //NavApi.fireEvent(Event(action: EventAction.NAV_HOME));
+      ..addJavaScriptChannel('FlutterChannel', onMessageReceived: (s) {
+        debugPrint("BUTTON ===> ${s.message}");
+        if (s.message == 'dashboard_clicked') {
+          model.onDoneOnclick?.call();
+        }
       })
       ..setNavigationDelegate(
         NavigationDelegate(
@@ -133,7 +142,15 @@ class BaseWebView extends BaseScreenImpl {
               isPageLoading.value = false;
             }
 
-            // print("Its done loading ==> $url");
+            // Inject JS to listen for button click
+            wCtrl.runJavaScript("""
+            const homeButton = document.querySelector('a[href="/dashboard"]');
+            if (homeButton) {
+              homeButton.addEventListener('click', function(event) {
+                FlutterChannel.postMessage('dashboard_clicked');
+              });
+            }
+          """);
           },
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},

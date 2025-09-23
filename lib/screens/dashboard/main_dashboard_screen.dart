@@ -10,7 +10,8 @@ import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart
 import 'package:student_union/screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
 import 'package:student_union/screens/dashboard/home/home_screen.dart';
 import 'package:student_union/screens/dashboard/more/more_screen.dart';
-import 'package:student_union/screens/dashboard/news/ui/news_screen.dart';
+
+import 'devotion/ui/purchased_book_details_screen.dart';
 
 class MainDashboardScreen extends BaseScreenStandard {
   final _controller = Get.put(DashboardController());
@@ -36,7 +37,7 @@ class MainDashboardScreen extends BaseScreenStandard {
         case "Donation":
           return DonationCoreMinistriesScreen();
         case "News Update":
-          return NewsScreen();
+          return PurchasedBookDetailsScreen();
         case "More":
           return MoreScreen();
         default:
@@ -50,7 +51,7 @@ class MainDashboardScreen extends BaseScreenStandard {
     return CardContainerWidget(
       color: colorScheme.onSecondary,
       padding: EdgeInsets.only(
-        bottom: appDimen.dimen(20),
+        bottom: MediaQuery.of(context).padding.bottom,
         top: appDimen.dimen(8),
         right: appDimen.dimen(5),
         left: appDimen.dimen(5),
