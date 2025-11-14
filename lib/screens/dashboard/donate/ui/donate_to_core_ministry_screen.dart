@@ -1,7 +1,6 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
@@ -9,29 +8,18 @@ import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:core_module/core_ui/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core/model/remote/campaign_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
 
 import '../controller/donations_controller.dart';
 
-class DonateToCoreMinistryScreen extends BaseScreenStandard {
+class DonateToCoreMinistryScreen extends BaseSharedScreen {
   final _controller = Get.put(DonationsController());
 
   @override
   String appBarTitle() {
     return getModel().title;
-  }
-
-  @override
-  bool showAppBar() {
-    return true;
-  }
-
-  @override
-  TextStyle? appBarTitleStyle(BuildContext context) {
-    return super
-        .appBarTitleStyle(context)
-        ?.copyWith(fontWeight: FontWeight.w700);
   }
 
   @override

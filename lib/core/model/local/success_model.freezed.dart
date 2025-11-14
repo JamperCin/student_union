@@ -12,7 +12,8 @@ part of 'success_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 SuccessModel _$SuccessModelFromJson(Map<String, dynamic> json) {
   return _SuccessModel.fromJson(json);
@@ -36,8 +37,9 @@ mixin _$SuccessModel {
 /// @nodoc
 abstract class $SuccessModelCopyWith<$Res> {
   factory $SuccessModelCopyWith(
-          SuccessModel value, $Res Function(SuccessModel) then) =
-      _$SuccessModelCopyWithImpl<$Res, SuccessModel>;
+    SuccessModel value,
+    $Res Function(SuccessModel) then,
+  ) = _$SuccessModelCopyWithImpl<$Res, SuccessModel>;
   @useResult
   $Res call({String title, String message});
 }
@@ -56,20 +58,20 @@ class _$SuccessModelCopyWithImpl<$Res, $Val extends SuccessModel>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? title = null,
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? title = null, Object? message = null}) {
+    return _then(
+      _value.copyWith(
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+            message: null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                      as String,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -77,8 +79,9 @@ class _$SuccessModelCopyWithImpl<$Res, $Val extends SuccessModel>
 abstract class _$$SuccessModelImplCopyWith<$Res>
     implements $SuccessModelCopyWith<$Res> {
   factory _$$SuccessModelImplCopyWith(
-          _$SuccessModelImpl value, $Res Function(_$SuccessModelImpl) then) =
-      __$$SuccessModelImplCopyWithImpl<$Res>;
+    _$SuccessModelImpl value,
+    $Res Function(_$SuccessModelImpl) then,
+  ) = __$$SuccessModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String title, String message});
@@ -89,27 +92,27 @@ class __$$SuccessModelImplCopyWithImpl<$Res>
     extends _$SuccessModelCopyWithImpl<$Res, _$SuccessModelImpl>
     implements _$$SuccessModelImplCopyWith<$Res> {
   __$$SuccessModelImplCopyWithImpl(
-      _$SuccessModelImpl _value, $Res Function(_$SuccessModelImpl) _then)
-      : super(_value, _then);
+    _$SuccessModelImpl _value,
+    $Res Function(_$SuccessModelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of SuccessModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? title = null,
-    Object? message = null,
-  }) {
-    return _then(_$SuccessModelImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? title = null, Object? message = null}) {
+    return _then(
+      _$SuccessModelImpl(
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+        message: null == message
+            ? _value.message
+            : message // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
@@ -156,9 +159,7 @@ class _$SuccessModelImpl implements _SuccessModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SuccessModelImplToJson(
-      this,
-    );
+    return _$$SuccessModelImplToJson(this);
   }
 }
 

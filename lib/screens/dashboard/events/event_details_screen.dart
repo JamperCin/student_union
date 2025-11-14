@@ -2,38 +2,43 @@ import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core/utils/date_time_utils.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
-import 'package:core_module/core_ui/widgets/confirm_transaction_layout.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 
 import '../../../core/model/remote/upcoming_event_model.dart';
 
-class EventDetailsScreen extends BaseScreenStandard {
+class EventDetailsScreen extends BaseSharedScreen {
   final UpcomingEventModel event;
 
   EventDetailsScreen(this.event);
 
+
+  @override
+  String appBarTitle() {
+    return "Event Details";
+  }
+
   @override
   Widget body(BuildContext context) {
-    return ConfirmTransactionLayout(
-      title: event.name,
-      buttonTitle: 'Close',
-      displayCancelButton: false,
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(24.dp()),
       child: Column(
         children: [
+          Text(event.name, style: textTheme.titleLarge),
+          Gap(10.dp()),
           NetworkImageWidget(
-            height: 200.dp(),
+            height: appDimen.screenHeight * 0.55,
             width: appDimen.screenWidth,
             url: event.image,
             fit: BoxFit.fitWidth,
             placeHolderWidget: ContainerWidget(
-              height: 200.dp(),
+              height: appDimen.screenHeight * 0.55,
               width: appDimen.screenWidth,
             ),
           ),
-          Gap(40.dp()),
+          Gap(10.dp()),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(event.description, style: textTheme.bodySmall),

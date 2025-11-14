@@ -13,8 +13,10 @@ import 'package:student_union/core/model/remote/upcoming_event_model.dart';
 
 class UpcomingEventsWidget extends StatelessWidget {
   final Function(UpcomingEventModel)? onTap;
+  final Function()? onSeeAllOnTap;
+  RxInt selectedIndex = 0.obs;
 
-  const UpcomingEventsWidget({super.key, this.onTap});
+   UpcomingEventsWidget({super.key, this.onTap, this.onSeeAllOnTap});
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +33,7 @@ class UpcomingEventsWidget extends StatelessWidget {
     BuildContext context,
     List<UpcomingEventModel> list,
   ) {
-
-    if(list.isEmpty){
+    if (list.isEmpty) {
       return const SizedBox.shrink();
     }
 
@@ -41,22 +42,32 @@ class UpcomingEventsWidget extends StatelessWidget {
         Gap(20.dp()),
         TitleTextWidget(
           text: "Upcoming Events",
-          onTap: () {},
+          onTap: onSeeAllOnTap,
         ),
         Gap(5.dp()),
         CarouselSlider.builder(
-            itemCount: list.length,
-            itemBuilder: (context, index, realIndex) {
-              UpcomingEventModel model = list[index];
-              return _eventItemWidget(context, model);
+          itemCount: list.length,
+          itemBuilder: (context, index, realIndex) {
+            UpcomingEventModel model = list[index];
+            return _eventItemWidget(context, model);
+          },
+          options: CarouselOptions(
+            scrollPhysics: const BouncingScrollPhysics(),
+            height: 210.dp(),
+            enableInfiniteScroll: true,
+            initialPage: list.length > 1 ? 1 : 0,
+            viewportFraction: 0.8,
+            autoPlay: true,
+            onPageChanged: (index, reason) {
+              selectedIndex.value = index;
             },
-            options: CarouselOptions(
-              scrollPhysics: const BouncingScrollPhysics(),
-              height: 210.dp(),
-              enableInfiniteScroll: false,
-              initialPage: list.length > 1 ? 1 : 0,
-              viewportFraction: 0.8,
-            )),
+          ),
+        ),
+        Gap(10.dp()),
+        Center(
+          child: PodWidget(podLength: list.length, currentIndex: selectedIndex),
+        ),
+        Gap(10.dp()),
       ],
     );
   }
@@ -76,7 +87,7 @@ class UpcomingEventsWidget extends StatelessWidget {
               height: height,
               width: appDimen.screenWidth,
               url: model.image,
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.cover,
               placeHolderWidget: ContainerWidget(
                 height: height,
                 width: appDimen.screenWidth,
@@ -88,13 +99,12 @@ class UpcomingEventsWidget extends StatelessWidget {
               children: [
                 Text(
                   model.name,
-                  style:
-                  textTheme.labelSmall?.copyWith(fontSize: 8.dp()),
+                  style: textTheme.labelSmall?.copyWith(fontSize: 8.dp()),
                 ),
                 Text(
-                 DateTimeUtils().formatDate( model.date, format: "dd MMM, yyyy"),
-                  style:
-                  textTheme.labelMedium?.copyWith(fontSize: 8.dp()),
+                  DateTimeUtils()
+                      .formatDate(model.date, format: "dd MMM, yyyy"),
+                  style: textTheme.labelMedium?.copyWith(fontSize: 8.dp()),
                 )
               ],
             )

@@ -1,8 +1,5 @@
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 
-class NewsDetailsScreen extends BaseScreenStandard{
-  @override
-  bool showAppBar() {
-    return true;
-  }
+class NewsDetailsScreen extends BaseSharedScreen{
+
 }

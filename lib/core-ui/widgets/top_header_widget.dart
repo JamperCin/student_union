@@ -1,7 +1,6 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:flutter/material.dart';
@@ -65,11 +64,11 @@ class TopHeaderWidget extends StatelessWidget {
                         text: TextSpan(
                       children: [
                         TextSpan(
-                          text: appPreference.getUser()?.name ?? '',
+                          text: appPreference.getUser().name,
                           style: textTheme.titleLarge,
                         ),
                         TextSpan(
-                          text: appPreference.getUser()?.email ?? '',
+                          text: appPreference.getUser().email,
                           style: textTheme.labelSmall,
                         )
                       ],
@@ -81,7 +80,7 @@ class TopHeaderWidget extends StatelessWidget {
                         TextSpan(text: 'Welcome', style: textTheme.titleLarge),
                         const TextSpan(text: '\n'),
                         TextSpan(
-                          text: appPreference.getUser()?.name ?? '',
+                          text: appPreference.getUser().name,
                           style: textTheme.bodyMedium
                               ?.copyWith(color: colorScheme.primary),
                         ),
@@ -106,12 +105,25 @@ class TopHeaderWidget extends StatelessWidget {
                   ),
                 if (onSearchOnClick != null) Gap(appDimen.dimen(1)),
                 if (onNotifyOnClick != null)
-                  IconButtonWidget(
-                    icon: Icons.notifications_none,
-                    iconSize: 25,
-                    iconPadding: 2,
-                    iconColor: colorScheme.primary,
+                  InkWell(
                     onTap: onNotifyOnClick,
+                    child: Badge(
+                      backgroundColor: Colors.red,
+                      label: Center(
+                        child: Text(
+                          "${notificationCount.value}",
+                          style: textTheme.labelLarge?.copyWith(
+                            color: Colors.white,
+                            fontSize: 10.dp(),
+                          ),
+                        ),
+                      ),
+                      isLabelVisible: true,
+                      child: Icon(
+                        Icons.notifications_none,
+                        size: 25.dp(),
+                      ),
+                    ),
                   ),
               ],
             ),

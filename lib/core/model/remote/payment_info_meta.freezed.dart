@@ -12,7 +12,8 @@ part of 'payment_info_meta.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 PaymentInfoMeta _$PaymentInfoMetaFromJson(Map<String, dynamic> json) {
   return _PaymentInfoMeta.fromJson(json);
@@ -40,13 +41,15 @@ mixin _$PaymentInfoMeta {
 /// @nodoc
 abstract class $PaymentInfoMetaCopyWith<$Res> {
   factory $PaymentInfoMetaCopyWith(
-          PaymentInfoMeta value, $Res Function(PaymentInfoMeta) then) =
-      _$PaymentInfoMetaCopyWithImpl<$Res, PaymentInfoMeta>;
+    PaymentInfoMeta value,
+    $Res Function(PaymentInfoMeta) then,
+  ) = _$PaymentInfoMetaCopyWithImpl<$Res, PaymentInfoMeta>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'note') String? note,
-      @JsonKey(name: 'campaign_id') int? campaignId,
-      @JsonKey(name: 'init_response') InitResponse? initResponse});
+  $Res call({
+    @JsonKey(name: 'note') String? note,
+    @JsonKey(name: 'campaign_id') int? campaignId,
+    @JsonKey(name: 'init_response') InitResponse? initResponse,
+  });
 
   $InitResponseCopyWith<$Res>? get initResponse;
 }
@@ -70,20 +73,23 @@ class _$PaymentInfoMetaCopyWithImpl<$Res, $Val extends PaymentInfoMeta>
     Object? campaignId = freezed,
     Object? initResponse = freezed,
   }) {
-    return _then(_value.copyWith(
-      note: freezed == note
-          ? _value.note
-          : note // ignore: cast_nullable_to_non_nullable
-              as String?,
-      campaignId: freezed == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      initResponse: freezed == initResponse
-          ? _value.initResponse
-          : initResponse // ignore: cast_nullable_to_non_nullable
-              as InitResponse?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            note: freezed == note
+                ? _value.note
+                : note // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            campaignId: freezed == campaignId
+                ? _value.campaignId
+                : campaignId // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            initResponse: freezed == initResponse
+                ? _value.initResponse
+                : initResponse // ignore: cast_nullable_to_non_nullable
+                      as InitResponse?,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of PaymentInfoMeta
@@ -104,15 +110,17 @@ class _$PaymentInfoMetaCopyWithImpl<$Res, $Val extends PaymentInfoMeta>
 /// @nodoc
 abstract class _$$PaymentInfoMetaImplCopyWith<$Res>
     implements $PaymentInfoMetaCopyWith<$Res> {
-  factory _$$PaymentInfoMetaImplCopyWith(_$PaymentInfoMetaImpl value,
-          $Res Function(_$PaymentInfoMetaImpl) then) =
-      __$$PaymentInfoMetaImplCopyWithImpl<$Res>;
+  factory _$$PaymentInfoMetaImplCopyWith(
+    _$PaymentInfoMetaImpl value,
+    $Res Function(_$PaymentInfoMetaImpl) then,
+  ) = __$$PaymentInfoMetaImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'note') String? note,
-      @JsonKey(name: 'campaign_id') int? campaignId,
-      @JsonKey(name: 'init_response') InitResponse? initResponse});
+  $Res call({
+    @JsonKey(name: 'note') String? note,
+    @JsonKey(name: 'campaign_id') int? campaignId,
+    @JsonKey(name: 'init_response') InitResponse? initResponse,
+  });
 
   @override
   $InitResponseCopyWith<$Res>? get initResponse;
@@ -123,8 +131,9 @@ class __$$PaymentInfoMetaImplCopyWithImpl<$Res>
     extends _$PaymentInfoMetaCopyWithImpl<$Res, _$PaymentInfoMetaImpl>
     implements _$$PaymentInfoMetaImplCopyWith<$Res> {
   __$$PaymentInfoMetaImplCopyWithImpl(
-      _$PaymentInfoMetaImpl _value, $Res Function(_$PaymentInfoMetaImpl) _then)
-      : super(_value, _then);
+    _$PaymentInfoMetaImpl _value,
+    $Res Function(_$PaymentInfoMetaImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of PaymentInfoMeta
   /// with the given fields replaced by the non-null parameter values.
@@ -135,30 +144,33 @@ class __$$PaymentInfoMetaImplCopyWithImpl<$Res>
     Object? campaignId = freezed,
     Object? initResponse = freezed,
   }) {
-    return _then(_$PaymentInfoMetaImpl(
-      note: freezed == note
-          ? _value.note
-          : note // ignore: cast_nullable_to_non_nullable
-              as String?,
-      campaignId: freezed == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      initResponse: freezed == initResponse
-          ? _value.initResponse
-          : initResponse // ignore: cast_nullable_to_non_nullable
-              as InitResponse?,
-    ));
+    return _then(
+      _$PaymentInfoMetaImpl(
+        note: freezed == note
+            ? _value.note
+            : note // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        campaignId: freezed == campaignId
+            ? _value.campaignId
+            : campaignId // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        initResponse: freezed == initResponse
+            ? _value.initResponse
+            : initResponse // ignore: cast_nullable_to_non_nullable
+                  as InitResponse?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PaymentInfoMetaImpl implements _PaymentInfoMeta {
-  const _$PaymentInfoMetaImpl(
-      {@JsonKey(name: 'note') this.note,
-      @JsonKey(name: 'campaign_id') this.campaignId,
-      @JsonKey(name: 'init_response') this.initResponse});
+  const _$PaymentInfoMetaImpl({
+    @JsonKey(name: 'note') this.note,
+    @JsonKey(name: 'campaign_id') this.campaignId,
+    @JsonKey(name: 'init_response') this.initResponse,
+  });
 
   factory _$PaymentInfoMetaImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaymentInfoMetaImplFromJson(json);
@@ -201,22 +213,22 @@ class _$PaymentInfoMetaImpl implements _PaymentInfoMeta {
   @pragma('vm:prefer-inline')
   _$$PaymentInfoMetaImplCopyWith<_$PaymentInfoMetaImpl> get copyWith =>
       __$$PaymentInfoMetaImplCopyWithImpl<_$PaymentInfoMetaImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PaymentInfoMetaImplToJson(
-      this,
-    );
+    return _$$PaymentInfoMetaImplToJson(this);
   }
 }
 
 abstract class _PaymentInfoMeta implements PaymentInfoMeta {
-  const factory _PaymentInfoMeta(
-          {@JsonKey(name: 'note') final String? note,
-          @JsonKey(name: 'campaign_id') final int? campaignId,
-          @JsonKey(name: 'init_response') final InitResponse? initResponse}) =
-      _$PaymentInfoMetaImpl;
+  const factory _PaymentInfoMeta({
+    @JsonKey(name: 'note') final String? note,
+    @JsonKey(name: 'campaign_id') final int? campaignId,
+    @JsonKey(name: 'init_response') final InitResponse? initResponse,
+  }) = _$PaymentInfoMetaImpl;
 
   factory _PaymentInfoMeta.fromJson(Map<String, dynamic> json) =
       _$PaymentInfoMetaImpl.fromJson;
@@ -265,13 +277,15 @@ mixin _$InitResponse {
 /// @nodoc
 abstract class $InitResponseCopyWith<$Res> {
   factory $InitResponseCopyWith(
-          InitResponse value, $Res Function(InitResponse) then) =
-      _$InitResponseCopyWithImpl<$Res, InitResponse>;
+    InitResponse value,
+    $Res Function(InitResponse) then,
+  ) = _$InitResponseCopyWithImpl<$Res, InitResponse>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'data') Data? data,
-      @JsonKey(name: 'status') bool? status,
-      @JsonKey(name: 'message') String? message});
+  $Res call({
+    @JsonKey(name: 'data') Data? data,
+    @JsonKey(name: 'status') bool? status,
+    @JsonKey(name: 'message') String? message,
+  });
 
   $DataCopyWith<$Res>? get data;
 }
@@ -295,20 +309,23 @@ class _$InitResponseCopyWithImpl<$Res, $Val extends InitResponse>
     Object? status = freezed,
     Object? message = freezed,
   }) {
-    return _then(_value.copyWith(
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as Data?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            data: freezed == data
+                ? _value.data
+                : data // ignore: cast_nullable_to_non_nullable
+                      as Data?,
+            status: freezed == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as bool?,
+            message: freezed == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                      as String?,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of InitResponse
@@ -330,14 +347,16 @@ class _$InitResponseCopyWithImpl<$Res, $Val extends InitResponse>
 abstract class _$$InitResponseImplCopyWith<$Res>
     implements $InitResponseCopyWith<$Res> {
   factory _$$InitResponseImplCopyWith(
-          _$InitResponseImpl value, $Res Function(_$InitResponseImpl) then) =
-      __$$InitResponseImplCopyWithImpl<$Res>;
+    _$InitResponseImpl value,
+    $Res Function(_$InitResponseImpl) then,
+  ) = __$$InitResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'data') Data? data,
-      @JsonKey(name: 'status') bool? status,
-      @JsonKey(name: 'message') String? message});
+  $Res call({
+    @JsonKey(name: 'data') Data? data,
+    @JsonKey(name: 'status') bool? status,
+    @JsonKey(name: 'message') String? message,
+  });
 
   @override
   $DataCopyWith<$Res>? get data;
@@ -348,8 +367,9 @@ class __$$InitResponseImplCopyWithImpl<$Res>
     extends _$InitResponseCopyWithImpl<$Res, _$InitResponseImpl>
     implements _$$InitResponseImplCopyWith<$Res> {
   __$$InitResponseImplCopyWithImpl(
-      _$InitResponseImpl _value, $Res Function(_$InitResponseImpl) _then)
-      : super(_value, _then);
+    _$InitResponseImpl _value,
+    $Res Function(_$InitResponseImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of InitResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -360,30 +380,33 @@ class __$$InitResponseImplCopyWithImpl<$Res>
     Object? status = freezed,
     Object? message = freezed,
   }) {
-    return _then(_$InitResponseImpl(
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as Data?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$InitResponseImpl(
+        data: freezed == data
+            ? _value.data
+            : data // ignore: cast_nullable_to_non_nullable
+                  as Data?,
+        status: freezed == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        message: freezed == message
+            ? _value.message
+            : message // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$InitResponseImpl implements _InitResponse {
-  const _$InitResponseImpl(
-      {@JsonKey(name: 'data') this.data,
-      @JsonKey(name: 'status') this.status,
-      @JsonKey(name: 'message') this.message});
+  const _$InitResponseImpl({
+    @JsonKey(name: 'data') this.data,
+    @JsonKey(name: 'status') this.status,
+    @JsonKey(name: 'message') this.message,
+  });
 
   factory _$InitResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$InitResponseImplFromJson(json);
@@ -427,17 +450,16 @@ class _$InitResponseImpl implements _InitResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$InitResponseImplToJson(
-      this,
-    );
+    return _$$InitResponseImplToJson(this);
   }
 }
 
 abstract class _InitResponse implements InitResponse {
-  const factory _InitResponse(
-      {@JsonKey(name: 'data') final Data? data,
-      @JsonKey(name: 'status') final bool? status,
-      @JsonKey(name: 'message') final String? message}) = _$InitResponseImpl;
+  const factory _InitResponse({
+    @JsonKey(name: 'data') final Data? data,
+    @JsonKey(name: 'status') final bool? status,
+    @JsonKey(name: 'message') final String? message,
+  }) = _$InitResponseImpl;
 
   factory _InitResponse.fromJson(Map<String, dynamic> json) =
       _$InitResponseImpl.fromJson;
@@ -487,10 +509,11 @@ abstract class $DataCopyWith<$Res> {
   factory $DataCopyWith(Data value, $Res Function(Data) then) =
       _$DataCopyWithImpl<$Res, Data>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'reference') String? reference,
-      @JsonKey(name: 'access_code') String? accessCode,
-      @JsonKey(name: 'authorization_url') String? authorizationUrl});
+  $Res call({
+    @JsonKey(name: 'reference') String? reference,
+    @JsonKey(name: 'access_code') String? accessCode,
+    @JsonKey(name: 'authorization_url') String? authorizationUrl,
+  });
 }
 
 /// @nodoc
@@ -512,34 +535,39 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
     Object? accessCode = freezed,
     Object? authorizationUrl = freezed,
   }) {
-    return _then(_value.copyWith(
-      reference: freezed == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
-              as String?,
-      accessCode: freezed == accessCode
-          ? _value.accessCode
-          : accessCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      authorizationUrl: freezed == authorizationUrl
-          ? _value.authorizationUrl
-          : authorizationUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            reference: freezed == reference
+                ? _value.reference
+                : reference // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            accessCode: freezed == accessCode
+                ? _value.accessCode
+                : accessCode // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            authorizationUrl: freezed == authorizationUrl
+                ? _value.authorizationUrl
+                : authorizationUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$DataImplCopyWith<$Res> implements $DataCopyWith<$Res> {
   factory _$$DataImplCopyWith(
-          _$DataImpl value, $Res Function(_$DataImpl) then) =
-      __$$DataImplCopyWithImpl<$Res>;
+    _$DataImpl value,
+    $Res Function(_$DataImpl) then,
+  ) = __$$DataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'reference') String? reference,
-      @JsonKey(name: 'access_code') String? accessCode,
-      @JsonKey(name: 'authorization_url') String? authorizationUrl});
+  $Res call({
+    @JsonKey(name: 'reference') String? reference,
+    @JsonKey(name: 'access_code') String? accessCode,
+    @JsonKey(name: 'authorization_url') String? authorizationUrl,
+  });
 }
 
 /// @nodoc
@@ -547,7 +575,7 @@ class __$$DataImplCopyWithImpl<$Res>
     extends _$DataCopyWithImpl<$Res, _$DataImpl>
     implements _$$DataImplCopyWith<$Res> {
   __$$DataImplCopyWithImpl(_$DataImpl _value, $Res Function(_$DataImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of Data
   /// with the given fields replaced by the non-null parameter values.
@@ -558,30 +586,33 @@ class __$$DataImplCopyWithImpl<$Res>
     Object? accessCode = freezed,
     Object? authorizationUrl = freezed,
   }) {
-    return _then(_$DataImpl(
-      reference: freezed == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
-              as String?,
-      accessCode: freezed == accessCode
-          ? _value.accessCode
-          : accessCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      authorizationUrl: freezed == authorizationUrl
-          ? _value.authorizationUrl
-          : authorizationUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$DataImpl(
+        reference: freezed == reference
+            ? _value.reference
+            : reference // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        accessCode: freezed == accessCode
+            ? _value.accessCode
+            : accessCode // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        authorizationUrl: freezed == authorizationUrl
+            ? _value.authorizationUrl
+            : authorizationUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DataImpl implements _Data {
-  const _$DataImpl(
-      {@JsonKey(name: 'reference') this.reference,
-      @JsonKey(name: 'access_code') this.accessCode,
-      @JsonKey(name: 'authorization_url') this.authorizationUrl});
+  const _$DataImpl({
+    @JsonKey(name: 'reference') this.reference,
+    @JsonKey(name: 'access_code') this.accessCode,
+    @JsonKey(name: 'authorization_url') this.authorizationUrl,
+  });
 
   factory _$DataImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataImplFromJson(json);
@@ -629,18 +660,16 @@ class _$DataImpl implements _Data {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DataImplToJson(
-      this,
-    );
+    return _$$DataImplToJson(this);
   }
 }
 
 abstract class _Data implements Data {
-  const factory _Data(
-          {@JsonKey(name: 'reference') final String? reference,
-          @JsonKey(name: 'access_code') final String? accessCode,
-          @JsonKey(name: 'authorization_url') final String? authorizationUrl}) =
-      _$DataImpl;
+  const factory _Data({
+    @JsonKey(name: 'reference') final String? reference,
+    @JsonKey(name: 'access_code') final String? accessCode,
+    @JsonKey(name: 'authorization_url') final String? authorizationUrl,
+  }) = _$DataImpl;
 
   factory _Data.fromJson(Map<String, dynamic> json) = _$DataImpl.fromJson;
 

@@ -44,4 +44,5 @@ const icWarn  = "$_rootPath/ic_warn.png";
 const icSuccess  = "$_rootPath/ic_success.svg";
 const icOrders  = "$_rootPath/ic_orders.svg";
 const icDanger  = "$_rootPath/ic_danger.png";
+const icYouVersion  = "$_rootPath/ic_you_version.png";
 

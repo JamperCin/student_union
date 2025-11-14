@@ -1,36 +1,23 @@
 import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/extensions/double_extension.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core/extensions/string_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/container_widget.dart';
 import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 
 import '../controller/devotion_controller.dart';
 
-class BuyDevotionalBookScreen extends BaseScreenStandard {
+class BuyDevotionalBookScreen extends BaseSharedScreen {
   final _controller = Get.put(DevotionController());
 
   @override
   String appBarTitle() {
     return "Devotionals";
-  }
-
-  @override
-  bool showAppBar() {
-    return true;
-  }
-
-  @override
-  TextStyle? appBarTitleStyle(BuildContext context) {
-    return super
-        .appBarTitleStyle(context)
-        ?.copyWith(fontWeight: FontWeight.w700);
   }
 
   @override

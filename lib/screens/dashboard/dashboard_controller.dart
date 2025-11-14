@@ -1,13 +1,11 @@
-import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/model/local/bottom_bar_model.dart';
 import 'package:core_module/core_module.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
 import 'package:student_union/core/api/fcm_api.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
+import 'package:student_union/screens/auth/login/login_screen.dart';
 
 class DashboardController extends BaseController with WidgetsBindingObserver {
   ///Initialise this when the main dashboard is called
@@ -26,21 +24,7 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
     }
   }
 
-  Future<void> requestFcmToken() async{
-    final fcm = FirebaseMessaging.instance;
-    // Request permission (for iOS especially)
-    await fcm.requestPermission();
 
-    final token = await fcm.getToken();
-
-    final param = {
-      'user': {
-        "fcm_id": token,
-      }
-    };
-
-    await notificationApiService.registerFcmToken(param);
-  }
 
   ///List of menu for the bottom navigation bar
   RxList<BottomBarModel> bottomBarMenuList = [
@@ -78,16 +62,37 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
   ].obs;
 
   void onBottomMenuOnClick(BottomBarModel model) {
+    for(BottomBarModel m in bottomBarMenuList){
+      
+    }
+    var mod = bottomBarMenuList.firstWhere((e) => e.isSelected == true);
+    if (mod == model) return;
+
     bottomBarMenuList.value = bottomBarMenuList.value
         .map((e) => e.copyWith(isSelected: e.text == model.text))
         .toList();
 
-    final mod = bottomBarMenuList.firstWhere((e) => e.isSelected == true);
+    mod = bottomBarMenuList.firstWhere((e) => e.isSelected == true);
     mod.key?.currentState?.forward();
   }
 
   Future<void> fetchUserDetails() async {
     final user = await userApiService.fetchUserDetails();
+
+    if (user.status == "401" && Get.context != null && Get.context!.mounted) {
+      snackBarSnippet.showCountdownSnackBar(
+        Get.context!,
+        message: "Session Timeout!. Kindly login again.",
+        actionIcon: Icons.timer_off_outlined,
+        showCloseIcon: false,
+        onProgressCompletion: () async {
+          await Future.delayed(const Duration(seconds: 1));
+          navUtils.fireTargetOff(LoginScreen());
+        },
+      );
+
+      return;
+    }
     appPreference.setUser(user);
     userApiService.profilePic.value = user.profilePic;
   }

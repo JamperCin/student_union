@@ -1,13 +1,11 @@
-import 'package:core_module/core/app/app_dimens.dart';
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/enum/env_type.dart';
 import 'package:core_module/core_module.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:student_union/core/api/fcm_api.dart';
+import 'package:student_union/core/api/notification_api.dart';
 import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/app/app_theme.dart';
@@ -21,20 +19,27 @@ import 'package:student_union/core/services/notifications/notification_api_servi
 import 'package:student_union/core/services/payment/payment_api_service.dart';
 import 'package:student_union/core/services/upcoming_events/upcoming_events_api_service.dart';
 import 'package:student_union/core/services/user/user_api_service.dart';
-import 'package:student_union/firebase_options.dart';
 import 'core/services/auth/auth_api_service.dart';
 
 @pragma('vm:entry-point')
-Future<void> _firebaseBackgroundMessageHanlder(RemoteMessage msg) async {
-  await FcmApi().initializeFirebase();// Initialize Firebase if not already initialized
+Future<void> firebaseBackgroundMessageHandler(RemoteMessage msg) async {
   debugPrint("Background messaging ======>>>> ${msg.toMap().toString()}");
+  await FcmApi().initializeFirebase();// Initialize Firebase if not already initialized
+
+  FcmApi().handleFcmMessage(msg);
   // Perform background tasks based on the message data
+}
+
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse not) {
+  // handle action
+  debugPrint("on Tap messaging ======>>>> ${not.data.toString()}");
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FcmApi().initializeFirebase();
-  FirebaseMessaging.onBackgroundMessage(_firebaseBackgroundMessageHanlder);
+  FirebaseMessaging.onBackgroundMessage(firebaseBackgroundMessageHandler);
 
   if (kReleaseMode) {
     debugPrint = (String? message, {int? wrapWidth}) {};
@@ -78,7 +83,7 @@ Future<void> _initializeApp() async {
   authApiService = AuthApiService();
   paymentApiService = PaymentApiService();
   notificationApiService = NotificationApiService();
-
+  notificationApi = NotificationApi();
 }
 
 class MyApp extends StatelessWidget {

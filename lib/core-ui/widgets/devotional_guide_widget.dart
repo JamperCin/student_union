@@ -15,6 +15,7 @@ class DevotionalGuideWidget extends StatelessWidget {
   int page = 1;
   RxBool isLoadingAvailableBooks = false.obs;
   late ColorScheme colorScheme;
+  RxInt selectedIndex = 0.obs;
 
   DevotionalGuideWidget.withAvailableBooks({
     super.key,
@@ -76,7 +77,7 @@ class DevotionalGuideWidget extends StatelessWidget {
   }
 
   Widget _purchasedBooks() {
-     Map<String, dynamic>? param;
+    Map<String, dynamic>? param;
     if (yearFilter != null) {
       param = {
         "year": yearFilter,
@@ -161,17 +162,26 @@ class DevotionalGuideWidget extends StatelessWidget {
                   },
                   options: CarouselOptions(
                     scrollPhysics: const BouncingScrollPhysics(),
-                    enableInfiniteScroll: false,
+                    enableInfiniteScroll: true,
                     initialPage: list.length > 1 ? 1 : 0,
                     viewportFraction: 0.4,
+                    autoPlay: true,
+                    onPageChanged: (index, reason) {
+                      selectedIndex.value = index;
+                    },
                   )),
+              Gap(10.dp()),
+              Center(
+                child: PodWidget(
+                    podLength: list.length, currentIndex: selectedIndex),
+              ),
+              Gap(10.dp()),
             ],
           );
   }
 
   Widget _gridViewDisplayOfAvailableBooksWidget(
       List<DevotionalBookModel> list) {
-
     if (list.isEmpty) {
       return const NoDataWidget(
         title: 'Devotional Guides',
@@ -183,7 +193,7 @@ class DevotionalGuideWidget extends StatelessWidget {
 
     return ListViewWidget<DevotionalBookModel>.withGridView(
       list: list.obs,
-      onLoadMore:()=> _onLoadMoreAvailableBooks(page = page + 1),
+      onLoadMore: () => _onLoadMoreAvailableBooks(page = page + 1),
       onRefresh: () => _onLoadMoreAvailableBooks(page = 1),
       listItemWidget: (book) {
         return InkWell(
@@ -226,7 +236,6 @@ class DevotionalGuideWidget extends StatelessWidget {
 
   ///Load more Available books
   Future<List<DevotionalBookModel>> _onLoadMoreAvailableBooks(int page) async {
-
     Map<String, Object>? param;
 
     if (yearFilter != null) {

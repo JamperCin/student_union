@@ -4,6 +4,7 @@ class Assets {
 
   static const String aboutAboutScreen = 'lib/screens/dashboard/more/about/about_screen.dart';
   static const String apiFcmApi = 'lib/core/api/fcm_api.dart';
+  static const String apiNotificationApi = 'lib/core/api/notification_api.dart';
   static const String appAppColors = 'lib/core/app/app_colors.dart';
   static const String appAppRoutes = 'lib/core/app/app_routes.dart';
   static const String appAppStyle = 'lib/core/app/app_style.dart';
@@ -50,6 +51,7 @@ class Assets {
   static const String devotionalGuideDevotionalGuideApiService = 'lib/core/services/devotional_guide/devotional_guide_api_service.dart';
   static const String enumsBookType = 'lib/core/enums/book_type.dart';
   static const String enumsPaymentType = 'lib/core/enums/payment_type.dart';
+  static const String eventsAllEventsScreen = 'lib/screens/dashboard/events/all_events_screen.dart';
   static const String eventsEventDetailsScreen = 'lib/screens/dashboard/events/event_details_screen.dart';
   static const String faqsFaqsScreen = 'lib/screens/dashboard/more/faqs/faqs_screen.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
@@ -105,6 +107,7 @@ class Assets {
   static const String imagesIcTheme = 'assets/images/ic_theme.svg';
   static const String imagesIcUser = 'assets/images/ic_user.png';
   static const String imagesIcWarn = 'assets/images/ic_warn.png';
+  static const String imagesIcYouVersion = 'assets/images/ic_you_version.png';
   static const String introIntroController = 'lib/screens/intro/intro_controller.dart';
   static const String introIntroScreen = 'lib/screens/intro/intro_screen.dart';
   static const String invitesInviteFriendScreen = 'lib/screens/dashboard/more/invites/invite_friend_screen.dart';
@@ -166,6 +169,7 @@ class Assets {
   static const String remoteUpcomingEventModel.freezed = 'lib/core/model/remote/upcoming_event_model.freezed.dart';
   static const String remoteUpcomingEventModel.g = 'lib/core/model/remote/upcoming_event_model.g.dart';
   static const String resAssetPath = 'lib/core/res/asset_path.dart';
+  static const String screenBaseSharedScreen = 'lib/core-ui/screen/base_shared_screen.dart';
   static const String screenBaseWeb = 'lib/core-ui/screen/base_web.dart';
   static const String sfUiSfBold = 'assets/fonts/sf_ui/sf_bold.otf';
   static const String sfUiSfHeavy = 'assets/fonts/sf_ui/sf_heavy.otf';
@@ -196,6 +200,7 @@ class Assets {
   static const String upcomingEventsUpcomingEventsApiService = 'lib/core/services/upcoming_events/upcoming_events_api_service.dart';
   static const String userUserApiInterface = 'lib/core/services/user/user_api_interface.dart';
   static const String userUserApiService = 'lib/core/services/user/user_api_service.dart';
+  static const String utilsYouVersionUtils = 'lib/core/utils/you_version_utils.dart';
   static const String widgetsCoreMinistriesWidget = 'lib/core-ui/widgets/core_ministries_widget.dart';
   static const String widgetsDailyDevotionWidget = 'lib/core-ui/widgets/daily_devotion_widget.dart';
   static const String widgetsDevotionalGuideWidget = 'lib/core-ui/widgets/devotional_guide_widget.dart';

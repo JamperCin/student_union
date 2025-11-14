@@ -12,7 +12,8 @@ part of 'payment_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 PaymentModel _$PaymentModelFromJson(Map<String, dynamic> json) {
   return _PaymentModel.fromJson(json);
@@ -51,21 +52,23 @@ mixin _$PaymentModel {
 /// @nodoc
 abstract class $PaymentModelCopyWith<$Res> {
   factory $PaymentModelCopyWith(
-          PaymentModel value, $Res Function(PaymentModel) then) =
-      _$PaymentModelCopyWithImpl<$Res, PaymentModel>;
+    PaymentModel value,
+    $Res Function(PaymentModel) then,
+  ) = _$PaymentModelCopyWithImpl<$Res, PaymentModel>;
   @useResult
-  $Res call(
-      {int id,
-      String amount,
-      String status,
-      String reference,
-      @JsonKey(name: 'payment_type') String paymentType,
-      @JsonKey(name: 'created_at') String createdAt,
-      String currency,
-      @JsonKey(name: 'authorization_url') String authUrl,
-      @JsonKey(name: 'payable_meta') PayableMeta? payableMeta,
-      @JsonKey(name: 'metadata') PaymentInfoMeta? paymentInfoMeta,
-      @JsonKey(name: 'campaign_id') int campaignId});
+  $Res call({
+    int id,
+    String amount,
+    String status,
+    String reference,
+    @JsonKey(name: 'payment_type') String paymentType,
+    @JsonKey(name: 'created_at') String createdAt,
+    String currency,
+    @JsonKey(name: 'authorization_url') String authUrl,
+    @JsonKey(name: 'payable_meta') PayableMeta? payableMeta,
+    @JsonKey(name: 'metadata') PaymentInfoMeta? paymentInfoMeta,
+    @JsonKey(name: 'campaign_id') int campaignId,
+  });
 
   $PayableMetaCopyWith<$Res>? get payableMeta;
   $PaymentInfoMetaCopyWith<$Res>? get paymentInfoMeta;
@@ -98,52 +101,55 @@ class _$PaymentModelCopyWithImpl<$Res, $Val extends PaymentModel>
     Object? paymentInfoMeta = freezed,
     Object? campaignId = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      reference: null == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
-              as String,
-      paymentType: null == paymentType
-          ? _value.paymentType
-          : paymentType // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      authUrl: null == authUrl
-          ? _value.authUrl
-          : authUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      payableMeta: freezed == payableMeta
-          ? _value.payableMeta
-          : payableMeta // ignore: cast_nullable_to_non_nullable
-              as PayableMeta?,
-      paymentInfoMeta: freezed == paymentInfoMeta
-          ? _value.paymentInfoMeta
-          : paymentInfoMeta // ignore: cast_nullable_to_non_nullable
-              as PaymentInfoMeta?,
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int,
+            amount: null == amount
+                ? _value.amount
+                : amount // ignore: cast_nullable_to_non_nullable
+                      as String,
+            status: null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as String,
+            reference: null == reference
+                ? _value.reference
+                : reference // ignore: cast_nullable_to_non_nullable
+                      as String,
+            paymentType: null == paymentType
+                ? _value.paymentType
+                : paymentType // ignore: cast_nullable_to_non_nullable
+                      as String,
+            createdAt: null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                      as String,
+            currency: null == currency
+                ? _value.currency
+                : currency // ignore: cast_nullable_to_non_nullable
+                      as String,
+            authUrl: null == authUrl
+                ? _value.authUrl
+                : authUrl // ignore: cast_nullable_to_non_nullable
+                      as String,
+            payableMeta: freezed == payableMeta
+                ? _value.payableMeta
+                : payableMeta // ignore: cast_nullable_to_non_nullable
+                      as PayableMeta?,
+            paymentInfoMeta: freezed == paymentInfoMeta
+                ? _value.paymentInfoMeta
+                : paymentInfoMeta // ignore: cast_nullable_to_non_nullable
+                      as PaymentInfoMeta?,
+            campaignId: null == campaignId
+                ? _value.campaignId
+                : campaignId // ignore: cast_nullable_to_non_nullable
+                      as int,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of PaymentModel
@@ -179,22 +185,24 @@ class _$PaymentModelCopyWithImpl<$Res, $Val extends PaymentModel>
 abstract class _$$PaymentModelImplCopyWith<$Res>
     implements $PaymentModelCopyWith<$Res> {
   factory _$$PaymentModelImplCopyWith(
-          _$PaymentModelImpl value, $Res Function(_$PaymentModelImpl) then) =
-      __$$PaymentModelImplCopyWithImpl<$Res>;
+    _$PaymentModelImpl value,
+    $Res Function(_$PaymentModelImpl) then,
+  ) = __$$PaymentModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      String amount,
-      String status,
-      String reference,
-      @JsonKey(name: 'payment_type') String paymentType,
-      @JsonKey(name: 'created_at') String createdAt,
-      String currency,
-      @JsonKey(name: 'authorization_url') String authUrl,
-      @JsonKey(name: 'payable_meta') PayableMeta? payableMeta,
-      @JsonKey(name: 'metadata') PaymentInfoMeta? paymentInfoMeta,
-      @JsonKey(name: 'campaign_id') int campaignId});
+  $Res call({
+    int id,
+    String amount,
+    String status,
+    String reference,
+    @JsonKey(name: 'payment_type') String paymentType,
+    @JsonKey(name: 'created_at') String createdAt,
+    String currency,
+    @JsonKey(name: 'authorization_url') String authUrl,
+    @JsonKey(name: 'payable_meta') PayableMeta? payableMeta,
+    @JsonKey(name: 'metadata') PaymentInfoMeta? paymentInfoMeta,
+    @JsonKey(name: 'campaign_id') int campaignId,
+  });
 
   @override
   $PayableMetaCopyWith<$Res>? get payableMeta;
@@ -207,8 +215,9 @@ class __$$PaymentModelImplCopyWithImpl<$Res>
     extends _$PaymentModelCopyWithImpl<$Res, _$PaymentModelImpl>
     implements _$$PaymentModelImplCopyWith<$Res> {
   __$$PaymentModelImplCopyWithImpl(
-      _$PaymentModelImpl _value, $Res Function(_$PaymentModelImpl) _then)
-      : super(_value, _then);
+    _$PaymentModelImpl _value,
+    $Res Function(_$PaymentModelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of PaymentModel
   /// with the given fields replaced by the non-null parameter values.
@@ -227,70 +236,73 @@ class __$$PaymentModelImplCopyWithImpl<$Res>
     Object? paymentInfoMeta = freezed,
     Object? campaignId = null,
   }) {
-    return _then(_$PaymentModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      reference: null == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
-              as String,
-      paymentType: null == paymentType
-          ? _value.paymentType
-          : paymentType // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      authUrl: null == authUrl
-          ? _value.authUrl
-          : authUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      payableMeta: freezed == payableMeta
-          ? _value.payableMeta
-          : payableMeta // ignore: cast_nullable_to_non_nullable
-              as PayableMeta?,
-      paymentInfoMeta: freezed == paymentInfoMeta
-          ? _value.paymentInfoMeta
-          : paymentInfoMeta // ignore: cast_nullable_to_non_nullable
-              as PaymentInfoMeta?,
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$PaymentModelImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int,
+        amount: null == amount
+            ? _value.amount
+            : amount // ignore: cast_nullable_to_non_nullable
+                  as String,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as String,
+        reference: null == reference
+            ? _value.reference
+            : reference // ignore: cast_nullable_to_non_nullable
+                  as String,
+        paymentType: null == paymentType
+            ? _value.paymentType
+            : paymentType // ignore: cast_nullable_to_non_nullable
+                  as String,
+        createdAt: null == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as String,
+        currency: null == currency
+            ? _value.currency
+            : currency // ignore: cast_nullable_to_non_nullable
+                  as String,
+        authUrl: null == authUrl
+            ? _value.authUrl
+            : authUrl // ignore: cast_nullable_to_non_nullable
+                  as String,
+        payableMeta: freezed == payableMeta
+            ? _value.payableMeta
+            : payableMeta // ignore: cast_nullable_to_non_nullable
+                  as PayableMeta?,
+        paymentInfoMeta: freezed == paymentInfoMeta
+            ? _value.paymentInfoMeta
+            : paymentInfoMeta // ignore: cast_nullable_to_non_nullable
+                  as PaymentInfoMeta?,
+        campaignId: null == campaignId
+            ? _value.campaignId
+            : campaignId // ignore: cast_nullable_to_non_nullable
+                  as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PaymentModelImpl implements _PaymentModel {
-  const _$PaymentModelImpl(
-      {this.id = 0,
-      this.amount = "0.0",
-      this.status = "",
-      this.reference = "",
-      @JsonKey(name: 'payment_type') this.paymentType = "",
-      @JsonKey(name: 'created_at') this.createdAt = "",
-      this.currency = "GHS",
-      @JsonKey(name: 'authorization_url') this.authUrl = "",
-      @JsonKey(name: 'payable_meta') this.payableMeta,
-      @JsonKey(name: 'metadata') this.paymentInfoMeta,
-      @JsonKey(name: 'campaign_id') this.campaignId = 0});
+  const _$PaymentModelImpl({
+    this.id = 0,
+    this.amount = "0.0",
+    this.status = "",
+    this.reference = "",
+    @JsonKey(name: 'payment_type') this.paymentType = "",
+    @JsonKey(name: 'created_at') this.createdAt = "",
+    this.currency = "GHS",
+    @JsonKey(name: 'authorization_url') this.authUrl = "",
+    @JsonKey(name: 'payable_meta') this.payableMeta,
+    @JsonKey(name: 'metadata') this.paymentInfoMeta,
+    @JsonKey(name: 'campaign_id') this.campaignId = 0,
+  });
 
   factory _$PaymentModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaymentModelImplFromJson(json);
@@ -362,18 +374,19 @@ class _$PaymentModelImpl implements _PaymentModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      amount,
-      status,
-      reference,
-      paymentType,
-      createdAt,
-      currency,
-      authUrl,
-      payableMeta,
-      paymentInfoMeta,
-      campaignId);
+    runtimeType,
+    id,
+    amount,
+    status,
+    reference,
+    paymentType,
+    createdAt,
+    currency,
+    authUrl,
+    payableMeta,
+    paymentInfoMeta,
+    campaignId,
+  );
 
   /// Create a copy of PaymentModel
   /// with the given fields replaced by the non-null parameter values.
@@ -385,25 +398,24 @@ class _$PaymentModelImpl implements _PaymentModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PaymentModelImplToJson(
-      this,
-    );
+    return _$$PaymentModelImplToJson(this);
   }
 }
 
 abstract class _PaymentModel implements PaymentModel {
-  const factory _PaymentModel(
-      {final int id,
-      final String amount,
-      final String status,
-      final String reference,
-      @JsonKey(name: 'payment_type') final String paymentType,
-      @JsonKey(name: 'created_at') final String createdAt,
-      final String currency,
-      @JsonKey(name: 'authorization_url') final String authUrl,
-      @JsonKey(name: 'payable_meta') final PayableMeta? payableMeta,
-      @JsonKey(name: 'metadata') final PaymentInfoMeta? paymentInfoMeta,
-      @JsonKey(name: 'campaign_id') final int campaignId}) = _$PaymentModelImpl;
+  const factory _PaymentModel({
+    final int id,
+    final String amount,
+    final String status,
+    final String reference,
+    @JsonKey(name: 'payment_type') final String paymentType,
+    @JsonKey(name: 'created_at') final String createdAt,
+    final String currency,
+    @JsonKey(name: 'authorization_url') final String authUrl,
+    @JsonKey(name: 'payable_meta') final PayableMeta? payableMeta,
+    @JsonKey(name: 'metadata') final PaymentInfoMeta? paymentInfoMeta,
+    @JsonKey(name: 'campaign_id') final int campaignId,
+  }) = _$PaymentModelImpl;
 
   factory _PaymentModel.fromJson(Map<String, dynamic> json) =
       _$PaymentModelImpl.fromJson;

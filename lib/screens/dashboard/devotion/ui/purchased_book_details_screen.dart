@@ -30,17 +30,17 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
     _controller.setPurchasedBook(baseObject as DevotionalBookModel);
   }
 
-  @override
-  String appBarTitle() {
-    return _controller.book.value.name;
-  }
+  // @override
+  // String appBarTitle() {
+  //   return _controller.book.value.name;
+  // }
 
-  @override
-  TextStyle? appBarTitleStyle(BuildContext context) {
-    return super
-        .appBarTitleStyle(context)
-        ?.copyWith(fontWeight: FontWeight.w700);
-  }
+  // @override
+  // TextStyle? appBarTitleStyle(BuildContext context) {
+  //   return super
+  //       .appBarTitleStyle(context)
+  //       ?.copyWith(fontWeight: FontWeight.w700);
+  // }
 
   @override
   Widget body(BuildContext context) {
@@ -54,6 +54,7 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.dp()),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,11 +62,13 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
                       ButtonWidget(
                         asset: icCalendar,
                         text: _controller.selectedDate.value,
-                        assetBgColor: colorScheme.primary,
+                        textColor: colorScheme.surface,
+                        assetColor: colorScheme.surface,
+                        assetBgColor: colorScheme.surface.withOpacity(.3),
                         width: appDimen.screenWidth * 0.5,
                         onTap: () => _controller.onPickCalendar(context),
                       ),
-                      Gap(20.dp()),
+                      Gap(10.dp()),
                       Obx(
                         () => IconButtonWidget(
                           icon: _controller.textToSpeechApi.isReadingAloud.value
@@ -75,10 +78,20 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
                           iconColor: colorScheme.inverseSurface,
                           onTap: _controller.onReadAloudOnTap,
                         ),
-                      )
+                      ),
+                      Gap(10.dp()),
+                      IconButtonWidget(
+                        icon: Icons.share,
+                        iconSize: 25.dp(),
+                        iconColor: colorScheme.inverseSurface,
+                        onTap: _controller.onShareDevotionOnTap,
+                      ),
                     ],
                   ),
-                  Gap(16.dp()),
+                  Gap(5.dp()),
+                  Text("Read Bible text first",
+                      style: textTheme.labelSmall?.copyWith(fontSize: 10.dp())),
+                  Gap(12.dp()),
                   ContainerWidget(
                     color: colorScheme.primary,
                     borderRadius: 0,
@@ -137,15 +150,32 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
                           description:
                               "Your devotional content appears here. There is no content available for the selected date.",
                         )
-                      : BaseWebView(
-                          model: WebModel(
-                            showAppBar: false,
-                            content: _controller.book.value.devotion?.content,
+                      : Container(
+                          color: colorScheme.tertiary,
+                          child: BaseWebView(
+                            model: WebModel(
+                              showAppBar: false,
+                              content: _controller.book.value.devotion?.content,
+                            ),
                           ),
                         ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  @override
+  Widget floatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: _controller.onOpenBibleTextOnTap,
+      shape: CircleBorder(),
+      backgroundColor: colorScheme.surfaceBright,
+      child: AssetImageWidget(
+        asset: icYouVersion,
+        height: 30.dp(),
+        width: 30.dp(),
       ),
     );
   }

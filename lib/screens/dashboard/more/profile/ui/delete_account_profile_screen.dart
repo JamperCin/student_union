@@ -66,6 +66,7 @@ class DeleteAccountProfileScreen extends BaseScreenStandard {
           Gap(100.dp()),
           ButtonWidget(
             text: "Delete Account",
+            textColor: colorScheme.surface,
             onTap:()=> _controller.onConfirmDeleteAccount(context),
           ),
           Gap(10.dp()),

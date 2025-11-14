@@ -1,13 +1,12 @@
-import 'package:core_module/core/utils/date_time_utils.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/calendar_picker_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
+import 'package:share_plus/share_plus.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
+import 'package:student_union/core/utils/you_version_utils.dart';
 
 class PurchasedBookController extends BaseController {
   Rx<DevotionalBookModel> book = const DevotionalBookModel().obs;
@@ -27,10 +26,12 @@ class PurchasedBookController extends BaseController {
         .formatDate(DateTime.now().toString(), format: "dd MMM, yyyy")
         .obs;
 
-    if(book.devotion == null) {
+    if (book.devotion == null) {
       await Future.delayed(const Duration(milliseconds: 30));
       _fetchDevotionContent(DateTimeUtils().formatDate(
-        DateTime.now().toString(), format: "yyyy-MM-dd",));
+        DateTime.now().toString(),
+        format: "yyyy-MM-dd",
+      ));
     }
   }
 
@@ -63,7 +64,10 @@ class PurchasedBookController extends BaseController {
         DateTimeUtils().formatDate(date.toString(), format: "yyyy-MM-dd");
 
     final param = {
-      "devotion_year_id": (book.value.devotionalId == 0 ? book.value.id : book.value.devotionalId).toString(),
+      "devotion_year_id": (book.value.devotionalId == 0
+              ? book.value.id
+              : book.value.devotionalId)
+          .toString(),
       "date": formatDate
     };
 
@@ -78,5 +82,23 @@ class PurchasedBookController extends BaseController {
         html_parser.parse(book.value.devotion?.content ?? '').body?.text ?? '';
 
     textToSpeechApi.regulateSpeech(content);
+  }
+
+  Future<void> onOpenBibleTextOnTap() async {
+    YouVersionUtils().openBibleReference(ref: book.value.devotion?.reference);
+  }
+
+  void onShareDevotionOnTap() {
+    if (book.value.devotion == null) {
+      return;
+    }
+
+    SharePlus.instance.share(
+      ShareParams(
+        text: book.value.devotion?.reference,
+        title: book.value.devotion?.title,
+        subject: book.value.devotion?.referenceText,
+      ),
+    );
   }
 }

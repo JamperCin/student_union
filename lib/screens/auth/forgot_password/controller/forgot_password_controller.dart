@@ -21,6 +21,11 @@ class ForgotPasswordController extends BaseController {
         subTitle:
             "Kindly confirm your email below as we will send you a link to reset your password",
         onTap: () => _onInitPasswordReset(context),
+        cancelAssetColor: Theme.of(context).colorScheme.surface,
+        buttonStyle: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: Theme.of(context).colorScheme.surface),
         child: Text(
           emailTxtCtrl.text,
           style: Theme.of(context).textTheme.bodyLarge,
@@ -41,10 +46,10 @@ class ForgotPasswordController extends BaseController {
     final results = await userApiService.sendResetPasswordLink(params);
     const LoaderWidget().hideProgress();
 
-
     ///TODO Clean up this block
     if (results.success) {
-      navUtils.fireTarget(VerifyCodeScreen(), model: emailTxtCtrl.text.toString().trim());
+      navUtils.fireTarget(VerifyCodeScreen(),
+          model: emailTxtCtrl.text.toString().trim());
       // SuccessModel model = const SuccessModel(
       //   title: 'Password Reset link sent',
       //   message:
@@ -55,10 +60,10 @@ class ForgotPasswordController extends BaseController {
       //   SuccessScreen(onTap: () => navUtils.fireTargetOff(LoginScreen())),
       //   model: model,
       // );
-    }else{
+    } else {
       //final model
-     // navUtils.fireTarget(VerifyCodeScreen(), model: emailTxtCtrl.text.toString().trim());
-     // snackBarSnippet.snackBarError(results.error ?? 'Something went wrong');
+      // navUtils.fireTarget(VerifyCodeScreen(), model: emailTxtCtrl.text.toString().trim());
+      // snackBarSnippet.snackBarError(results.error ?? 'Something went wrong');
     }
   }
 }

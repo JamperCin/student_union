@@ -20,8 +20,17 @@ class DevotionController extends BaseController {
 
 
   ///Generate list of years starting from current year
-  List<String> get list =>
-      List<String>.generate(5 + 1, (index) => "${DateTime.now().year - index}");
+  // List<String> get list =>
+  //     List<String>.generate(5 + 1, (index) => "${DateTime.now().year - index}");
+  ///Generate list of years starting from current year downwards to 2024
+  List<String> get list {
+    int startYear = 2024;
+    int currentYear = DateTime.now().year;
+    return List<String>.generate(
+      currentYear - startYear + 1,
+          (index) => "${currentYear - index}",
+    );
+  }
 
   void onDevotionTap(DevotionalBookModel model) {
     navUtils.fireTarget(
@@ -44,8 +53,9 @@ class DevotionController extends BaseController {
     if (event is EventTrigger && event.bookType != null) {
       await Future.delayed(const Duration(seconds: 1));
       bookTypeFilter.value = event.bookType!;
+      debugPrint("Called here ${event.screen} --- ${event.bookType}");
     }
-    debugPrint("Called here ${event.screen} --- ${event.bookType}");
+
   }
 
 
@@ -59,6 +69,11 @@ class DevotionController extends BaseController {
       child: ConfirmTransactionLayout(
         title: "Confirm Purchase",
         crossAxisAlignment: CrossAxisAlignment.center,
+        cancelAssetColor: Theme.of(context).colorScheme.surface,
+        buttonStyle: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: Theme.of(context).colorScheme.surface),
         titleStyle: textTheme.titleMedium?.copyWith(color: colorScheme.primary),
         subTitle:
             "Kindly confirm the purchase of this devotional guide with the amount specified below",

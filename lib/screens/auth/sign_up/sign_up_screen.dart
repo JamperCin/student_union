@@ -1,10 +1,8 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_ui/base_screen/base_screen_dec.dart';
-import 'package:core_module/core_ui/snippets/third_party_auth/third_party_auth_widget.dart';
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/checkbox_widget.dart';
-import 'package:core_module/core_ui/widgets/divider_widget.dart';
 import 'package:core_module/core_ui/widgets/text_button_widget.dart';
 import 'package:core_module/core_ui/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';

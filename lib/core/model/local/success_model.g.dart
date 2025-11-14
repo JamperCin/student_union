@@ -13,7 +13,4 @@ _$SuccessModelImpl _$$SuccessModelImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$SuccessModelImplToJson(_$SuccessModelImpl instance) =>
-    <String, dynamic>{
-      'title': instance.title,
-      'message': instance.message,
-    };
+    <String, dynamic>{'title': instance.title, 'message': instance.message};

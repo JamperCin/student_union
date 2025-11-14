@@ -19,6 +19,7 @@ class CustomerModel extends BaseObject with _$CustomerModel {
     @JsonKey(name: 'updated_at')@Default("") String updatedAt,
     @Default("") String status,
     @JsonKey(name: 'thumbnail_url')@Default("") String profilePic,
+    @JsonKey(name: 'fcm_id')@Default("") String fcmToken,
 }) = _CustomerModel;
 
   factory CustomerModel.fromJson(Map<String, dynamic> json) =>

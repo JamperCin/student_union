@@ -1,4 +1,3 @@
-import 'dart:collection';
 
 import 'package:student_union/core/model/remote/customer_model.dart';
 import 'package:student_union/core/model/remote/notification_model.dart';

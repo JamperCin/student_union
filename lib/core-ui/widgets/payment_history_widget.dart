@@ -1,4 +1,3 @@
-import 'package:core_module/core/extensions/double_extension.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core/extensions/string_extension.dart';
 import 'package:core_module/core/utils/date_time_utils.dart';

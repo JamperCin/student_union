@@ -38,6 +38,10 @@ class DonationsController extends BaseController {
         subTitle:
             "Kindly confirm your donation to ${model.title} with the amount stated below",
         buttonTitle: "Proceed",
+        cancelAssetColor: Theme.of(context).colorScheme.surface,
+        buttonStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: Theme.of(context).colorScheme.surface,
+        ),
         onTap: () => _initiateDonation(context, model),
         child: Center(
           child: Column(
@@ -73,7 +77,29 @@ class DonationsController extends BaseController {
   }
 
   Future<void> _initiateDonation(
-      BuildContext context, CampaignModel model) async {
+    BuildContext context,
+    CampaignModel model,
+  ) async {
+
+    executeRequest(
+      validate: () {
+        return (amountTxt.text.toString().isEmpty ||
+            amountTxt.text.toString() == "0" ||
+            double.tryParse(amountTxt.text.toString()) == null);
+      },
+      param: () {
+        return {
+          "payment_type": PaymentType.campaign_donation.name,
+          "metadata": {
+            "campaign_id": model.id,
+            "note": "Donations",
+            "amount": amountTxt.text.toString(),
+          },
+        };
+      },
+      validationErrorMessage: 'Please enter a valid amount',
+    );
+
     //validate amount
     if (amountTxt.text.toString().isEmpty ||
         amountTxt.text.toString() == "0" ||
@@ -88,7 +114,6 @@ class DonationsController extends BaseController {
         "note": "Donations",
         "amount": amountTxt.text.toString(),
       },
-
     };
 
     const LoaderWidget().showProgressIndicator(context: context);
@@ -103,10 +128,11 @@ class DonationsController extends BaseController {
     navUtils.fireTarget(
       BaseWebView(
         model: WebModel(
-            url: url,
-            onDoneOnclick: () {
-              navUtils.fireTargetHome();
-            }),
+          url: url,
+          onDoneOnclick: () {
+            navUtils.fireTargetHome();
+          },
+        ),
       ),
     );
   }

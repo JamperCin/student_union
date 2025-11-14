@@ -13,8 +13,8 @@ _$DevotionalTypeImpl _$$DevotionalTypeImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$DevotionalTypeImplToJson(
-        _$DevotionalTypeImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'description': instance.description,
-    };
+  _$DevotionalTypeImpl instance,
+) => <String, dynamic>{
+  'name': instance.name,
+  'description': instance.description,
+};

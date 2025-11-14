@@ -1,10 +1,7 @@
-import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/model/local/bottom_bar_model.dart';
 import 'package:core_module/core_module.dart';
-import 'package:flutter/material.dart';
+import 'package:student_union/core/api/notification_api.dart';
 import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/enums/book_type.dart';
-import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/core/services/auth/auth_api_service.dart';
 import 'package:student_union/core/services/campaigns/campaigns_api_service.dart';
 import 'package:student_union/core/services/devotional_guide/devotional_guide_api_service.dart';
@@ -23,10 +20,12 @@ late NewsUpdateApiService newsUpdateApiService;
 late AuthApiService authApiService;
 late PaymentApiService paymentApiService;
 late NotificationApiService notificationApiService;
+late NotificationApi notificationApi;
 
 ///--------------------------------------------------------------
 
 RxBool isDarkTheme = false.obs;
+RxInt notificationCount = 0.obs;
 
 class EventTrigger {
   BookType? bookType;

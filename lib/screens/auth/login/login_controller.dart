@@ -4,7 +4,6 @@ import 'dart:collection';
 import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/text_controller_ext.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/calendar_picker_widget.dart';
 import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/base/base_controller.dart';
@@ -17,12 +16,12 @@ class LoginController extends BaseController {
   var emailTxtCtrl = TextEditingController();
   var passwordTxtCtrl = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-    emailTxtCtrl.text = "jampercola@gmail.com";
-    passwordTxtCtrl.text = "asdfghjkl";
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   emailTxtCtrl.text = "jampercola@gmail.com";
+  //   passwordTxtCtrl.text = "asdfghjkl";
+  // }
 
   void onSignUpClicked() {
     navUtils.fireTarget(SignUpScreen());
@@ -37,26 +36,42 @@ class LoginController extends BaseController {
     if (validationUtils.validateEntryEmail(emailTxtCtrl) &&
         validationUtils.validateDataEntry(passwordTxtCtrl)) {
       _initLoginRequest(context);
-      // navUtils.fireTargetOff(MainDashboardScreen());
     }
   }
 
-  ///Initialise the login request to the Api
+  /// Initializes the login request to the API.
+  ///
+  /// This asynchronous method performs the following steps:
+  /// 1. Creates a `HashMap` to store the login parameters (email and password).
+  /// 2. Retrieves the email from `emailTxtCtrl`, converts it to lowercase, and adds it to the parameters.
+  /// 3. Retrieves the password from `passwordTxtCtrl` and adds it to the parameters.
+  /// 4. Displays a progress indicator to the user.
+  /// 5. Makes an API call to the `authApiService.login` endpoint with the prepared parameters.
+  /// 6. Hides the progress indicator after the API call completes.
+  /// 7. Checks if the API response is not null and contains a token.
+  /// 8. If the response is valid:
+  ///    a. Stores the authentication token using `appPreference.setToken()`.
+  ///    b. Stores the user information using `appPreference.setUser()`.
+  ///    c. Navigates the user to the `MainDashboardScreen` and removes the current login screen from the navigation stack.
+  ///
+  /// - Parameters:
+  ///   - `context`: The `BuildContext` used to show and hide the progress indicator.
   Future<void> _initLoginRequest(BuildContext context) async {
-
+    // Prepare the parameters for the login request.
     HashMap<String, Object> params = HashMap();
     params.putIfAbsent("email", () => emailTxtCtrl.getData().toLowerCase());
     params.putIfAbsent("password", () => passwordTxtCtrl.getData());
 
+    // Show a loading indicator while the request is in progress.
     const LoaderWidget().showProgressIndicator(context: context);
     final response = await authApiService.login(params);
     const LoaderWidget().hideProgress();
 
+    // Process the API response.
     if (response != null && response.token != null) {
       appPreference.setToken(response.token!);
       appPreference.setUser(response.user);
       navUtils.fireTargetOff(MainDashboardScreen());
     }
   }
-
 }

@@ -1,4 +1,3 @@
-import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
 import 'package:core_module/core_ui/widgets/list_view_widget.dart';
@@ -16,14 +15,15 @@ class CoreMinistriesWidget extends StatelessWidget {
   final bool horizontalGrid;
   final Function(CampaignModel)? onTap;
   final GestureTapCallback? onSeeMore;
+  RxInt selectedIndex = 0.obs;
 
-  const CoreMinistriesWidget({
+   CoreMinistriesWidget({
     super.key,
     this.onTap,
     this.onSeeMore,
   }) : horizontalGrid = true;
 
-  const CoreMinistriesWidget.withDonations({
+   CoreMinistriesWidget.withDonations({
     super.key,
     this.onTap,
   })  : horizontalGrid = false,
@@ -75,8 +75,18 @@ class CoreMinistriesWidget extends StatelessWidget {
             enableInfiniteScroll: false,
             initialPage: list.length > 1 ? 1 : 0,
             viewportFraction: 0.5,
+            autoPlay: true,
+            onPageChanged: (index, reason) {
+              selectedIndex.value = index;
+            },
           ),
         ),
+        Gap(10.dp()),
+        Center(
+          child: PodWidget(
+              podLength: list.length, currentIndex: selectedIndex),
+        ),
+        Gap(10.dp()),
       ],
     );
   }

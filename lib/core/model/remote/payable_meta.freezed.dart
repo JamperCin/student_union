@@ -12,7 +12,8 @@ part of 'payable_meta.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 PayableMeta _$PayableMetaFromJson(Map<String, dynamic> json) {
   return _PayableMeta.fromJson(json);
@@ -62,24 +63,26 @@ mixin _$PayableMeta {
 /// @nodoc
 abstract class $PayableMetaCopyWith<$Res> {
   factory $PayableMetaCopyWith(
-          PayableMeta value, $Res Function(PayableMeta) then) =
-      _$PayableMetaCopyWithImpl<$Res, PayableMeta>;
+    PayableMeta value,
+    $Res Function(PayableMeta) then,
+  ) = _$PayableMetaCopyWithImpl<$Res, PayableMeta>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'account_id') int? accountId,
-      @JsonKey(name: 'title') String? title,
-      @JsonKey(name: 'description') String? description,
-      @JsonKey(name: 'archived') bool? archived,
-      @JsonKey(name: 'image_url') String? imageUrl,
-      @JsonKey(name: 'update_by') dynamic updateBy,
-      @JsonKey(name: 'created_by') int? createdBy,
-      @JsonKey(name: 'created_at') String? createdAt,
-      @JsonKey(name: 'updated_at') String? updatedAt,
-      @JsonKey(name: 'campaign_type_id') int? campaignTypeId,
-      @JsonKey(name: 'goal_amount') String? goalAmount,
-      @JsonKey(name: 'raised_amount') String? raisedAmount,
-      @JsonKey(name: 'donation_amount') String? donationAmount});
+  $Res call({
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'account_id') int? accountId,
+    @JsonKey(name: 'title') String? title,
+    @JsonKey(name: 'description') String? description,
+    @JsonKey(name: 'archived') bool? archived,
+    @JsonKey(name: 'image_url') String? imageUrl,
+    @JsonKey(name: 'update_by') dynamic updateBy,
+    @JsonKey(name: 'created_by') int? createdBy,
+    @JsonKey(name: 'created_at') String? createdAt,
+    @JsonKey(name: 'updated_at') String? updatedAt,
+    @JsonKey(name: 'campaign_type_id') int? campaignTypeId,
+    @JsonKey(name: 'goal_amount') String? goalAmount,
+    @JsonKey(name: 'raised_amount') String? raisedAmount,
+    @JsonKey(name: 'donation_amount') String? donationAmount,
+  });
 }
 
 /// @nodoc
@@ -112,64 +115,67 @@ class _$PayableMetaCopyWithImpl<$Res, $Val extends PayableMeta>
     Object? raisedAmount = freezed,
     Object? donationAmount = freezed,
   }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      accountId: freezed == accountId
-          ? _value.accountId
-          : accountId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      archived: freezed == archived
-          ? _value.archived
-          : archived // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updateBy: freezed == updateBy
-          ? _value.updateBy
-          : updateBy // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as int?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      campaignTypeId: freezed == campaignTypeId
-          ? _value.campaignTypeId
-          : campaignTypeId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      goalAmount: freezed == goalAmount
-          ? _value.goalAmount
-          : goalAmount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      raisedAmount: freezed == raisedAmount
-          ? _value.raisedAmount
-          : raisedAmount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      donationAmount: freezed == donationAmount
-          ? _value.donationAmount
-          : donationAmount // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id: freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            accountId: freezed == accountId
+                ? _value.accountId
+                : accountId // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            title: freezed == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            description: freezed == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            archived: freezed == archived
+                ? _value.archived
+                : archived // ignore: cast_nullable_to_non_nullable
+                      as bool?,
+            imageUrl: freezed == imageUrl
+                ? _value.imageUrl
+                : imageUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            updateBy: freezed == updateBy
+                ? _value.updateBy
+                : updateBy // ignore: cast_nullable_to_non_nullable
+                      as dynamic,
+            createdBy: freezed == createdBy
+                ? _value.createdBy
+                : createdBy // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            createdAt: freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            updatedAt: freezed == updatedAt
+                ? _value.updatedAt
+                : updatedAt // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            campaignTypeId: freezed == campaignTypeId
+                ? _value.campaignTypeId
+                : campaignTypeId // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            goalAmount: freezed == goalAmount
+                ? _value.goalAmount
+                : goalAmount // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            raisedAmount: freezed == raisedAmount
+                ? _value.raisedAmount
+                : raisedAmount // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            donationAmount: freezed == donationAmount
+                ? _value.donationAmount
+                : donationAmount // ignore: cast_nullable_to_non_nullable
+                      as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -177,25 +183,27 @@ class _$PayableMetaCopyWithImpl<$Res, $Val extends PayableMeta>
 abstract class _$$PayableMetaImplCopyWith<$Res>
     implements $PayableMetaCopyWith<$Res> {
   factory _$$PayableMetaImplCopyWith(
-          _$PayableMetaImpl value, $Res Function(_$PayableMetaImpl) then) =
-      __$$PayableMetaImplCopyWithImpl<$Res>;
+    _$PayableMetaImpl value,
+    $Res Function(_$PayableMetaImpl) then,
+  ) = __$$PayableMetaImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'account_id') int? accountId,
-      @JsonKey(name: 'title') String? title,
-      @JsonKey(name: 'description') String? description,
-      @JsonKey(name: 'archived') bool? archived,
-      @JsonKey(name: 'image_url') String? imageUrl,
-      @JsonKey(name: 'update_by') dynamic updateBy,
-      @JsonKey(name: 'created_by') int? createdBy,
-      @JsonKey(name: 'created_at') String? createdAt,
-      @JsonKey(name: 'updated_at') String? updatedAt,
-      @JsonKey(name: 'campaign_type_id') int? campaignTypeId,
-      @JsonKey(name: 'goal_amount') String? goalAmount,
-      @JsonKey(name: 'raised_amount') String? raisedAmount,
-      @JsonKey(name: 'donation_amount') String? donationAmount});
+  $Res call({
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'account_id') int? accountId,
+    @JsonKey(name: 'title') String? title,
+    @JsonKey(name: 'description') String? description,
+    @JsonKey(name: 'archived') bool? archived,
+    @JsonKey(name: 'image_url') String? imageUrl,
+    @JsonKey(name: 'update_by') dynamic updateBy,
+    @JsonKey(name: 'created_by') int? createdBy,
+    @JsonKey(name: 'created_at') String? createdAt,
+    @JsonKey(name: 'updated_at') String? updatedAt,
+    @JsonKey(name: 'campaign_type_id') int? campaignTypeId,
+    @JsonKey(name: 'goal_amount') String? goalAmount,
+    @JsonKey(name: 'raised_amount') String? raisedAmount,
+    @JsonKey(name: 'donation_amount') String? donationAmount,
+  });
 }
 
 /// @nodoc
@@ -203,8 +211,9 @@ class __$$PayableMetaImplCopyWithImpl<$Res>
     extends _$PayableMetaCopyWithImpl<$Res, _$PayableMetaImpl>
     implements _$$PayableMetaImplCopyWith<$Res> {
   __$$PayableMetaImplCopyWithImpl(
-      _$PayableMetaImpl _value, $Res Function(_$PayableMetaImpl) _then)
-      : super(_value, _then);
+    _$PayableMetaImpl _value,
+    $Res Function(_$PayableMetaImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of PayableMeta
   /// with the given fields replaced by the non-null parameter values.
@@ -226,85 +235,88 @@ class __$$PayableMetaImplCopyWithImpl<$Res>
     Object? raisedAmount = freezed,
     Object? donationAmount = freezed,
   }) {
-    return _then(_$PayableMetaImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      accountId: freezed == accountId
-          ? _value.accountId
-          : accountId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      archived: freezed == archived
-          ? _value.archived
-          : archived // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updateBy: freezed == updateBy
-          ? _value.updateBy
-          : updateBy // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as int?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      campaignTypeId: freezed == campaignTypeId
-          ? _value.campaignTypeId
-          : campaignTypeId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      goalAmount: freezed == goalAmount
-          ? _value.goalAmount
-          : goalAmount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      raisedAmount: freezed == raisedAmount
-          ? _value.raisedAmount
-          : raisedAmount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      donationAmount: freezed == donationAmount
-          ? _value.donationAmount
-          : donationAmount // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$PayableMetaImpl(
+        id: freezed == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        accountId: freezed == accountId
+            ? _value.accountId
+            : accountId // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        title: freezed == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        description: freezed == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        archived: freezed == archived
+            ? _value.archived
+            : archived // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        imageUrl: freezed == imageUrl
+            ? _value.imageUrl
+            : imageUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        updateBy: freezed == updateBy
+            ? _value.updateBy
+            : updateBy // ignore: cast_nullable_to_non_nullable
+                  as dynamic,
+        createdBy: freezed == createdBy
+            ? _value.createdBy
+            : createdBy // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        createdAt: freezed == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        updatedAt: freezed == updatedAt
+            ? _value.updatedAt
+            : updatedAt // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        campaignTypeId: freezed == campaignTypeId
+            ? _value.campaignTypeId
+            : campaignTypeId // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        goalAmount: freezed == goalAmount
+            ? _value.goalAmount
+            : goalAmount // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        raisedAmount: freezed == raisedAmount
+            ? _value.raisedAmount
+            : raisedAmount // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        donationAmount: freezed == donationAmount
+            ? _value.donationAmount
+            : donationAmount // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PayableMetaImpl implements _PayableMeta {
-  const _$PayableMetaImpl(
-      {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'account_id') this.accountId,
-      @JsonKey(name: 'title') this.title,
-      @JsonKey(name: 'description') this.description,
-      @JsonKey(name: 'archived') this.archived,
-      @JsonKey(name: 'image_url') this.imageUrl,
-      @JsonKey(name: 'update_by') this.updateBy,
-      @JsonKey(name: 'created_by') this.createdBy,
-      @JsonKey(name: 'created_at') this.createdAt,
-      @JsonKey(name: 'updated_at') this.updatedAt,
-      @JsonKey(name: 'campaign_type_id') this.campaignTypeId,
-      @JsonKey(name: 'goal_amount') this.goalAmount,
-      @JsonKey(name: 'raised_amount') this.raisedAmount,
-      @JsonKey(name: 'donation_amount') this.donationAmount});
+  const _$PayableMetaImpl({
+    @JsonKey(name: 'id') this.id,
+    @JsonKey(name: 'account_id') this.accountId,
+    @JsonKey(name: 'title') this.title,
+    @JsonKey(name: 'description') this.description,
+    @JsonKey(name: 'archived') this.archived,
+    @JsonKey(name: 'image_url') this.imageUrl,
+    @JsonKey(name: 'update_by') this.updateBy,
+    @JsonKey(name: 'created_by') this.createdBy,
+    @JsonKey(name: 'created_at') this.createdAt,
+    @JsonKey(name: 'updated_at') this.updatedAt,
+    @JsonKey(name: 'campaign_type_id') this.campaignTypeId,
+    @JsonKey(name: 'goal_amount') this.goalAmount,
+    @JsonKey(name: 'raised_amount') this.raisedAmount,
+    @JsonKey(name: 'donation_amount') this.donationAmount,
+  });
 
   factory _$PayableMetaImpl.fromJson(Map<String, dynamic> json) =>
       _$$PayableMetaImplFromJson(json);
@@ -392,21 +404,22 @@ class _$PayableMetaImpl implements _PayableMeta {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      accountId,
-      title,
-      description,
-      archived,
-      imageUrl,
-      const DeepCollectionEquality().hash(updateBy),
-      createdBy,
-      createdAt,
-      updatedAt,
-      campaignTypeId,
-      goalAmount,
-      raisedAmount,
-      donationAmount);
+    runtimeType,
+    id,
+    accountId,
+    title,
+    description,
+    archived,
+    imageUrl,
+    const DeepCollectionEquality().hash(updateBy),
+    createdBy,
+    createdAt,
+    updatedAt,
+    campaignTypeId,
+    goalAmount,
+    raisedAmount,
+    donationAmount,
+  );
 
   /// Create a copy of PayableMeta
   /// with the given fields replaced by the non-null parameter values.
@@ -418,29 +431,27 @@ class _$PayableMetaImpl implements _PayableMeta {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PayableMetaImplToJson(
-      this,
-    );
+    return _$$PayableMetaImplToJson(this);
   }
 }
 
 abstract class _PayableMeta implements PayableMeta {
-  const factory _PayableMeta(
-          {@JsonKey(name: 'id') final int? id,
-          @JsonKey(name: 'account_id') final int? accountId,
-          @JsonKey(name: 'title') final String? title,
-          @JsonKey(name: 'description') final String? description,
-          @JsonKey(name: 'archived') final bool? archived,
-          @JsonKey(name: 'image_url') final String? imageUrl,
-          @JsonKey(name: 'update_by') final dynamic updateBy,
-          @JsonKey(name: 'created_by') final int? createdBy,
-          @JsonKey(name: 'created_at') final String? createdAt,
-          @JsonKey(name: 'updated_at') final String? updatedAt,
-          @JsonKey(name: 'campaign_type_id') final int? campaignTypeId,
-          @JsonKey(name: 'goal_amount') final String? goalAmount,
-          @JsonKey(name: 'raised_amount') final String? raisedAmount,
-          @JsonKey(name: 'donation_amount') final String? donationAmount}) =
-      _$PayableMetaImpl;
+  const factory _PayableMeta({
+    @JsonKey(name: 'id') final int? id,
+    @JsonKey(name: 'account_id') final int? accountId,
+    @JsonKey(name: 'title') final String? title,
+    @JsonKey(name: 'description') final String? description,
+    @JsonKey(name: 'archived') final bool? archived,
+    @JsonKey(name: 'image_url') final String? imageUrl,
+    @JsonKey(name: 'update_by') final dynamic updateBy,
+    @JsonKey(name: 'created_by') final int? createdBy,
+    @JsonKey(name: 'created_at') final String? createdAt,
+    @JsonKey(name: 'updated_at') final String? updatedAt,
+    @JsonKey(name: 'campaign_type_id') final int? campaignTypeId,
+    @JsonKey(name: 'goal_amount') final String? goalAmount,
+    @JsonKey(name: 'raised_amount') final String? raisedAmount,
+    @JsonKey(name: 'donation_amount') final String? donationAmount,
+  }) = _$PayableMetaImpl;
 
   factory _PayableMeta.fromJson(Map<String, dynamic> json) =
       _$PayableMetaImpl.fromJson;

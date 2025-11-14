@@ -6,8 +6,6 @@ import 'package:core_module/core_ui/snippets/file_image_picker/file_image_picker
 import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
 import 'package:core_module/core_ui/widgets/button_widget.dart';
 import 'package:core_module/core_ui/widgets/card_container_widget.dart';
-import 'package:core_module/core_ui/widgets/container_widget.dart';
-import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:core_module/core_ui/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
@@ -54,7 +52,7 @@ class ProfileScreen extends BaseScreenStandard {
               hintText: 'Ex. John Doe',
               isEnabled: false,
               controller: TextEditingController(
-                  text: appPreference.getUser()?.name ?? ''),
+                  text: appPreference.getUser().name),
               disabledColor: colorScheme.tertiary,
               prefixIcon: AssetImageWidget(
                 asset: icProfileInput,
@@ -71,7 +69,7 @@ class ProfileScreen extends BaseScreenStandard {
               isEnabled: false,
               disabledColor: colorScheme.tertiary,
               controller: TextEditingController(
-                  text: appPreference.getUser()?.email ?? ''),
+                  text: appPreference.getUser().email),
               prefixIcon: AssetImageWidget(
                 asset: icEmailInput,
                 height: 20.dp(),
