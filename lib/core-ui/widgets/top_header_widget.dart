@@ -105,21 +105,24 @@ class TopHeaderWidget extends StatelessWidget {
                   ),
                 if (onSearchOnClick != null) Gap(appDimen.dimen(1)),
                 if (onNotifyOnClick != null)
-                  Badge(
-                    backgroundColor: Colors.red,
-                    label: Center(
-                      child: Text(
-                        "${notificationCount.value}",
-                        style: textTheme.labelLarge?.copyWith(
-                          color: Colors.white,
-                          fontSize: 10.dp(),
+                  InkWell(
+                    onTap: onNotifyOnClick,
+                    child: Badge(
+                      backgroundColor: Colors.red,
+                      label: Center(
+                        child: Text(
+                          "${notificationCount.value}",
+                          style: textTheme.labelLarge?.copyWith(
+                            color: Colors.white,
+                            fontSize: 10.dp(),
+                          ),
                         ),
                       ),
-                    ),
-                    isLabelVisible: true,
-                    child: Icon(
-                      Icons.notifications_none,
-                      size: 25.dp(),
+                      isLabelVisible: true,
+                      child: Icon(
+                        Icons.notifications_none,
+                        size: 25.dp(),
+                      ),
                     ),
                   ),
               ],

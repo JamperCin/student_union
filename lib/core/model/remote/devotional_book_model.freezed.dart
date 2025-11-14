@@ -12,7 +12,8 @@ part of 'devotional_book_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 DevotionalBookModel _$DevotionalBookModelFromJson(Map<String, dynamic> json) {
   return _DevotionalBookModel.fromJson(json);
@@ -52,25 +53,27 @@ mixin _$DevotionalBookModel {
 /// @nodoc
 abstract class $DevotionalBookModelCopyWith<$Res> {
   factory $DevotionalBookModelCopyWith(
-          DevotionalBookModel value, $Res Function(DevotionalBookModel) then) =
-      _$DevotionalBookModelCopyWithImpl<$Res, DevotionalBookModel>;
+    DevotionalBookModel value,
+    $Res Function(DevotionalBookModel) then,
+  ) = _$DevotionalBookModelCopyWithImpl<$Res, DevotionalBookModel>;
   @useResult
-  $Res call(
-      {int id,
-      int year,
-      bool published,
-      bool purchased,
-      @JsonKey(name: "thumbnail_url") String thumbnail,
-      @JsonKey(name: "devotion_type") DevotionalType? devotionalType,
-      @JsonKey(name: "devotion_year_id") int devotionalId,
-      TodaysDevotion? devotion,
-      String description,
-      String title,
-      String name,
-      String author,
-      String page,
-      String currency,
-      String price});
+  $Res call({
+    int id,
+    int year,
+    bool published,
+    bool purchased,
+    @JsonKey(name: "thumbnail_url") String thumbnail,
+    @JsonKey(name: "devotion_type") DevotionalType? devotionalType,
+    @JsonKey(name: "devotion_year_id") int devotionalId,
+    TodaysDevotion? devotion,
+    String description,
+    String title,
+    String name,
+    String author,
+    String page,
+    String currency,
+    String price,
+  });
 
   $DevotionalTypeCopyWith<$Res>? get devotionalType;
   $TodaysDevotionCopyWith<$Res>? get devotion;
@@ -107,68 +110,71 @@ class _$DevotionalBookModelCopyWithImpl<$Res, $Val extends DevotionalBookModel>
     Object? currency = null,
     Object? price = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      year: null == year
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int,
-      published: null == published
-          ? _value.published
-          : published // ignore: cast_nullable_to_non_nullable
-              as bool,
-      purchased: null == purchased
-          ? _value.purchased
-          : purchased // ignore: cast_nullable_to_non_nullable
-              as bool,
-      thumbnail: null == thumbnail
-          ? _value.thumbnail
-          : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String,
-      devotionalType: freezed == devotionalType
-          ? _value.devotionalType
-          : devotionalType // ignore: cast_nullable_to_non_nullable
-              as DevotionalType?,
-      devotionalId: null == devotionalId
-          ? _value.devotionalId
-          : devotionalId // ignore: cast_nullable_to_non_nullable
-              as int,
-      devotion: freezed == devotion
-          ? _value.devotion
-          : devotion // ignore: cast_nullable_to_non_nullable
-              as TodaysDevotion?,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      author: null == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
-              as String,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as String,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int,
+            year: null == year
+                ? _value.year
+                : year // ignore: cast_nullable_to_non_nullable
+                      as int,
+            published: null == published
+                ? _value.published
+                : published // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            purchased: null == purchased
+                ? _value.purchased
+                : purchased // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            thumbnail: null == thumbnail
+                ? _value.thumbnail
+                : thumbnail // ignore: cast_nullable_to_non_nullable
+                      as String,
+            devotionalType: freezed == devotionalType
+                ? _value.devotionalType
+                : devotionalType // ignore: cast_nullable_to_non_nullable
+                      as DevotionalType?,
+            devotionalId: null == devotionalId
+                ? _value.devotionalId
+                : devotionalId // ignore: cast_nullable_to_non_nullable
+                      as int,
+            devotion: freezed == devotion
+                ? _value.devotion
+                : devotion // ignore: cast_nullable_to_non_nullable
+                      as TodaysDevotion?,
+            description: null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                      as String,
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+            name: null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                      as String,
+            author: null == author
+                ? _value.author
+                : author // ignore: cast_nullable_to_non_nullable
+                      as String,
+            page: null == page
+                ? _value.page
+                : page // ignore: cast_nullable_to_non_nullable
+                      as String,
+            currency: null == currency
+                ? _value.currency
+                : currency // ignore: cast_nullable_to_non_nullable
+                      as String,
+            price: null == price
+                ? _value.price
+                : price // ignore: cast_nullable_to_non_nullable
+                      as String,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of DevotionalBookModel
@@ -203,27 +209,29 @@ class _$DevotionalBookModelCopyWithImpl<$Res, $Val extends DevotionalBookModel>
 /// @nodoc
 abstract class _$$DevotionalBookModelImplCopyWith<$Res>
     implements $DevotionalBookModelCopyWith<$Res> {
-  factory _$$DevotionalBookModelImplCopyWith(_$DevotionalBookModelImpl value,
-          $Res Function(_$DevotionalBookModelImpl) then) =
-      __$$DevotionalBookModelImplCopyWithImpl<$Res>;
+  factory _$$DevotionalBookModelImplCopyWith(
+    _$DevotionalBookModelImpl value,
+    $Res Function(_$DevotionalBookModelImpl) then,
+  ) = __$$DevotionalBookModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      int year,
-      bool published,
-      bool purchased,
-      @JsonKey(name: "thumbnail_url") String thumbnail,
-      @JsonKey(name: "devotion_type") DevotionalType? devotionalType,
-      @JsonKey(name: "devotion_year_id") int devotionalId,
-      TodaysDevotion? devotion,
-      String description,
-      String title,
-      String name,
-      String author,
-      String page,
-      String currency,
-      String price});
+  $Res call({
+    int id,
+    int year,
+    bool published,
+    bool purchased,
+    @JsonKey(name: "thumbnail_url") String thumbnail,
+    @JsonKey(name: "devotion_type") DevotionalType? devotionalType,
+    @JsonKey(name: "devotion_year_id") int devotionalId,
+    TodaysDevotion? devotion,
+    String description,
+    String title,
+    String name,
+    String author,
+    String page,
+    String currency,
+    String price,
+  });
 
   @override
   $DevotionalTypeCopyWith<$Res>? get devotionalType;
@@ -235,9 +243,10 @@ abstract class _$$DevotionalBookModelImplCopyWith<$Res>
 class __$$DevotionalBookModelImplCopyWithImpl<$Res>
     extends _$DevotionalBookModelCopyWithImpl<$Res, _$DevotionalBookModelImpl>
     implements _$$DevotionalBookModelImplCopyWith<$Res> {
-  __$$DevotionalBookModelImplCopyWithImpl(_$DevotionalBookModelImpl _value,
-      $Res Function(_$DevotionalBookModelImpl) _then)
-      : super(_value, _then);
+  __$$DevotionalBookModelImplCopyWithImpl(
+    _$DevotionalBookModelImpl _value,
+    $Res Function(_$DevotionalBookModelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of DevotionalBookModel
   /// with the given fields replaced by the non-null parameter values.
@@ -260,90 +269,93 @@ class __$$DevotionalBookModelImplCopyWithImpl<$Res>
     Object? currency = null,
     Object? price = null,
   }) {
-    return _then(_$DevotionalBookModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      year: null == year
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int,
-      published: null == published
-          ? _value.published
-          : published // ignore: cast_nullable_to_non_nullable
-              as bool,
-      purchased: null == purchased
-          ? _value.purchased
-          : purchased // ignore: cast_nullable_to_non_nullable
-              as bool,
-      thumbnail: null == thumbnail
-          ? _value.thumbnail
-          : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String,
-      devotionalType: freezed == devotionalType
-          ? _value.devotionalType
-          : devotionalType // ignore: cast_nullable_to_non_nullable
-              as DevotionalType?,
-      devotionalId: null == devotionalId
-          ? _value.devotionalId
-          : devotionalId // ignore: cast_nullable_to_non_nullable
-              as int,
-      devotion: freezed == devotion
-          ? _value.devotion
-          : devotion // ignore: cast_nullable_to_non_nullable
-              as TodaysDevotion?,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      author: null == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
-              as String,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as String,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$DevotionalBookModelImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int,
+        year: null == year
+            ? _value.year
+            : year // ignore: cast_nullable_to_non_nullable
+                  as int,
+        published: null == published
+            ? _value.published
+            : published // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        purchased: null == purchased
+            ? _value.purchased
+            : purchased // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        thumbnail: null == thumbnail
+            ? _value.thumbnail
+            : thumbnail // ignore: cast_nullable_to_non_nullable
+                  as String,
+        devotionalType: freezed == devotionalType
+            ? _value.devotionalType
+            : devotionalType // ignore: cast_nullable_to_non_nullable
+                  as DevotionalType?,
+        devotionalId: null == devotionalId
+            ? _value.devotionalId
+            : devotionalId // ignore: cast_nullable_to_non_nullable
+                  as int,
+        devotion: freezed == devotion
+            ? _value.devotion
+            : devotion // ignore: cast_nullable_to_non_nullable
+                  as TodaysDevotion?,
+        description: null == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String,
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _value.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        author: null == author
+            ? _value.author
+            : author // ignore: cast_nullable_to_non_nullable
+                  as String,
+        page: null == page
+            ? _value.page
+            : page // ignore: cast_nullable_to_non_nullable
+                  as String,
+        currency: null == currency
+            ? _value.currency
+            : currency // ignore: cast_nullable_to_non_nullable
+                  as String,
+        price: null == price
+            ? _value.price
+            : price // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DevotionalBookModelImpl implements _DevotionalBookModel {
-  const _$DevotionalBookModelImpl(
-      {this.id = 0,
-      this.year = 0,
-      this.published = true,
-      this.purchased = false,
-      @JsonKey(name: "thumbnail_url") this.thumbnail = "",
-      @JsonKey(name: "devotion_type") this.devotionalType,
-      @JsonKey(name: "devotion_year_id") this.devotionalId = 0,
-      this.devotion,
-      this.description = "",
-      this.title = "",
-      this.name = "",
-      this.author = "",
-      this.page = "",
-      this.currency = "GHS",
-      this.price = "0.00"});
+  const _$DevotionalBookModelImpl({
+    this.id = 0,
+    this.year = 0,
+    this.published = true,
+    this.purchased = false,
+    @JsonKey(name: "thumbnail_url") this.thumbnail = "",
+    @JsonKey(name: "devotion_type") this.devotionalType,
+    @JsonKey(name: "devotion_year_id") this.devotionalId = 0,
+    this.devotion,
+    this.description = "",
+    this.title = "",
+    this.name = "",
+    this.author = "",
+    this.page = "",
+    this.currency = "GHS",
+    this.price = "0.00",
+  });
 
   factory _$DevotionalBookModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DevotionalBookModelImplFromJson(json);
@@ -431,22 +443,23 @@ class _$DevotionalBookModelImpl implements _DevotionalBookModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      year,
-      published,
-      purchased,
-      thumbnail,
-      devotionalType,
-      devotionalId,
-      devotion,
-      description,
-      title,
-      name,
-      author,
-      page,
-      currency,
-      price);
+    runtimeType,
+    id,
+    year,
+    published,
+    purchased,
+    thumbnail,
+    devotionalType,
+    devotionalId,
+    devotion,
+    description,
+    title,
+    name,
+    author,
+    page,
+    currency,
+    price,
+  );
 
   /// Create a copy of DevotionalBookModel
   /// with the given fields replaced by the non-null parameter values.
@@ -455,33 +468,34 @@ class _$DevotionalBookModelImpl implements _DevotionalBookModel {
   @pragma('vm:prefer-inline')
   _$$DevotionalBookModelImplCopyWith<_$DevotionalBookModelImpl> get copyWith =>
       __$$DevotionalBookModelImplCopyWithImpl<_$DevotionalBookModelImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DevotionalBookModelImplToJson(
-      this,
-    );
+    return _$$DevotionalBookModelImplToJson(this);
   }
 }
 
 abstract class _DevotionalBookModel implements DevotionalBookModel {
-  const factory _DevotionalBookModel(
-      {final int id,
-      final int year,
-      final bool published,
-      final bool purchased,
-      @JsonKey(name: "thumbnail_url") final String thumbnail,
-      @JsonKey(name: "devotion_type") final DevotionalType? devotionalType,
-      @JsonKey(name: "devotion_year_id") final int devotionalId,
-      final TodaysDevotion? devotion,
-      final String description,
-      final String title,
-      final String name,
-      final String author,
-      final String page,
-      final String currency,
-      final String price}) = _$DevotionalBookModelImpl;
+  const factory _DevotionalBookModel({
+    final int id,
+    final int year,
+    final bool published,
+    final bool purchased,
+    @JsonKey(name: "thumbnail_url") final String thumbnail,
+    @JsonKey(name: "devotion_type") final DevotionalType? devotionalType,
+    @JsonKey(name: "devotion_year_id") final int devotionalId,
+    final TodaysDevotion? devotion,
+    final String description,
+    final String title,
+    final String name,
+    final String author,
+    final String page,
+    final String currency,
+    final String price,
+  }) = _$DevotionalBookModelImpl;
 
   factory _DevotionalBookModel.fromJson(Map<String, dynamic> json) =
       _$DevotionalBookModelImpl.fromJson;

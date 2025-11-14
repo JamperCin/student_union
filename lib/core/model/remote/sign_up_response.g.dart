@@ -13,15 +13,16 @@ _$SignUpResponseImpl _$$SignUpResponseImplFromJson(Map<String, dynamic> json) =>
           ? null
           : CustomerModel.fromJson(json['user'] as Map<String, dynamic>),
       status: json['status'] as String?,
-      errors:
-          (json['errors'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$SignUpResponseImplToJson(
-        _$SignUpResponseImpl instance) =>
-    <String, dynamic>{
-      'token': instance.token,
-      'user': instance.user,
-      'status': instance.status,
-      'errors': instance.errors,
-    };
+  _$SignUpResponseImpl instance,
+) => <String, dynamic>{
+  'token': instance.token,
+  'user': instance.user,
+  'status': instance.status,
+  'errors': instance.errors,
+};

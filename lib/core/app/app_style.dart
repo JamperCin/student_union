@@ -20,8 +20,9 @@ TextStyle normalButtonLightModeStyle = TextStyle(
   color: Colors.white,
 );
 
-TextStyle boldButtonLightModeStyle =
-normalButtonLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+TextStyle boldButtonLightModeStyle = normalButtonLightModeStyle.copyWith(
+  fontWeight: FontWeight.w900,
+);
 
 ///Label Text
 TextStyle labelSmallTextLightModeStyle = TextStyle(
@@ -35,11 +36,13 @@ TextStyle labelSmallTextLightModeStyle = TextStyle(
   color: Colors.black87,
 );
 
-TextStyle labelMediumTextLightModeStyle =
-labelSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+TextStyle labelMediumTextLightModeStyle = labelSmallTextLightModeStyle.copyWith(
+  fontWeight: FontWeight.w400,
+);
 
-TextStyle labelLargeTextLightModeStyle =
-labelSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+TextStyle labelLargeTextLightModeStyle = labelSmallTextLightModeStyle.copyWith(
+  fontWeight: FontWeight.w900,
+);
 
 ///Body Text
 TextStyle bodySmallTextLightModeStyle = TextStyle(
@@ -53,11 +56,13 @@ TextStyle bodySmallTextLightModeStyle = TextStyle(
   color: Colors.black87,
 );
 
-TextStyle bodyMediumTextLightModeStyle =
-bodySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+TextStyle bodyMediumTextLightModeStyle = bodySmallTextLightModeStyle.copyWith(
+  fontWeight: FontWeight.w400,
+);
 
-TextStyle bodyLargeTextLightModeStyle =
-bodySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+TextStyle bodyLargeTextLightModeStyle = bodySmallTextLightModeStyle.copyWith(
+  fontWeight: FontWeight.w900,
+);
 
 ///Title text
 TextStyle titleSmallTextLightModeStyle = TextStyle(
@@ -71,11 +76,13 @@ TextStyle titleSmallTextLightModeStyle = TextStyle(
   color: Colors.black87,
 );
 
-TextStyle titleMediumTextLightModeStyle =
-titleSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+TextStyle titleMediumTextLightModeStyle = titleSmallTextLightModeStyle.copyWith(
+  fontWeight: FontWeight.w400,
+);
 
-TextStyle titleLargeTextLightModeStyle =
-titleSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+TextStyle titleLargeTextLightModeStyle = titleSmallTextLightModeStyle.copyWith(
+  fontWeight: FontWeight.w900,
+);
 
 ///Display text
 TextStyle displaySmallTextLightModeStyle = TextStyle(
@@ -89,11 +96,11 @@ TextStyle displaySmallTextLightModeStyle = TextStyle(
   color: Colors.black87,
 );
 
-TextStyle displayMediumTextLightModeStyle =
-displaySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+TextStyle displayMediumTextLightModeStyle = displaySmallTextLightModeStyle
+    .copyWith(fontWeight: FontWeight.w400);
 
-TextStyle displayLargeTextLightModeStyle =
-displaySmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+TextStyle displayLargeTextLightModeStyle = displaySmallTextLightModeStyle
+    .copyWith(fontWeight: FontWeight.w900);
 
 ///Heading text
 TextStyle headingSmallTextLightModeStyle = TextStyle(
@@ -106,8 +113,8 @@ TextStyle headingSmallTextLightModeStyle = TextStyle(
   letterSpacing: _letterSpacing,
   color: Colors.black87,
 );
-TextStyle headingMediumTextLightModeStyle =
-headingSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w400);
+TextStyle headingMediumTextLightModeStyle = headingSmallTextLightModeStyle
+    .copyWith(fontWeight: FontWeight.w400);
 
-TextStyle headingLargeTextLightModeStyle =
-headingSmallTextLightModeStyle.copyWith(fontWeight: FontWeight.w900);
+TextStyle headingLargeTextLightModeStyle = headingSmallTextLightModeStyle
+    .copyWith(fontWeight: FontWeight.w900);

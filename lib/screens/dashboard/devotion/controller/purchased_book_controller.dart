@@ -1,7 +1,4 @@
-import 'package:core_module/core/utils/date_time_utils.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/calendar_picker_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:share_plus/share_plus.dart';

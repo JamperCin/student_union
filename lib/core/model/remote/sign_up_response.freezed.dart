@@ -12,7 +12,8 @@ part of 'sign_up_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 SignUpResponse _$SignUpResponseFromJson(Map<String, dynamic> json) {
   return _SignUpResponse.fromJson(json);
@@ -42,14 +43,16 @@ mixin _$SignUpResponse {
 /// @nodoc
 abstract class $SignUpResponseCopyWith<$Res> {
   factory $SignUpResponseCopyWith(
-          SignUpResponse value, $Res Function(SignUpResponse) then) =
-      _$SignUpResponseCopyWithImpl<$Res, SignUpResponse>;
+    SignUpResponse value,
+    $Res Function(SignUpResponse) then,
+  ) = _$SignUpResponseCopyWithImpl<$Res, SignUpResponse>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'token') String? token,
-      @JsonKey(name: 'user') CustomerModel? user,
-      @JsonKey(name: 'status') String? status,
-      @JsonKey(name: 'errors') List<String>? errors});
+  $Res call({
+    @JsonKey(name: 'token') String? token,
+    @JsonKey(name: 'user') CustomerModel? user,
+    @JsonKey(name: 'status') String? status,
+    @JsonKey(name: 'errors') List<String>? errors,
+  });
 
   $CustomerModelCopyWith<$Res>? get user;
 }
@@ -74,24 +77,27 @@ class _$SignUpResponseCopyWithImpl<$Res, $Val extends SignUpResponse>
     Object? status = freezed,
     Object? errors = freezed,
   }) {
-    return _then(_value.copyWith(
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as CustomerModel?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      errors: freezed == errors
-          ? _value.errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            token: freezed == token
+                ? _value.token
+                : token // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            user: freezed == user
+                ? _value.user
+                : user // ignore: cast_nullable_to_non_nullable
+                      as CustomerModel?,
+            status: freezed == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            errors: freezed == errors
+                ? _value.errors
+                : errors // ignore: cast_nullable_to_non_nullable
+                      as List<String>?,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of SignUpResponse
@@ -112,16 +118,18 @@ class _$SignUpResponseCopyWithImpl<$Res, $Val extends SignUpResponse>
 /// @nodoc
 abstract class _$$SignUpResponseImplCopyWith<$Res>
     implements $SignUpResponseCopyWith<$Res> {
-  factory _$$SignUpResponseImplCopyWith(_$SignUpResponseImpl value,
-          $Res Function(_$SignUpResponseImpl) then) =
-      __$$SignUpResponseImplCopyWithImpl<$Res>;
+  factory _$$SignUpResponseImplCopyWith(
+    _$SignUpResponseImpl value,
+    $Res Function(_$SignUpResponseImpl) then,
+  ) = __$$SignUpResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'token') String? token,
-      @JsonKey(name: 'user') CustomerModel? user,
-      @JsonKey(name: 'status') String? status,
-      @JsonKey(name: 'errors') List<String>? errors});
+  $Res call({
+    @JsonKey(name: 'token') String? token,
+    @JsonKey(name: 'user') CustomerModel? user,
+    @JsonKey(name: 'status') String? status,
+    @JsonKey(name: 'errors') List<String>? errors,
+  });
 
   @override
   $CustomerModelCopyWith<$Res>? get user;
@@ -132,8 +140,9 @@ class __$$SignUpResponseImplCopyWithImpl<$Res>
     extends _$SignUpResponseCopyWithImpl<$Res, _$SignUpResponseImpl>
     implements _$$SignUpResponseImplCopyWith<$Res> {
   __$$SignUpResponseImplCopyWithImpl(
-      _$SignUpResponseImpl _value, $Res Function(_$SignUpResponseImpl) _then)
-      : super(_value, _then);
+    _$SignUpResponseImpl _value,
+    $Res Function(_$SignUpResponseImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of SignUpResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -145,36 +154,38 @@ class __$$SignUpResponseImplCopyWithImpl<$Res>
     Object? status = freezed,
     Object? errors = freezed,
   }) {
-    return _then(_$SignUpResponseImpl(
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as CustomerModel?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      errors: freezed == errors
-          ? _value._errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-    ));
+    return _then(
+      _$SignUpResponseImpl(
+        token: freezed == token
+            ? _value.token
+            : token // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        user: freezed == user
+            ? _value.user
+            : user // ignore: cast_nullable_to_non_nullable
+                  as CustomerModel?,
+        status: freezed == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        errors: freezed == errors
+            ? _value._errors
+            : errors // ignore: cast_nullable_to_non_nullable
+                  as List<String>?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SignUpResponseImpl implements _SignUpResponse {
-  const _$SignUpResponseImpl(
-      {@JsonKey(name: 'token') this.token,
-      @JsonKey(name: 'user') this.user,
-      @JsonKey(name: 'status') this.status,
-      @JsonKey(name: 'errors') final List<String>? errors})
-      : _errors = errors;
+  const _$SignUpResponseImpl({
+    @JsonKey(name: 'token') this.token,
+    @JsonKey(name: 'user') this.user,
+    @JsonKey(name: 'status') this.status,
+    @JsonKey(name: 'errors') final List<String>? errors,
+  }) : _errors = errors;
 
   factory _$SignUpResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$SignUpResponseImplFromJson(json);
@@ -217,8 +228,13 @@ class _$SignUpResponseImpl implements _SignUpResponse {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, token, user, status,
-      const DeepCollectionEquality().hash(_errors));
+  int get hashCode => Object.hash(
+    runtimeType,
+    token,
+    user,
+    status,
+    const DeepCollectionEquality().hash(_errors),
+  );
 
   /// Create a copy of SignUpResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -227,23 +243,23 @@ class _$SignUpResponseImpl implements _SignUpResponse {
   @pragma('vm:prefer-inline')
   _$$SignUpResponseImplCopyWith<_$SignUpResponseImpl> get copyWith =>
       __$$SignUpResponseImplCopyWithImpl<_$SignUpResponseImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SignUpResponseImplToJson(
-      this,
-    );
+    return _$$SignUpResponseImplToJson(this);
   }
 }
 
 abstract class _SignUpResponse implements SignUpResponse {
-  const factory _SignUpResponse(
-          {@JsonKey(name: 'token') final String? token,
-          @JsonKey(name: 'user') final CustomerModel? user,
-          @JsonKey(name: 'status') final String? status,
-          @JsonKey(name: 'errors') final List<String>? errors}) =
-      _$SignUpResponseImpl;
+  const factory _SignUpResponse({
+    @JsonKey(name: 'token') final String? token,
+    @JsonKey(name: 'user') final CustomerModel? user,
+    @JsonKey(name: 'status') final String? status,
+    @JsonKey(name: 'errors') final List<String>? errors,
+  }) = _$SignUpResponseImpl;
 
   factory _SignUpResponse.fromJson(Map<String, dynamic> json) =
       _$SignUpResponseImpl.fromJson;

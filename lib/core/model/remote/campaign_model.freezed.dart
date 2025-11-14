@@ -12,7 +12,8 @@ part of 'campaign_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 CampaignModel _$CampaignModelFromJson(Map<String, dynamic> json) {
   return _CampaignModel.fromJson(json);
@@ -48,19 +49,21 @@ mixin _$CampaignModel {
 /// @nodoc
 abstract class $CampaignModelCopyWith<$Res> {
   factory $CampaignModelCopyWith(
-          CampaignModel value, $Res Function(CampaignModel) then) =
-      _$CampaignModelCopyWithImpl<$Res, CampaignModel>;
+    CampaignModel value,
+    $Res Function(CampaignModel) then,
+  ) = _$CampaignModelCopyWithImpl<$Res, CampaignModel>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'image_url') String image,
-      String description,
-      String currency,
-      int id,
-      @JsonKey(name: 'goal_amount') String goalAmount,
-      @JsonKey(name: 'campaign_type') String campaignType,
-      @JsonKey(name: 'created_at') String createdAt,
-      @JsonKey(name: 'account_id') int accountId,
-      String title});
+  $Res call({
+    @JsonKey(name: 'image_url') String image,
+    String description,
+    String currency,
+    int id,
+    @JsonKey(name: 'goal_amount') String goalAmount,
+    @JsonKey(name: 'campaign_type') String campaignType,
+    @JsonKey(name: 'created_at') String createdAt,
+    @JsonKey(name: 'account_id') int accountId,
+    String title,
+  });
 }
 
 /// @nodoc
@@ -88,44 +91,47 @@ class _$CampaignModelCopyWithImpl<$Res, $Val extends CampaignModel>
     Object? accountId = null,
     Object? title = null,
   }) {
-    return _then(_value.copyWith(
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      goalAmount: null == goalAmount
-          ? _value.goalAmount
-          : goalAmount // ignore: cast_nullable_to_non_nullable
-              as String,
-      campaignType: null == campaignType
-          ? _value.campaignType
-          : campaignType // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountId: null == accountId
-          ? _value.accountId
-          : accountId // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            image: null == image
+                ? _value.image
+                : image // ignore: cast_nullable_to_non_nullable
+                      as String,
+            description: null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                      as String,
+            currency: null == currency
+                ? _value.currency
+                : currency // ignore: cast_nullable_to_non_nullable
+                      as String,
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int,
+            goalAmount: null == goalAmount
+                ? _value.goalAmount
+                : goalAmount // ignore: cast_nullable_to_non_nullable
+                      as String,
+            campaignType: null == campaignType
+                ? _value.campaignType
+                : campaignType // ignore: cast_nullable_to_non_nullable
+                      as String,
+            createdAt: null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                      as String,
+            accountId: null == accountId
+                ? _value.accountId
+                : accountId // ignore: cast_nullable_to_non_nullable
+                      as int,
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -133,20 +139,22 @@ class _$CampaignModelCopyWithImpl<$Res, $Val extends CampaignModel>
 abstract class _$$CampaignModelImplCopyWith<$Res>
     implements $CampaignModelCopyWith<$Res> {
   factory _$$CampaignModelImplCopyWith(
-          _$CampaignModelImpl value, $Res Function(_$CampaignModelImpl) then) =
-      __$$CampaignModelImplCopyWithImpl<$Res>;
+    _$CampaignModelImpl value,
+    $Res Function(_$CampaignModelImpl) then,
+  ) = __$$CampaignModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'image_url') String image,
-      String description,
-      String currency,
-      int id,
-      @JsonKey(name: 'goal_amount') String goalAmount,
-      @JsonKey(name: 'campaign_type') String campaignType,
-      @JsonKey(name: 'created_at') String createdAt,
-      @JsonKey(name: 'account_id') int accountId,
-      String title});
+  $Res call({
+    @JsonKey(name: 'image_url') String image,
+    String description,
+    String currency,
+    int id,
+    @JsonKey(name: 'goal_amount') String goalAmount,
+    @JsonKey(name: 'campaign_type') String campaignType,
+    @JsonKey(name: 'created_at') String createdAt,
+    @JsonKey(name: 'account_id') int accountId,
+    String title,
+  });
 }
 
 /// @nodoc
@@ -154,8 +162,9 @@ class __$$CampaignModelImplCopyWithImpl<$Res>
     extends _$CampaignModelCopyWithImpl<$Res, _$CampaignModelImpl>
     implements _$$CampaignModelImplCopyWith<$Res> {
   __$$CampaignModelImplCopyWithImpl(
-      _$CampaignModelImpl _value, $Res Function(_$CampaignModelImpl) _then)
-      : super(_value, _then);
+    _$CampaignModelImpl _value,
+    $Res Function(_$CampaignModelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CampaignModel
   /// with the given fields replaced by the non-null parameter values.
@@ -172,60 +181,63 @@ class __$$CampaignModelImplCopyWithImpl<$Res>
     Object? accountId = null,
     Object? title = null,
   }) {
-    return _then(_$CampaignModelImpl(
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      goalAmount: null == goalAmount
-          ? _value.goalAmount
-          : goalAmount // ignore: cast_nullable_to_non_nullable
-              as String,
-      campaignType: null == campaignType
-          ? _value.campaignType
-          : campaignType // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountId: null == accountId
-          ? _value.accountId
-          : accountId // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$CampaignModelImpl(
+        image: null == image
+            ? _value.image
+            : image // ignore: cast_nullable_to_non_nullable
+                  as String,
+        description: null == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String,
+        currency: null == currency
+            ? _value.currency
+            : currency // ignore: cast_nullable_to_non_nullable
+                  as String,
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int,
+        goalAmount: null == goalAmount
+            ? _value.goalAmount
+            : goalAmount // ignore: cast_nullable_to_non_nullable
+                  as String,
+        campaignType: null == campaignType
+            ? _value.campaignType
+            : campaignType // ignore: cast_nullable_to_non_nullable
+                  as String,
+        createdAt: null == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as String,
+        accountId: null == accountId
+            ? _value.accountId
+            : accountId // ignore: cast_nullable_to_non_nullable
+                  as int,
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$CampaignModelImpl implements _CampaignModel {
-  const _$CampaignModelImpl(
-      {@JsonKey(name: 'image_url') this.image = "",
-      this.description = "",
-      this.currency = "",
-      this.id = 0,
-      @JsonKey(name: 'goal_amount') this.goalAmount = "",
-      @JsonKey(name: 'campaign_type') this.campaignType = "",
-      @JsonKey(name: 'created_at') this.createdAt = "",
-      @JsonKey(name: 'account_id') this.accountId = 0,
-      this.title = ""});
+  const _$CampaignModelImpl({
+    @JsonKey(name: 'image_url') this.image = "",
+    this.description = "",
+    this.currency = "",
+    this.id = 0,
+    @JsonKey(name: 'goal_amount') this.goalAmount = "",
+    @JsonKey(name: 'campaign_type') this.campaignType = "",
+    @JsonKey(name: 'created_at') this.createdAt = "",
+    @JsonKey(name: 'account_id') this.accountId = 0,
+    this.title = "",
+  });
 
   factory _$CampaignModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CampaignModelImplFromJson(json);
@@ -287,8 +299,18 @@ class _$CampaignModelImpl implements _CampaignModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, image, description, currency, id,
-      goalAmount, campaignType, createdAt, accountId, title);
+  int get hashCode => Object.hash(
+    runtimeType,
+    image,
+    description,
+    currency,
+    id,
+    goalAmount,
+    campaignType,
+    createdAt,
+    accountId,
+    title,
+  );
 
   /// Create a copy of CampaignModel
   /// with the given fields replaced by the non-null parameter values.
@@ -300,23 +322,22 @@ class _$CampaignModelImpl implements _CampaignModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CampaignModelImplToJson(
-      this,
-    );
+    return _$$CampaignModelImplToJson(this);
   }
 }
 
 abstract class _CampaignModel implements CampaignModel {
-  const factory _CampaignModel(
-      {@JsonKey(name: 'image_url') final String image,
-      final String description,
-      final String currency,
-      final int id,
-      @JsonKey(name: 'goal_amount') final String goalAmount,
-      @JsonKey(name: 'campaign_type') final String campaignType,
-      @JsonKey(name: 'created_at') final String createdAt,
-      @JsonKey(name: 'account_id') final int accountId,
-      final String title}) = _$CampaignModelImpl;
+  const factory _CampaignModel({
+    @JsonKey(name: 'image_url') final String image,
+    final String description,
+    final String currency,
+    final int id,
+    @JsonKey(name: 'goal_amount') final String goalAmount,
+    @JsonKey(name: 'campaign_type') final String campaignType,
+    @JsonKey(name: 'created_at') final String createdAt,
+    @JsonKey(name: 'account_id') final int accountId,
+    final String title,
+  }) = _$CampaignModelImpl;
 
   factory _CampaignModel.fromJson(Map<String, dynamic> json) =
       _$CampaignModelImpl.fromJson;

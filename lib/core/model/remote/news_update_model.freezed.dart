@@ -12,7 +12,8 @@ part of 'news_update_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 NewsUpdateModel _$NewsUpdateModelFromJson(Map<String, dynamic> json) {
   return _NewsUpdateModel.fromJson(json);
@@ -43,18 +44,20 @@ mixin _$NewsUpdateModel {
 /// @nodoc
 abstract class $NewsUpdateModelCopyWith<$Res> {
   factory $NewsUpdateModelCopyWith(
-          NewsUpdateModel value, $Res Function(NewsUpdateModel) then) =
-      _$NewsUpdateModelCopyWithImpl<$Res, NewsUpdateModel>;
+    NewsUpdateModel value,
+    $Res Function(NewsUpdateModel) then,
+  ) = _$NewsUpdateModelCopyWithImpl<$Res, NewsUpdateModel>;
   @useResult
-  $Res call(
-      {String title,
-      String description,
-      @JsonKey(name: "created_at") String createdAt,
-      String image,
-      String url,
-      int id,
-      String content,
-      String author});
+  $Res call({
+    String title,
+    String description,
+    @JsonKey(name: "created_at") String createdAt,
+    String image,
+    String url,
+    int id,
+    String content,
+    String author,
+  });
 }
 
 /// @nodoc
@@ -81,60 +84,65 @@ class _$NewsUpdateModelCopyWithImpl<$Res, $Val extends NewsUpdateModel>
     Object? content = null,
     Object? author = null,
   }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
-      author: null == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+            description: null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                      as String,
+            createdAt: null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                      as String,
+            image: null == image
+                ? _value.image
+                : image // ignore: cast_nullable_to_non_nullable
+                      as String,
+            url: null == url
+                ? _value.url
+                : url // ignore: cast_nullable_to_non_nullable
+                      as String,
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int,
+            content: null == content
+                ? _value.content
+                : content // ignore: cast_nullable_to_non_nullable
+                      as String,
+            author: null == author
+                ? _value.author
+                : author // ignore: cast_nullable_to_non_nullable
+                      as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$NewsUpdateModelImplCopyWith<$Res>
     implements $NewsUpdateModelCopyWith<$Res> {
-  factory _$$NewsUpdateModelImplCopyWith(_$NewsUpdateModelImpl value,
-          $Res Function(_$NewsUpdateModelImpl) then) =
-      __$$NewsUpdateModelImplCopyWithImpl<$Res>;
+  factory _$$NewsUpdateModelImplCopyWith(
+    _$NewsUpdateModelImpl value,
+    $Res Function(_$NewsUpdateModelImpl) then,
+  ) = __$$NewsUpdateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String title,
-      String description,
-      @JsonKey(name: "created_at") String createdAt,
-      String image,
-      String url,
-      int id,
-      String content,
-      String author});
+  $Res call({
+    String title,
+    String description,
+    @JsonKey(name: "created_at") String createdAt,
+    String image,
+    String url,
+    int id,
+    String content,
+    String author,
+  });
 }
 
 /// @nodoc
@@ -142,8 +150,9 @@ class __$$NewsUpdateModelImplCopyWithImpl<$Res>
     extends _$NewsUpdateModelCopyWithImpl<$Res, _$NewsUpdateModelImpl>
     implements _$$NewsUpdateModelImplCopyWith<$Res> {
   __$$NewsUpdateModelImplCopyWithImpl(
-      _$NewsUpdateModelImpl _value, $Res Function(_$NewsUpdateModelImpl) _then)
-      : super(_value, _then);
+    _$NewsUpdateModelImpl _value,
+    $Res Function(_$NewsUpdateModelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of NewsUpdateModel
   /// with the given fields replaced by the non-null parameter values.
@@ -159,55 +168,58 @@ class __$$NewsUpdateModelImplCopyWithImpl<$Res>
     Object? content = null,
     Object? author = null,
   }) {
-    return _then(_$NewsUpdateModelImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
-      author: null == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$NewsUpdateModelImpl(
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+        description: null == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String,
+        createdAt: null == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as String,
+        image: null == image
+            ? _value.image
+            : image // ignore: cast_nullable_to_non_nullable
+                  as String,
+        url: null == url
+            ? _value.url
+            : url // ignore: cast_nullable_to_non_nullable
+                  as String,
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int,
+        content: null == content
+            ? _value.content
+            : content // ignore: cast_nullable_to_non_nullable
+                  as String,
+        author: null == author
+            ? _value.author
+            : author // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$NewsUpdateModelImpl implements _NewsUpdateModel {
-  const _$NewsUpdateModelImpl(
-      {this.title = "",
-      this.description = "",
-      @JsonKey(name: "created_at") this.createdAt = "",
-      this.image = "",
-      this.url = "",
-      this.id = 0,
-      this.content = "",
-      this.author = ""});
+  const _$NewsUpdateModelImpl({
+    this.title = "",
+    this.description = "",
+    @JsonKey(name: "created_at") this.createdAt = "",
+    this.image = "",
+    this.url = "",
+    this.id = 0,
+    this.content = "",
+    this.author = "",
+  });
 
   factory _$NewsUpdateModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewsUpdateModelImplFromJson(json);
@@ -261,8 +273,17 @@ class _$NewsUpdateModelImpl implements _NewsUpdateModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, title, description, createdAt,
-      image, url, id, content, author);
+  int get hashCode => Object.hash(
+    runtimeType,
+    title,
+    description,
+    createdAt,
+    image,
+    url,
+    id,
+    content,
+    author,
+  );
 
   /// Create a copy of NewsUpdateModel
   /// with the given fields replaced by the non-null parameter values.
@@ -271,26 +292,27 @@ class _$NewsUpdateModelImpl implements _NewsUpdateModel {
   @pragma('vm:prefer-inline')
   _$$NewsUpdateModelImplCopyWith<_$NewsUpdateModelImpl> get copyWith =>
       __$$NewsUpdateModelImplCopyWithImpl<_$NewsUpdateModelImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NewsUpdateModelImplToJson(
-      this,
-    );
+    return _$$NewsUpdateModelImplToJson(this);
   }
 }
 
 abstract class _NewsUpdateModel implements NewsUpdateModel {
-  const factory _NewsUpdateModel(
-      {final String title,
-      final String description,
-      @JsonKey(name: "created_at") final String createdAt,
-      final String image,
-      final String url,
-      final int id,
-      final String content,
-      final String author}) = _$NewsUpdateModelImpl;
+  const factory _NewsUpdateModel({
+    final String title,
+    final String description,
+    @JsonKey(name: "created_at") final String createdAt,
+    final String image,
+    final String url,
+    final int id,
+    final String content,
+    final String author,
+  }) = _$NewsUpdateModelImpl;
 
   factory _NewsUpdateModel.fromJson(Map<String, dynamic> json) =
       _$NewsUpdateModelImpl.fromJson;

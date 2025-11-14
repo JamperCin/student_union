@@ -16,12 +16,12 @@ class LoginController extends BaseController {
   var emailTxtCtrl = TextEditingController();
   var passwordTxtCtrl = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-    emailTxtCtrl.text = "jampercola@gmail.com";
-    passwordTxtCtrl.text = "asdfghjkl";
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   emailTxtCtrl.text = "jampercola@gmail.com";
+  //   passwordTxtCtrl.text = "asdfghjkl";
+  // }
 
   void onSignUpClicked() {
     navUtils.fireTarget(SignUpScreen());
@@ -35,8 +35,7 @@ class LoginController extends BaseController {
   void onLoginOnClick(BuildContext context) {
     if (validationUtils.validateEntryEmail(emailTxtCtrl) &&
         validationUtils.validateDataEntry(passwordTxtCtrl)) {
-     // _initLoginRequest(context);
-       navUtils.fireTargetOff(MainDashboardScreen());
+      _initLoginRequest(context);
     }
   }
 

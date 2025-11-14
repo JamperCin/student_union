@@ -1,17 +1,12 @@
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/model/local/bottom_bar_model.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
-import 'package:core_module/core_ui/widgets/bottom_app_bar_widget.dart';
-import 'package:core_module/core_ui/widgets/card_container_widget.dart';
+import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:student_union/screens/dashboard/dashboard_controller.dart';
 import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart';
 import 'package:student_union/screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
 import 'package:student_union/screens/dashboard/home/home_screen.dart';
 import 'package:student_union/screens/dashboard/more/more_screen.dart';
+import 'package:student_union/screens/dashboard/news/ui/news_screen.dart';
 
-import 'devotion/ui/purchased_book_details_screen.dart';
 
 class MainDashboardScreen extends BaseScreenStandard {
   final _controller = Get.put(DashboardController());
@@ -37,7 +32,7 @@ class MainDashboardScreen extends BaseScreenStandard {
         case "Donation":
           return DonationCoreMinistriesScreen();
         case "News Update":
-          return PurchasedBookDetailsScreen();
+          return NewsScreen();
         case "More":
           return MoreScreen();
         default:

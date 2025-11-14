@@ -12,7 +12,8 @@ part of 'todays_devotion.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 TodaysDevotion _$TodaysDevotionFromJson(Map<String, dynamic> json) {
   return _TodaysDevotion.fromJson(json);
@@ -55,24 +56,26 @@ mixin _$TodaysDevotion {
 /// @nodoc
 abstract class $TodaysDevotionCopyWith<$Res> {
   factory $TodaysDevotionCopyWith(
-          TodaysDevotion value, $Res Function(TodaysDevotion) then) =
-      _$TodaysDevotionCopyWithImpl<$Res, TodaysDevotion>;
+    TodaysDevotion value,
+    $Res Function(TodaysDevotion) then,
+  ) = _$TodaysDevotionCopyWithImpl<$Res, TodaysDevotion>;
   @useResult
-  $Res call(
-      {int? id,
-      String? title,
-      String? content,
-      String? reference,
-      @JsonKey(name: 'display_date') String? displayDate,
-      @JsonKey(name: 'reference_text') String? referenceText,
-      @JsonKey(name: 'is_prayer') bool isPrayer,
-      @JsonKey(name: 'is_thought') bool isThought,
-      @JsonKey(name: 'is_question') bool isQuestion,
-      @JsonKey(name: 'is_so_what') bool isSoWhat,
-      String prayer,
-      String thought,
-      String question,
-      @JsonKey(name: 'sowhat') String soWhat});
+  $Res call({
+    int? id,
+    String? title,
+    String? content,
+    String? reference,
+    @JsonKey(name: 'display_date') String? displayDate,
+    @JsonKey(name: 'reference_text') String? referenceText,
+    @JsonKey(name: 'is_prayer') bool isPrayer,
+    @JsonKey(name: 'is_thought') bool isThought,
+    @JsonKey(name: 'is_question') bool isQuestion,
+    @JsonKey(name: 'is_so_what') bool isSoWhat,
+    String prayer,
+    String thought,
+    String question,
+    @JsonKey(name: 'sowhat') String soWhat,
+  });
 }
 
 /// @nodoc
@@ -105,90 +108,95 @@ class _$TodaysDevotionCopyWithImpl<$Res, $Val extends TodaysDevotion>
     Object? question = null,
     Object? soWhat = null,
   }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      content: freezed == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String?,
-      reference: freezed == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayDate: freezed == displayDate
-          ? _value.displayDate
-          : displayDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      referenceText: freezed == referenceText
-          ? _value.referenceText
-          : referenceText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isPrayer: null == isPrayer
-          ? _value.isPrayer
-          : isPrayer // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isThought: null == isThought
-          ? _value.isThought
-          : isThought // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isQuestion: null == isQuestion
-          ? _value.isQuestion
-          : isQuestion // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSoWhat: null == isSoWhat
-          ? _value.isSoWhat
-          : isSoWhat // ignore: cast_nullable_to_non_nullable
-              as bool,
-      prayer: null == prayer
-          ? _value.prayer
-          : prayer // ignore: cast_nullable_to_non_nullable
-              as String,
-      thought: null == thought
-          ? _value.thought
-          : thought // ignore: cast_nullable_to_non_nullable
-              as String,
-      question: null == question
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
-              as String,
-      soWhat: null == soWhat
-          ? _value.soWhat
-          : soWhat // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id: freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            title: freezed == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            content: freezed == content
+                ? _value.content
+                : content // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            reference: freezed == reference
+                ? _value.reference
+                : reference // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            displayDate: freezed == displayDate
+                ? _value.displayDate
+                : displayDate // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            referenceText: freezed == referenceText
+                ? _value.referenceText
+                : referenceText // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            isPrayer: null == isPrayer
+                ? _value.isPrayer
+                : isPrayer // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            isThought: null == isThought
+                ? _value.isThought
+                : isThought // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            isQuestion: null == isQuestion
+                ? _value.isQuestion
+                : isQuestion // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            isSoWhat: null == isSoWhat
+                ? _value.isSoWhat
+                : isSoWhat // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            prayer: null == prayer
+                ? _value.prayer
+                : prayer // ignore: cast_nullable_to_non_nullable
+                      as String,
+            thought: null == thought
+                ? _value.thought
+                : thought // ignore: cast_nullable_to_non_nullable
+                      as String,
+            question: null == question
+                ? _value.question
+                : question // ignore: cast_nullable_to_non_nullable
+                      as String,
+            soWhat: null == soWhat
+                ? _value.soWhat
+                : soWhat // ignore: cast_nullable_to_non_nullable
+                      as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$TodaysDevotionImplCopyWith<$Res>
     implements $TodaysDevotionCopyWith<$Res> {
-  factory _$$TodaysDevotionImplCopyWith(_$TodaysDevotionImpl value,
-          $Res Function(_$TodaysDevotionImpl) then) =
-      __$$TodaysDevotionImplCopyWithImpl<$Res>;
+  factory _$$TodaysDevotionImplCopyWith(
+    _$TodaysDevotionImpl value,
+    $Res Function(_$TodaysDevotionImpl) then,
+  ) = __$$TodaysDevotionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id,
-      String? title,
-      String? content,
-      String? reference,
-      @JsonKey(name: 'display_date') String? displayDate,
-      @JsonKey(name: 'reference_text') String? referenceText,
-      @JsonKey(name: 'is_prayer') bool isPrayer,
-      @JsonKey(name: 'is_thought') bool isThought,
-      @JsonKey(name: 'is_question') bool isQuestion,
-      @JsonKey(name: 'is_so_what') bool isSoWhat,
-      String prayer,
-      String thought,
-      String question,
-      @JsonKey(name: 'sowhat') String soWhat});
+  $Res call({
+    int? id,
+    String? title,
+    String? content,
+    String? reference,
+    @JsonKey(name: 'display_date') String? displayDate,
+    @JsonKey(name: 'reference_text') String? referenceText,
+    @JsonKey(name: 'is_prayer') bool isPrayer,
+    @JsonKey(name: 'is_thought') bool isThought,
+    @JsonKey(name: 'is_question') bool isQuestion,
+    @JsonKey(name: 'is_so_what') bool isSoWhat,
+    String prayer,
+    String thought,
+    String question,
+    @JsonKey(name: 'sowhat') String soWhat,
+  });
 }
 
 /// @nodoc
@@ -196,8 +204,9 @@ class __$$TodaysDevotionImplCopyWithImpl<$Res>
     extends _$TodaysDevotionCopyWithImpl<$Res, _$TodaysDevotionImpl>
     implements _$$TodaysDevotionImplCopyWith<$Res> {
   __$$TodaysDevotionImplCopyWithImpl(
-      _$TodaysDevotionImpl _value, $Res Function(_$TodaysDevotionImpl) _then)
-      : super(_value, _then);
+    _$TodaysDevotionImpl _value,
+    $Res Function(_$TodaysDevotionImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of TodaysDevotion
   /// with the given fields replaced by the non-null parameter values.
@@ -219,85 +228,88 @@ class __$$TodaysDevotionImplCopyWithImpl<$Res>
     Object? question = null,
     Object? soWhat = null,
   }) {
-    return _then(_$TodaysDevotionImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      content: freezed == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String?,
-      reference: freezed == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayDate: freezed == displayDate
-          ? _value.displayDate
-          : displayDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      referenceText: freezed == referenceText
-          ? _value.referenceText
-          : referenceText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isPrayer: null == isPrayer
-          ? _value.isPrayer
-          : isPrayer // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isThought: null == isThought
-          ? _value.isThought
-          : isThought // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isQuestion: null == isQuestion
-          ? _value.isQuestion
-          : isQuestion // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSoWhat: null == isSoWhat
-          ? _value.isSoWhat
-          : isSoWhat // ignore: cast_nullable_to_non_nullable
-              as bool,
-      prayer: null == prayer
-          ? _value.prayer
-          : prayer // ignore: cast_nullable_to_non_nullable
-              as String,
-      thought: null == thought
-          ? _value.thought
-          : thought // ignore: cast_nullable_to_non_nullable
-              as String,
-      question: null == question
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
-              as String,
-      soWhat: null == soWhat
-          ? _value.soWhat
-          : soWhat // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$TodaysDevotionImpl(
+        id: freezed == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        title: freezed == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        content: freezed == content
+            ? _value.content
+            : content // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        reference: freezed == reference
+            ? _value.reference
+            : reference // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        displayDate: freezed == displayDate
+            ? _value.displayDate
+            : displayDate // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        referenceText: freezed == referenceText
+            ? _value.referenceText
+            : referenceText // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        isPrayer: null == isPrayer
+            ? _value.isPrayer
+            : isPrayer // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        isThought: null == isThought
+            ? _value.isThought
+            : isThought // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        isQuestion: null == isQuestion
+            ? _value.isQuestion
+            : isQuestion // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        isSoWhat: null == isSoWhat
+            ? _value.isSoWhat
+            : isSoWhat // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        prayer: null == prayer
+            ? _value.prayer
+            : prayer // ignore: cast_nullable_to_non_nullable
+                  as String,
+        thought: null == thought
+            ? _value.thought
+            : thought // ignore: cast_nullable_to_non_nullable
+                  as String,
+        question: null == question
+            ? _value.question
+            : question // ignore: cast_nullable_to_non_nullable
+                  as String,
+        soWhat: null == soWhat
+            ? _value.soWhat
+            : soWhat // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TodaysDevotionImpl implements _TodaysDevotion {
-  const _$TodaysDevotionImpl(
-      {this.id,
-      this.title,
-      this.content,
-      this.reference,
-      @JsonKey(name: 'display_date') this.displayDate,
-      @JsonKey(name: 'reference_text') this.referenceText,
-      @JsonKey(name: 'is_prayer') this.isPrayer = false,
-      @JsonKey(name: 'is_thought') this.isThought = false,
-      @JsonKey(name: 'is_question') this.isQuestion = false,
-      @JsonKey(name: 'is_so_what') this.isSoWhat = false,
-      this.prayer = '',
-      this.thought = '',
-      this.question = '',
-      @JsonKey(name: 'sowhat') this.soWhat = ''});
+  const _$TodaysDevotionImpl({
+    this.id,
+    this.title,
+    this.content,
+    this.reference,
+    @JsonKey(name: 'display_date') this.displayDate,
+    @JsonKey(name: 'reference_text') this.referenceText,
+    @JsonKey(name: 'is_prayer') this.isPrayer = false,
+    @JsonKey(name: 'is_thought') this.isThought = false,
+    @JsonKey(name: 'is_question') this.isQuestion = false,
+    @JsonKey(name: 'is_so_what') this.isSoWhat = false,
+    this.prayer = '',
+    this.thought = '',
+    this.question = '',
+    @JsonKey(name: 'sowhat') this.soWhat = '',
+  });
 
   factory _$TodaysDevotionImpl.fromJson(Map<String, dynamic> json) =>
       _$$TodaysDevotionImplFromJson(json);
@@ -378,21 +390,22 @@ class _$TodaysDevotionImpl implements _TodaysDevotion {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      title,
-      content,
-      reference,
-      displayDate,
-      referenceText,
-      isPrayer,
-      isThought,
-      isQuestion,
-      isSoWhat,
-      prayer,
-      thought,
-      question,
-      soWhat);
+    runtimeType,
+    id,
+    title,
+    content,
+    reference,
+    displayDate,
+    referenceText,
+    isPrayer,
+    isThought,
+    isQuestion,
+    isSoWhat,
+    prayer,
+    thought,
+    question,
+    soWhat,
+  );
 
   /// Create a copy of TodaysDevotion
   /// with the given fields replaced by the non-null parameter values.
@@ -401,32 +414,33 @@ class _$TodaysDevotionImpl implements _TodaysDevotion {
   @pragma('vm:prefer-inline')
   _$$TodaysDevotionImplCopyWith<_$TodaysDevotionImpl> get copyWith =>
       __$$TodaysDevotionImplCopyWithImpl<_$TodaysDevotionImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TodaysDevotionImplToJson(
-      this,
-    );
+    return _$$TodaysDevotionImplToJson(this);
   }
 }
 
 abstract class _TodaysDevotion implements TodaysDevotion {
-  const factory _TodaysDevotion(
-      {final int? id,
-      final String? title,
-      final String? content,
-      final String? reference,
-      @JsonKey(name: 'display_date') final String? displayDate,
-      @JsonKey(name: 'reference_text') final String? referenceText,
-      @JsonKey(name: 'is_prayer') final bool isPrayer,
-      @JsonKey(name: 'is_thought') final bool isThought,
-      @JsonKey(name: 'is_question') final bool isQuestion,
-      @JsonKey(name: 'is_so_what') final bool isSoWhat,
-      final String prayer,
-      final String thought,
-      final String question,
-      @JsonKey(name: 'sowhat') final String soWhat}) = _$TodaysDevotionImpl;
+  const factory _TodaysDevotion({
+    final int? id,
+    final String? title,
+    final String? content,
+    final String? reference,
+    @JsonKey(name: 'display_date') final String? displayDate,
+    @JsonKey(name: 'reference_text') final String? referenceText,
+    @JsonKey(name: 'is_prayer') final bool isPrayer,
+    @JsonKey(name: 'is_thought') final bool isThought,
+    @JsonKey(name: 'is_question') final bool isQuestion,
+    @JsonKey(name: 'is_so_what') final bool isSoWhat,
+    final String prayer,
+    final String thought,
+    final String question,
+    @JsonKey(name: 'sowhat') final String soWhat,
+  }) = _$TodaysDevotionImpl;
 
   factory _TodaysDevotion.fromJson(Map<String, dynamic> json) =
       _$TodaysDevotionImpl.fromJson;

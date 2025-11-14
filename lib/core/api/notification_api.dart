@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core_module/core/utils/file_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -37,10 +39,23 @@ class NotificationApi {
   ///    - `onDidReceiveBackgroundNotificationResponse`: Specifies a callback function (`notificationTapBackground`)
   ///      to be executed when a user interacts with a notification while the app is in the background or terminated.
   Future<void> _initialize() async {
-    final isPermissionAccepted = await _notifications
+    bool? isPermissionAccepted = await _notifications
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
+
+    if(Platform.isIOS) {
+      final iosPlugin =
+      _notifications.resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin>();
+
+      isPermissionAccepted = await iosPlugin?.requestPermissions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+    }
+
 
     if (isPermissionAccepted == null || isPermissionAccepted == false) {
       return;
@@ -48,10 +63,13 @@ class NotificationApi {
 
     const androidSetting = AndroidInitializationSettings('notify');
 
-    const initSettingsDarwin = DarwinInitializationSettings();
+    const initSettingsDarwin = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
 
     const settings = InitializationSettings(
-
       android: androidSetting,
       iOS: initSettingsDarwin,
     );
@@ -108,12 +126,14 @@ class NotificationApi {
     String? body,
     dynamic payload,
     String? largePicture, //= AppStrings.PRIME_ICON,
-  }) async =>
-      await _notifications.show(
-        id,
-        title,
-        body,
-        await _notificationDetails(url: largePicture),
-        payload: payload.toString(),
-      );
+  }) async {
+    debugPrint("Running ====>> ${title}");
+    return await _notifications.show(
+      id,
+      title,
+      body,
+      await _notificationDetails(url: largePicture),
+      payload: payload.toString(),
+    );
+  }
 }

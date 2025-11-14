@@ -1,5 +1,3 @@
-import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/model/local/bottom_bar_model.dart';
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
@@ -26,21 +24,7 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
     }
   }
 
-  // Future<void> requestFcmToken() async{
-  //   final fcm = FirebaseMessaging.instance;
-  //   // Request permission (for iOS especially)
-  //   await fcm.requestPermission();
-  //
-  //   final token = await fcm.getToken();
-  //
-  //   final param = {
-  //     'user': {
-  //       "fcm_id": token,
-  //     }
-  //   };
-  //
-  //   await notificationApiService.registerFcmToken(param);
-  // }
+
 
   ///List of menu for the bottom navigation bar
   RxList<BottomBarModel> bottomBarMenuList = [

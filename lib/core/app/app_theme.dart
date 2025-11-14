@@ -129,7 +129,6 @@ ThemeData lightMode = ThemeData(
 
 ThemeData darkMode = lightMode.copyWith(
   brightness: Brightness.dark,
-  dialogBackgroundColor: darkColor,
   colorScheme: ColorScheme(
     brightness: Brightness.dark,
     primary: whiteColor,
@@ -183,5 +182,5 @@ ThemeData darkMode = lightMode.copyWith(
         ),
       ),
     ),
-  ),
+  ), dialogTheme: DialogThemeData(backgroundColor: darkColor),
 );

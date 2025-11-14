@@ -25,20 +25,20 @@ _$TodaysDevotionImpl _$$TodaysDevotionImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$TodaysDevotionImplToJson(
-        _$TodaysDevotionImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'content': instance.content,
-      'reference': instance.reference,
-      'display_date': instance.displayDate,
-      'reference_text': instance.referenceText,
-      'is_prayer': instance.isPrayer,
-      'is_thought': instance.isThought,
-      'is_question': instance.isQuestion,
-      'is_so_what': instance.isSoWhat,
-      'prayer': instance.prayer,
-      'thought': instance.thought,
-      'question': instance.question,
-      'sowhat': instance.soWhat,
-    };
+  _$TodaysDevotionImpl instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'title': instance.title,
+  'content': instance.content,
+  'reference': instance.reference,
+  'display_date': instance.displayDate,
+  'reference_text': instance.referenceText,
+  'is_prayer': instance.isPrayer,
+  'is_thought': instance.isThought,
+  'is_question': instance.isQuestion,
+  'is_so_what': instance.isSoWhat,
+  'prayer': instance.prayer,
+  'thought': instance.thought,
+  'question': instance.question,
+  'sowhat': instance.soWhat,
+};

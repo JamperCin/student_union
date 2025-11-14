@@ -29,8 +29,8 @@ class FcmApi {
 
   Future<void> init() async {
     _firebaseMessaging = FirebaseMessaging.instance;
-    await _requestNotificationPermission();
     await _registerListeners();
+    await _requestNotificationPermission();
   }
 
   ///Call this function to request for permission on IOS devices to show notifications
@@ -40,18 +40,24 @@ class FcmApi {
 
     debugPrint('User granted permission: ${settings.authorizationStatus}');
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      await _checkForFcmToken();
+      await checkForApnToken();
     }
   }
 
-  ///Get token from FCM
-  Future<void> _checkForFcmToken() async {
-    final token = await _firebaseMessaging.getToken();
-    if (token != null) _sendTokenToSerer(token);
+
+  Future<void> checkForApnToken() async {
+    final apnsToken = await _firebaseMessaging.getAPNSToken();
+    if (apnsToken != null) {
+      final fcm = await _firebaseMessaging.getToken();
+      debugPrint("FCM TOKEN: $fcm");
+      _sendTokenToSerer(fcm);
+    }
+
   }
 
   ///Send FCM Token to the server and save it locally to shared preference
-  Future<void> _sendTokenToSerer(String token) async {
+  Future<void> _sendTokenToSerer(String? token) async {
+    if (token == null) return;
     if (appPreference.getFcmToken() != token) {
       final param = {
         'user': {
@@ -73,6 +79,12 @@ class FcmApi {
 
     //When user clicks on Notification to open app
     FirebaseMessaging.onMessageOpenedApp.listen(_handleOnNotificationOnClick);
+
+    _firebaseMessaging.onTokenRefresh.listen((newToken) {
+      debugPrint('New FCM Token: $newToken');
+      _sendTokenToSerer(newToken);
+    });
+
   }
 
   /// Handle foreground messages

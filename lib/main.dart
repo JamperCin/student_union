@@ -23,15 +23,17 @@ import 'core/services/auth/auth_api_service.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseBackgroundMessageHandler(RemoteMessage msg) async {
-  await FcmApi().initializeFirebase();// Initialize Firebase if not already initialized
   debugPrint("Background messaging ======>>>> ${msg.toMap().toString()}");
+  await FcmApi().initializeFirebase();// Initialize Firebase if not already initialized
+
   FcmApi().handleFcmMessage(msg);
   // Perform background tasks based on the message data
 }
 
 @pragma('vm:entry-point')
-void notificationTapBackground(NotificationResponse notificationResponse) {
+void notificationTapBackground(NotificationResponse not) {
   // handle action
+  debugPrint("on Tap messaging ======>>>> ${not.data.toString()}");
 }
 
 void main() async {
