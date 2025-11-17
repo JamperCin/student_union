@@ -32,6 +32,11 @@ jobs:
       - name: Run tests
         run: flutter test
 
+      - name: Decode Keystore
+        run: |
+          echo "$SU_KEYSTORE" | base64 --decode > android/app/su-keystore.jks
+
+
       - name: Build Android APK
         run: flutter build apk --release
 
