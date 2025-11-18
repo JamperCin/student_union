@@ -55,6 +55,15 @@ jobs:
           name: android-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
+      - name: Build Android App Bundle
+        run: flutter build appbundle --release
+
+      - name: Upload Android App Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-bundle
+          path: build/app/outputs/bundle/release/app-release.aab
+
   ios:
     runs-on: macos-latest
 
