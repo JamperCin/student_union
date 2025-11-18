@@ -24,6 +24,16 @@ jobs:
         with:
           channel: stable
 
+      - name: Cache Flutter packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            .packages
+            pubspec.lock
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+
+
       - run: flutter --version
 
       - name: Install dependencies
@@ -58,7 +68,14 @@ jobs:
         with:
           channel: stable
 
-      - run: flutter --version
+      - name: Cache Flutter packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            .packages
+            pubspec.lock
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
 
       - name: Install dependencies
         run: flutter pub get
@@ -66,7 +83,30 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Build iOS (IPA)
+      # --- CocoaPods setup & caching ---
+      - name: Cache CocoaPods
+        uses: actions/cache@v3
+        with:
+          path: |
+            ios/Pods
+            ios/Podfile.lock
+          key: ${{ runner.os }}-cocoapods-${{ hashFiles('ios/Podfile.lock') }}
+
+      - name: Install CocoaPods
+        run: sudo gem install cocoapods
+
+      - name: Fix CocoaPods trunk repo
+        run: |
+          pod repo remove trunk || true
+          pod repo add trunk https://github.com/CocoaPods/Specs.git
+
+      - name: Pod install
+        run: |
+          cd ios
+          pod install --repo-update
+
+      # --- iOS build ---
+      - name: Build iOS IPA (no codesign)
         run: flutter build ipa --release --no-codesign
 
       - name: Package .ipa if missing
@@ -84,4 +124,3 @@ jobs:
         with:
           name: ios-ipa
           path: build/ios/ipa/*.ipa
-
