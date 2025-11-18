@@ -44,14 +44,7 @@ jobs:
 
       - name: Decode Keystore
         run: |
-          echo "$SU_KEYSTORE" | base64 --decode > android/app/su-keystore.jks
-
-      - name: Set up JDK 18
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 18
-
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/su-keystore.jks
 
       - name: Build Android APK
         run: flutter build apk --release
