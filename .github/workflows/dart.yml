@@ -103,10 +103,16 @@ jobs:
     - name: Install CocoaPods
       run: sudo gem install cocoapods
 
+    - name: Ensure CocoaPods trunk exists
+      run: |
+        mkdir -p ~/.cocoapods/repos
+        pod repo add trunk https://github.com/CocoaPods/Specs.git || true
+
+
     - name: Pod install
       run: |
         cd ios
-        pod install --repo-update --verbose --sources=https://cdn.cocoapods.org/
+        pod install --repo-update
 
 
     # --- iOS build ---
