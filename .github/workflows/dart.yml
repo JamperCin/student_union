@@ -106,7 +106,8 @@ jobs:
     - name: Pod install
       run: |
         cd ios
-        pod install --repo-update
+        pod install --repo-update --verbose --sources=https://cdn.cocoapods.org/
+
 
     # --- iOS build ---
     - name: Build iOS IPA (no codesign)
