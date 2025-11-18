@@ -68,67 +68,62 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: stable
 
-      - name: Cache Flutter packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pub-cache
-            .packages
-            pubspec.lock
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+    - name: Cache Flutter packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.pub-cache
+          .packages
+          pubspec.lock
+        key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
 
-      - name: Install dependencies
-        run: flutter pub get
+    - name: Install dependencies
+      run: flutter pub get
 
-      - name: Run tests
-        run: flutter test
+    - name: Run tests
+      run: flutter test
 
-      # --- CocoaPods setup & caching ---
-      - name: Cache CocoaPods
-        uses: actions/cache@v3
-        with:
-          path: |
-            ios/Pods
-            ios/Podfile.lock
-          key: ${{ runner.os }}-cocoapods-${{ hashFiles('ios/Podfile.lock') }}
+    # --- CocoaPods setup & caching ---
+    - name: Cache CocoaPods
+      uses: actions/cache@v3
+      with:
+        path: |
+          ios/Pods
+          ios/Podfile.lock
+        key: ${{ runner.os }}-cocoapods-${{ hashFiles('ios/Podfile.lock') }}
 
-      - name: Install CocoaPods
-        run: sudo gem install cocoapods
+    - name: Install CocoaPods
+      run: sudo gem install cocoapods
 
-      - name: Fix CocoaPods trunk repo
-        run: |
-          pod repo remove trunk || true
-          pod repo add trunk https://github.com/CocoaPods/Specs.git
+    - name: Pod install
+      run: |
+        cd ios
+        pod install --repo-update
 
-      - name: Pod install
-        run: |
-          cd ios
-          pod install --repo-update
+    # --- iOS build ---
+    - name: Build iOS IPA (no codesign)
+      run: flutter build ipa --release --no-codesign
 
-      # --- iOS build ---
-      - name: Build iOS IPA (no codesign)
-        run: flutter build ipa --release --no-codesign
+    - name: Package .ipa if missing
+      run: |
+        if [ ! -f build/ios/ipa/*.ipa ]; then
+          mkdir -p build/ios/ipa/Payload
+          cp -r build/ios/iphoneos/Runner.app build/ios/ipa/Payload/
+          cd build/ios/ipa
+          zip -r Runner.ipa Payload
+          cd -
+        fi
 
-      - name: Package .ipa if missing
-        run: |
-          if [ ! -f build/ios/ipa/*.ipa ]; then
-            mkdir -p build/ios/ipa/Payload
-            cp -r build/ios/iphoneos/Runner.app build/ios/ipa/Payload/
-            cd build/ios/ipa
-            zip -r Runner.ipa Payload
-            cd -
-          fi
-
-      - name: Upload iOS IPA
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios-ipa
-          path: build/ios/ipa/*.ipa
+    - name: Upload iOS IPA
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-ipa
+        path: build/ios/ipa/*.ipa
