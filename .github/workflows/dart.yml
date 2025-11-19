@@ -97,10 +97,10 @@ jobs:
           MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
         run: |
           cd ios
-            fastlane match appstore --type ios --readonly
-            fastlane match development --type ios --readonly
+            fastlane match appstore --readonly
+            fastlane match development --readonly
 
-          # 7️⃣ Install Pod dependencies
+# 7️⃣ Install Pod dependencies
       - name: Pod install
         run: |
           cd ios
