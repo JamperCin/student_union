@@ -94,7 +94,7 @@ jobs:
       - name: Setup iOS Signing (Fastlane Match)
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          MATCH_GIT_URL: https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git
+          MATCH_GIT_URL: https://github.com/JamperCin/su-ios-certificates.git
         run: |
           cd ios
             fastlane match appstore --readonly
