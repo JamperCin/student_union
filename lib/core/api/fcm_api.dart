@@ -46,13 +46,10 @@ class FcmApi {
 
 
   Future<void> checkForApnToken() async {
-    final apnsToken = await _firebaseMessaging.getAPNSToken();
-    if (apnsToken != null) {
-      final fcm = await _firebaseMessaging.getToken();
-      debugPrint("FCM TOKEN: $fcm");
-      _sendTokenToSerer(fcm);
-    }
-
+    String? apnsToken = await _firebaseMessaging.getAPNSToken();
+    apnsToken ??= await _firebaseMessaging.getToken();
+    debugPrint("FCM TOKEN: $apnsToken");
+    _sendTokenToSerer(apnsToken);
   }
 
   ///Send FCM Token to the server and save it locally to shared preference
@@ -60,9 +57,7 @@ class FcmApi {
     if (token == null) return;
     if (appPreference.getFcmToken() != token) {
       final param = {
-        'user': {
-          "fcm_id": token,
-        }
+        'user': {"fcm_id": token},
       };
 
       final result = await notificationApiService.registerFcmToken(param);
@@ -84,14 +79,14 @@ class FcmApi {
       debugPrint('New FCM Token: $newToken');
       _sendTokenToSerer(newToken);
     });
-
   }
 
   /// Handle foreground messages
   /// This is called when the app is in the foreground and a notification is received
   Future<void> _handleForeground(RemoteMessage msg) async {
     debugPrint(
-        "Foreground Running ====>> ${msg.notification?.toMap().toString()}");
+      "Foreground Running ====>> ${msg.notification?.toMap().toString()}",
+    );
     notificationApi.showNotification(
       id: 1,
       title: msg.notification?.title,
@@ -142,8 +137,9 @@ class FcmApi {
       Map<String, dynamic> data = msg.data;
       debugPrint("Data ====>> ${data.toString()}");
 
-      String type =
-          data.containsKey('payment_type') ? data['payment_type'] : '';
+      String type = data.containsKey('payment_type')
+          ? data['payment_type']
+          : '';
       String status = data.containsKey('status') ? data['status'] : '';
 
       switch (type) {
