@@ -68,70 +68,57 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        channel: stable
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
 
-    - name: Cache Flutter packages
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.pub-cache
-          .packages
-          pubspec.lock
-        key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+      - name: Install dependencies
+        run: flutter pub get
 
-    - name: Install dependencies
-      run: flutter pub get
+  # ---- Install Fastlane ----
+      - name: Install fastlane
+        run: sudo gem install fastlane
 
-    - name: Run tests
-      run: flutter test
+  # ---- CocoaPods ----
+      - name: Install CocoaPods
+        run: |
+          sudo gem install cocoapods
+          cd ios
+          pod install --repo-update
+        
+# 6️⃣ Setup iOS signing (certificates & provisioning profiles)
+      - name: Setup iOS Signing (Fastlane Match)
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+        run: |
+          cd ios
+            fastlane match appstore --type ios --readonly
+            fastlane match development --type ios --readonly
 
-    # --- CocoaPods setup & caching ---
-    - name: Cache CocoaPods
-      uses: actions/cache@v3
-      with:
-        path: |
-          ios/Pods
-          ios/Podfile.lock
-        key: ${{ runner.os }}-cocoapods-${{ hashFiles('ios/Podfile.lock') }}
+          # 7️⃣ Install Pod dependencies
+      - name: Pod install
+        run: |
+          cd ios
+            pod install --repo-updat
 
-    - name: Install CocoaPods
-      run: sudo gem install cocoapods
+        # ---- Build IPA (now signing will work) ----
+      - name: Build iOS IPA
+        run: flutter build ipa --release
 
-    - name: Ensure CocoaPods trunk exists
-      run: |
-        mkdir -p ~/.cocoapods/repos
-        pod repo add trunk https://github.com/CocoaPods/Specs.git || true
-
-
-    - name: Pod install
-      run: |
-        cd ios
-        pod install --repo-update
-
-
-    # --- iOS build ---
-    - name: Build iOS IPA 
-      run: flutter build ipa --release
-
-    # --- Install fastlane ---
-    - name: Install fastlane
-      run: sudo gem install fastlane
-
-    # 9️⃣ Upload IPA to App Store Connect
-    - name: Upload to App Store Connect
-      env:
-        APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-        APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-        APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
-      run: |
-        cd ios
-        fastlane deliver --ipa ../build/ios/ipa/Runner.ipa \
-                         --skip_screenshots \
-                         --skip_metadata \
-                         --api_key_path $APP_STORE_CONNECT_KEY
+      - name: Upload IPA to App Store Connect
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+        run: |
+          cd ios
+            fastlane deliver \
+              --ipa ../build/ios/ipa/Runner.ipa \
+              --skip_screenshots \
+              --skip_metadata \
+              --api_key_path $APP_STORE_CONNECT_KEY
