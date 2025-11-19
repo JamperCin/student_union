@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDX6GzT7h-gWkf8-D7DJ3MHECdXaYFJEgs</string>
+	<string>AIzaSyA1ArVEhlEBT25LVvD4CnwgMbejngxJpNw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>312153547476</string>
+	<string>538014947390</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.kodeit.scriptureunion</string>
 	<key>PROJECT_ID</key>
-	<string>scriptureunion-ee408</string>
+	<string>su-ghana-1b48b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>scriptureunion-ee408.firebasestorage.app</string>
+	<string>su-ghana-1b48b.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:312153547476:ios:cf26ca626743df4bae5141</string>
+	<string>1:538014947390:ios:bf46ad0d3407a25e5bd96f</string>
 </dict>
 </plist>

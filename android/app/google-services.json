@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "312153547476",
-    "project_id": "scriptureunion-ee408",
-    "storage_bucket": "scriptureunion-ee408.firebasestorage.app"
+    "project_number": "538014947390",
+    "project_id": "su-ghana-1b48b",
+    "storage_bucket": "su-ghana-1b48b.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:312153547476:android:7ab549e65ec9d8a9ae5141",
+        "mobilesdk_app_id": "1:538014947390:android:5a356d5e51986ade5bd96f",
         "android_client_info": {
           "package_name": "com.kodeit.scriptureunion"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCzKcmDK-VQrYx5q5V8JKs2jtWOBJB_9VE"
+          "current_key": "AIzaSyDZTjFtggefwUID-vhIWihsqJ-nyVOH30Y"
         }
       ],
       "services": {
