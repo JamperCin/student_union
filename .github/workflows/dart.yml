@@ -116,21 +116,22 @@ jobs:
 
 
     # --- iOS build ---
-    - name: Build iOS IPA (no codesign)
-      run: flutter build ipa --release --no-codesign
+    - name: Build iOS IPA 
+      run: flutter build ipa --release
 
-    - name: Package .ipa if missing
+    # --- Install fastlane ---
+    - name: Install fastlane
+      run: sudo gem install fastlane
+
+    # 9️⃣ Upload IPA to App Store Connect
+    - name: Upload to App Store Connect
+      env:
+        APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
       run: |
-        if [ ! -f build/ios/ipa/*.ipa ]; then
-          mkdir -p build/ios/ipa/Payload
-          cp -r build/ios/iphoneos/Runner.app build/ios/ipa/Payload/
-          cd build/ios/ipa
-          zip -r Runner.ipa Payload
-          cd -
-        fi
-
-    - name: Upload iOS IPA
-      uses: actions/upload-artifact@v4
-      with:
-        name: ios-ipa
-        path: build/ios/ipa/*.ipa
+        cd ios
+        fastlane deliver --ipa ../build/ios/ipa/Runner.ipa \
+                         --skip_screenshots \
+                         --skip_metadata \
+                         --api_key_path $APP_STORE_CONNECT_KEY
