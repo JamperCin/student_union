@@ -95,13 +95,13 @@ jobs:
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_PAT: ${{ secrets.MATCH_GIT_PAT }}
-          #MATCH_GIT_URL: https://github.com/JamperCin/su-ios-certificates.git
+          
         run: |
           # Use HTTPS URL with secret expanded
           export MATCH_GIT_URL="https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git"
            
           cd ios
-            fastlane match appstore --readonly
+            fastlane match appstore --app_identifier com.kodeit.scriptureunion --readonly
             fastlane match development --readonly
 
 # 7️⃣ Install Pod dependencies
