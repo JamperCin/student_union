@@ -84,17 +84,11 @@ jobs:
         run: sudo gem install fastlane
 
   # ---- CocoaPods ----
-      - name: Install CocoaPods
+      - name: Install CocoaPods and install Pod dependencies
         run: |
           sudo gem install cocoapods
           cd ios
           pod install --repo-update
-          
-      #Install Pod dependencies
-      - name: Pod install
-        run: |
-          cd ios
-            pod install --repo-updat
 
     # Set up Xcode environment
       - name: Set up Xcode
