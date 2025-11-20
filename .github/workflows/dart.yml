@@ -89,8 +89,18 @@ jobs:
           sudo gem install cocoapods
           cd ios
           pod install --repo-update
-        
-# 6️⃣ Setup iOS signing (certificates & provisioning profiles)
+          
+      #Install Pod dependencies
+      - name: Pod install
+        run: |
+          cd ios
+            pod install --repo-updat
+
+    # Set up Xcode environment
+      - name: Set up Xcode
+        run: sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+
+      #Setup iOS signing (certificates & provisioning profiles)
       - name: Setup iOS Signing (Fastlane Match)
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
@@ -99,29 +109,15 @@ jobs:
         run: |
           # Use HTTPS URL with secret expanded
           export MATCH_GIT_URL="https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git"
-           
-          cd ios
-            fastlane match appstore --app_identifier com.kodeit.scriptureunion
-            fastlane match development
-
-# 7️⃣ Install Pod dependencies
-      - name: Pod install
-        run: |
-          cd ios
-            pod install --repo-updat
-
-# ---- Build IPA (now signing will work) ----
-      - name: Build iOS IPA
-        run: flutter build ipa --release
-
-      - name: Upload to TestFlight
+        
+ # Decrypt secrets and set environment variables
+      - name: Set up environment variables
         env:
-          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-        run: |
-          cd ios
-              fastlane deliver \
-                --ipa ../build/ios/ipa/*.ipa \
-                --skip_screenshots \
-                --skip_metadata \
-                --submit_for_review false \
-                --api_key_path api_key.json
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+
+      # Run Fastlane lanes
+      - name: Run Fastlane build and upload
+        run: fastlane fetch_and_increment_build_number && fastlane load_asc_api_key && fastlane beta
