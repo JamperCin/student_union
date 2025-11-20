@@ -125,4 +125,5 @@ jobs:
               --ipa ../build/ios/ipa/Runner.ipa \
               --skip_screenshots \
               --skip_metadata \
-              --api_key_path $APP_STORE_CONNECT_KEY
+              --submit_for_review false \
+              --api_key_path api_key.json
