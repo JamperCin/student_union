@@ -103,20 +103,15 @@ jobs:
       #Setup iOS signing (certificates & provisioning profiles)
       - name: Setup iOS Signing (Fastlane Match)
         env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_PAT: ${{ secrets.MATCH_GIT_PAT }}
           
         run: |
           # Use HTTPS URL with secret expanded
           export MATCH_GIT_URL="https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git"
-        
- # Decrypt secrets and set environment variables
-      - name: Set up environment variables
-        env:
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
       # Run Fastlane lanes
       - name: Run Fastlane build and upload
