@@ -110,20 +110,18 @@ jobs:
           cd ios
             pod install --repo-updat
 
-        # ---- Build IPA (now signing will work) ----
+# ---- Build IPA (now signing will work) ----
       - name: Build iOS IPA
         run: flutter build ipa --release
 
-      - name: Upload IPA to App Store Connect
+      - name: Upload to TestFlight
         env:
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
         run: |
           cd ios
-            fastlane deliver \
-              --ipa ../build/ios/ipa/Runner.ipa \
-              --skip_screenshots \
-              --skip_metadata \
-              --submit_for_review false \
-              --api_key_path api_key.json
+              fastlane deliver \
+                --ipa ../build/ios/ipa/*.ipa \
+                --skip_screenshots \
+                --skip_metadata \
+                --submit_for_review false \
+                --api_key_path api_key.json
