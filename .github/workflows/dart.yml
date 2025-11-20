@@ -101,8 +101,8 @@ jobs:
           export MATCH_GIT_URL="https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git"
            
           cd ios
-            fastlane match appstore --app_identifier com.kodeit.scriptureunion --readonly
-            fastlane match development --readonly
+            fastlane match appstore --app_identifier com.kodeit.scriptureunion
+            fastlane match development
 
 # 7️⃣ Install Pod dependencies
       - name: Pod install
