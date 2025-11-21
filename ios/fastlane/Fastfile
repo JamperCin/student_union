@@ -47,6 +47,7 @@ platform :ios do
   lane :code_signing do
     match(
       type: "appstore",
+      git_url: ENV["MATCH_GIT_URL"],  # explicit repo url
       readonly: false
     )
   end
@@ -60,7 +61,8 @@ platform :ios do
     build_app(
       workspace: "Runner.xcworkspace",
       scheme: "Runner",
-      export_method: "app-store"
+      export_method: "app-store",
+      allow_provisioning_updates: true   # <-- important
     )
 
     upload_to_testflight(
