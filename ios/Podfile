@@ -45,6 +45,7 @@ post_install do |installer|
     # Force Swift 5.9
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '5.9'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
     end
   end
 end
