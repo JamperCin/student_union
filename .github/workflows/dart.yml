@@ -79,10 +79,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-  # ---- Install Fastlane ----
-      - name: Install fastlane
-        run: sudo gem install fastlane
-
   # ---- CocoaPods ----
       - name: Install CocoaPods and install Pod dependencies
         run: |
@@ -93,6 +89,16 @@ jobs:
     # Set up Xcode environment
       - name: Set up Xcode
         run: sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+
+#Instal Ruby first before fastlane
+      - name: Install Ruby dependencies
+        run: |
+          cd ios
+            bundle install --path vendor/bundle
+
+ # ---- Install Fastlane ----
+      - name: Install fastlane
+        run: sudo gem install fastlane
 
       #Setup iOS signing (certificates & provisioning profiles)
       - name: Setup iOS Signing (Fastlane Match)
