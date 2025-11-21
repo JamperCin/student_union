@@ -62,8 +62,13 @@ platform :ios do
       workspace: "Runner.xcworkspace",
       scheme: "Runner",
       export_method: "app-store",
-      allow_provisioning_updates: true   # <-- important
+      export_options: {
+        provisioningProfiles: {
+          "com.kodeit.scriptureunion" => "match AppStore com.kodeit.scriptureunion"
+        }
+      }
     )
+
 
     upload_to_testflight(
       skip_waiting_for_build_processing: true
