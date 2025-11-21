@@ -111,5 +111,5 @@ jobs:
       - name: Run Fastlane build and upload
         run: |
           cd ios
-            fastlane beta
+          bundle exec fastlane beta
 
