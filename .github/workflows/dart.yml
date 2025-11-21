@@ -129,11 +129,12 @@ jobs:
           APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_PAT: ${{ secrets.MATCH_GIT_PAT }}
-          MATCH_GIT_URL: https://github.com/JamperCin/su-ios-certificates.git
+          MATCH_GIT_URL: https://${{ secrets.MATCH_GIT_PAT }}@github.com/JamperCin/su-ios-certificates.git
+
         run: |
           cd ios
-            echo "KEY_ID = $APP_STORE_CONNECT_API_KEY_ID"
-            export MATCH_GIT_URL="https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git"
+            #echo "KEY_ID = $APP_STORE_CONNECT_API_KEY_ID"
+            #export MATCH_GIT_URL="https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git"
             bundle exec fastlane beta
 
 
