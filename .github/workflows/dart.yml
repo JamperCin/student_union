@@ -91,10 +91,18 @@ jobs:
         run: sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
 
 #Instal Ruby first before fastlane
-      - name: Install Ruby dependencies
+      - name: Set up Ruby 3.1
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: false
+
+      - name: Install dependencies
         run: |
           cd ios
-            bundle install --path vendor/bundle
+            bundle config set --local path 'vendor/bundle'
+            bundle install
+
 
  # ---- Install Fastlane ----
       - name: Install fastlane
