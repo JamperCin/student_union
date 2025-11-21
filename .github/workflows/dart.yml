@@ -86,9 +86,13 @@ jobs:
           cd ios
           pod install --repo-update
 
+      - name: List Xcode versions
+        run: xcodebuild -version
+
+
     # Set up Xcode environment
       - name: Set up Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+        run: sudo xcode-select -s /Applications/Xcode.app
 
 #Instal Ruby first before fastlane
       - name: Set up Ruby 3.1
