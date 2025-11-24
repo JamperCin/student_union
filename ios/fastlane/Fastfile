@@ -65,7 +65,6 @@ platform :ios do
       scheme: "Runner",
       export_method: "app-store",
       clean: true,
-      allow_provisioning_updates: true,
       export_options: {
         provisioningProfiles: {
           "com.kodeit.scriptureunion" => "match AppStore com.kodeit.scriptureunion"
