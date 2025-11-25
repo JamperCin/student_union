@@ -56,7 +56,7 @@ platform :ios do
   desc "Match App Store Provisioning Profiles"
   lane :match_profiles do
      # Sync and ensure code signing certificates and provisioning profiles are available
-    match(type: "appstore", shallow_clone: true, setup_ci: true)
+    match(type: "appstore", shallow_clone: true)
 
   end
 
