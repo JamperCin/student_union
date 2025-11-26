@@ -58,6 +58,27 @@ platform :ios do
 
   desc "Build and upload to TestFlight"
   lane :beta do
+
+    # --- Add these lines to unlock the keychain and set permissions ---
+    keychain_path = "~/Library/Keychains/build.keychain"
+    # Create a new keychain and set it as default (standard match behavior)
+    create_keychain(
+      path: keychain_path,
+      password: "bonsu.",
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600
+    )
+    # Unlock the keychain and allow access without prompting
+    unlock_keychain(
+      path: keychain_path,
+      password: "bonsu.",
+    )
+    # Set keychain settings to avoid auto-lock and allow access for signing tools
+    sh "security set-keychain-settings -u #{keychain_path}"
+    sh "security set-key-partition-list -S apple-tool:,apple: -s -k #{ENV["MATCH_PASSWORD"]} #{keychain_path}"
+    # ------------------------------------------------------------------
+
     load_asc_api_key
     code_signing
     fetch_and_increment_build_number
