@@ -71,6 +71,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+        # --- Caching for faster builds and preventing timeouts ---
+      - name: Cache CocoaPods dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Caches/CocoaPods
+            ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Cache Xcode DerivedData
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-xcode-deriveddata-${{ hashFiles('ios/Podfile.lock') }}-${{ hashFiles('ios/Runner.xcodeproj/project.pbxproj') }}
+          restore-keys: |
+            ${{ runner.os }}-xcode-deriveddata-
+      # ---------------------------------------------------------
+
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -91,8 +113,8 @@ jobs:
 
 
     # Set up Xcode environment
-      - name: Set up Xcode
-        run: sudo xcode-select -s /Applications/Xcode.app
+      #- name: Set up Xcode
+       # run: sudo xcode-select -s /Applications/Xcode.app
 
 #Instal Ruby first before fastlane
       - name: Set up Ruby 3.1
@@ -109,17 +131,20 @@ jobs:
 
 
  # ---- Install Fastlane ----
-      - name: Install fastlane
-        run: sudo gem install fastlane
+      #- name: Install fastlane
+        #run: sudo gem install fastlane
 
       #Setup iOS signing (certificates & provisioning profiles)
       - name: Setup iOS Signing (Fastlane Match)
+      
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_PAT: ${{ secrets.MATCH_GIT_PAT }}
+          CI: true
+          FLUTTER_ROOT: /opt/hostedtoolcache/flutter/3.13.0-stable/x64  # your Flutter path
           
         run: |
           # Use HTTPS URL with secret expanded
