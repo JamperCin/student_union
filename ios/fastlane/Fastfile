@@ -40,14 +40,19 @@ platform :ios do
     # This action handles all necessary permissions and links the profile correctly, replacing the SH commands
     update_code_signing_settings(
       use_automatic_signing: false,
-      code_signing_identity: "Apple Distribution", 
+      code_sign_identity: "Apple Distribution", 
       bundle_identifier: "com.kodeit.scriptureunion"
     )
 
     # --- 4. Fetch latest build number and increment it ---
-    app_identifier = "com.kodeit.scriptureunion"
+    app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
     current_version = get_version_number(target: "Runner")
-    latest_build_number = latest_testflight_build_number(version: current_version, app_identifier: app_identifier)
+    latest_build_number = latest_testflight_build_number(
+      api_key: api_key,
+      version: current_version,
+      app_identifier: app_identifier
+    )
     increment_build_number(build_number: (latest_build_number + 1))
     
     clear_derived_data
