@@ -28,7 +28,20 @@ platform :ios do
       in_house: false
     )
 
-    # --- 2. Sync and install certificates/profiles using Match ---
+     # --- Step 2: Define keychain path and create it ---
+    keychain_path = File.expand_path("~/Library/Keychains/build.keychain")
+    sh "mkdir -p ~/Library/Keychains"
+
+    create_keychain(
+      path: keychain_path,
+      password: ENV["MATCH_PASSWORD"], 
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600
+    )
+
+
+    # --- 3. Sync and install certificates/profiles using Match ---
     # Fastlane automatically handles temporary keychain creation and unlocking for CI environments
     match(
       type: "appstore", 
@@ -36,7 +49,19 @@ platform :ios do
       git_url: ENV["MATCH_GIT_URL"] # Use the env var set in your YAML file
     )
 
-    # --- 3. Update Xcode project build settings for manual signing ---
+     # --- Step 4: Set the keychain permissions AFTER the certificate is installed ---
+    # Now the security command can find the certificate item
+    unlock_keychain(
+      path: keychain_path,
+      password: ENV["MATCH_PASSWORD"], 
+    )
+    sh "security set-keychain-settings -u #{keychain_path}"
+    # This command grants access to the certificate without prompting
+    sh "security set-key-partition-list -S apple-tool:,apple: -s -k #{ENV["MATCH_PASSWORD"]} #{keychain_path}"
+    # ------------------------------------------------------------------
+
+
+    # --- 5. Update Xcode project build settings for manual signing ---
     # This action handles all necessary permissions and links the profile correctly, replacing the SH commands
     update_code_signing_settings(
       use_automatic_signing: false,
@@ -44,7 +69,7 @@ platform :ios do
       bundle_identifier: "com.kodeit.scriptureunion"
     )
 
-    # --- 4. Fetch latest build number and increment it ---
+    # --- 6. Fetch latest build number and increment it ---
     app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
     api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
     current_version = get_version_number(target: "Runner")
@@ -57,7 +82,7 @@ platform :ios do
     
     clear_derived_data
 
-    # --- 5. Build the iOS app ---
+    # --- 7. Build the iOS app ---
     build_app(
       workspace: "Runner.xcworkspace",
       scheme: "Runner",
@@ -73,7 +98,7 @@ platform :ios do
       }
     )
 
-    # --- 6. Upload to TestFlight ---
+    # --- 8. Upload to TestFlight ---
     upload_to_testflight(
       skip_waiting_for_build_processing: true,
       changelog: "Automated build from GitHub Actions"
