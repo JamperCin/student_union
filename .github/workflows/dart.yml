@@ -136,12 +136,15 @@ jobs:
 
       #Setup iOS signing (certificates & provisioning profiles)
       - name: Setup iOS Signing (Fastlane Match)
+      
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_PAT: ${{ secrets.MATCH_GIT_PAT }}
+          CI: true
+          FLUTTER_ROOT: /opt/hostedtoolcache/flutter/3.13.0-stable/x64  # your Flutter path
           
         run: |
           # Use HTTPS URL with secret expanded
