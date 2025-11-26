@@ -59,29 +59,31 @@ platform :ios do
   desc "Build and upload to TestFlight"
   lane :beta do
 
-    # --- Use a reliable absolute path within the workspace directory ---
-    # This path is more reliable on the GitHub Actions environment than ~/Library/Keychains
+     # --- Step 2: Define keychain path and create it ---
     keychain_path = File.expand_path("~/Library/Keychains/build.keychain")
-    
-    # Optional: Ensure the directory exists before creating the keychain
     sh "mkdir -p ~/Library/Keychains"
 
-    # Create a new keychain and set it as default (standard match behavior)
     create_keychain(
       path: keychain_path,
-      password: "bonsu.",
+      password: ENV["MATCH_PASSWORD"], 
       default_keychain: true,
       unlock: true,
       timeout: 3600
     )
-    # Unlock the keychain and allow access without prompting
+    
+    # --- Step 3: Sync and install certificates/profiles using Match ---
+    # This installs the certificate INTO the created keychain
+    match(type: "appstore", shallow_clone: true)
+
+    # --- Step 4: Set the keychain permissions AFTER the certificate is installed ---
+    # Now the security command can find the certificate item
     unlock_keychain(
       path: keychain_path,
-      password: "bonsu.",
+      password: ENV["MATCH_PASSWORD"], 
     )
-    # Set keychain settings to avoid auto-lock and allow access for signing tools
     sh "security set-keychain-settings -u #{keychain_path}"
-    sh "security set-key-partition-list -S apple-tool:,apple: -s -k #{"bonsu."} #{keychain_path}"
+    # This command grants access to the certificate without prompting
+    sh "security set-key-partition-list -S apple-tool:,apple: -s -k #{ENV["MATCH_PASSWORD"]} #{keychain_path}"
     # ------------------------------------------------------------------
 
     load_asc_api_key
