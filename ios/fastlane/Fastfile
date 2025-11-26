@@ -69,7 +69,7 @@ platform :ios do
       # export_options: { ... }
 
       # Add these reliable parameters back (your modern Fastlane version should support these)
-      code_sign_identity: "Apple Distribution", 
+      codesigning_identity: "Apple Distribution", 
       provisioning_profile_uuid: ENV["sigh_com.kodeit.scriptureunion_AppStore"]
     )
 
