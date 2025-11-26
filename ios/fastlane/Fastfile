@@ -16,8 +16,10 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Load App Store Connect API Key"
-  lane :load_asc_api_key do
+  desc "Build and upload to TestFlight"
+  lane :beta do
+
+    # --- 1. Authenticate with App Store Connect API ---
     app_store_connect_api_key(
       key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
       issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
@@ -25,87 +27,48 @@ platform :ios do
       is_key_content_base64: true,
       in_house: false
     )
-  #  pilot( api_key_path: "fastlane/api_key.json" )
-  end
 
-  desc "Fetch and increment build number"
-  lane :fetch_and_increment_build_number do
-    app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
-    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
-
-    current_version = get_version_number(target: "Runner")
-
-    latest_build_number = latest_testflight_build_number(
-      api_key: api_key,
-      version: current_version,
-      app_identifier: app_identifier
-    )
-
-    increment_build_number(build_number: (latest_build_number + 1))
-  end
-
-  desc "Code Signing using Match"
-  lane :code_signing do
+    # --- 2. Sync and install certificates/profiles using Match ---
+    # Fastlane automatically handles temporary keychain creation and unlocking for CI environments
     match(
-      type: "appstore",
-      git_url: ENV["MATCH_GIT_URL"],  # explicit repo url
-      readonly: false,
-      shallow_clone: true
-    )
-  end
-
-
-
-  desc "Build and upload to TestFlight"
-  lane :beta do
-
-    load_asc_api_key
-
-     # --- Step 2: Define keychain path and create it ---
-    keychain_path = File.expand_path("~/Library/Keychains/build.keychain")
-    sh "mkdir -p ~/Library/Keychains"
-
-    create_keychain(
-      path: keychain_path,
-      password: ENV["MATCH_PASSWORD"], 
-      default_keychain: true,
-      unlock: true,
-      timeout: 3600
+      type: "appstore", 
+      shallow_clone: true,
+      git_url: ENV["MATCH_GIT_URL"] # Use the env var set in your YAML file
     )
 
-    code_signing
-    
-    # --- Step 4: Set the keychain permissions AFTER the certificate is installed ---
-    # Now the security command can find the certificate item
-    unlock_keychain(
-      path: keychain_path,
-      password: ENV["MATCH_PASSWORD"], 
+    # --- 3. Update Xcode project build settings for manual signing ---
+    # This action handles all necessary permissions and links the profile correctly, replacing the SH commands
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      code_signing_identity: "Apple Distribution", 
+      bundle_identifier: "com.kodeit.scriptureunion"
     )
-    sh "security set-keychain-settings -u #{keychain_path}"
-    # This command grants access to the certificate without prompting
-    sh "security set-key-partition-list -S apple-tool:,apple: -s -k #{ENV["MATCH_PASSWORD"]} #{keychain_path}"
-    # ------------------------------------------------------------------
 
+    # --- 4. Fetch latest build number and increment it ---
+    app_identifier = "com.kodeit.scriptureunion"
+    current_version = get_version_number(target: "Runner")
+    latest_build_number = latest_testflight_build_number(version: current_version, app_identifier: app_identifier)
+    increment_build_number(build_number: (latest_build_number + 1))
     
-    
-    fetch_and_increment_build_number
     clear_derived_data
 
+    # --- 5. Build the iOS app ---
     build_app(
       workspace: "Runner.xcworkspace",
       scheme: "Runner",
       export_method: "app-store",
       clean: true,
-      xcargs: "-allowProvisioningUpdates",
       include_bitcode: false,
-      export_options: {
-        provisioningProfiles: {
-          "com.kodeit.scriptureunion" => "match AppStore com.kodeit.scriptureunion"
-        }
-      }
+      # Remove xcargs and export_options block as they conflict with explicit manual signing setup above:
+      # xcargs: "-allowProvisioningUpdates", 
+      # export_options: { ... }
+
+      # Add these reliable parameters back (your modern Fastlane version should support these)
+      code_signing_identity: "Apple Distribution", 
+      provisioning_profile_uuid: ENV["sigh_com.kodeit.scriptureunion_AppStore"]
     )
 
-
+    # --- 6. Upload to TestFlight ---
     upload_to_testflight(
       skip_waiting_for_build_processing: true,
       changelog: "Automated build from GitHub Actions"
