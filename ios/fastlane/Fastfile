@@ -19,85 +19,53 @@ platform :ios do
   desc "Build and upload to TestFlight"
   lane :beta do
 
-    # --- 1. Authenticate with App Store Connect API ---
+    # --- 1. Authenticate with App Store Connect ---
     app_store_connect_api_key(
       key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
       issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
       key_content: ENV["APP_STORE_CONNECT_KEY"],
-      is_key_content_base64: true,
-      in_house: false
+      is_key_content_base64: true
     )
 
-     # --- Step 2: Define keychain path and create it ---
+    # --- 2. Create and unlock CI keychain ---
     keychain_path = File.expand_path("~/Library/Keychains/build.keychain")
-    sh "mkdir -p ~/Library/Keychains"
-
     create_keychain(
       path: keychain_path,
-      password: ENV["MATCH_PASSWORD"], 
+      password: ENV["MATCH_PASSWORD"],
       default_keychain: true,
       unlock: true,
       timeout: 3600
     )
 
-
-    # --- 3. Sync and install certificates/profiles using Match ---
-    # Fastlane automatically handles temporary keychain creation and unlocking for CI environments
+    # --- 3. Install certificates + provisioning profiles ---
     match(
-      type: "appstore", 
-      shallow_clone: true,
-      git_url: ENV["MATCH_GIT_URL"] # Use the env var set in your YAML file
+      type: "app-store",
+      readonly: false,
+      git_url: ENV["MATCH_GIT_URL"],
+      keychain_name: "build.keychain",
+      keychain_password: ENV["MATCH_PASSWORD"]
     )
 
-     # --- Step 4: Set the keychain permissions AFTER the certificate is installed ---
-    # Now the security command can find the certificate item
-    unlock_keychain(
-      path: keychain_path,
-      password: ENV["MATCH_PASSWORD"], 
-    )
+    # --- 4. Ensure keychain stays unlocked ---
+    sh "security set-keychain-settings -lut 21600 #{keychain_path}"
 
-    # Add the certificate to the keychain's search list
-    sh "security list-keychains -s #{keychain_path} $(security list-keychains | sed s/\"//g)"
-    # Set keychain settings to prevent it from locking during the build 
-    sh "security unlock-keychain -p #{ENV["MATCH_PASSWORD"]} #{keychain_path}"
-
-
-    #sh "security set-keychain-settings -u #{keychain_path}"
-    # This command grants access to the certificate without prompting
-    #sh "security set-key-partition-list -S apple-tool:,apple: -s -k #{ENV["MATCH_PASSWORD"]} #{keychain_path}"
-    # ------------------------------------------------------------------
-
-
-    # --- 5. Update Xcode project build settings for manual signing ---
-    # This action handles all necessary permissions and links the profile correctly, replacing the SH commands
-    update_code_signing_settings(
-      use_automatic_signing: false,
-      code_sign_identity: "Apple Distribution", 
-      bundle_identifier: "com.kodeit.scriptureunion"
-    )
-
-    # --- 6. Fetch latest build number and increment it ---
-    app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
-    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+    # --- 5. Increment build number ---
     current_version = get_version_number(target: "Runner")
-    latest_build_number = latest_testflight_build_number(
-      api_key: api_key,
+    latest = latest_testflight_build_number(
       version: current_version,
-      app_identifier: app_identifier
+      app_identifier: "com.kodeit.scriptureunion"
     )
-    increment_build_number(build_number: (latest_build_number + 1))
-    
+    increment_build_number(build_number: latest + 1)
+
     clear_derived_data
 
-    # --- 7. Build the iOS app ---
+    # --- 6. Build IPA ---
     build_app(
       workspace: "Runner.xcworkspace",
       scheme: "Runner",
       export_method: "app-store",
       clean: true,
       include_bitcode: false,
-      codesigning_identity: "Apple Distribution", 
-      xcargs: "-allowProvisioningUpdates",
       export_options: {
         provisioningProfiles: {
           "com.kodeit.scriptureunion" => "match AppStore com.kodeit.scriptureunion"
@@ -105,10 +73,11 @@ platform :ios do
       }
     )
 
-    # --- 8. Upload to TestFlight ---
+    # --- 7. Upload to TestFlight ---
     upload_to_testflight(
       skip_waiting_for_build_processing: true,
-      changelog: "Automated build from GitHub Actions"
+      changelog: "Automated GitHub Actions build"
     )
   end
 end
+
