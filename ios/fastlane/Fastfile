@@ -55,9 +55,16 @@ platform :ios do
       path: keychain_path,
       password: ENV["MATCH_PASSWORD"], 
     )
-    sh "security set-keychain-settings -u #{keychain_path}"
+
+    # Add the certificate to the keychain's search list
+    sh "security list-keychains -s #{keychain_path} $(security list-keychains | sed s/\"//g)"
+    # Set keychain settings to prevent it from locking during the build 
+    sh "security unlock-keychain -p #{ENV["MATCH_PASSWORD"]} #{keychain_path}"
+
+
+    #sh "security set-keychain-settings -u #{keychain_path}"
     # This command grants access to the certificate without prompting
-    sh "security set-key-partition-list -S apple-tool:,apple: -s -k #{ENV["MATCH_PASSWORD"]} #{keychain_path}"
+    #sh "security set-key-partition-list -S apple-tool:,apple: -s -k #{ENV["MATCH_PASSWORD"]} #{keychain_path}"
     # ------------------------------------------------------------------
 
 
