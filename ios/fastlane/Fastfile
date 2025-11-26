@@ -71,10 +71,6 @@ platform :ios do
       timeout: 3600
     )
     
-    # --- Step 3: Sync and install certificates/profiles using Match ---
-    # This installs the certificate INTO the created keychain
-    match(type: "appstore", shallow_clone: true)
-
     # --- Step 4: Set the keychain permissions AFTER the certificate is installed ---
     # Now the security command can find the certificate item
     unlock_keychain(
