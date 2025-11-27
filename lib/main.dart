@@ -92,7 +92,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    appDimen = AppDimens(context,constantMultiplier: 1.75);
+    final ratio = MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
+    //debugPrint("Ratio: $ratio");
+    appDimen = AppDimens(context,constantMultiplier: ratio - 0.15);
 
     return Obx(
       ()=> GetMaterialApp(
