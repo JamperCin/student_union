@@ -33,6 +33,7 @@ ThemeData lightMode = ThemeData(
       elevation: 5.0,
       backgroundColor: primaryGreenColor,
       textStyle: normalButtonLightModeStyle,
+      maximumSize: Size.fromHeight(50.dp()),
       disabledForegroundColor: disabledGreenColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.horizontal(
@@ -185,6 +186,7 @@ ThemeData darkMode = lightMode.copyWith(
       elevation: 5.0,
       backgroundColor: whiteColor,
       textStyle: normalButtonLightModeStyle,
+      maximumSize: Size.fromHeight(50.dp()),
       disabledForegroundColor: disabledGreenColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.horizontal(

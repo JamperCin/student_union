@@ -41,7 +41,7 @@ class MoreScreen extends BaseSharedScreen {
               _controller.onAboutOnClick();
             },
           ),
-          Gap(10.dp()),
+          Gap(5.dp()),
           SimpleCardItem(
             title: "Profile",
             prefixAsset: icProfileCircular,
@@ -50,7 +50,7 @@ class MoreScreen extends BaseSharedScreen {
               _controller.onEditProfileOnClick();
             },
           ),
-          Gap(10.dp()),
+          Gap(5.dp()),
           SimpleCardItem(
             title: "Read Bible",
             prefixAsset: icReadBible,
@@ -63,7 +63,7 @@ class MoreScreen extends BaseSharedScreen {
             prefixAsset: icEdit,
             prefixAssetHeight: prefixSize,
           ),*/
-          Gap(10.dp()),
+          Gap(5.dp()),
           SimpleCardItem(
             title: "Counselling & Prayers",
             prefixAsset: icPray,
@@ -76,7 +76,7 @@ class MoreScreen extends BaseSharedScreen {
           //   prefixAsset: icChat,
           //   prefixAssetHeight: prefixSize,
           // ),
-          Gap(10.dp()),
+          Gap(5.dp()),
           SimpleCardItem(
             title: "Settings",
             prefixAsset: icSettingsIcon,
@@ -85,7 +85,7 @@ class MoreScreen extends BaseSharedScreen {
               _controller.onSettingsOnClick();
             },
           ),
-          Gap(10.dp()),
+          Gap(5.dp()),
           SimpleCardItem(
             title: "Log Out",
             prefixAsset: icLogOutIcon,

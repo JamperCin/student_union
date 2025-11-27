@@ -38,7 +38,7 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
                     child: NetworkImageWidget(
                       url: getModel().thumbnail,
                       width: appDimen.screenWidth * 0.7,
-                      height: appDimen.screenHeight * 0.5,
+                      height: appDimen.screenHeight * 0.45,
                       fit: BoxFit.cover,
                       placeHolderWidget: ContainerWidget(
                         width: appDimen.screenWidth,
@@ -46,7 +46,7 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
                       ),
                     ),
                   ),
-                  Gap(40.dp()),
+                  Gap(30.dp()),
                   RichText(
                     text: TextSpan(
                       children: [

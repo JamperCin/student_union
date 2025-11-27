@@ -13,7 +13,7 @@ class DonationsHistoryScreen extends BaseSharedScreen {
   Widget body(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 24.dp(),
+        horizontal: 14.dp(),
         vertical: 16.dp(),
       ),
       child:  PaymentHistoryWidget(),
