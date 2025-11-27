@@ -1,8 +1,5 @@
-import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';
-import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/widgets/core_ministries_widget.dart';
 import 'package:student_union/core-ui/widgets/daily_devotion_widget.dart'
     show DailyDevotionWidget;
@@ -60,7 +57,7 @@ class HomeScreen extends BaseScreenStandard {
         ///Upcoming Events
         UpcomingEventsWidget(
           onTap: (v) => _controller.onUpcomingEventTap(context, v),
-          onSeeAllOnTap: _controller.onSeeAllUpcomingEvents,
+         // onSeeAllOnTap: _controller.onSeeAllUpcomingEvents,
         ),
 
         ///Core Ministries or Campaigns

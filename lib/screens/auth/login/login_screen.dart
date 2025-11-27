@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
+import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/login/login_controller.dart';
 
@@ -13,7 +14,7 @@ class LoginScreen extends BaseScreenDecorated {
 
   @override
   Color backgroundColor(BuildContext context) {
-    return colorScheme.primary;
+    return primaryGreenColor;
   }
 
   @override

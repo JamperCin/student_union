@@ -1,12 +1,4 @@
-import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/utils/date_time_utils.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
-import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
-import 'package:core_module/core_ui/widgets/divider_widget.dart';
-import 'package:core_module/core_ui/widgets/list_view_widget.dart';
-import 'package:core_module/core_ui/widgets/no_data_widget.dart';
-import 'package:core_module/core_ui/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/notification_model.dart';

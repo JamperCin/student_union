@@ -1,12 +1,5 @@
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/extensions/string_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/button_widget.dart';
-import 'package:core_module/core_ui/widgets/container_widget.dart';
-import 'package:core_module/core_ui/widgets/network_image_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 
@@ -28,7 +21,7 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
   @override
   Widget body(BuildContext context) {
     final lead = '—  ';
-    final script = 'Deuteronomy 29:29';
+    final script = "${getModel().devotionalType?.name}\n${getModel().devotionalType?.description}"; //'Deuteronomy 29:29';
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.dp(), vertical: 14.dp()),

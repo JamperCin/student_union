@@ -120,8 +120,11 @@ class AppPreference {
   }
 
   void logOut() {
+    bool theme = getBool(THEME_TYPE);
+    bool intro = getBool(IS_INTRO_SHOWN);
     preference.clear();
-    setBool(IS_INTRO_SHOWN, true);
+    setBool(IS_INTRO_SHOWN, intro);
+    setBool(THEME_TYPE, theme);
   }
 
   String getFcmToken() {

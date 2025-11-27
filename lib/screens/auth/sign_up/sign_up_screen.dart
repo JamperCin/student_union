@@ -1,12 +1,6 @@
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_dec.dart';
-import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
-import 'package:core_module/core_ui/widgets/button_widget.dart';
-import 'package:core_module/core_ui/widgets/checkbox_widget.dart';
-import 'package:core_module/core_ui/widgets/text_button_widget.dart';
-import 'package:core_module/core_ui/widgets/textfield_widget.dart';
+import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/sign_up/sign_up_controller.dart';
 
@@ -30,7 +24,7 @@ class SignUpScreen extends BaseScreenDecorated {
 
   @override
   Color appBarBackgroundColor(BuildContext context) {
-    return backgroundColor(context);
+    return primaryGreenColor;
   }
 
   @override

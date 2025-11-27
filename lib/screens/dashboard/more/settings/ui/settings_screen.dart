@@ -61,13 +61,16 @@ class SettingsScreen extends BaseScreenStandard {
               ),
               elevation: elevation,
               prefixAssetHeight: prefixSize,
-              suffixWidget: Switch(
-                value: isDarkTheme.value,
-                onChanged: _controller.onThemeSwitch,
-                inactiveThumbColor: colorScheme.surface,
-                activeColor: colorScheme.surface,
-                inactiveTrackColor: colorScheme.primary,
-                activeTrackColor: colorScheme.primary,
+              suffixWidget: SizedBox(
+                height: 25.dp(),
+                child: Switch(
+                  value: isDarkTheme.value,
+                  onChanged: _controller.onThemeSwitch,
+                  inactiveThumbColor: colorScheme.surface,
+                  activeColor: colorScheme.surface,
+                  inactiveTrackColor: colorScheme.primary,
+                  activeTrackColor: colorScheme.primary,
+                ),
               ),
             ),
           ),

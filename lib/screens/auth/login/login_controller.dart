@@ -1,10 +1,7 @@
 
 import 'dart:collection';
 
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/extensions/text_controller_ext.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';

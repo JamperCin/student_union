@@ -22,7 +22,7 @@ class IntroScreen extends BaseScreenStandard {
 
   @override
   Color backgroundColor(BuildContext context) {
-    return Colors.white;
+    return Theme.of(context).colorScheme.surface;
   }
 
   @override
