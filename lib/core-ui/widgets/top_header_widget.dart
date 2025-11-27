@@ -122,6 +122,7 @@ class TopHeaderWidget extends StatelessWidget {
                       child: Icon(
                         Icons.notifications_none,
                         size: 25.dp(),
+                        color: colorScheme.inverseSurface,
                       ),
                     ),
                   ),

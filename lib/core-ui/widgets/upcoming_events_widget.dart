@@ -15,18 +15,20 @@ class UpcomingEventsWidget extends StatelessWidget {
   final Function(UpcomingEventModel)? onTap;
   final Function()? onSeeAllOnTap;
   RxInt selectedIndex = 0.obs;
+  int page = 1;
 
-   UpcomingEventsWidget({super.key, this.onTap, this.onSeeAllOnTap});
+  UpcomingEventsWidget({super.key, this.onTap, this.onSeeAllOnTap});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: upcomingEventsApiService.fetchUpcomingEvents(),
-        builder: (context, data) {
-          return (data.hasData && data.data != null)
-              ? _eventsGridWidget(context, data.data!)
-              : ShimmerWidget.withList(length: 1);
-        });
+      future: upcomingEventsApiService.fetchUpcomingEvents(),
+      builder: (context, data) {
+        return (data.hasData && data.data != null)
+            ? _eventsGridWidget(context, data.data!)
+            : ShimmerWidget.withList(length: onSeeAllOnTap != null ? 1 : 5);
+      },
+    );
   }
 
   Widget _eventsGridWidget(
@@ -40,10 +42,7 @@ class UpcomingEventsWidget extends StatelessWidget {
     return Column(
       children: [
         Gap(20.dp()),
-        TitleTextWidget(
-          text: "Upcoming Events",
-          onTap: onSeeAllOnTap,
-        ),
+        TitleTextWidget(text: "Upcoming Events", onTap: onSeeAllOnTap),
         Gap(5.dp()),
         CarouselSlider.builder(
           itemCount: list.length,
@@ -102,12 +101,14 @@ class UpcomingEventsWidget extends StatelessWidget {
                   style: textTheme.labelSmall?.copyWith(fontSize: 8.dp()),
                 ),
                 Text(
-                  DateTimeUtils()
-                      .formatDate(model.date, format: "dd MMM, yyyy"),
+                  DateTimeUtils().formatDate(
+                    model.date,
+                    format: "dd MMM, yyyy",
+                  ),
                   style: textTheme.labelMedium?.copyWith(fontSize: 8.dp()),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

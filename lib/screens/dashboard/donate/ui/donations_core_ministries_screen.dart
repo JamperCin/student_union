@@ -1,6 +1,4 @@
-import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
@@ -27,7 +25,7 @@ class DonationCoreMinistriesScreen extends BaseSharedScreen {
         child: IconButtonWidget(
           icon: Icons.history,
           iconSize: 25.dp(),
-          iconColor: colorScheme.surface,
+          iconColor: colorScheme.tertiary,
           onTap: _controller.onViewDonationHistory,
         ),
       )

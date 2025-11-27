@@ -1,4 +1,3 @@
-import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/base/base_controller.dart';

@@ -35,10 +35,10 @@ class SimpleCardItem<T> extends StatelessWidget {
     this.prefixWidget,
     this.prefixAssetHeight,
     this.prefixAssetWidth,
-  })  : hasButton = false,
-        buttonText = null,
-        suffixAssetHeight = null,
-        suffixAssetWidth = null;
+  }) : hasButton = false,
+       buttonText = null,
+       suffixAssetHeight = null,
+       suffixAssetWidth = null;
 
   const SimpleCardItem.withButton({
     super.key,
@@ -51,11 +51,11 @@ class SimpleCardItem<T> extends StatelessWidget {
     this.prefixAssetHeight,
     this.prefixAssetWidth,
     this.buttonText,
-  })  : hasButton = true,
-        suffixWidget = null,
-        prefixWidget = null,
-        suffixAssetHeight = null,
-        suffixAssetWidth = null;
+  }) : hasButton = true,
+       suffixWidget = null,
+       prefixWidget = null,
+       suffixAssetHeight = null,
+       suffixAssetWidth = null;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +69,7 @@ class SimpleCardItem<T> extends StatelessWidget {
     return CardContainerWidget(
       padding: EdgeInsets.all(5.dp()),
       elevation: elevation ?? 5,
+      color: colorScheme.surfaceContainerHigh,
       margin: EdgeInsets.only(
         top: 7.dp(),
         right: 5.dp(),
@@ -77,25 +78,23 @@ class SimpleCardItem<T> extends StatelessWidget {
       ),
       child: Column(
         children: [
-
-              AssetImageWidget(
-                asset: prefixAsset ?? icCoreMinistry,
-                height: prefixAssetHeight ?? 60.dp(),
-                width: prefixAssetWidth ?? 100.dp(),
-                assetColor: colorScheme.primary,
-              ),
+          AssetImageWidget(
+            asset: prefixAsset ?? icCoreMinistry,
+            height: prefixAssetHeight ?? 60.dp(),
+            width: prefixAssetWidth ?? 100.dp(),
+            assetColor: colorScheme.primary,
+          ),
           Gap(10.dp()),
           SizedBox(
             height: 60.dp(),
             child: RichText(
-                maxLines: 3,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
-                  children: [
-                    TextSpan(text: title, style: textTheme.labelMedium)
-                  ],
-                )),
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                children: [TextSpan(text: title, style: textTheme.labelMedium)],
+              ),
+            ),
           ),
           Gap(10.dp()),
           ButtonWidget(
@@ -121,29 +120,29 @@ class SimpleCardItem<T> extends StatelessWidget {
       },
       child: CardContainerWidget(
         elevation: elevation ?? 5.0,
+        color: colorScheme.surfaceContainerHigh,
         padding: EdgeInsets.symmetric(horizontal: 10.dp(), vertical: 20.dp()),
-        margin: EdgeInsets.symmetric(
-          horizontal: 10.dp(),
-          vertical: 5.dp(),
-        ),
+        margin: EdgeInsets.symmetric(horizontal: 10.dp(), vertical: 5.dp()),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             prefixWidget ??
-            AssetImageWidget(
-              asset: prefixAsset ?? icCoreMinistry,
-              height: prefixAssetHeight ?? 40.dp(),
-              width: prefixAssetWidth ?? 40.dp(),
-              assetColor: colorScheme.primary,
-            ),
+                AssetImageWidget(
+                  asset: prefixAsset ?? icCoreMinistry,
+                  height: prefixAssetHeight ?? 40.dp(),
+                  width: prefixAssetWidth ?? 40.dp(),
+                  assetColor: colorScheme.primary,
+                ),
             Gap(10.dp()),
             Expanded(
-              child: Text(title,
-                  textAlign: TextAlign.start,
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.primary,
-                    fontWeight: FontWeight.w500,
-                  )),
+              child: Text(
+                title,
+                textAlign: TextAlign.start,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             Gap(10.dp()),
             suffixWidget ??

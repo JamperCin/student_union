@@ -1,13 +1,4 @@
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/model/local/base_object.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
-import 'package:core_module/core_ui/widgets/button_widget.dart';
-import 'package:core_module/core_ui/widgets/container_widget.dart';
-import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
-import 'package:core_module/core_ui/widgets/loader_widget.dart';
-import 'package:core_module/core_ui/widgets/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';

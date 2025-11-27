@@ -62,8 +62,8 @@ class PaymentHistoryWidget extends StatelessWidget {
             onTap: onSeeMoreOnTap,
           ),
         if (onSeeMoreOnTap != null) Gap(5.dp()),
-        if (onSeeMoreOnTap != null)
-          ...list.map((e) => _transactionItemWidget(context, e)),
+        if (onSeeMoreOnTap != null) //display only first 5 transactions only
+          ...list.getRange(0, list.length > 5 ? 5 : list.length).map((e) => _transactionItemWidget(context, e)),
         if (onSeeMoreOnTap == null)
           Expanded(
             child: ListViewWidget(

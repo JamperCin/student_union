@@ -1,8 +1,4 @@
-import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
-import 'package:core_module/core_ui/widgets/button_widget.dart';
-import 'package:core_module/core_ui/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/forgot_password/controller/forgot_password_controller.dart';

@@ -1,3 +1,4 @@
+import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/app/app_style.dart';
 
@@ -86,6 +87,7 @@ ThemeData lightMode = ThemeData(
     surfaceBright: greyTertiaryColor,
     surfaceContainerHighest: greyTertiaryColor,
     surfaceContainerLow: dividerColor,
+    surfaceContainerHigh: whiteColor,
 
     ///Inverse surface
     inverseSurface: darkColor,
@@ -125,6 +127,15 @@ ThemeData lightMode = ThemeData(
     // }),
   ),
   dialogTheme: DialogThemeData(backgroundColor: whiteColor),
+  appBarTheme: AppBarTheme(
+    backgroundColor: primaryGreenColor,
+    titleTextStyle: bodyMediumTextLightModeStyle.copyWith(
+      fontSize: 17.dp(),
+      fontWeight: FontWeight.w700,
+      color: whiteColor,
+    ),
+    iconTheme: IconThemeData(color: whiteColor),
+  ),
 );
 
 ThemeData darkMode = lightMode.copyWith(
@@ -143,9 +154,9 @@ ThemeData darkMode = lightMode.copyWith(
     surfaceDim: greyPrimaryColor,
     onSurface: darkBrownColor,
     tertiary: whiteColor,
-
     surfaceBright: greyPodActiveColor,
     surfaceContainerHighest: darkBrownColor,
+    surfaceContainerHigh: darkBrownColor,
     surfaceContainerLow: dividerColor,
   ),
   textTheme: TextTheme(
@@ -182,5 +193,15 @@ ThemeData darkMode = lightMode.copyWith(
         ),
       ),
     ),
-  ), dialogTheme: DialogThemeData(backgroundColor: darkColor),
+  ),
+  dialogTheme: DialogThemeData(backgroundColor: darkColor),
+  appBarTheme: AppBarTheme(
+    backgroundColor: darkColor,
+    titleTextStyle: bodyMediumTextLightModeStyle.copyWith(
+      fontSize: 17.dp(),
+      fontWeight: FontWeight.w700,
+      color: whiteColor,
+    ),
+    iconTheme: IconThemeData(color: whiteColor),
+  ),
 );
