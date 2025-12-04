@@ -12,7 +12,7 @@ import 'package:student_union/screens/dashboard/devotion/ui/purchased_book_detai
 import '../ui/buy_devotional_book_screen.dart';
 
 class DevotionController extends BaseController {
-  RxString selectedYear = "${DateTime.now().year}".obs;
+  RxString selectedYear = "All".obs; //${DateTime.now().year}
   Rx<BookType> bookTypeFilter = BookType.availableBooks.obs;
 
 
@@ -23,10 +23,11 @@ class DevotionController extends BaseController {
   List<String> get list {
     int startYear = 2024;
     int currentYear = DateTime.now().year + 1;
-    return List<String>.generate(
+    final data = List<String>.generate(
       currentYear - startYear + 1,
           (index) => "${currentYear - index}",
     );
+    return ["All", ...data];
   }
 
   void onDevotionTap(DevotionalBookModel model) {

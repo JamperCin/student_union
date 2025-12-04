@@ -1,4 +1,3 @@
-
 import 'package:core_module/core_module.dart';
 import 'package:student_union/core/def/global_access.dart';
 
@@ -74,7 +73,11 @@ class AppPreference {
   }
 
   List<double> getDoubleList(String key) {
-    return preference.getStringList(key)?.map((e) => double.parse(e)).toList() ?? [];
+    return preference
+            .getStringList(key)
+            ?.map((e) => double.parse(e))
+            .toList() ??
+        [];
   }
 
   ///----------------- H E L P E R     M E T H O D S  E N D S ----------------
@@ -87,21 +90,22 @@ class AppPreference {
     return getBool(IS_LOGIN);
   }
 
-
   void setToken(String token) {
     setString(TOKEN, token);
+  }
+
+  void setPassword(String password) {
+    setString(PASSWORD, password);
   }
 
   void setUser(CustomerModel? user) {
     if (user != null) {
       setString(PROFILE_IMAGE, user.profilePic);
-      setString(USER_DETAILS, MapUtils().convertEncode(user));
+      //setString(USER_DETAILS, MapUtils().convertEncode(user));
       appDbPreference.saveItem<CustomerModel>(item: user, key: USER_DETAILS);
     }
     setBool(IS_LOGIN, true);
   }
-
-
 
   CustomerModel getUser() {
     return appDbPreference.getItem<CustomerModel>(
@@ -117,6 +121,10 @@ class AppPreference {
 
   bool getDarkTheme() {
     return getBool(THEME_TYPE);
+  }
+
+  String getPassword() {
+    return getString(PASSWORD);
   }
 
   void logOut() {
@@ -135,7 +143,7 @@ class AppPreference {
     setString(FCM_TOKEN, token);
   }
 
-  void setNotificationCount( int value) {
+  void setNotificationCount(int value) {
     setInt(NOTIFICATION_COUNT, value);
   }
 }

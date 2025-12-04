@@ -1,9 +1,10 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/dashboard/more/profile/controller/delete_account_controller.dart';
 
-class DeleteAccountProfileScreen extends BaseScreenStandard {
+class DeleteAccountProfileScreen extends BaseSharedScreen {
   final _controller = Get.put(DeleteAccountController());
 
   @override

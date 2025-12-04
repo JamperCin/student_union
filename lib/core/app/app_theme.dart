@@ -100,7 +100,7 @@ ThemeData lightMode = ThemeData(
     surfaceDim: dividerColor,
   ),
   datePickerTheme: DatePickerThemeData(
-   // backgroundColor: Colors.red,
+    // backgroundColor: Colors.red,
     todayBackgroundColor: WidgetStateProperty.all(Colors.white),
     dayBackgroundColor: WidgetStateProperty.all(primaryGreenColor),
     // dayShape: WidgetStateProperty.all(
@@ -131,7 +131,7 @@ ThemeData lightMode = ThemeData(
   appBarTheme: AppBarTheme(
     backgroundColor: primaryGreenColor,
     titleTextStyle: bodyMediumTextLightModeStyle.copyWith(
-      fontSize: 17.dp(),
+      fontSize: 20.dp(),
       fontWeight: FontWeight.w700,
       color: whiteColor,
     ),
@@ -200,7 +200,7 @@ ThemeData darkMode = lightMode.copyWith(
   appBarTheme: AppBarTheme(
     backgroundColor: darkColor,
     titleTextStyle: bodyMediumTextLightModeStyle.copyWith(
-      fontSize: 17.dp(),
+      fontSize: 20.dp(),
       fontWeight: FontWeight.w700,
       color: whiteColor,
     ),

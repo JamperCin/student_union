@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core_module/core_module.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -24,7 +26,8 @@ import 'core/services/auth/auth_api_service.dart';
 @pragma('vm:entry-point')
 Future<void> firebaseBackgroundMessageHandler(RemoteMessage msg) async {
   debugPrint("Background messaging ======>>>> ${msg.toMap().toString()}");
-  await FcmApi().initializeFirebase();// Initialize Firebase if not already initialized
+  await FcmApi()
+      .initializeFirebase(); // Initialize Firebase if not already initialized
 
   FcmApi().handleFcmMessage(msg);
   // Perform background tasks based on the message data
@@ -92,18 +95,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final ratio = MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
-    //debugPrint("Ratio: $ratio");
-    appDimen = AppDimens(context,constantMultiplier: ratio - 0.15);
+    var ratio =
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
+    debugPrint("Ratio: $ratio");
+    ratio = Platform.isAndroid && ratio > 1.75 ? ratio : 1.8;
+
+    appDimen = AppDimens(context, constantMultiplier: ratio);
 
     return Obx(
-      ()=> GetMaterialApp(
+      () => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Scripture Union',
         initialRoute: rootRoute,
         getPages: appRoute,
         theme: isDarkTheme.value ? darkMode : lightMode,
-       // darkTheme: darkMode,
+        // darkTheme: darkMode,
         // home: MyHomePage(),
       ),
     );

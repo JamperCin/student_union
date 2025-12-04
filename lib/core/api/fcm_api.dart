@@ -8,6 +8,7 @@ import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/firebase_options.dart';
 import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart';
 import 'package:student_union/screens/dashboard/donate/ui/donations_history_screen.dart';
+import 'package:student_union/screens/dashboard/more/notifications/notificationsScreen.dart';
 
 class FcmApi {
   static FcmApi? _instance;
@@ -43,7 +44,6 @@ class FcmApi {
       await checkForApnToken();
     }
   }
-
 
   Future<void> checkForApnToken() async {
     String? apnsToken = await _firebaseMessaging.getAPNSToken();
@@ -104,7 +104,7 @@ class FcmApi {
     if (initMess != null) {
       msg = initMess;
     }
-    // TODO: Handle the notification click
+    navUtils.fireTarget(NotificationsScreen());
   }
 
   ///Handle all notifications at one central place
@@ -127,8 +127,10 @@ class FcmApi {
     //       break;
     //   default:
     //     break;
-    //
+
     // }
+
+    navUtils.fireTarget(NotificationsScreen());
   }
 
   Future<void> handleNotificationInStack() async {
