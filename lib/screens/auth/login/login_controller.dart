@@ -68,6 +68,7 @@ class LoginController extends BaseController {
     if (response != null && response.token != null) {
       appPreference.setToken(response.token!);
       appPreference.setUser(response.user);
+       appPreference.setPassword(passwordTxtCtrl.getData());
       navUtils.fireTargetOff(MainDashboardScreen());
     }
   }

@@ -1,15 +1,6 @@
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/model/local/intro_model.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/asset_image_widget.dart';
-import 'package:core_module/core_ui/widgets/icon_button_widget.dart';
-import 'package:core_module/core_ui/widgets/pod_widget.dart';
-import 'package:core_module/core_ui/widgets/text_button_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:student_union/screens/intro/intro_controller.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 
 class IntroScreen extends BaseScreenStandard {
   final _introController = IntroController();
@@ -67,8 +58,10 @@ class IntroScreen extends BaseScreenStandard {
                         child: Text(
                           model.mainText,
                           textAlign: TextAlign.center,
-                          style: textTheme.displayLarge
-                              ?.copyWith(color: colorScheme.primary, fontSize: 30.dp(),),
+                          style: textTheme.displayLarge?.copyWith(
+                            color: colorScheme.primary,
+                            fontSize: 30.dp(),
+                          ),
                         ),
                       ),
                     ),
@@ -76,7 +69,10 @@ class IntroScreen extends BaseScreenStandard {
                     Padding(
                       padding: EdgeInsets.only(left: 10.dp(), right: 10.dp()),
                       child: Center(
-                        child: parseBoldText(model.subText, style: textTheme.bodySmall)
+                        child: parseBoldText(
+                          model.subText,
+                          style: textTheme.bodySmall,
+                        ),
 
                         /*Text(
                           model.subText,
@@ -105,7 +101,7 @@ class IntroScreen extends BaseScreenStandard {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButtonWidget.withCircularBorder(
-                    iconSize: 20.dp(),
+                    iconSize: 30.dp(),
                     icon: Icons.arrow_back_ios,
                     iconColor: _introController.pageIndex.value != 0
                         ? colorScheme.primary
@@ -120,22 +116,23 @@ class IntroScreen extends BaseScreenStandard {
                   ),
                   Gap(10.dp()),
                   FittedBox(
-                      child: PodWidget(
-                    podLength: _introController.introData.length,
-                    inActiveColor: colorScheme.tertiaryContainer,
-                    currentIndex: _introController.pageIndex,
-                    onTap: (index) {
-                      _pageController.animateToPage(
-                        index,
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.decelerate,
-                      );
-                    },
-                  )),
-                  SizedBox(width: appDimen.dimen(10)),
+                    child: PodWidget(
+                      podLength: _introController.introData.length,
+                      inActiveColor: colorScheme.tertiaryContainer,
+                      currentIndex: _introController.pageIndex,
+                      onTap: (index) {
+                        _pageController.animateToPage(
+                          index,
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.decelerate,
+                        );
+                      },
+                    ),
+                  ),
+                  Gap(10.dp()),
                   IconButtonWidget.withCircularBorder(
                     icon: Icons.arrow_forward_ios,
-                    iconSize: 20.dp(),
+                    iconSize: 30.dp(),
                     iconPadding: 2.dp(),
                     iconColor: colorScheme.primary,
                     borderColor: Colors.transparent,
@@ -148,17 +145,15 @@ class IntroScreen extends BaseScreenStandard {
             ),
             TextButtonWidget(
               text: "Skip",
-              style: textTheme.labelMedium,
+              style: textTheme.bodyMedium,
               onTap: _introController.onSkipOnClick,
-            )
+            ),
           ],
         ),
         Gap(20.dp()),
       ],
     );
   }
-
-
 
   /// Parses a string with \b...\b markers into a RichText widget
   Widget parseBoldText(String input, {TextStyle? style}) {
@@ -176,7 +171,6 @@ class IntroScreen extends BaseScreenStandard {
       );
     }
 
-    return Text.rich(TextSpan(children: spans),textAlign: TextAlign.center,);
+    return Text.rich(TextSpan(children: spans), textAlign: TextAlign.center);
   }
-
 }

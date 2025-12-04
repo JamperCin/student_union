@@ -37,7 +37,7 @@ class BaseSharedScreen extends StatelessWidget implements BaseImpl {
     textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: showAppBar()
-          ? AppBar(title: Text(appBarTitle()), actions: actions())
+          ? AppBar(title: Text(appBarTitle()), actions: actions(), centerTitle: true,)
           : null,
       body: GestureDetector(
         child: body(context),

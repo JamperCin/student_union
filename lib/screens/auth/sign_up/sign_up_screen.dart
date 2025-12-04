@@ -83,6 +83,7 @@ class SignUpScreen extends BaseScreenDecorated {
             hintText: 'Ex. John Doe',
             controller: _controller.fullNameCtrl,
             focusColor: colorScheme.tertiary,
+            backgroundColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixAsset: icProfileInput,
@@ -94,6 +95,7 @@ class SignUpScreen extends BaseScreenDecorated {
             textCapitalization: TextCapitalization.none,
             controller: _controller.emailTxtCtrl,
             focusColor: colorScheme.tertiary,
+            backgroundColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixAsset: icEmailInput,
@@ -104,6 +106,7 @@ class SignUpScreen extends BaseScreenDecorated {
             hintText: '********',
             controller: _controller.passwordTxtCtrl,
             focusColor: colorScheme.tertiary,
+            backgroundColor: colorScheme.tertiary,
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixAsset: icPasswordInput,

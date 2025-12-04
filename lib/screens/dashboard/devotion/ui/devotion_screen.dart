@@ -27,7 +27,11 @@ class DevotionsScreen extends BaseScreenWithTabs {
   TextStyle? appBarTitleStyle(BuildContext context) {
     return super
         .appBarTitleStyle(context)
-        ?.copyWith(fontWeight: FontWeight.w700, color: colorScheme.surface);
+        ?.copyWith(
+          fontWeight: FontWeight.w700,
+          color: colorScheme.surface,
+          fontSize: 20.dp(),
+        );
   }
 
   @override
@@ -36,21 +40,21 @@ class DevotionsScreen extends BaseScreenWithTabs {
       preferredSize: Size.fromHeight(48.dp()),
       child: Material(
         color: colorScheme.surface,
-        child:super.appBarBottomWidget(context),
+        child: super.appBarBottomWidget(context),
       ),
     );
   }
-
 
   @override
   List<Widget> actions() {
     return [
       DropDownWidget(
-          initialItem: _controller.selectedYear.value,
-          list: _controller.list,
-          onItemSelected: (value) {
-            _controller.selectedYear.value = value;
-          })
+        initialItem: _controller.selectedYear.value,
+        list: _controller.list,
+        onItemSelected: (value) {
+          _controller.selectedYear.value = value;
+        },
+      ),
     ];
   }
 
@@ -67,7 +71,6 @@ class DevotionsScreen extends BaseScreenWithTabs {
     ];
   }
 
-
   @override
   List<Widget> tabsViews() {
     return [
@@ -83,8 +86,7 @@ class DevotionsScreen extends BaseScreenWithTabs {
           yearFilter: _controller.selectedYear.value,
           onTap: _controller.onPurchasedBookOnClick,
         ),
-      )
+      ),
     ];
   }
-
 }

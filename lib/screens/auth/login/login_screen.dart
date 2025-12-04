@@ -74,11 +74,7 @@ class LoginScreen extends BaseScreenDecorated {
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixAsset: icEmailInput,
-            // prefixIcon: AssetImageWidget(
-            //   asset: icEmailInput,
-            //   height: 5.dp(),
-            //   width: 5.dp(),
-            // ),
+            backgroundColor: colorScheme.tertiary,
             keyboardType: TextInputType.emailAddress,
             controller: _controller.emailTxtCtrl,
           ),
@@ -90,11 +86,7 @@ class LoginScreen extends BaseScreenDecorated {
             labelStyle:
                 textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
             prefixAsset: icPasswordInput,
-            // prefixIcon: AssetImageWidget(
-            //   asset: icPasswordInput,
-            //   height: 10.dp(),
-            //   width: 10.dp(),
-            // ),
+          backgroundColor: colorScheme.tertiary,
           ),
           SizedBox(height: appDimen.dimen(20)),
           Align(
