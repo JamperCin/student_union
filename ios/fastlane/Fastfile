@@ -60,7 +60,7 @@ platform :ios do
       build_number: latest + 1
       )
 
-    sh "sed -i '' 's/\\+.*$/+#{latest + 1}/' ../pubspec.yaml"
+    sh "sed -i '' 's/\\+.*$/+#{latest + 1}/' ../../pubspec.yaml"
 
     clear_derived_data
 
