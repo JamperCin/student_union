@@ -57,10 +57,7 @@ platform :ios do
     )
     increment_build_number(
       xcodeproj: "../ios/Runner.xcodeproj",
-      target: "Runner",
-      build_number: latest + 1,
-      plist_path: "../ios/Runner/Info.plist",
-      commit_all: true
+      build_number: latest + 1
       )
 
       sh "flutter pub version --set-build-number=#{latest + 1}"
