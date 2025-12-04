@@ -60,7 +60,7 @@ platform :ios do
       build_number: latest + 1
       )
 
-      sh "flutter pub version --set-build-number=#{latest + 1}"
+    sh "sed -i '' 's/\\+.*$/+#{latest_build + 1}/' ../pubspec.yaml"
 
     clear_derived_data
 
