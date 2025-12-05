@@ -102,16 +102,15 @@ class MyApp extends StatelessWidget {
 
     appDimen = AppDimens(context, constantMultiplier: ratio);
 
-    return Obx(
-      () => GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Scripture Union',
-        initialRoute: rootRoute,
-        getPages: appRoute,
-        theme: isDarkTheme.value ? darkMode : lightMode,
-        // darkTheme: darkMode,
-        // home: MyHomePage(),
-      ),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Scripture Union',
+      initialRoute: rootRoute,
+      getPages: appRoute,
+      theme: lightMode,
+      darkTheme: darkMode,
+      themeMode: ThemeMode.system,
+      // home: MyHomePage(),
     );
   }
 }
