@@ -36,6 +36,9 @@ jobs:
 
       - run: flutter --version
 
+      - name: Clean flutter
+        run: flutter clean
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -98,6 +101,9 @@ jobs:
         with:
           channel: stable
 
+      - name: Clean flutter
+        run: flutter clean
+        
       - name: Install dependencies
         run: flutter pub get
 
