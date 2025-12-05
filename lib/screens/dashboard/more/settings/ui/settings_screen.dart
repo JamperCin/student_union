@@ -1,11 +1,8 @@
-import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/base_screen/base_screen_standard.dart';
 import 'package:flutter/material.dart';
-import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/widgets/simple_card_item.dart';
-import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
+import 'package:student_union/main.dart';
 
 import '../controller/settings_controller.dart';
 
@@ -53,10 +50,10 @@ class SettingsScreen extends BaseScreenStandard {
           Gap(10.dp()),
           Obx(
             () => SimpleCardItem(
-              title: isDarkTheme.value ? "Light Theme" : "Dark Theme",
+              title: Get.find<ThemeController>().isDark.value ? "Dark Theme" : "Light Theme",
               //prefixAsset: icTheme,
               prefixWidget: Icon(
-                isDarkTheme.value ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
+                Get.find<ThemeController>().isDark.value ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
                 color: colorScheme.primary,
               ),
               elevation: elevation,
@@ -64,7 +61,7 @@ class SettingsScreen extends BaseScreenStandard {
               suffixWidget: SizedBox(
                 height: 25.dp(),
                 child: Switch(
-                  value: isDarkTheme.value,
+                  value: Get.find<ThemeController>().isDark.value,
                   onChanged: _controller.onThemeSwitch,
                   inactiveThumbColor: colorScheme.surface,
                   activeColor: colorScheme.surface,

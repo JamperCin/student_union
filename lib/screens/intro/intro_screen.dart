@@ -47,7 +47,7 @@ class IntroScreen extends BaseScreenStandard {
                       child: AssetImageWidget(
                         asset: model.assetName,
                         width: appDimen.screenWidth,
-                        height: appDimen.screenHeight * 0.68,
+                        height: appDimen.screenHeight * 0.6,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -101,7 +101,7 @@ class IntroScreen extends BaseScreenStandard {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButtonWidget.withCircularBorder(
-                    iconSize: 30.dp(),
+                    iconSize: 25.dp(),
                     icon: Icons.arrow_back_ios,
                     iconColor: _introController.pageIndex.value != 0
                         ? colorScheme.primary
@@ -132,7 +132,7 @@ class IntroScreen extends BaseScreenStandard {
                   Gap(10.dp()),
                   IconButtonWidget.withCircularBorder(
                     icon: Icons.arrow_forward_ios,
-                    iconSize: 30.dp(),
+                    iconSize: 25.dp(),
                     iconPadding: 2.dp(),
                     iconColor: colorScheme.primary,
                     borderColor: Colors.transparent,
@@ -150,7 +150,7 @@ class IntroScreen extends BaseScreenStandard {
             ),
           ],
         ),
-        Gap(20.dp()),
+        Gap(60.dp()),
       ],
     );
   }

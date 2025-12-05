@@ -50,16 +50,17 @@ void main() async {
 
   await _initializeApp();
 
+  // Setup dependency
+  final themeController = Get.put(ThemeController());
+  await themeController.loadTheme();
+
   runApp(const MyApp());
 
-  // Set status bar color
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarColor: primaryGreenColor, // Set the status bar color
-      statusBarBrightness:
-          Brightness.light, // For iOS (light text on status bar)
-      statusBarIconBrightness:
-          Brightness.light, // For Android (light icons on status bar)
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.white, // Light background
+      statusBarIconBrightness: Brightness.dark, // Dark icons for Android
+      statusBarBrightness: Brightness.light, // Dark icons for iOS
     ),
   );
 }
@@ -69,7 +70,6 @@ Future<void> _initializeApp() async {
   await Future.delayed(const Duration(seconds: 1));
   appPreference = AppPreference();
   await appPreference.initPreference();
-  isDarkTheme.value = appPreference.getDarkTheme();
 
   await CoreModule().init(
     envPath: icEnvPath,
@@ -92,25 +92,57 @@ Future<void> _initializeApp() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    var ratio =
-        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
-    debugPrint("Ratio: $ratio");
-    ratio = Platform.isAndroid && ratio > 1.75 ? ratio : 1.8;
+    final themeController = Get.find<ThemeController>();
 
-    appDimen = AppDimens(context, constantMultiplier: ratio);
+    // Wrap with LayoutBuilder to get proper MediaQuery before building the app
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final mq = MediaQuery.of(context);
+        double ratio = mq.size.height / mq.size.width;
+        ratio = Platform.isAndroid && ratio > 1.75 ? ratio : 1.8;
 
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Scripture Union',
-      initialRoute: rootRoute,
-      getPages: appRoute,
-      theme: lightMode,
-      darkTheme: darkMode,
-      themeMode: ThemeMode.system,
-      // home: MyHomePage(),
+        // Initialize appDimen BEFORE theme usage
+        appDimen = AppDimens(context, constantMultiplier: ratio);
+
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Scripture Union',
+          initialRoute: rootRoute,
+          getPages: appRoute,
+          theme: lightMode, // uses appDimen safely now
+          darkTheme: darkMode,
+          themeMode:
+          themeController.isDark.value ? ThemeMode.dark : ThemeMode.light,
+        );
+      },
+    );
+  }
+}
+
+
+
+class ThemeController extends GetxController {
+  RxBool isDark = false.obs;
+
+  Future<void> loadTheme() async {
+    isDark.value = AppPreference().getDarkTheme();
+  }
+
+  void toggleTheme() {
+    isDark.value = !isDark.value;
+    AppPreference().setDarkTheme(isDark.value);
+    Get.changeThemeMode(isDark.value ? ThemeMode.dark : ThemeMode.light);
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: isDark.value ? Colors.black : Colors.white,
+        statusBarIconBrightness:
+        isDark.value ? Brightness.light : Brightness.dark,
+        statusBarBrightness:
+        isDark.value ? Brightness.dark : Brightness.light,
+      ),
     );
   }
 }

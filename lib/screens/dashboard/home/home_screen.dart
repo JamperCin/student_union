@@ -15,33 +15,32 @@ class HomeScreen extends BaseScreenStandard {
 
   @override
   bool showAppBar() {
-    return false;
+    return true;
+  }
+
+  @override
+  Widget? appBarTitleWidget(BuildContext context) {
+    // TODO: implement appBarTitleWidget
+    return  TopHeaderWidget(
+      // onSearchOnClick: _controller.onSearchOnClick,
+      onNotifyOnClick: _controller.onNotificationOnClick,
+      onProfileOnClick: _controller.onProfileOnClick,
+    );
+  }
+
+  @override
+  double appBarHeight() {
+    return kToolbarHeight + 50.dp();
   }
 
   @override
   Widget body(BuildContext context) {
-    return Column(
-      children: [
-        TopHeaderWidget(
-          // onSearchOnClick: _controller.onSearchOnClick,
-          onNotifyOnClick: _controller.onNotificationOnClick,
-          onProfileOnClick: _controller.onProfileOnClick,
-        ),
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(appDimen.dimen(10)),
-            height: appDimen.screenHeight,
-            width: appDimen.screenWidth,
-            color: colorScheme.surface,
-            child: _homeBody(context),
-          ),
-        ),
-      ],
-    );
+    return _homeBody(context);
   }
 
   Widget _homeBody(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.symmetric(horizontal: 10.dp(), vertical: 16.dp()),
       children: [
         ///Daily Devotional
         DailyDevotionWidget(
