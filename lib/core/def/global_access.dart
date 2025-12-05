@@ -24,7 +24,6 @@ late NotificationApi notificationApi;
 
 ///--------------------------------------------------------------
 
-RxBool isDarkTheme = false.obs;
 RxInt notificationCount = 0.obs;
 
 class EventTrigger {
