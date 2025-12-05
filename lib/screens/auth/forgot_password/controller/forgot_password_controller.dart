@@ -21,10 +21,9 @@ class ForgotPasswordController extends BaseController {
             "Kindly confirm your email below as we will send you a link to reset your password",
         onTap: () => _onInitPasswordReset(context),
         cancelAssetColor: Theme.of(context).colorScheme.surface,
-        buttonStyle: Theme.of(context)
-            .textTheme
-            .bodyMedium
-            ?.copyWith(color: Theme.of(context).colorScheme.surface),
+        buttonStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: Theme.of(context).colorScheme.surface,
+        ),
         child: Text(
           emailTxtCtrl.text,
           style: Theme.of(context).textTheme.bodyLarge,
@@ -38,17 +37,17 @@ class ForgotPasswordController extends BaseController {
   Future<void> _onInitPasswordReset(BuildContext context) async {
     const LoaderWidget().showProgressIndicator(context: context);
 
-    Map<String, Object> params = {
-      'email': emailTxtCtrl.text.toString().trim(),
-    };
+    Map<String, Object> params = {'email': emailTxtCtrl.text.toString().trim()};
 
     final results = await userApiService.sendResetPasswordLink(params);
     const LoaderWidget().hideProgress();
 
     ///TODO Clean up this block
     if (results.success) {
-      navUtils.fireTarget(VerifyCodeScreen(),
-          model: emailTxtCtrl.text.toString().trim());
+      navUtils.fireTarget(
+        VerifyCodeScreen(),
+        model: emailTxtCtrl.text.toString().trim(),
+      );
       // SuccessModel model = const SuccessModel(
       //   title: 'Password Reset link sent',
       //   message:

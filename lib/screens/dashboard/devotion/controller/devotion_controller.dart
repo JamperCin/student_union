@@ -15,7 +15,6 @@ class DevotionController extends BaseController {
   RxString selectedYear = "All".obs; //${DateTime.now().year}
   Rx<BookType> bookTypeFilter = BookType.availableBooks.obs;
 
-
   ///Generate list of years starting from current year
   // List<String> get list =>
   //     List<String>.generate(5 + 1, (index) => "${DateTime.now().year - index}");
@@ -25,7 +24,7 @@ class DevotionController extends BaseController {
     int currentYear = DateTime.now().year + 1;
     final data = List<String>.generate(
       currentYear - startYear + 1,
-          (index) => "${currentYear - index}",
+      (index) => "${currentYear - index}",
     );
     return ["All", ...data];
   }
@@ -43,7 +42,6 @@ class DevotionController extends BaseController {
   void onInit() {
     super.onInit();
     checkForScreenUpdate();
-
   }
 
   Future<void> checkForScreenUpdate() async {
@@ -53,9 +51,7 @@ class DevotionController extends BaseController {
       bookTypeFilter.value = event.bookType!;
       debugPrint("Called here ${event.screen} --- ${event.bookType}");
     }
-
   }
-
 
   void confirmPayment(BuildContext context, DevotionalBookModel model) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -68,10 +64,9 @@ class DevotionController extends BaseController {
         title: "Confirm Purchase",
         crossAxisAlignment: CrossAxisAlignment.center,
         cancelAssetColor: Theme.of(context).colorScheme.surface,
-        buttonStyle: Theme.of(context)
-            .textTheme
-            .bodyMedium
-            ?.copyWith(color: Theme.of(context).colorScheme.surface),
+        buttonStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: Theme.of(context).colorScheme.surface,
+        ),
         titleStyle: textTheme.titleMedium?.copyWith(color: colorScheme.primary),
         subTitle:
             "Kindly confirm the purchase of this devotional guide with the amount specified below",
@@ -87,21 +82,7 @@ class DevotionController extends BaseController {
                 style: textTheme.displayLarge,
               ),
               Gap(5.dp()),
-              Text(
-                "Amount",
-                style: textTheme.labelMedium?.copyWith(
-                  color: colorScheme.onInverseSurface,
-                ),
-              ),
-              Gap(20.dp()),
-              Text(" ${model.name}", style: textTheme.titleLarge),
-              Gap(5.dp()),
-              Text(
-                "Book Details",
-                style: textTheme.labelMedium?.copyWith(
-                  color: colorScheme.onInverseSurface,
-                ),
-              ),
+              Text("Amount", style: textTheme.labelMedium),
               Gap(20.dp()),
             ],
           ),
@@ -111,15 +92,17 @@ class DevotionController extends BaseController {
   }
 
   Future<void> _initiatePayment(
-      BuildContext context, DevotionalBookModel model) async {
+    BuildContext context,
+    DevotionalBookModel model,
+  ) async {
     const LoaderWidget().showProgressIndicator(context: context);
 
     Map<String, dynamic> param = {
       "payment_type": PaymentType.devotion_year_purchase.name,
       "metadata": {
         "devotion_year_id": model.id,
-        "note": "Devotional Book Purchase"
-      }
+        "note": "Devotional Book Purchase",
+      },
     };
 
     final results = await paymentApiService.makePaymentOfBook(param);

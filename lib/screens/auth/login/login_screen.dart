@@ -71,8 +71,13 @@ class LoginScreen extends BaseScreenDecorated {
             textCapitalization: TextCapitalization.none,
             focusColor: colorScheme.tertiary,
             borderColor: colorScheme.tertiary,
-            labelStyle:
-                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            labelStyle: textTheme.labelSmall?.copyWith(
+              color: colorScheme.tertiary,
+            ),
+            hintStyle: textTheme.bodySmall?.copyWith(
+              color: colorScheme.outline,
+            ),
+            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
             prefixAsset: icEmailInput,
             backgroundColor: colorScheme.tertiary,
             keyboardType: TextInputType.emailAddress,
@@ -83,18 +88,24 @@ class LoginScreen extends BaseScreenDecorated {
             labelText: 'Password',
             hintText: 'Enter your password',
             controller: _controller.passwordTxtCtrl,
-            labelStyle:
-                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            labelStyle: textTheme.labelSmall?.copyWith(
+              color: colorScheme.tertiary,
+            ),
+            hintStyle: textTheme.bodySmall?.copyWith(
+              color: colorScheme.outline,
+            ),
+            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
             prefixAsset: icPasswordInput,
-          backgroundColor: colorScheme.tertiary,
+            backgroundColor: colorScheme.tertiary,
           ),
           SizedBox(height: appDimen.dimen(20)),
           Align(
             alignment: Alignment.centerRight,
             child: TextButtonWidget.withTextOnly(
               text: 'Forgot Password',
-              style:
-                  textTheme.bodyMedium?.copyWith(color: colorScheme.tertiary),
+              style: textTheme.bodyMedium?.copyWith(
+                color: colorScheme.tertiary,
+              ),
               onTap: _controller.onForgotPasswordClicked,
             ),
           ),
@@ -115,18 +126,23 @@ class LoginScreen extends BaseScreenDecorated {
             child: TextButtonWidget(
               onTap: _controller.onSignUpClicked,
               child: RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                  text: 'Don\'t have an Account? ',
-                  style: textTheme.labelSmall
-                      ?.copyWith(color: colorScheme.tertiary),
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Don\'t have an Account? ',
+                      style: textTheme.labelSmall?.copyWith(
+                        color: colorScheme.tertiary,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Sign Up',
+                      style: textTheme.labelMedium?.copyWith(
+                        color: colorScheme.secondary,
+                      ),
+                    ),
+                  ],
                 ),
-                TextSpan(
-                  text: 'Sign Up',
-                  style: textTheme.labelMedium
-                      ?.copyWith(color: colorScheme.secondary),
-                ),
-              ])),
+              ),
             ),
           ),
           SizedBox(height: appDimen.dimen(20)),

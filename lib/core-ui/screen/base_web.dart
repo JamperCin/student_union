@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/loader_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core/model/local/web_model.dart';
@@ -15,6 +13,18 @@ class BaseWebView extends BaseScreenStatefulStandard {
   final WebModel model;
 
   BaseWebView({required this.model});
+
+  @override
+  PreferredSizeWidget appBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: appBarBackgroundColor(context),
+      elevation: appBarElevation(),
+      centerTitle: true,
+      title: Text(appBarTitle(), style: appBarTitleStyle(context)),
+      iconTheme: IconThemeData(color: appBarIconColor(context)),
+      actions: actions(),
+    );
+  }
 
   @override
   TextStyle? appBarTitleStyle(BuildContext context) {
@@ -39,12 +49,13 @@ class BaseWebView extends BaseScreenStatefulStandard {
                 ),
                 child: Text(
                   "Done",
-                  style: textTheme.bodyMedium
-                      ?.copyWith(color: colorScheme.primary),
+                  style: textTheme.bodyMedium?.copyWith(
+                    color: colorScheme.primary,
+                  ),
                 ),
               ),
             )
-          : const SizedBox()
+          : const SizedBox(),
     ];
   }
 
@@ -68,8 +79,8 @@ class BaseWebView extends BaseScreenStatefulStandard {
     if (kIsWeb) {
       return const NoDataWidget(
         asset: icReadBible,
-        title: 'No applicable to read on web browser',
-        description: 'You cannot read this book on web browser',
+        title: 'Not applicable to read on web browser',
+        description: 'You cannot read this book on a web browser',
       );
     }
     return Stack(
@@ -118,12 +129,15 @@ class BaseWebView extends BaseScreenStatefulStandard {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Colors.transparent)
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..addJavaScriptChannel('FlutterChannel', onMessageReceived: (s) {
-        debugPrint("BUTTON ===> ${s.message}");
-        if (s.message == 'dashboard_clicked') {
-          model.onDoneOnclick?.call();
-        }
-      })
+      ..addJavaScriptChannel(
+        'FlutterChannel',
+        onMessageReceived: (s) {
+          debugPrint("BUTTON ===> ${s.message}");
+          if (s.message == 'dashboard_clicked') {
+            model.onDoneOnclick?.call();
+          }
+        },
+      )
       ..setNavigationDelegate(
         NavigationDelegate(
           onHttpAuthRequest: (HttpAuthRequest request) {},

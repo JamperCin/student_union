@@ -1,13 +1,19 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/screens/auth/forgot_password/controller/verify_code_controller.dart';
 
-class VerifyCodeScreen extends BaseScreenStandard {
+class VerifyCodeScreen extends BaseSharedScreen {
   final _controller = Get.put(VerifyCodeController());
 
   @override
-  bool showAppBar() {
-    return true;
+  Color? appBarBackgroundColor(BuildContext context) {
+    return Theme.of(context).colorScheme.surface;
+  }
+
+  @override
+  Color? appBarIconColor(BuildContext context) {
+    return Theme.of(context).colorScheme.inverseSurface;
   }
 
   @override

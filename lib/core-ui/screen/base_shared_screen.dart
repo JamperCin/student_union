@@ -27,6 +27,14 @@ class BaseSharedScreen extends StatelessWidget implements BaseImpl {
     return Theme.of(context).colorScheme.surface;
   }
 
+  Color? appBarBackgroundColor(BuildContext context) {
+    return Theme.of(context).appBarTheme.backgroundColor;
+  }
+
+  Color? appBarIconColor(BuildContext context) {
+    return Theme.of(context).appBarTheme.iconTheme?.color;
+  }
+
   void dismissKeyBoard(BuildContext context) {
     FocusScope.of(context).unfocus();
   }
@@ -37,7 +45,13 @@ class BaseSharedScreen extends StatelessWidget implements BaseImpl {
     textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: showAppBar()
-          ? AppBar(title: Text(appBarTitle()), actions: actions(), centerTitle: true,)
+          ? AppBar(
+              title: Text(appBarTitle()),
+              actions: actions(),
+              centerTitle: true,
+              backgroundColor: appBarBackgroundColor(context),
+              iconTheme: IconThemeData(color: appBarIconColor(context)),
+            )
           : null,
       body: GestureDetector(
         child: body(context),
