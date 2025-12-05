@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 assets/data/env.json
-android/su.properties
+/android/su.properties
