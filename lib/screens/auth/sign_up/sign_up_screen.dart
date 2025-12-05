@@ -82,33 +82,48 @@ class SignUpScreen extends BaseScreenDecorated {
             labelText: 'Full Name',
             hintText: 'Ex. John Doe',
             controller: _controller.fullNameCtrl,
+            hintStyle: textTheme.bodySmall?.copyWith(
+              color: colorScheme.outline,
+            ),
+            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
             focusColor: colorScheme.tertiary,
             backgroundColor: colorScheme.tertiary,
-            labelStyle:
-                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            labelStyle: textTheme.labelSmall?.copyWith(
+              color: colorScheme.tertiary,
+            ),
             prefixAsset: icProfileInput,
           ),
           SizedBox(height: appDimen.dimen(10)),
           TextFieldWidget(
             labelText: 'Email',
             hintText: 'example@mail.com',
+            hintStyle: textTheme.bodySmall?.copyWith(
+              color: colorScheme.outline,
+            ),
+            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
             textCapitalization: TextCapitalization.none,
             controller: _controller.emailTxtCtrl,
             focusColor: colorScheme.tertiary,
             backgroundColor: colorScheme.tertiary,
-            labelStyle:
-                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            labelStyle: textTheme.labelSmall?.copyWith(
+              color: colorScheme.tertiary,
+            ),
             prefixAsset: icEmailInput,
           ),
           SizedBox(height: appDimen.dimen(10)),
           TextFieldWidget.withPassword(
             labelText: 'Password',
             hintText: '********',
+            hintStyle: textTheme.bodySmall?.copyWith(
+              color: colorScheme.outline,
+            ),
+            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
             controller: _controller.passwordTxtCtrl,
             focusColor: colorScheme.tertiary,
             backgroundColor: colorScheme.tertiary,
-            labelStyle:
-                textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
+            labelStyle: textTheme.labelSmall?.copyWith(
+              color: colorScheme.tertiary,
+            ),
             prefixAsset: icPasswordInput,
           ),
           SizedBox(height: appDimen.dimen(1)),
@@ -132,18 +147,22 @@ class SignUpScreen extends BaseScreenDecorated {
             child: TextButtonWidget(
               onTap: _controller.onSignInOnClick,
               child: RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                    text: 'Already have an Account? ',
-                    style: textTheme.labelSmall
-                        ?.copyWith(color: colorScheme.tertiary),
-                  ),
-                  TextSpan(
-                    text: 'Sign In',
-                    style: textTheme.labelMedium
-                        ?.copyWith(color: colorScheme.secondary),
-                  ),
-                ]),
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Already have an Account? ',
+                      style: textTheme.labelSmall?.copyWith(
+                        color: colorScheme.tertiary,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Sign In',
+                      style: textTheme.labelMedium?.copyWith(
+                        color: colorScheme.secondary,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,14 +1,20 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/forgot_password/controller/forgot_password_controller.dart';
 
-class ForgotPasswordScreen extends BaseScreenStandard {
+class ForgotPasswordScreen extends BaseSharedScreen {
   final _controller = Get.put(ForgotPasswordController());
 
   @override
-  bool showAppBar() {
-    return true;
+  Color? appBarBackgroundColor(BuildContext context) {
+    return Theme.of(context).colorScheme.surface;
+  }
+
+  @override
+  Color? appBarIconColor(BuildContext context) {
+    return Theme.of(context).colorScheme.inverseSurface;
   }
 
   @override
@@ -22,10 +28,7 @@ class ForgotPasswordScreen extends BaseScreenStandard {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: appDimen.dimen(20)),
-          Text(
-            'Forgot Password?',
-            style: textTheme.headlineMedium,
-          ),
+          Text('Forgot Password?', style: textTheme.headlineMedium),
           SizedBox(height: appDimen.dimen(20)),
           Text(
             'You can easily reset your password using your email address. '
