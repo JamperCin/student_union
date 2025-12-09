@@ -1,8 +1,7 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/widgets/core_ministries_widget.dart';
-import 'package:student_union/core-ui/widgets/daily_devotion_widget.dart'
-    show DailyDevotionWidget;
+import 'package:student_union/core-ui/widgets/daily_devotion_widget.dart';
 import 'package:student_union/core-ui/widgets/devotional_guide_widget.dart';
 import 'package:student_union/core-ui/widgets/news_update_widget.dart';
 import 'package:student_union/core-ui/widgets/payment_history_widget.dart';
@@ -20,8 +19,7 @@ class HomeScreen extends BaseScreenStandard {
 
   @override
   Widget? appBarTitleWidget(BuildContext context) {
-    // TODO: implement appBarTitleWidget
-    return  TopHeaderWidget(
+    return TopHeaderWidget(
       // onSearchOnClick: _controller.onSearchOnClick,
       onNotifyOnClick: _controller.onNotificationOnClick,
       onProfileOnClick: _controller.onProfileOnClick,
@@ -56,7 +54,7 @@ class HomeScreen extends BaseScreenStandard {
         ///Upcoming Events
         UpcomingEventsWidget(
           onTap: (v) => _controller.onUpcomingEventTap(context, v),
-         // onSeeAllOnTap: _controller.onSeeAllUpcomingEvents,
+          // onSeeAllOnTap: _controller.onSeeAllUpcomingEvents,
         ),
 
         ///Core Ministries or Campaigns

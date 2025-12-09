@@ -1,12 +1,5 @@
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/extensions/int_extension.dart';
-import 'package:core_module/core/utils/date_time_utils.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/container_widget.dart';
-import 'package:core_module/core_ui/widgets/network_image_widget.dart';
-import 'package:core_module/core_ui/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/upcoming_event_model.dart';
@@ -72,7 +65,6 @@ class UpcomingEventsWidget extends StatelessWidget {
   }
 
   Widget _eventItemWidget(BuildContext context, UpcomingEventModel model) {
-    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final height = 180.dp();
 
@@ -87,6 +79,7 @@ class UpcomingEventsWidget extends StatelessWidget {
               width: appDimen.screenWidth,
               url: model.image,
               fit: BoxFit.cover,
+              heroTag: model.image,
               placeHolderWidget: ContainerWidget(
                 height: height,
                 width: appDimen.screenWidth,

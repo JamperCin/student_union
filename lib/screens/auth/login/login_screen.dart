@@ -77,7 +77,7 @@ class LoginScreen extends BaseScreenDecorated {
             hintStyle: textTheme.bodySmall?.copyWith(
               color: colorScheme.outline,
             ),
-            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
+            style: textTheme.bodySmall?.copyWith(color: darkColor),
             prefixAsset: icEmailInput,
             backgroundColor: colorScheme.tertiary,
             keyboardType: TextInputType.emailAddress,
@@ -94,7 +94,7 @@ class LoginScreen extends BaseScreenDecorated {
             hintStyle: textTheme.bodySmall?.copyWith(
               color: colorScheme.outline,
             ),
-            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
+            style: textTheme.bodySmall?.copyWith(color: darkColor),
             prefixAsset: icPasswordInput,
             backgroundColor: colorScheme.tertiary,
           ),

@@ -1,4 +1,3 @@
-
 import 'dart:collection';
 
 import 'package:core_module/core_module.dart';
@@ -68,7 +67,7 @@ class LoginController extends BaseController {
     if (response != null && response.token != null) {
       appPreference.setToken(response.token!);
       appPreference.setUser(response.user);
-       appPreference.setPassword(passwordTxtCtrl.getData());
+      appPreference.setPassword(passwordTxtCtrl.getData());
       navUtils.fireTargetOff(MainDashboardScreen());
     }
   }

@@ -43,8 +43,10 @@
 	<string>Scripture Union app requires camera access to take photos for profile picture.</string>
 	<key>NSLocalNotificationAlertAction</key>
 	<string>Alert</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Scripture Union needs permission to save photos and videos to your library for your convenience.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Scripture Union app needs photo access to upload images for profile picture.</string>
+	<string>Scripture Union app needs permission to access your photo library to view and select your photos and videos.</string>
 	<key>NSUserNotificationUsageDescription</key>
 	<string>Scripture Union needs permission to be able to send you notifications and also keep you up to date on latest news.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
