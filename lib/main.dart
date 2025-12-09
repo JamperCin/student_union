@@ -8,9 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:student_union/core/api/fcm_api.dart';
 import 'package:student_union/core/api/notification_api.dart';
-import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/app/app_theme.dart';
+import 'package:student_union/core/app/theme_controller.dart';
 import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
@@ -117,32 +117,6 @@ class MyApp extends StatelessWidget {
           themeController.isDark.value ? ThemeMode.dark : ThemeMode.light,
         );
       },
-    );
-  }
-}
-
-
-
-class ThemeController extends GetxController {
-  RxBool isDark = false.obs;
-
-  Future<void> loadTheme() async {
-    isDark.value = AppPreference().getDarkTheme();
-  }
-
-  void toggleTheme() {
-    isDark.value = !isDark.value;
-    AppPreference().setDarkTheme(isDark.value);
-    Get.changeThemeMode(isDark.value ? ThemeMode.dark : ThemeMode.light);
-
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: isDark.value ? Colors.black : Colors.white,
-        statusBarIconBrightness:
-        isDark.value ? Brightness.light : Brightness.dark,
-        statusBarBrightness:
-        isDark.value ? Brightness.dark : Brightness.light,
-      ),
     );
   }
 }

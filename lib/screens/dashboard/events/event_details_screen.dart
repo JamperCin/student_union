@@ -1,12 +1,14 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
+import 'package:student_union/core/utils/share_file_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/model/remote/upcoming_event_model.dart';
 
 class EventDetailsScreen extends BaseSharedScreen {
   final UpcomingEventModel event;
+  RxBool hasStartedSharing = false.obs;
 
   EventDetailsScreen(this.event);
 
@@ -31,23 +33,26 @@ class EventDetailsScreen extends BaseSharedScreen {
             width: appDimen.screenWidth,
             url: event.image,
             fit: BoxFit.fitWidth,
+            heroTag: event.image,
             placeHolderWidget: ContainerWidget(
               height: appDimen.screenHeight * 0.55,
               width: appDimen.screenWidth,
             ),
           ),
           Gap(10.dp()),
-          //TODO Extract only the link from the description and bolden the text and underlined blue color
           Align(
             alignment: Alignment.centerLeft,
             child: event.description.contains('http')
                 ? GestureDetector(
                     onTap: () => launchUrl(Uri.parse(url)),
-                    child: Text(event.description, style: textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      decoration: TextDecoration.underline,
-                      color: Colors.blue,
-                    ))
+                    child: Text(
+                      event.description,
+                      style: textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue,
+                      ),
+                    ),
                   )
                 : Text(event.description, style: textTheme.bodySmall),
           ),
@@ -72,7 +77,7 @@ class EventDetailsScreen extends BaseSharedScreen {
               ),
             ),
           ),
-          Gap(20.dp()),
+          Gap(15.dp()),
           Align(
             alignment: Alignment.centerLeft,
             child: RichText(
@@ -91,6 +96,34 @@ class EventDetailsScreen extends BaseSharedScreen {
                   ),
                 ],
               ),
+            ),
+          ),
+          Gap(20.dp()),
+          Obx(
+            () => FilledButton.icon(
+              onPressed: hasStartedSharing.value
+                  ? null
+                  : () async {
+                      hasStartedSharing.value = true;
+                      await ShareFileUtils().saveAndShareImage(
+                        imageUrl: event.image,
+                        title: event.name,
+                      );
+                      hasStartedSharing.value = false;
+                    },
+              label: Text(
+                "   Share   ",
+                style: textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ),
+              icon: hasStartedSharing.value
+                  ? const CircularProgressIndicator.adaptive(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      strokeWidth: 2,
+                    )
+                  : const Icon(Icons.share, color: Colors.white),
             ),
           ),
         ],

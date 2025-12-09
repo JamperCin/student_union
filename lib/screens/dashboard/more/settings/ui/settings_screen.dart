@@ -1,8 +1,8 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/widgets/simple_card_item.dart';
+import 'package:student_union/core/app/theme_controller.dart';
 import 'package:student_union/core/res/asset_path.dart';
-import 'package:student_union/main.dart';
 
 import '../controller/settings_controller.dart';
 

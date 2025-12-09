@@ -10,58 +10,55 @@ class ProfileController extends BaseController {
 
   ///
   ///Listener when a profile image is uploaded
-  void onProfileImageUploaded(String url) {
+  void onProfileImageUploaded(BuildContext context, String url) {
     profilePic = url;
-    _uploadProfileImage();
+    _initUpdate(context);
   }
 
-  // Future<void> _initUpdate(BuildContext context) async {
-  //   if(profilePic.isEmpty){
-  //     snackBarSnippet.snackBarError("Please first upload a profile image");
-  //     return;
-  //   }
+  Future<void> _initUpdate(BuildContext context) async {
+    if (profilePic.isEmpty) {
+      snackBarSnippet.snackBarError("Please first upload a profile image");
+      return;
+    }
 
-  //   const LoaderWidget().showProgressIndicator(context: context);
+    const LoaderWidget().showProgressIndicator(context: context);
 
+    final params = {
+      'user': {"thumbnail_url": profilePic},
+    };
+    final results = await userApiService.updateUserDetails(params);
+
+    if (results.profilePic.isNotEmpty) {
+      userApiService.profilePic.value = profilePic;
+      appPreference.setString(AppPreference().PROFILE_IMAGE, profilePic);
+      snackBarSnippet.snackBarSuccess("Profile updated successfully");
+    } else {
+      snackBarSnippet.snackBarError("Failed to update profile image");
+    }
+    const LoaderWidget().hideProgress();
+  }
+
+  // Future<void> _uploadProfileImage() async {
+  //   isUpdating.value = true;
   //   final params = {
-  //     'user': {
-  //       "thumbnail_url": profilePic,
-  //     }
+  //     'user': {"thumbnail_url": profilePic},
   //   };
   //   final results = await userApiService.updateUserDetails(params);
-  
   //   if (results.profilePic.isNotEmpty) {
   //     userApiService.profilePic.value = profilePic;
   //     appPreference.setString(AppPreference().PROFILE_IMAGE, profilePic);
   //     snackBarSnippet.snackBarSuccess("Profile updated successfully");
+  //   } else {
+  //     snackBarSnippet.snackBarError("Failed to update profile image");
   //   }
-  //   const LoaderWidget().hideProgress();
+  //   isUpdating.value = false;
   // }
-
-  Future<void> _uploadProfileImage() async {
-    isUpdating.value = true;
-   final params = {
-      'user': {
-        "thumbnail_url": profilePic,
-      }
-    };
-    final results = await userApiService.updateUserDetails(params);
-    if (results.profilePic.isNotEmpty) {
-      userApiService.profilePic.value = profilePic;
-      appPreference.setString(AppPreference().PROFILE_IMAGE, profilePic);
-       snackBarSnippet.snackBarSuccess("Profile updated successfully");
-    }else{
-      snackBarSnippet.snackBarError("Failed to update profile image");
-    }
-    isUpdating.value = false;
-  } 
 
   // void onConfirmUpdate(BuildContext context) {
   //   if (profilePic.isEmpty) {
   //     snackBarSnippet.snackBarError("Please first upload a profile image");
   //     return;
   //   }
-
 
   //   BottomSheetWidget(
   //     context: context,
