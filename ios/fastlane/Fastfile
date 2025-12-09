@@ -13,6 +13,77 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+
+
+#-----------------------------------------------------------------------------------------
+# Helper methods for versioning pubspec.yaml
+
+# ---------------------------
+# Helper: Read version from pubspec.yaml
+# ---------------------------
+def get_pubspec_version
+  pubspec = File.read("../pubspec.yaml")
+  match = pubspec.match(/version:\s+(\d+\.\d+\.\d+)\+(\d+)/)
+  if match
+    return "#{match[1]}"
+  else
+    UI.user_error!("Could not read pubspec version")
+  end
+end
+
+# ---------------------------
+# Helper: Increment version name
+# Example: "1.0.8" → "1.0.9"
+# ---------------------------
+def increment_version_name(version)
+  parts = version.split(".")
+  parts[-1] = parts[-1].to_i + 1
+  return parts.join(".")
+end
+
+# ---------------------------
+# Helper: Update pubspec.yaml version + build
+# ---------------------------
+def update_pubspec(new_version, new_build)
+  file = "../pubspec.yaml"
+  content = File.read(file)
+  new_line = "version: #{new_version}+#{new_build}"
+  updated = content.gsub(/version:\s+\d+\.\d+\.\d+\+\d+/, new_line)
+  File.write(file, updated)
+  puts("Updated pubspec.yaml → #{new_line}")
+end
+
+
+#-----------------------------------------------------------------------------------------
+
+def get_pubspec_version
+  pubspec = File.read("../../pubspec.yaml")
+  version_line = pubspec.lines.find { |line| line.start_with?("version:") }
+  version = version_line.split(":").last.strip
+  return version
+end
+
+def increment_version_name(version)
+  major, minor, patch = version.split(".").map(&:to_i)
+  patch += 1
+  return "#{major}.#{minor}.#{patch}"
+end
+
+def update_pubspec(new_version_name, new_build_number)
+  pubspec_path = "../../pubspec.yaml"
+  pubspec = File.read(pubspec_path)
+
+  new_version_line = "version: #{new_version_name}+#{new_build_number}"
+  updated_pubspec = pubspec.gsub(/^version: .+$/, new_version_line)
+
+  File.write(pubspec_path, updated_pubspec)
+  puts("Updated pubspec.yaml to version #{new_version_name}+#{new_build_number}")
+end
+
+#-----------------------------------------------------------------------------------------
+# End of helper methods for versioning pubspec.yaml
+#-----------------------------------------------------------------------------------------`
+
 default_platform(:ios)
 
 platform :ios do
@@ -68,29 +139,29 @@ platform :ios do
     puts("Current pubspec version: #{pubspec_version}")
 
   # 5.2. Increment version name (1.0.8 -> 1.0.9)
-    new_version = increment_version_name(pubspec_version)
+    new_version_name = increment_version_name(pubspec_version)
 
   # 5.3. Get latest build number from App Store
     latest_build = latest_testflight_build_number(
       api_key: api_key,
-      version: new_version,
+      version: new_version_name,
       app_identifier: app_identifier
     ) || 0
 
-    new_build = latest_build + 1
-    puts("New build number: #{new_build}")
+    new_build_number = latest_build + 1
+    puts("New build number: #{new_build_number}")
 
   # 5.4. Update pubspec.yaml
-    update_pubspec(new_version, new_build)
+    update_pubspec(new_version_name, new_build_number)
 
   # 5.5. Update Xcode project
      increment_build_number(
         xcodeproj: "../ios/Runner.xcodeproj",
-        build_number: latest + 1
+        build_number: new_build_number
       )
-    increment_version_number(version_number: new_version)
+    increment_version_number(version_number: new_version_name)
 
-    sh "sed -i '' 's/\\+.*$/+#{latest + 1}/' ../../pubspec.yaml"
+    sh "sed -i '' 's/\\+.*$/+#{new_build_number}/' ../../pubspec.yaml"
 
     clear_derived_data
 
