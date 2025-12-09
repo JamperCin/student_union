@@ -117,7 +117,7 @@ platform :ios do
     # 5.2. Use current pubspec version to Get latest build number from App Store
     latest_build = latest_testflight_build_number(
       api_key: api_key,
-      version: new_version_name,
+      version: pubspec_version,
       app_identifier: app_identifier
     ) || 0
 
