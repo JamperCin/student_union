@@ -17,43 +17,6 @@
 
 #-----------------------------------------------------------------------------------------
 # Helper methods for versioning pubspec.yaml
-
-# ---------------------------
-# Helper: Read version from pubspec.yaml
-# ---------------------------
-def get_pubspec_version
-  pubspec = File.read("../pubspec.yaml")
-  match = pubspec.match(/version:\s+(\d+\.\d+\.\d+)\+(\d+)/)
-  if match
-    return "#{match[1]}"
-  else
-    UI.user_error!("Could not read pubspec version")
-  end
-end
-
-# ---------------------------
-# Helper: Increment version name
-# Example: "1.0.8" → "1.0.9"
-# ---------------------------
-def increment_version_name(version)
-  parts = version.split(".")
-  parts[-1] = parts[-1].to_i + 1
-  return parts.join(".")
-end
-
-# ---------------------------
-# Helper: Update pubspec.yaml version + build
-# ---------------------------
-def update_pubspec(new_version, new_build)
-  file = "../pubspec.yaml"
-  content = File.read(file)
-  new_line = "version: #{new_version}+#{new_build}"
-  updated = content.gsub(/version:\s+\d+\.\d+\.\d+\+\d+/, new_line)
-  File.write(file, updated)
-  puts("Updated pubspec.yaml → #{new_line}")
-end
-
-
 #-----------------------------------------------------------------------------------------
 
 def get_pubspec_version
@@ -65,9 +28,22 @@ end
 
 def increment_version_name(version)
   major, minor, patch = version.split(".").map(&:to_i)
-  patch += 1
-  return "#{major}.#{minor}.#{patch}"
+
+  if patch < 9
+    patch += 1
+  else
+    patch = 0
+    if minor < 9
+      minor += 1
+    else
+      minor = 0
+      major += 1
+    end
+  end
+
+  "#{major}.#{minor}.#{patch}"
 end
+
 
 def update_pubspec(new_version_name, new_build_number)
   pubspec_path = "../../pubspec.yaml"
@@ -134,20 +110,22 @@ platform :ios do
     app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
     api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
 
-  # 5.1. Read pubspec version
+  # 5.1. Read current pubspec version
     pubspec_version = get_pubspec_version
     puts("Current pubspec version: #{pubspec_version}")
 
-  # 5.2. Increment version name (1.0.8 -> 1.0.9)
-    new_version_name = increment_version_name(pubspec_version)
-
-  # 5.3. Get latest build number from App Store
+    # 5.2. Use current pubspec version to Get latest build number from App Store
     latest_build = latest_testflight_build_number(
       api_key: api_key,
       version: new_version_name,
       app_identifier: app_identifier
     ) || 0
 
+  # 5.3. Increment current version name eg: (1.0.8 -> 1.0.9)
+    new_version_name = increment_version_name(pubspec_version)
+    puts("New version name: #{new_version_name}")
+
+  # 5.4. Increment appstore build number
     new_build_number = latest_build + 1
     puts("New build number: #{new_build_number}")
 
