@@ -85,7 +85,7 @@ class SignUpScreen extends BaseScreenDecorated {
             hintStyle: textTheme.bodySmall?.copyWith(
               color: colorScheme.outline,
             ),
-            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
+            style: textTheme.bodySmall?.copyWith(color: darkColor),
             focusColor: colorScheme.tertiary,
             backgroundColor: colorScheme.tertiary,
             labelStyle: textTheme.labelSmall?.copyWith(
@@ -100,7 +100,7 @@ class SignUpScreen extends BaseScreenDecorated {
             hintStyle: textTheme.bodySmall?.copyWith(
               color: colorScheme.outline,
             ),
-            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
+            style: textTheme.bodySmall?.copyWith(color: darkColor),
             textCapitalization: TextCapitalization.none,
             controller: _controller.emailTxtCtrl,
             focusColor: colorScheme.tertiary,
@@ -117,7 +117,7 @@ class SignUpScreen extends BaseScreenDecorated {
             hintStyle: textTheme.bodySmall?.copyWith(
               color: colorScheme.outline,
             ),
-            style: textTheme.bodySmall?.copyWith(color: colorScheme.outline),
+            style: textTheme.bodySmall?.copyWith(color: darkColor),
             controller: _controller.passwordTxtCtrl,
             focusColor: colorScheme.tertiary,
             backgroundColor: colorScheme.tertiary,

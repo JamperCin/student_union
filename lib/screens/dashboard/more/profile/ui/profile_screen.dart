@@ -44,7 +44,8 @@ class ProfileScreen extends BaseSharedScreen {
                   heroTag: "Profile_img_ui_xyz",
                   iconColor: colorScheme.surface,
                   placeholder: icUserIc,
-                  onFileUploaded: _controller.onProfileImageUploaded,
+                  onFileUploaded: (url) =>
+                      _controller.onProfileImageUploaded(context, url),
                   apiParser: (json) =>
                       json['url'] != null ? json['url'] as String : '',
                 ),

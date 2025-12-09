@@ -50,15 +50,45 @@ platform :ios do
     sh "security set-keychain-settings -lut 21600 #{keychain_path}"
 
     # --- 5. Increment build number ---
-    current_version = get_version_number(target: "Runner")
-    latest = latest_testflight_build_number(
-      version: current_version,
-      app_identifier: "com.kodeit.scriptureunion"
-    )
-    increment_build_number(
-      xcodeproj: "../ios/Runner.xcodeproj",
-      build_number: latest + 1
+    # current_version = get_version_number(target: "Runner")
+    # latest = latest_testflight_build_number(
+    #   version: current_version,
+    #   app_identifier: "com.kodeit.scriptureunion"
+    # )
+    # increment_build_number(
+    #   xcodeproj: "../ios/Runner.xcodeproj",
+    #   build_number: latest + 1
+    #   )
+
+    app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+
+  # 5.1. Read pubspec version
+    pubspec_version = get_pubspec_version
+    puts("Current pubspec version: #{pubspec_version}")
+
+  # 5.2. Increment version name (1.0.8 -> 1.0.9)
+    new_version = increment_version_name(pubspec_version)
+
+  # 5.3. Get latest build number from App Store
+    latest_build = latest_testflight_build_number(
+      api_key: api_key,
+      version: new_version,
+      app_identifier: app_identifier
+    ) || 0
+
+    new_build = latest_build + 1
+    puts("New build number: #{new_build}")
+
+  # 5.4. Update pubspec.yaml
+    update_pubspec(new_version, new_build)
+
+  # 5.5. Update Xcode project
+     increment_build_number(
+        xcodeproj: "../ios/Runner.xcodeproj",
+        build_number: latest + 1
       )
+    increment_version_number(version_number: new_version)
 
     sh "sed -i '' 's/\\+.*$/+#{latest + 1}/' ../../pubspec.yaml"
 
