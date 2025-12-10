@@ -120,6 +120,7 @@ platform :ios do
       version: pubspec_version,
       app_identifier: app_identifier
     ) || 0
+    
 
   # 5.3. Increment current version name eg: (1.0.8 -> 1.0.9)
     new_version_name = increment_version_name(pubspec_version)
