@@ -108,7 +108,7 @@ platform :ios do
     #   )
 
     app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
-    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+    #api_key = lane_context[SharedValues::APP_STORE_CONNECT_KEY]
 
   # 5.1. Read current pubspec version
     pubspec_version = get_pubspec_version
@@ -116,7 +116,7 @@ platform :ios do
 
     # 5.2. Use current pubspec version to Get latest build number from App Store
     latest_build = latest_testflight_build_number(
-      api_key: api_key,
+      #api_key: api_key,
       version: pubspec_version,
       app_identifier: app_identifier
     ) || 0
