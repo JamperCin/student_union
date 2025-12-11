@@ -1,6 +1,7 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
+import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/utils/share_file_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,7 +34,7 @@ class EventDetailsScreen extends BaseSharedScreen {
             width: appDimen.screenWidth,
             url: event.image,
             fit: BoxFit.fitWidth,
-            heroTag: event.image,
+            heroTag: "${event.image}_${event.id}_${event.name}",
             placeHolderWidget: ContainerWidget(
               height: appDimen.screenHeight * 0.55,
               width: appDimen.screenWidth,
@@ -101,6 +102,9 @@ class EventDetailsScreen extends BaseSharedScreen {
           Gap(20.dp()),
           Obx(
             () => FilledButton.icon(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(primaryGreenColor),
+              ),
               onPressed: hasStartedSharing.value
                   ? null
                   : () async {
@@ -115,7 +119,7 @@ class EventDetailsScreen extends BaseSharedScreen {
                 "   Share   ",
                 style: textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w700,
-                  color: Colors.white,
+                  //color: Colors.white,
                 ),
               ),
               icon: hasStartedSharing.value
@@ -126,6 +130,7 @@ class EventDetailsScreen extends BaseSharedScreen {
                   : const Icon(Icons.share, color: Colors.white),
             ),
           ),
+          Gap(40.dp()),
         ],
       ),
     );
