@@ -13,12 +13,10 @@ class MoreScreen extends BaseSharedScreen {
     return Theme.of(context).colorScheme.shadow.withOpacity(0.2);
   }
 
-
   @override
   String appBarTitle() {
     return "More";
   }
-
 
   @override
   Widget body(BuildContext context) {
@@ -55,6 +53,7 @@ class MoreScreen extends BaseSharedScreen {
             prefixAssetHeight: prefixSize,
             onTap: _controller.onReadBibleOnClick,
           ),
+
           /* Gap(10.dp()),
           SimpleCardItem(
             title: "Highlights",
@@ -82,6 +81,17 @@ class MoreScreen extends BaseSharedScreen {
             onTap: (v) {
               _controller.onSettingsOnClick();
             },
+          ),
+          Gap(5.dp()),
+
+          SimpleCardItem(
+            onTap:(v)=> _controller.onPrivacyPolicyOnClick(),
+            title: "Privacy Policy",
+            prefixWidget: Icon(
+              Icons.privacy_tip_rounded,
+              color: colorScheme.primary,
+            ),
+            prefixAssetHeight: prefixSize,
           ),
           Gap(5.dp()),
           SimpleCardItem(

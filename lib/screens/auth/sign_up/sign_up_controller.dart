@@ -2,8 +2,10 @@ import 'dart:collection';
 
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
+import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
 import 'package:student_union/screens/dashboard/main_dashboard_screen.dart';
 
@@ -22,11 +24,17 @@ class SignUpController extends BaseController {
     navUtils.fireTarget(LoginScreen());
   }
 
-  ///Go to the Login Screen
-  // void onContinueToProfileOnClick() {
-  //   //Get.to(() => SignUpProfileScreen());
-  //  // navUtils.fireTarget(SignUpProfileScreen());
-  // }
+  //Go to the Login Screen
+  void onPrivacyPolicyOnClick() {
+   navUtils.fireTarget(
+      BaseWebView(
+        model: WebModel(
+          url: "https://sughana.org/privacy/",
+          title: "Privacy Policy",
+        ),
+      ),
+    );
+  }
 
   void onTermsAndCondOnClick(bool isChecked) {
     isTermsAndCondChecked = isChecked;

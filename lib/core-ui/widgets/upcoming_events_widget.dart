@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/upcoming_event_model.dart';
+import 'package:student_union/core/res/asset_path.dart';
 
 class UpcomingEventsWidget extends StatelessWidget {
   final Function(UpcomingEventModel)? onTap;
@@ -18,8 +19,55 @@ class UpcomingEventsWidget extends StatelessWidget {
       future: upcomingEventsApiService.fetchUpcomingEvents(),
       builder: (context, data) {
         return (data.hasData && data.data != null)
-            ? _eventsGridWidget(context, data.data!)
+            ? (onSeeAllOnTap == null
+                  ? _allEventsWidget(context, data.data!)
+                  : _eventsGridWidget(context, data.data!))
             : ShimmerWidget.withList(length: onSeeAllOnTap != null ? 1 : 5);
+      },
+    );
+  }
+
+  Widget _allEventsWidget(BuildContext context, List<UpcomingEventModel> list) {
+    final textTheme = Theme.of(context).textTheme;
+
+    if (list.isEmpty) {
+      return const NoDataWidget(
+        title: "No Events",
+        description: "No events available at the moment.",
+        asset: icDonate,
+      );
+    }
+
+    return ListViewWidget<UpcomingEventModel>(
+      list: list,
+      listItemWidget: (event) {
+        return ListTile(
+          onTap: () => onTap?.call(event),
+          leading: NetworkImageWidget(
+            height: 100.dp(),
+            width: 100.dp(),
+            url: event.image,
+            fit: BoxFit.cover,
+            heroTag: "${event.image}_${event.id}_${event.name}",
+            placeHolderWidget: ContainerWidget(
+              height: 100.dp(),
+              width: 100.dp(),
+            ),
+          ),
+          title: RichText(
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            text: TextSpan(text: event.name, style: textTheme.titleMedium),
+          ),
+          subtitle: RichText(
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            text: TextSpan(
+              text: event.description,
+              style: textTheme.labelSmall,
+            ),
+          ),
+        );
       },
     );
   }

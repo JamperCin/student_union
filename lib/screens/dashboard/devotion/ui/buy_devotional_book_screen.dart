@@ -21,7 +21,8 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
   @override
   Widget body(BuildContext context) {
     final lead = '—  ';
-    final script = "${getModel().devotionalType?.name}\n${getModel().devotionalType?.description}"; //'Deuteronomy 29:29';
+    final script =
+        "${getModel().devotionalType?.name}\n${getModel().devotionalType?.description}"; //'Deuteronomy 29:29';
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.dp(), vertical: 14.dp()),
@@ -29,8 +30,10 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding:
-                  EdgeInsets.symmetric(horizontal: 16.dp(), vertical: 14.dp()),
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.dp(),
+                vertical: 14.dp(),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -40,6 +43,8 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
                       width: appDimen.screenWidth * 0.7,
                       height: appDimen.screenHeight * 0.45,
                       fit: BoxFit.cover,
+                      heroTag:
+                          "${getModel().thumbnail}_${getModel().id}_${getModel().name}",
                       placeHolderWidget: ContainerWidget(
                         width: appDimen.screenWidth,
                         height: appDimen.screenHeight * 0.4,
@@ -54,10 +59,7 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
                           text: getModel().description,
                           style: textTheme.labelMedium,
                         ),
-                        TextSpan(
-                          text: "\n\n",
-                          style: textTheme.labelMedium,
-                        ),
+                        TextSpan(text: "\n\n", style: textTheme.labelMedium),
                         TextSpan(
                           text: lead,
                           style: textTheme.bodyMedium?.copyWith(
@@ -84,8 +86,9 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
                         children: [
                           TextSpan(text: "GHS ", style: textTheme.bodyLarge),
                           TextSpan(
-                              text: getModel().price.toDecimalPlaces(),
-                              style: textTheme.bodyLarge),
+                            text: getModel().price.toDecimalPlaces(),
+                            style: textTheme.bodyLarge,
+                          ),
                         ],
                       ),
                     ),
@@ -96,11 +99,12 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
             ),
           ),
           ButtonWidget(
-              text: "Buy",
-              textColor: colorScheme.surface,
-              onTap: () {
-                _controller.confirmPayment(context, getModel());
-              }),
+            text: "Buy",
+            textColor: colorScheme.surface,
+            onTap: () {
+              _controller.confirmPayment(context, getModel());
+            },
+          ),
           Gap(30.dp()),
         ],
       ),

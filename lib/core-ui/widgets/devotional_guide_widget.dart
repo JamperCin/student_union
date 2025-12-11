@@ -118,6 +118,7 @@ class DevotionalGuideWidget extends StatelessWidget {
           },
           url: book.thumbnail,
           fit: BoxFit.cover,
+          heroTag: "${book.thumbnail}_${book.id}_${book.name}",
           placeHolderWidget: ContainerWidget(
             height: appDimen.dimen(280),
             width: appDimen.dimen(200),
@@ -153,6 +154,7 @@ class DevotionalGuideWidget extends StatelessWidget {
                         onTap?.call(model);
                       },
                       url: model.thumbnail,
+                      heroTag: "${model.thumbnail}_${model.id}_${model.name}",
                       fit: BoxFit.cover,
                       placeHolderWidget: ContainerWidget(
                         height: appDimen.dimen(280),
@@ -215,6 +217,7 @@ class DevotionalGuideWidget extends StatelessWidget {
                 },
                 url: book.thumbnail,
                 fit: BoxFit.cover,
+                heroTag: "${book.thumbnail}_${book.id}_${book.name}",
                 placeHolderWidget: ContainerWidget(
                   height: appDimen.dimen(280),
                   width: appDimen.dimen(200),

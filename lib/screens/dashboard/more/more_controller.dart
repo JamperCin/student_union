@@ -38,11 +38,7 @@ class MoreController extends BaseController {
         padding: EdgeInsets.all(10.dp()),
         child: Column(
           children: [
-            AssetImageWidget(
-              asset: icWarn,
-              height: 80.dp(),
-              width: 80.dp(),
-            ),
+            AssetImageWidget(asset: icWarn, height: 80.dp(), width: 80.dp()),
             Gap(30.dp()),
             Text(
               "Are you sure you want to log Out?",
@@ -53,7 +49,7 @@ class MoreController extends BaseController {
               onTap: _onLogOutOnClick,
               backgroundColor: Theme.of(context).colorScheme.error,
               text: "Log Out",
-            )
+            ),
           ],
         ),
       ),
@@ -73,14 +69,26 @@ class MoreController extends BaseController {
   void onCounsellingOnClick(v) {
     navUtils.fireTarget(
       BaseWebView(
-          model: WebModel(
-        url: "https://tawk.to/socialmediamissionary",
-        title: "Counselling & Prayers",
-      )),
+        model: WebModel(
+          url: "https://tawk.to/socialmediamissionary",
+          title: "Counselling & Prayers",
+        ),
+      ),
     );
   }
 
   void onAboutOnClick() {
     navUtils.fireTarget(AboutScreen());
+  }
+
+  void onPrivacyPolicyOnClick() {
+    navUtils.fireTarget(
+      BaseWebView(
+        model: WebModel(
+          url: "https://sughana.org/privacy/",
+          title: "Privacy Policy",
+        ),
+      ),
+    );
   }
 }

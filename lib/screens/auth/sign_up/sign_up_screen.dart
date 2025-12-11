@@ -128,10 +128,11 @@ class SignUpScreen extends BaseScreenDecorated {
           ),
           SizedBox(height: appDimen.dimen(1)),
           CheckboxWidget(
-            text: 'Agree with Terms And Conditions',
+            text: 'Agree with Privacy Policy & Terms & Conditions',
             unCheckedValue: colorScheme.tertiary,
             activeColor: colorScheme.secondary,
             onChange: _controller.onTermsAndCondOnClick,
+            onTextClick: _controller.onPrivacyPolicyOnClick,
             style: textTheme.labelSmall?.copyWith(color: colorScheme.tertiary),
           ),
           SizedBox(height: appDimen.dimen(50)),

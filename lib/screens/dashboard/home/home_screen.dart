@@ -54,7 +54,7 @@ class HomeScreen extends BaseScreenStandard {
         ///Upcoming Events
         UpcomingEventsWidget(
           onTap: (v) => _controller.onUpcomingEventTap(context, v),
-          // onSeeAllOnTap: _controller.onSeeAllUpcomingEvents,
+          onSeeAllOnTap: _controller.onSeeAllUpcomingEvents,
         ),
 
         ///Core Ministries or Campaigns
