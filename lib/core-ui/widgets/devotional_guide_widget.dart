@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';

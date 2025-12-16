@@ -133,7 +133,9 @@ class BaseWebView extends BaseScreenStatefulStandard {
         'FlutterChannel',
         onMessageReceived: (s) {
           debugPrint("BUTTON ===> ${s.message}");
-          if (s.message == 'dashboard_clicked') {
+
+          if (s.message == 'dashboard_clicked' ||
+              s.message == 'back_to_dashboard_clicked') {
             model.onDoneOnclick?.call();
           }
         },
@@ -157,14 +159,39 @@ class BaseWebView extends BaseScreenStatefulStandard {
             }
 
             // Inject JS to listen for button click
+            //Get the view which has the text 'Back To Home' and add click listener
             wCtrl.runJavaScript("""
-            const homeButton = document.querySelector('a[href="/dashboard"]');
-            if (homeButton) {
-              homeButton.addEventListener('click', function(event) {
-                FlutterChannel.postMessage('dashboard_clicked');
-              });
-            }
-          """);
+
+              function findElementByText(tagName, searchText) {
+                  // Get all elements of the specified tag name (e.g., 'a')
+                  const elements = document.getElementsByTagName(tagName); 
+                  
+                  // Iterate through the elements to find a match
+                  for (let i = 0; i < elements.length; i++) {
+                    // Use .textContent for a robust text comparison
+                    if (elements[i].textContent.trim() === searchText) {
+                      return elements[i]; // Return the first matching element
+                    }
+                  }
+                  return null; // Return null if not found
+                }
+
+
+              const backToDashboardButton = findElementByText('a', 'Back to Home');
+              const dashboardButton = document.querySelector('a[href="/dashboard"]');
+              
+              if (dashboardButton) {
+                dashboardButton.addEventListener('click', function(event) {
+                  FlutterChannel.postMessage('dashboard_clicked');
+                });
+              }
+
+              if (backToDashboardButton) {
+                backToDashboardButton.addEventListener('click', function(event) {
+                  FlutterChannel.postMessage('back_to_dashboard_clicked');
+                });
+              }
+            """);
           },
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},

@@ -9,7 +9,7 @@ import '../controller/donations_controller.dart';
 class DonateToCoreMinistryScreen extends BaseSharedScreen {
   final _controller = Get.put(DonationsController());
 
-  DonateToCoreMinistryScreen(){
+  DonateToCoreMinistryScreen() {
     _controller.amountTxt.text = "";
   }
 
@@ -33,23 +33,25 @@ class DonateToCoreMinistryScreen extends BaseSharedScreen {
           NetworkImageWidget(
             url: getModel().image,
             width: appDimen.screenWidth,
-            height: appDimen.screenHeight * 0.4,
-            fit: BoxFit.cover,
+            height: appDimen.screenHeight * 0.5,
+            fit: BoxFit.contain,
             placeHolderWidget: ContainerWidget(
               width: appDimen.screenWidth,
               height: appDimen.screenHeight * 0.4,
             ),
           ),
           Gap(40.dp()),
-          Text("Enter an amount to donate",
-              style: textTheme.bodyLarge?.copyWith(color: colorScheme.primary)),
+          Text(
+            "Enter an amount to donate",
+            style: textTheme.bodyLarge?.copyWith(color: colorScheme.primary),
+          ),
           Gap(5.dp()),
           TextFieldWidget(
             hintText: "Enter Amount",
             keyboardType: TextInputType.number,
             controller: _controller.amountTxt,
             prefixIcon: Padding(
-              padding:  EdgeInsets.all(5.dp()),
+              padding: EdgeInsets.all(5.dp()),
               child: AssetImageWidget(
                 asset: icGhs,
                 height: 15.dp(),
@@ -60,12 +62,13 @@ class DonateToCoreMinistryScreen extends BaseSharedScreen {
           ),
           Gap(70.dp()),
           ButtonWidget(
-              text: "Proceed",
-              textColor: colorScheme.surface,
-              onTap: () {
-                dismissKeyBoard(context);
-                _controller.confirmDonation(context, getModel());
-              }),
+            text: "Proceed",
+            textColor: colorScheme.surface,
+            onTap: () {
+              dismissKeyBoard(context);
+              _controller.confirmDonation(context, getModel());
+            },
+          ),
           Gap(40.dp()),
         ],
       ),
