@@ -33,7 +33,7 @@ class EventDetailsScreen extends BaseSharedScreen {
             height: appDimen.screenHeight * 0.55,
             width: appDimen.screenWidth,
             url: event.image,
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.contain,
             heroTag: "${event.image}_${event.id}_${event.name}",
             placeHolderWidget: ContainerWidget(
               height: appDimen.screenHeight * 0.55,
@@ -111,7 +111,7 @@ class EventDetailsScreen extends BaseSharedScreen {
                       hasStartedSharing.value = true;
                       await ShareFileUtils().saveAndShareImage(
                         imageUrl: event.image,
-                        title: event.name,
+                        title: "${event.name}\n\n${event.description}",
                       );
                       hasStartedSharing.value = false;
                     },
@@ -119,7 +119,7 @@ class EventDetailsScreen extends BaseSharedScreen {
                 "   Share   ",
                 style: textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w700,
-                  //color: Colors.white,
+                  color: Colors.white,
                 ),
               ),
               icon: hasStartedSharing.value
@@ -127,7 +127,7 @@ class EventDetailsScreen extends BaseSharedScreen {
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       strokeWidth: 2,
                     )
-                  : const Icon(Icons.share, color: Colors.white),
+                  : Icon(Icons.share, color: Colors.white, size: 20.dp()),
             ),
           ),
           Gap(40.dp()),

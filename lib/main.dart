@@ -101,7 +101,7 @@ class MyApp extends StatelessWidget {
       builder: (context, constraints) {
         final mq = MediaQuery.of(context);
         double ratio = mq.size.height / mq.size.width;
-        ratio = Platform.isAndroid && ratio > 1.75 ? ratio : 1.8;
+        ratio = Platform.isAndroid && ratio > 1.85 ? ratio : 1.85;
 
         // Initialize appDimen BEFORE theme usage
         appDimen = AppDimens(context, constantMultiplier: ratio);
