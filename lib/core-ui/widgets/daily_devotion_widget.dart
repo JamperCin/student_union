@@ -1,4 +1,4 @@
-
+import 'package:core_module/core_ui/snippets/country_picker/res/strings/de.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
 import 'package:share_plus/share_plus.dart';
@@ -7,16 +7,15 @@ import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
+import 'package:student_union/core/utils/share_file_utils.dart';
 
 class DailyDevotionWidget extends StatelessWidget {
   final Function(DevotionalBookModel)? onReadMoreOnTap;
 
-  const DailyDevotionWidget({
-    super.key,
-    this.onReadMoreOnTap,
-  });
+  DailyDevotionWidget({super.key, this.onReadMoreOnTap});
 
   final lead = '—  ';
+  RxBool hasStartedSharing = false.obs;
   //final script = 'Deuteronomy 29:29';
 
   @override
@@ -28,13 +27,15 @@ class DailyDevotionWidget extends StatelessWidget {
 
     return FutureBuilder(
       future: devGuideService.fetchDailyDevotion(),
-      builder: (BuildContext context,
-          AsyncSnapshot<List<DevotionalBookModel>> snapshot) {
-        return snapshot.hasData && snapshot.data != null
-            ? _devotionCard(context, snapshot.data!)
-            : ShimmerWidget.withList(length: 1);
-
-      },
+      builder:
+          (
+            BuildContext context,
+            AsyncSnapshot<List<DevotionalBookModel>> snapshot,
+          ) {
+            return snapshot.hasData && snapshot.data != null
+                ? _devotionCard(context, snapshot.data!)
+                : ShimmerWidget.withList(length: 1);
+          },
     );
   }
 
@@ -42,12 +43,13 @@ class DailyDevotionWidget extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    if (list.isEmpty) {
+    if (list.isEmpty || list.first.devotion == null) {
       return const SizedBox.shrink();
     }
 
     final devotion = list.first.devotion;
-    final content = devotion?.referenceText ?? ''; //html_parser.parse(devotion?.content ?? '').body?.text ?? '';
+    final content = devotion?.referenceText ?? '';
+    //html_parser.parse(devotion?.content ?? '').body?.text ?? '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,13 +68,17 @@ class DailyDevotionWidget extends StatelessWidget {
               RichText(
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
-                text: TextSpan(children: [
-                  TextSpan(
-                    text: content,
-                    style: textTheme.labelMedium?.copyWith(
-                        fontSize: 12.dp(), color: colorScheme.tertiary),
-                  ),
-                ]),
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: content,
+                      style: textTheme.labelMedium?.copyWith(
+                        fontSize: 12.dp(),
+                        color: colorScheme.tertiary,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Gap(5.dp()),
               RichText(
@@ -108,27 +114,39 @@ class DailyDevotionWidget extends StatelessWidget {
                     borderRadius: 20,
                     borderColor: colorScheme.tertiary,
                     // text: "Read",
-                    // backgroundColor: colorScheme.tertiary,
+                    color: Colors.transparent,
                     padding: EdgeInsets.symmetric(
                       horizontal: 10.dp(),
                       vertical: 0.1.dp(),
                     ),
                     child: Center(
-                        child: Text(
-                      "Read More",
-                      style: textTheme.labelMedium,
-                    )),
+                      child: Text(
+                        "Read More",
+                        style: textTheme.labelMedium?.copyWith(
+                          color: colorScheme.tertiary,
+                        ),
+                      ),
+                    ),
                   ),
                   Row(
                     children: [
-                      IconButtonWidget(
-                        icon: Icons.share,iconSize: 22.dp(),
-                        iconColor: colorScheme.tertiary,
-                        onTap: (){
-                          SharePlus.instance.share(
-                              ShareParams(text: content, title: 'Scripture Union',subject: devotion?.title ?? '')
-                          );
-                        },
+                      Obx(
+                        () => hasStartedSharing.value
+                            ? const CircularProgressIndicator.adaptive(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                                strokeWidth: 5,
+                                backgroundColor: Colors.white,
+                              )
+                            : IconButtonWidget(
+                                icon: Icons.share,
+                                iconSize: 22.dp(),
+                                iconColor: colorScheme.tertiary,
+                                onTap: () async {
+                                  await onShareDevotionOnTap(list.first);
+                                },
+                              ),
                       ),
                       Gap(10.dp()),
                       Obx(
@@ -142,15 +160,38 @@ class DailyDevotionWidget extends StatelessWidget {
                             TextToSpeechApi().regulateSpeech(content);
                           },
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
       ],
     );
+  }
+
+  Future<void> onShareDevotionOnTap(DevotionalBookModel book) async {
+    if (book.devotion == null) {
+      return;
+    }
+
+    hasStartedSharing.value = true;
+    StringBuffer contentBuffer = StringBuffer();
+    //final content =html_parser.parse(book.value.devotion?.content ?? '').body?.text ?? '';
+
+    contentBuffer.writeln(book.devotion?.title ?? '');
+    contentBuffer.writeln('\n');
+    contentBuffer.writeln(book.devotion?.referenceText ?? '');
+    contentBuffer.write('(${book.devotion?.reference})');
+    //contentBuffer.writeln('\n');
+    //contentBuffer.writeln(content);
+
+    await ShareFileUtils().saveAndShareImage(
+      imageUrl: book.thumbnail,
+      title: contentBuffer.toString(),
+    );
+    hasStartedSharing.value = false;
   }
 }

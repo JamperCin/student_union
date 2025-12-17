@@ -2,6 +2,7 @@ import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
+import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
@@ -50,15 +51,38 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ButtonWidget(
-                        asset: icCalendar,
-                        text: _controller.selectedDate.value,
-                        textColor: colorScheme.surface,
-                        assetColor: colorScheme.surface,
-                        assetBgColor: colorScheme.surface.withOpacity(.3),
-                        width: appDimen.screenWidth * 0.5,
-                        onTap: () => _controller.onPickCalendar(context),
+                      SizedBox(
+                        width: appDimen.screenWidth * 0.52,
+                        height: 50.dp(),
+                        child: FilledButton.icon(
+                          onPressed: () => _controller.onPickCalendar(context),
+                          label: Text(
+                            _controller.selectedDate.value,
+                            style: textTheme.bodyLarge?.copyWith(
+                              color: colorScheme.tertiary,
+                            ),
+                          ),
+                          icon: Icon(Icons.calendar_today, size: 18.dp()),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: primaryGreenColor,
+                            foregroundColor: colorScheme.tertiary,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12.dp(),
+                              vertical: 8.dp(),
+                            ),
+                          ),
+                        ),
                       ),
+                      // ButtonWidget(
+                      //   asset: icCalendar,
+                      //   backgroundColor: primaryGreenColor,
+                      //   text: _controller.selectedDate.value,
+                      //   textColor: colorScheme.tertiary,
+                      //   assetColor: colorScheme.tertiary,
+                      //   assetBgColor: colorScheme.tertiary.withAlpha(104),
+                      //   width: appDimen.screenWidth * 0.55,
+                      //   onTap: () => _controller.onPickCalendar(context),
+                      // ),
                       Gap(10.dp()),
                       Obx(
                         () => IconButtonWidget(
@@ -71,20 +95,31 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
                         ),
                       ),
                       Gap(10.dp()),
-                      IconButtonWidget(
-                        icon: Icons.share,
-                        iconSize: 25.dp(),
-                        iconColor: colorScheme.inverseSurface,
-                        onTap: _controller.onShareDevotionOnTap,
+                      Obx(
+                        () => _controller.hasStartedSharing.value
+                            ? const CircularProgressIndicator.adaptive(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                                strokeWidth: 2,
+                              )
+                            : IconButtonWidget(
+                                icon: Icons.share,
+                                iconSize: 25.dp(),
+                                iconColor: colorScheme.inverseSurface,
+                                onTap: _controller.onShareDevotionOnTap,
+                              ),
                       ),
                     ],
                   ),
                   Gap(5.dp()),
-                  Text("Read Bible text first",
-                      style: textTheme.labelSmall?.copyWith(fontSize: 10.dp())),
+                  Text(
+                    "Read Bible text first",
+                    style: textTheme.labelSmall?.copyWith(fontSize: 10.dp()),
+                  ),
                   Gap(12.dp()),
                   ContainerWidget(
-                    color: colorScheme.primary,
+                    color: primaryGreenColor,
                     borderRadius: 0,
                     padding: EdgeInsets.symmetric(
                       horizontal: 8.dp(),
@@ -97,17 +132,20 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
                           child: Text(
                             (_controller.book.value.devotion?.reference ?? '')
                                 .toUpperCase(),
-                            style: textTheme.labelLarge
-                                ?.copyWith(color: colorScheme.surface),
+                            style: textTheme.labelLarge?.copyWith(
+                              color: whiteColor,
+                            ),
                           ),
                         ),
                         Gap(5.dp()),
                         Flexible(
+                          flex: 0,
                           child: Text(
                             _controller.selectedDateTimeline.value
                                 .toUpperCase(),
-                            style: textTheme.labelMedium
-                                ?.copyWith(color: colorScheme.surface),
+                            style: textTheme.labelMedium?.copyWith(
+                              color: whiteColor,
+                            ),
                           ),
                         ),
                       ],
@@ -124,32 +162,40 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
                     ),
                     child: Text(
                       _controller.book.value.devotion?.title ?? '',
-                      style: textTheme.labelLarge
-                          ?.copyWith(fontWeight: FontWeight.w700),
+                      style: textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: darkColor,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
+            Gap(12.dp()),
             Expanded(
               child: _controller.isLoadingContent.value
                   ? const LoaderWidget.withIndicator()
                   : (_controller.book.value.devotion?.content ?? '').isEmpty
-                      ? const NoDataWidget(
-                          asset: icDevotion,
-                          title: "No Content Found",
-                          description:
-                              "Your devotional content appears here. There is no content available for the selected date.",
-                        )
-                      : Container(
-                          color: colorScheme.tertiary,
-                          child: BaseWebView(
-                            model: WebModel(
-                              showAppBar: false,
-                              content: _controller.book.value.devotion?.content,
-                            ),
-                          ),
+                  ? const NoDataWidget(
+                      asset: icDevotion,
+                      title: "No Content Found",
+                      description:
+                          "Your devotional content appears here. There is no content available for the selected date.",
+                    )
+                  : Container(
+                      color: colorScheme.tertiary,
+                      child: BaseWebView(
+                        model: WebModel(
+                          showAppBar: false,
+                          backgroundColor:
+                              Theme.of(context).brightness == Brightness.light
+                              ? colorScheme.surface
+                              : greyTertiaryColor,
+                          content: _controller.book.value.devotion?.content,
+                          sections: _controller.getDevotionSections(),
                         ),
+                      ),
+                    ),
             ),
           ],
         ),

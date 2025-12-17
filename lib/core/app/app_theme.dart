@@ -145,7 +145,7 @@ ThemeData darkMode = lightMode.copyWith(
     brightness: Brightness.dark,
     primary: whiteColor,
     inversePrimary: greenFaded,
-    onPrimary: secondaryGreenColor,
+    onPrimary: secondaryGreenColor, //Calendar picker selected day text color
     secondary: secondary,
     onSecondary: darkBrownColor,
     inverseSurface: whiteColor,
@@ -153,7 +153,7 @@ ThemeData darkMode = lightMode.copyWith(
     onError: redColor,
     surface: darkColor,
     surfaceDim: greyPrimaryColor,
-    onSurface: darkBrownColor,
+    onSurface: greyPodInactiveColor, //Calendar picker General text color
     tertiary: whiteColor,
     surfaceBright: greyPodActiveColor,
     surfaceContainerHighest: darkBrownColor,
@@ -207,3 +207,13 @@ ThemeData darkMode = lightMode.copyWith(
     iconTheme: IconThemeData(color: whiteColor),
   ),
 );
+
+
+// ThemeData(
+//   colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue).copyWith(
+//     primary: Colors.green,          // Selected date
+//     onPrimary: Colors.white,        // Selected date text
+//     surface: Colors.grey[200],      // Calendar background
+//     onSurface: Colors.black,        // Default date text
+//   ),
+// )
