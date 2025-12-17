@@ -65,6 +65,16 @@ class BaseWebView extends BaseScreenStatefulStandard {
   }
 
   @override
+  Color appBarBackgroundColor(BuildContext context) {
+    return model.appBarColor ?? super.appBarBackgroundColor(context);
+  }
+
+  @override
+  Color backgroundColor(BuildContext context) {
+    return model.backgroundColor ?? super.backgroundColor(context);
+  }
+
+  @override
   double appBarElevation() {
     return 0;
   }
@@ -96,6 +106,69 @@ class BaseWebView extends BaseScreenStatefulStandard {
   }
 
   Uri? _getContent() {
+    if (model.uri != null) return model.uri;
+
+    final buffer = StringBuffer();
+
+    // Add main content if available
+    if (model.content != null && model.content!.trim().isNotEmpty) {
+      buffer.writeln("""
+      <div class="section">
+        ${model.content}
+      </div>
+    """);
+    }
+
+    // Add extra sections (if any)
+    if (model.sections != null && model.sections!.isNotEmpty) {
+      for (final section in model.sections!) {
+        buffer.writeln("""
+        <div class="section">
+          <div class="title">${section.title}</div>
+          <div class="content">${section.content}</div>
+        </div>
+      """);
+      }
+    }
+
+    // If nothing to render, return null
+    if (buffer.isEmpty) return null;
+
+    return Uri.dataFromString(
+      '''
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          body {
+            font-family: sans-serif;
+            padding: 16px;
+            line-height: 1.6;
+          }
+          .section {
+            margin-bottom: 16px;
+          }
+          .title {
+            font-weight: bold;
+            margin-bottom: 4px;
+          }
+          .content {
+            font-weight: normal;
+          }
+        </style>
+      </head>
+      <body>
+        ${buffer.toString()}
+      </body>
+    </html>
+    ''',
+      mimeType: 'text/html',
+      encoding: Encoding.getByName('utf-8'),
+    );
+  }
+
+  Uri? _getContents() {
     return model.uri ??
         (model.content != null
             ? Uri.dataFromString(
@@ -200,7 +273,7 @@ class BaseWebView extends BaseScreenStatefulStandard {
           },
         ),
       )
-      ..loadRequest(_getContent() ?? Uri.parse(model.url ?? ''));
+      ..loadRequest(_getContent() ?? Uri.parse(model.url));
 
     return controller;
   }

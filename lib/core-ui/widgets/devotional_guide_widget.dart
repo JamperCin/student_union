@@ -108,6 +108,8 @@ class DevotionalGuideWidget extends StatelessWidget {
 
     return ListViewWidget<DevotionalBookModel>.withGridView(
       list: list,
+      refreshIndicatorBackgroundColor: colorScheme.inverseSurface,
+      refreshIndicatorColor: colorScheme.surface,
       listItemWidget: (book) {
         return NetworkImageWidget(
           height: appDimen.dimen(280),
@@ -201,6 +203,8 @@ class DevotionalGuideWidget extends StatelessWidget {
       list: list.obs,
       onLoadMore: () => _onLoadMoreAvailableBooks(page = page + 1),
       onRefresh: () => _onLoadMoreAvailableBooks(page = 1),
+      refreshIndicatorBackgroundColor: colorScheme.inverseSurface,
+      refreshIndicatorColor: colorScheme.surface,
       listItemWidget: (book) {
         return InkWell(
           onTap: () {
