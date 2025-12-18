@@ -32,10 +32,7 @@ class SettingsScreen extends BaseScreenStandard {
     const elevation = 0.0;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-        vertical: 10.dp(),
-        horizontal: 10.dp(),
-      ),
+      padding: EdgeInsets.symmetric(vertical: 10.dp(), horizontal: 10.dp()),
       child: Column(
         children: [
           SimpleCardItem(
@@ -50,10 +47,14 @@ class SettingsScreen extends BaseScreenStandard {
           Gap(10.dp()),
           Obx(
             () => SimpleCardItem(
-              title: Get.find<ThemeController>().isDark.value ? "Dark Theme" : "Light Theme",
+              title: Get.find<ThemeController>().isDark.value
+                  ? "Dark Theme"
+                  : "Light Theme",
               //prefixAsset: icTheme,
               prefixWidget: Icon(
-                Get.find<ThemeController>().isDark.value ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                Get.find<ThemeController>().isDark.value
+                    ? Icons.dark_mode_rounded
+                    : Icons.light_mode_rounded,
                 color: colorScheme.primary,
               ),
               elevation: elevation,
@@ -86,6 +87,19 @@ class SettingsScreen extends BaseScreenStandard {
             prefixAssetHeight: prefixSize,
             onTap: (v) {
               _controller.onDeleteAccountOnClick(context);
+            },
+          ),
+          Gap(10.dp()),
+          SimpleCardItem(
+            title: "Text to Speech Settings",
+            elevation: elevation,
+            prefixWidget: Icon(
+              Icons.record_voice_over,
+              color: colorScheme.primary,
+            ),
+            prefixAssetHeight: prefixSize,
+            onTap: (v) {
+              _controller.onChangeSpeechSettings(context);
             },
           ),
           Gap(10.dp()),

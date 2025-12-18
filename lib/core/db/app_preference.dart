@@ -17,6 +17,7 @@ class AppPreference {
   final String IS_INTRO_SHOWN = "is_intro";
   final String THEME_TYPE = "is_dark_theme";
   final String NOTIFICATION_COUNT = "notification_count";
+  final String SELECTED_SPEECH_RATE_VALUE = "selected_speech_rate_value";
 
   AppPreference._();
 
@@ -146,4 +147,15 @@ class AppPreference {
   void setNotificationCount(int value) {
     setInt(NOTIFICATION_COUNT, value);
   }
+
+  double getSelectedSpeechRateValue() {
+    return getDouble(SELECTED_SPEECH_RATE_VALUE) == 0.00
+        ? 0.4
+        : getDouble(SELECTED_SPEECH_RATE_VALUE);
+  }
+
+  void setSelectedSpeechRateValue(double value) {
+    setDouble(SELECTED_SPEECH_RATE_VALUE, value);
+  }
+  
 }
