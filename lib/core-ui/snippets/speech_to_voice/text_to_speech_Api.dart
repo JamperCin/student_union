@@ -1,13 +1,15 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:student_union/core/def/global_access.dart';
 
 class TextToSpeechApi {
   static TextToSpeechApi? _instance;
   final flutterTts = FlutterTts();
   RxBool isReadingAloud = false.obs;
+  double selectedSpeechRateValue = 0.4;
 
   TextToSpeechApi._() {
-     _init();
+    _init();
   }
 
   factory TextToSpeechApi() {
@@ -17,29 +19,31 @@ class TextToSpeechApi {
   Future _init() async {
     await flutterTts.setLanguage("en-US");
 
-    await flutterTts.setSpeechRate(0.4); //speed
+    await flutterTts.setSpeechRate(
+      appPreference.getSelectedSpeechRateValue(),
+    ); //speed
 
     await flutterTts.setVolume(1.0);
 
     await flutterTts.setPitch(1.0);
   }
 
-  Future<void> regulateSpeech(String text, {double speed = 0.4}) async {
+  Future<void> regulateSpeech(String text, {double? speed}) async {
     isReadingAloud.value = !isReadingAloud.value;
-    if(isReadingAloud.value) {
-      await speak(text, speed: speed);
+    if (isReadingAloud.value) {
+      await speak(text);
     } else {
       stop();
     }
   }
 
-  Future<void> speak(String text,{double speed = 0.4}) async {
-    if(text.isEmpty) {
+  Future<void> speak(String text) async {
+    if (text.isEmpty) {
       isReadingAloud.value = false;
       return;
     }
 
-    await flutterTts.setSpeechRate(speed); //speed
+    await flutterTts.setSpeechRate(appPreference.getSelectedSpeechRateValue());
     await flutterTts.speak(text);
     isReadingAloud.value = true;
     flutterTts.setCompletionHandler(() {
@@ -51,5 +55,4 @@ class TextToSpeechApi {
     await flutterTts.stop();
     isReadingAloud.value = false;
   }
-
 }
