@@ -1,12 +1,13 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core-ui/widgets/simple_card_item.dart';
 import 'package:student_union/core/app/theme_controller.dart';
 import 'package:student_union/core/res/asset_path.dart';
 
 import '../controller/settings_controller.dart';
 
-class SettingsScreen extends BaseScreenStandard {
+class SettingsScreen extends BaseSharedScreen {
   final _controller = Get.put(SettingsController());
 
   @override
@@ -14,17 +15,7 @@ class SettingsScreen extends BaseScreenStandard {
     return 'Settings';
   }
 
-  @override
-  bool showAppBar() {
-    return true;
-  }
 
-  @override
-  TextStyle? appBarTitleStyle(BuildContext context) {
-    return super
-        .appBarTitleStyle(context)
-        ?.copyWith(fontWeight: FontWeight.w700);
-  }
 
   @override
   Widget body(BuildContext context) {
@@ -35,16 +26,17 @@ class SettingsScreen extends BaseScreenStandard {
       padding: EdgeInsets.symmetric(vertical: 10.dp(), horizontal: 10.dp()),
       child: Column(
         children: [
-          SimpleCardItem(
-            title: "Change Password",
-            prefixAsset: icChangePassword,
-            prefixAssetHeight: prefixSize,
-            elevation: elevation,
-            onTap: (v) {
-              _controller.onChangePasswordOnClick();
-            },
-          ),
-          Gap(10.dp()),
+          //TODO implement change password functionality
+          // SimpleCardItem(
+          //   title: "Change Password",
+          //   prefixAsset: icChangePassword,
+          //   prefixAssetHeight: prefixSize,
+          //   elevation: elevation,
+          //   onTap: (v) {
+          //     _controller.onChangePasswordOnClick();
+          //   },
+          // ),
+          // Gap(10.dp()),
           Obx(
             () => SimpleCardItem(
               title: Get.find<ThemeController>().isDark.value

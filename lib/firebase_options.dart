@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDZTjFtggefwUID-vhIWihsqJ-nyVOH30Y',
-    appId: '1:538014947390:android:5a356d5e51986ade5bd96f',
-    messagingSenderId: '538014947390',
-    projectId: 'su-ghana-1b48b',
-    storageBucket: 'su-ghana-1b48b.firebasestorage.app',
+    apiKey: 'AIzaSyAXjJM0OOiAHPuv1CnGtufOHDaC3Q3-AVo',
+    appId: '1:235940493766:android:0e8a4cf5bf739cfa839ac7',
+    messagingSenderId: '235940493766',
+    projectId: 'scripture-union-ghana',
+    storageBucket: 'scripture-union-ghana.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA1ArVEhlEBT25LVvD4CnwgMbejngxJpNw',
-    appId: '1:538014947390:ios:bf46ad0d3407a25e5bd96f',
-    messagingSenderId: '538014947390',
-    projectId: 'su-ghana-1b48b',
-    storageBucket: 'su-ghana-1b48b.firebasestorage.app',
+    apiKey: 'AIzaSyC3_Ejv7tUcxS11ULeCte2Z234fruuMXCo',
+    appId: '1:235940493766:ios:1a23beb0df0bd979839ac7',
+    messagingSenderId: '235940493766',
+    projectId: 'scripture-union-ghana',
+    storageBucket: 'scripture-union-ghana.firebasestorage.app',
     iosBundleId: 'com.kodeit.scriptureunion',
   );
 
