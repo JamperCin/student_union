@@ -15,7 +15,7 @@ class DonateToCoreMinistryScreen extends BaseSharedScreen {
 
   @override
   String appBarTitle() {
-    return getModel().title;
+    return "Donate to Core Ministry";
   }
 
   @override
@@ -30,10 +30,18 @@ class DonateToCoreMinistryScreen extends BaseSharedScreen {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Center(
+            child: Text(
+              getModel().title,
+              textAlign: TextAlign.center,
+              style: textTheme.bodyLarge?.copyWith(color: colorScheme.primary),
+            ),
+          ),
+          Gap(5.dp()),
           NetworkImageWidget(
             url: getModel().image,
             width: appDimen.screenWidth,
-            height: appDimen.screenHeight * 0.5,
+            height: appDimen.screenHeight * 0.45,
             fit: BoxFit.contain,
             placeHolderWidget: ContainerWidget(
               width: appDimen.screenWidth,

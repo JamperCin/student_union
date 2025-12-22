@@ -60,7 +60,12 @@ class BaseSharedScreen extends StatelessWidget implements BaseImpl {
         },
       ),
       backgroundColor: backgroundColor(context),
+      floatingActionButton: floatingActionButton(context),
     );
+  }
+
+  Widget? floatingActionButton(BuildContext context) {
+    return null;
   }
 
   @override

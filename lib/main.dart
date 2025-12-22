@@ -63,6 +63,12 @@ void main() async {
       statusBarBrightness: Brightness.light, // Dark icons for iOS
     ),
   );
+
+  //restrict to portrait mode only
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 }
 
 ///Initialise the Core module library and other services here
@@ -104,7 +110,10 @@ class MyApp extends StatelessWidget {
         ratio = Platform.isAndroid && ratio > 1.85 ? ratio : 1.85;
 
         // Initialize appDimen BEFORE theme usage
-        appDimen = AppDimens(context, constantMultiplier: ratio);
+        appDimen = AppDimens(context, constantMultiplier: 1.85);
+        debugPrint(
+          "Screen Height: ${mq.size.height}, Width: ${mq.size.width}, Ratio: $ratio",
+        );
 
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
@@ -113,8 +122,9 @@ class MyApp extends StatelessWidget {
           getPages: appRoute,
           theme: lightMode, // uses appDimen safely now
           darkTheme: darkMode,
-          themeMode:
-          themeController.isDark.value ? ThemeMode.dark : ThemeMode.light,
+          themeMode: themeController.isDark.value
+              ? ThemeMode.dark
+              : ThemeMode.light,
         );
       },
     );

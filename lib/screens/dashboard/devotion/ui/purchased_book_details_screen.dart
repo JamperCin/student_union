@@ -1,5 +1,6 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
 import 'package:student_union/core/app/app_colors.dart';
@@ -8,13 +9,9 @@ import 'package:student_union/core/model/remote/devotional_book_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/dashboard/devotion/controller/purchased_book_controller.dart';
 
-class PurchasedBookDetailsScreen extends BaseScreenStandard {
+class PurchasedBookDetailsScreen extends BaseSharedScreen {
   final _controller = Get.put(PurchasedBookController());
 
-  @override
-  bool showAppBar() {
-    return true;
-  }
 
   @override
   void setModel(BaseObject baseObject) {
@@ -44,7 +41,10 @@ class PurchasedBookDetailsScreen extends BaseScreenStandard {
         () => Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.dp()),
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.dp(),
+                vertical: 10.dp(),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

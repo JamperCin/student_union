@@ -30,7 +30,7 @@ class BaseWebView extends BaseScreenStatefulStandard {
   TextStyle? appBarTitleStyle(BuildContext context) {
     return super
         .appBarTitleStyle(context)
-        ?.copyWith(fontWeight: FontWeight.w700);
+        ?.copyWith(fontWeight: FontWeight.w700, color: colorScheme.tertiary);
   }
 
   @override
@@ -66,7 +66,15 @@ class BaseWebView extends BaseScreenStatefulStandard {
 
   @override
   Color appBarBackgroundColor(BuildContext context) {
-    return model.appBarColor ?? super.appBarBackgroundColor(context);
+    return model.appBarColor ??
+        Theme.of(context).appBarTheme.backgroundColor ??
+        super.appBarBackgroundColor(context);
+  }
+
+  @override
+  appBarIconColor(BuildContext context) {
+    return Theme.of(context).appBarTheme.iconTheme?.color ??
+        super.appBarIconColor(context);
   }
 
   @override
