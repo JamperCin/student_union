@@ -43,18 +43,6 @@ class PurchasedBookController extends BaseController {
     List<Section> sections = [];
     if (book.value.devotion == null) return sections;
 
-    if ((book.value.devotion?.prayer ?? '').isNotEmpty) {
-      sections.add(
-        Section(title: 'Prayer', content: book.value.devotion?.prayer ?? ''),
-      );
-    }
-
-    if ((book.value.devotion?.thought ?? '').isNotEmpty) {
-      sections.add(
-        Section(title: 'Thought', content: book.value.devotion?.thought ?? ''),
-      );
-    }
-
     if ((book.value.devotion?.question ?? '').isNotEmpty) {
       sections.add(
         Section(
@@ -64,9 +52,21 @@ class PurchasedBookController extends BaseController {
       );
     }
 
+    if ((book.value.devotion?.thought ?? '').isNotEmpty) {
+      sections.add(
+        Section(title: 'Thought', content: book.value.devotion?.thought ?? ''),
+      );
+    }
+
     if ((book.value.devotion?.soWhat ?? '').isNotEmpty) {
       sections.add(
         Section(title: 'So What', content: book.value.devotion?.soWhat ?? ''),
+      );
+    }
+
+    if ((book.value.devotion?.prayer ?? '').isNotEmpty) {
+      sections.add(
+        Section(title: 'Prayer', content: book.value.devotion?.prayer ?? ''),
       );
     }
 
