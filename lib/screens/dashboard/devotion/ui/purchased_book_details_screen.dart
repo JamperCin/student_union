@@ -12,7 +12,6 @@ import 'package:student_union/screens/dashboard/devotion/controller/purchased_bo
 class PurchasedBookDetailsScreen extends BaseSharedScreen {
   final _controller = Get.put(PurchasedBookController());
 
-
   @override
   void setModel(BaseObject baseObject) {
     super.setModel(baseObject);
@@ -113,12 +112,16 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
                     ],
                   ),
                   Gap(5.dp()),
-                  Text(
-                    "Read Bible text first",
-                    style: textTheme.labelSmall?.copyWith(fontSize: 10.dp()),
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "Read Bible text first",
+                      style: textTheme.labelSmall?.copyWith(fontSize: 10.dp()),
+                    ),
                   ),
                   Gap(12.dp()),
                   ContainerWidget(
+                    onTap: () {},
                     color: primaryGreenColor,
                     borderRadius: 0,
                     padding: EdgeInsets.symmetric(
@@ -155,6 +158,7 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
                   ContainerWidget(
                     color: colorScheme.inversePrimary,
                     borderRadius: 0,
+                    onTap: () {},
                     width: appDimen.screenWidth,
                     padding: EdgeInsets.symmetric(
                       horizontal: 16.dp(),
