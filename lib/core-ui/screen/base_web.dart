@@ -9,10 +9,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class BaseWebView extends BaseScreenStatefulStandard {
   RxBool isPageLoading = true.obs;
-  late WebViewController wCtrl;
+  WebViewController wCtrl = WebViewController();
   final WebModel model;
 
-  BaseWebView({required this.model});
+  BaseWebView({required this.model}) {
+    wCtrl = getWebController();
+  }
 
   @override
   PreferredSizeWidget appBar(BuildContext context) {
@@ -176,6 +178,7 @@ class BaseWebView extends BaseScreenStatefulStandard {
     );
   }
 
+  @Deprecated('Use _getContent() instead')
   Uri? _getContents() {
     return model.uri ??
         (model.content != null

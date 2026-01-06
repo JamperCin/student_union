@@ -6,12 +6,14 @@ import 'package:student_union/core/model/remote/news_update_model.dart';
 
 class NewsController extends BaseController {
   void onNewsUpdateTap(NewsUpdateModel news) {
+    if (news.url.isEmpty) return;
     navUtils.fireTarget(
-      BaseWebView(model: WebModel(
-        url: "https://www.catholic.org/bible/daily_reading/",
-        title: "News Update",
-      ),),
-
+      BaseWebView(
+        model: WebModel(
+          url: news.url,
+          title: news.title.isEmpty ? "News Update" : news.title,
+        ),
+      ),
     );
   }
 }
