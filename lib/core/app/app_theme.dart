@@ -4,9 +4,12 @@ import 'package:student_union/core/app/app_style.dart';
 
 import 'app_colors.dart';
 
+const String _fontFamily = "KumbhSans"; //"SfUI"; //"Gotham";
+
 ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   primarySwatch: Colors.green,
+  fontFamily: _fontFamily,
   textTheme: TextTheme(
     labelSmall: labelSmallTextLightModeStyle,
     labelMedium: labelMediumTextLightModeStyle,
@@ -207,7 +210,6 @@ ThemeData darkMode = lightMode.copyWith(
     iconTheme: IconThemeData(color: whiteColor),
   ),
 );
-
 
 // ThemeData(
 //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue).copyWith(

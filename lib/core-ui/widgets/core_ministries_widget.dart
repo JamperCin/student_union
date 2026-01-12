@@ -1,10 +1,5 @@
-import 'package:core_module/core/extensions/int_extension.dart';
 import 'package:core_module/core_module.dart';
-import 'package:core_module/core_ui/widgets/list_view_widget.dart';
-import 'package:core_module/core_ui/widgets/no_data_widget.dart';
-import 'package:core_module/core_ui/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/widgets/simple_card_item.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';

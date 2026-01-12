@@ -15,7 +15,7 @@ class CampaignApiService extends BaseApiService
 
   @override
   Future<List<CampaignModel>> fetchListOfCoreMinistries() async {
-   // await Future.delayed(const Duration(seconds: 2));
+    // await Future.delayed(const Duration(seconds: 2));
     // final results = await FileUtils().fetchList<CampaignModel>(
     //   path: path,
     //   key: 'data',
@@ -25,12 +25,19 @@ class CampaignApiService extends BaseApiService
     //
 
     final results = await _instance?.getListRequest<CampaignModel>(
-      api: 'customer/v1/campaigns',
-      key: 'campaigns',
-      parser: (json) => CampaignModel.fromJson(json),
-    ) ?? [];
+          api: 'customer/v1/campaigns',
+          key: 'campaigns',
+          parser: (json) => CampaignModel.fromJson(json),
+        ) ??
+        [];
+
+    //Sort the results in ascending order based on createAt sample : 2025-12-11T15:00:51.226Z by using Datetime.parse
+    results.sort((a, b) {
+      DateTime dateA = DateTime.parse(a.createdAt);
+      DateTime dateB = DateTime.parse(b.createdAt);
+      return dateA.compareTo(dateB);
+    });
 
     return results;
   }
-
 }

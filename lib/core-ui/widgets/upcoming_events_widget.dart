@@ -134,21 +134,33 @@ class UpcomingEventsWidget extends StatelessWidget {
               ),
             ),
             Gap(2.dp()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  model.name,
-                  style: textTheme.labelSmall?.copyWith(fontSize: 8.dp()),
-                ),
-                Text(
-                  DateTimeUtils().formatDate(
-                    model.date,
-                    format: "dd MMM, yyyy",
+            Flexible(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: RichText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      text: TextSpan(
+                        text: model.name,
+                        style: textTheme.labelSmall?.copyWith(fontSize: 8.dp()),
+                      ),
+                    ),
                   ),
-                  style: textTheme.labelMedium?.copyWith(fontSize: 8.dp()),
-                ),
-              ],
+                  Gap(10.dp()),
+                  Flexible(
+                    flex: 0,
+                    child: Text(
+                      DateTimeUtils().formatDate(
+                        model.date,
+                        format: "dd MMM, yyyy",
+                      ),
+                      style: textTheme.labelMedium?.copyWith(fontSize: 8.dp()),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
