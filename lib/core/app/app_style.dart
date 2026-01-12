@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 const double _wordSpacing = 1.5;
 const double _height = 1.3;
 const double _letterSpacing = 0.2;
-const String _fontFamily = "Avenirl";//"SfUI"; //"Gotham";
+const String _fontFamily = "KumbhSans";//"SfUI"; //"Gotham";
 
 ///=================== L  I  G  H  T     M  O  D  E  =========================
 ///===========================================================================

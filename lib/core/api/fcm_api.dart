@@ -46,8 +46,8 @@ class FcmApi {
   }
 
   Future<void> checkForApnToken() async {
-    String? apnsToken = await _firebaseMessaging.getAPNSToken();
-    apnsToken ??= await _firebaseMessaging.getToken();
+    String? apnsToken = await _firebaseMessaging.getToken();
+    apnsToken ??= await _firebaseMessaging.getAPNSToken();
     debugPrint("FCM TOKEN: $apnsToken");
     _sendTokenToSerer(apnsToken);
   }
@@ -115,8 +115,8 @@ class FcmApi {
     Map<String, dynamic> data = msg.data;
     debugPrint("Data ====>> ${data.toString()}");
 
-    String type = data.containsKey('payment_type') ? data['payment_type'] : '';
-    String status = data.containsKey('status') ? data['status'] : '';
+    // String type = data.containsKey('payment_type') ? data['payment_type'] : '';
+    // String status = data.containsKey('status') ? data['status'] : '';
 
     // switch (type) {
     //   case 'campaign_donation':

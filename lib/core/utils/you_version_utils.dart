@@ -1,5 +1,6 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core/enums/bible_version.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core-ui/screen/base_web.dart';
@@ -16,7 +17,7 @@ class YouVersionUtils {
     'Deuteronomy': 'DEU', 'Deut': 'DEU',
     'Joshua': 'JOS', 'Josh': 'JOS',
     'Judges': 'JDG', 'Judg': 'JDG',
-    'Ruth': 'RUT',
+    'Ruth': 'RUT', 'RUTH': 'RUT',
     '1 Samuel': '1SA', '1Sam': '1SA',
     '2 Samuel': '2SA', '2Sam': '2SA',
     '1 Kings': '1KI', '1Kgs': '1KI',
@@ -85,9 +86,7 @@ class YouVersionUtils {
       return '';
     }
     // Match: book name, chapter, starting verse, optional ending verse
-    final regex = RegExp(
-      r'^([\d ]?[A-Za-z ]+)\s+(\d+)(?::(\d+)(?:-(\d+))?)?$',
-    );
+    final regex = RegExp(r'^([\d ]?[A-Za-z ]+)\s+(\d+)(?::(\d+)(?:-(\d+))?)?$');
 
     final match = regex.firstMatch(reference.trim());
     if (match == null) {
@@ -143,22 +142,35 @@ class YouVersionUtils {
     return null;
   }
 
-  Future<void> openBibleReference({String? ref}) async {
-    String reference = _bibleReferenceToUrl(ref ?? 'GENESIS 1');
-    //Bible Mobile app Uri
-    final mobileUri = Uri.parse('youversion://bible?reference=$reference');
-
-    // Web fallback (NIV in this example)
-    final webUri = Uri.parse('https://www.bible.com/bible/111/$reference');
-
-    if (await canLaunchUrl(mobileUri)) {
-      debugPrint('Launching YouVersion URI: $mobileUri');
-      await launchUrl(mobileUri);
-    } else {
-      debugPrint('Launching web URI: $webUri');
-      navUtils.fireTarget(
-        BaseWebView(model: WebModel(title: "Read Bible", uri: webUri)),
+  Future<void> openBibleReference({
+    String? ref,
+    BibleVersion version = BibleVersion.KJV, // Default to KJV
+  }) async {
+    try {
+      String reference = _bibleReferenceToUrl(ref ?? 'GENESIS 1');
+      final versionId = version.webVersionId;
+      // Bible Mobile app Uri
+      final mobileUri = Uri.parse(
+        'youversion://bible/$versionId?reference=${Uri.encodeComponent(reference)}',
       );
+
+      final webUri = Uri.parse(
+        'https://www.bible.com/bible/$versionId/$reference',
+      );
+
+      debugPrint('Launching YouVersion URI Mobile: $mobileUri \nWeb: $webUri');
+
+      if (await canLaunchUrl(mobileUri)) {
+        await launchUrl(mobileUri);
+      } else {
+        navUtils.fireTarget(
+          BaseWebView(
+            model: WebModel(title: "Read Bible ($version)", uri: webUri),
+          ),
+        );
+      }
+    } catch (e) {
+      debugPrint('Error opening Bible reference: $e');
     }
   }
 }

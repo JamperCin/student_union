@@ -110,7 +110,7 @@ class MyApp extends StatelessWidget {
         ratio = Platform.isAndroid && ratio > 1.85 ? ratio : 1.85;
 
         // Initialize appDimen BEFORE theme usage
-        appDimen = AppDimens(context, constantMultiplier: ratio);
+        appDimen = AppDimens(context, constantMultiplier: 1.85);
         // debugPrint(
         //   "Screen Height: ${mq.size.height}, Width: ${mq.size.width}, Ratio: $ratio",
         // );
