@@ -70,13 +70,13 @@ class PurchasedBookController extends BaseController {
       );
     }
 
+    currentEvent.value = null; //Reset event after use
     return sections;
   }
 
   void onPickCalendar(BuildContext context) {
     CalendarPickerWidget.show(
       context: context,
-     // backgroundColor: Theme.of(context).colorScheme.onSecondary,
       endDate: DateTime(
         DateTime.now().year + 1,
         DateTime.now().month,

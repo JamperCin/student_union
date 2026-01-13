@@ -25,10 +25,12 @@ late NotificationApi notificationApi;
 ///--------------------------------------------------------------
 
 RxInt notificationCount = 0.obs;
+Rxn<dynamic> currentEvent = Rxn<dynamic>();
 
 class EventTrigger {
   BookType? bookType;
   String screen;
+  BaseObject? model;
 
-  EventTrigger({this.bookType, required this.screen});
+  EventTrigger({this.bookType, required this.screen, this.model});
 }

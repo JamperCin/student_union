@@ -1,3 +1,4 @@
+
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
@@ -14,6 +15,7 @@ import '../ui/buy_devotional_book_screen.dart';
 class DevotionController extends BaseController {
   RxString selectedYear = "All".obs; //${DateTime.now().year}
   Rx<BookType> bookTypeFilter = BookType.availableBooks.obs;
+  TabController? tabController;
 
   ///Generate list of years starting from current year
   // List<String> get list =>
@@ -45,11 +47,28 @@ class DevotionController extends BaseController {
   }
 
   Future<void> checkForScreenUpdate() async {
-    final event = Get.arguments;
-    if (event is EventTrigger && event.bookType != null) {
-      await Future.delayed(const Duration(seconds: 1));
+    final event = currentEvent.value;
+    debugPrint(
+      "EVENT TRIGGERED MODEL $event bookType ---> ${bookTypeFilter.value}",
+    );
+
+    if (event is EventTrigger &&
+        event.bookType != null &&
+        event.model is DevotionalBookModel) {
+      debugPrint("EVENT TRIGGERED ${event.bookType} ---> ${event.model}");
+      //Change tab after a short delay to allow for screen to load
+      await Future.delayed(const Duration(milliseconds: 180));
       bookTypeFilter.value = event.bookType!;
-      debugPrint("Called here ${event.screen} --- ${event.bookType}");
+      tabController?.index = event.bookType == BookType.availableBooks ? 0 : 1;
+
+      //If a model is passed, open the purchased book details screen
+      await Future.delayed(const Duration(milliseconds: 180));
+      navUtils.fireBack();
+      navUtils.fireTarget(PurchasedBookDetailsScreen(), model: event.model);
+      currentEvent.value = null; //Reset event after use
+    } else {
+      bookTypeFilter.value = BookType.availableBooks;
+      tabController?.index = 0;
     }
   }
 
@@ -107,22 +126,27 @@ class DevotionController extends BaseController {
 
     final results = await paymentApiService.makePaymentOfBook(param);
     const LoaderWidget().hideProgress();
-    navToPaymentScreen(results.authUrl);
+    navToPaymentScreen(results.authUrl, book: model);
   }
 
-  void navToPaymentScreen(String url) {
+  void navToPaymentScreen(String url, {DevotionalBookModel? book}) {
     if (url.isEmpty) return;
     navUtils.fireTarget(
       BaseWebView(
         model: WebModel(
           url: url,
           onDoneOnclick: () {
-            navUtils.fireTargetHome(
-              model: EventTrigger(
+            debugPrint("NAVIGATED BACK ---> $url");
+            navUtils.fireTargetHome();
+            if (url.isNotEmpty) {
+              currentEvent.value = EventTrigger(
                 bookType: BookType.purchasedBooks,
                 screen: 'Devotional',
-              ),
-            );
+                model: book,
+              );
+            } else {
+              currentEvent.value = null;
+            }
           },
         ),
       ),
@@ -131,5 +155,13 @@ class DevotionController extends BaseController {
 
   void onPurchasedBookOnClick(DevotionalBookModel book) {
     navUtils.fireTarget(PurchasedBookDetailsScreen(), model: book);
+  }
+
+  void onTabChanged(int value) {
+    if (value == 0) {
+      bookTypeFilter.value = BookType.availableBooks;
+    } else {
+      bookTypeFilter.value = BookType.purchasedBooks;
+    }
   }
 }

@@ -13,15 +13,14 @@ class DeleteAccountController extends BaseController {
   void onConfirmDeleteAccount(BuildContext context) {
     BottomSheetWidget(
       context: context,
-      height: appDimen.screenHeight * 0.45,
+      height: appDimen.screenHeight * 0.5,
       child: ConfirmTransactionLayout(
         title: "Confirm deletion of account",
         displayCancelButton: false,
         cancelAssetColor: Theme.of(context).colorScheme.surface,
-        buttonStyle: Theme.of(context)
-            .textTheme
-            .bodyMedium
-            ?.copyWith(color: Theme.of(context).colorScheme.surface),
+        buttonStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: Theme.of(context).colorScheme.surface,
+        ),
         titleStyle: Theme.of(context).textTheme.titleLarge,
         subTitle: "Are you sure you want to delete your account?",
         buttonTitle: 'Delete Account',
