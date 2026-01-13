@@ -134,8 +134,8 @@ class BaseWebView extends BaseScreenStatefulStandard {
       for (final section in model.sections!) {
         buffer.writeln("""
       <div class="section">
-        <div class="title" style="font-size: 18px;">${section.title}</div>
-        <div class="content" style="font-size: 16px;">${section.content}</div>
+        <div class="title" style="font-size: 20px;">${section.title}</div>
+        <div class="content" style="font-size: 18px;">${section.content}</div>
       </div>
       """);
       }
