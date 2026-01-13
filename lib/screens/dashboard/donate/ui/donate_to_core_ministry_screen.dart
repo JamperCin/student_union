@@ -41,11 +41,11 @@ class DonateToCoreMinistryScreen extends BaseSharedScreen {
           NetworkImageWidget(
             url: getModel().image,
             width: appDimen.screenWidth,
-            height: appDimen.screenHeight * 0.45,
+            height: appDimen.screenHeight * 0.35,
             fit: BoxFit.contain,
             placeHolderWidget: ContainerWidget(
               width: appDimen.screenWidth,
-              height: appDimen.screenHeight * 0.4,
+              height: appDimen.screenHeight * 0.35,
             ),
           ),
           Gap(40.dp()),

@@ -52,7 +52,7 @@ class BaseWebView extends BaseScreenStatefulStandard {
                 child: Text(
                   "Done",
                   style: textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.primary,
+                    color: colorScheme.tertiary,
                   ),
                 ),
               ),
@@ -133,10 +133,10 @@ class BaseWebView extends BaseScreenStatefulStandard {
     if (model.sections != null && model.sections!.isNotEmpty) {
       for (final section in model.sections!) {
         buffer.writeln("""
-        <div class="section">
-          <div class="title">${section.title}</div>
-          <div class="content">${section.content}</div>
-        </div>
+      <div class="section">
+        <div class="title" style="font-size: 18px;">${section.title}</div>
+        <div class="content" style="font-size: 16px;">${section.content}</div>
+      </div>
       """);
       }
     }

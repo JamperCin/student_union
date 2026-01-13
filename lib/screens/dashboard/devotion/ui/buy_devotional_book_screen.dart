@@ -41,7 +41,7 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
                     child: NetworkImageWidget(
                       url: getModel().thumbnail,
                       width: appDimen.screenWidth * 0.7,
-                      height: appDimen.screenHeight * 0.45,
+                      height: appDimen.screenHeight * 0.4,
                       fit: BoxFit.contain,
                       heroTag:
                           "${getModel().thumbnail}_${getModel().id}_${getModel().name}",
@@ -105,7 +105,7 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
               _controller.confirmPayment(context, getModel());
             },
           ),
-          Gap(30.dp()),
+          Gap(40.dp()),
         ],
       ),
     );

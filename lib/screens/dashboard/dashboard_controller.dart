@@ -17,14 +17,12 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
   }
 
   Future<void> checkForScreenUpdate() async {
-    final event = Get.arguments;
+    final event = currentEvent.value;
     if (event is EventTrigger) {
       await Future.delayed(const Duration(milliseconds: 180));
       onBottomMenuOnClick(BottomBarModel(text: event.screen));
     }
   }
-
-
 
   ///List of menu for the bottom navigation bar
   RxList<BottomBarModel> bottomBarMenuList = [
@@ -62,13 +60,10 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
   ].obs;
 
   void onBottomMenuOnClick(BottomBarModel model) {
-    for(BottomBarModel m in bottomBarMenuList){
-      
-    }
     var mod = bottomBarMenuList.firstWhere((e) => e.isSelected == true);
     if (mod == model) return;
 
-    bottomBarMenuList.value = bottomBarMenuList.value
+    bottomBarMenuList.value = bottomBarMenuList
         .map((e) => e.copyWith(isSelected: e.text == model.text))
         .toList();
 

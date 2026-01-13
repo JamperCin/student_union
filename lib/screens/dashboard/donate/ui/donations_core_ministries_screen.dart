@@ -1,6 +1,5 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
-import 'package:core_module/core_module.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core-ui/widgets/core_ministries_widget.dart';
 

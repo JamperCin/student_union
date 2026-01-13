@@ -25,17 +25,12 @@ class SuccessScreen extends BaseScreenStandard {
       child: Column(
         children: [
           Gap(appDimen.screenHeight * 0.15),
-          AssetImageWidget(
-            asset: icSuccess,
-            height: 220.dp(),
-            width: 250.dp(),
-          ),
+          AssetImageWidget(asset: icSuccess, height: 220.dp(), width: 250.dp()),
           Gap(50.dp()),
           Text(
             getModel().title,
             textAlign: TextAlign.center,
-            style:
-                textTheme.displayLarge?.copyWith(color: colorScheme.primary),
+            style: textTheme.displayLarge?.copyWith(color: colorScheme.primary),
           ),
           Gap(20.dp()),
           Text(
@@ -44,9 +39,11 @@ class SuccessScreen extends BaseScreenStandard {
             style: textTheme.bodySmall?.copyWith(color: colorScheme.primary),
           ),
           Gap(70.dp()),
-          ButtonWidget.withOutLine(
+          ButtonWidget(
             text: "DONE",
-            onTap: onTap ??
+            textColor: colorScheme.surface,
+            onTap:
+                onTap ??
                 () {
                   navUtils.fireTargetHome();
                 },
