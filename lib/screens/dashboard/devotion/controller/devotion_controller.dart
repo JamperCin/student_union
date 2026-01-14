@@ -57,12 +57,12 @@ class DevotionController extends BaseController {
         event.model is DevotionalBookModel) {
       debugPrint("EVENT TRIGGERED ${event.bookType} ---> ${event.model}");
       //Change tab after a short delay to allow for screen to load
-      await Future.delayed(const Duration(milliseconds: 180));
+      await Future.delayed(const Duration(seconds: 1));
       bookTypeFilter.value = event.bookType!;
       tabController?.index = event.bookType == BookType.availableBooks ? 0 : 1;
 
       //If a model is passed, open the purchased book details screen
-      await Future.delayed(const Duration(milliseconds: 180));
+      await Future.delayed(const Duration(seconds: 1));
       navUtils.fireBack();
       navUtils.fireTarget(PurchasedBookDetailsScreen(), model: event.model);
       currentEvent.value = null; //Reset event after use

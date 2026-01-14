@@ -26,6 +26,7 @@ _$DevotionalBookModelImpl _$$DevotionalBookModelImplFromJson(
   name: json['name'] as String? ?? "",
   author: json['author'] as String? ?? "",
   page: json['page'] as String? ?? "",
+  heroTag: json['heroTag'] as String? ?? "",
   currency: json['currency'] as String? ?? "GHS",
   price: json['price'] as String? ?? "0.00",
 );
@@ -46,6 +47,7 @@ Map<String, dynamic> _$$DevotionalBookModelImplToJson(
   'name': instance.name,
   'author': instance.author,
   'page': instance.page,
+  'heroTag': instance.heroTag,
   'currency': instance.currency,
   'price': instance.price,
 };

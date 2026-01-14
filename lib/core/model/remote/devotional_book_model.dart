@@ -26,6 +26,7 @@ class DevotionalBookModel extends BaseObject with _$DevotionalBookModel {
     @Default("") String name,
     @Default("") String author,
     @Default("") String page,
+    @Default("") String heroTag,
     @Default("GHS") String currency,
     @Default("0.00") String price,
   }) = _DevotionalBookModel;
