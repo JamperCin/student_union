@@ -37,6 +37,7 @@ mixin _$DevotionalBookModel {
   String get name => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
   String get page => throw _privateConstructorUsedError;
+  String get heroTag => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
   String get price => throw _privateConstructorUsedError;
 
@@ -71,6 +72,7 @@ abstract class $DevotionalBookModelCopyWith<$Res> {
     String name,
     String author,
     String page,
+    String heroTag,
     String currency,
     String price,
   });
@@ -107,6 +109,7 @@ class _$DevotionalBookModelCopyWithImpl<$Res, $Val extends DevotionalBookModel>
     Object? name = null,
     Object? author = null,
     Object? page = null,
+    Object? heroTag = null,
     Object? currency = null,
     Object? price = null,
   }) {
@@ -163,6 +166,10 @@ class _$DevotionalBookModelCopyWithImpl<$Res, $Val extends DevotionalBookModel>
             page: null == page
                 ? _value.page
                 : page // ignore: cast_nullable_to_non_nullable
+                      as String,
+            heroTag: null == heroTag
+                ? _value.heroTag
+                : heroTag // ignore: cast_nullable_to_non_nullable
                       as String,
             currency: null == currency
                 ? _value.currency
@@ -229,6 +236,7 @@ abstract class _$$DevotionalBookModelImplCopyWith<$Res>
     String name,
     String author,
     String page,
+    String heroTag,
     String currency,
     String price,
   });
@@ -266,6 +274,7 @@ class __$$DevotionalBookModelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? author = null,
     Object? page = null,
+    Object? heroTag = null,
     Object? currency = null,
     Object? price = null,
   }) {
@@ -323,6 +332,10 @@ class __$$DevotionalBookModelImplCopyWithImpl<$Res>
             ? _value.page
             : page // ignore: cast_nullable_to_non_nullable
                   as String,
+        heroTag: null == heroTag
+            ? _value.heroTag
+            : heroTag // ignore: cast_nullable_to_non_nullable
+                  as String,
         currency: null == currency
             ? _value.currency
             : currency // ignore: cast_nullable_to_non_nullable
@@ -353,6 +366,7 @@ class _$DevotionalBookModelImpl implements _DevotionalBookModel {
     this.name = "",
     this.author = "",
     this.page = "",
+    this.heroTag = "",
     this.currency = "GHS",
     this.price = "0.00",
   });
@@ -400,6 +414,9 @@ class _$DevotionalBookModelImpl implements _DevotionalBookModel {
   final String page;
   @override
   @JsonKey()
+  final String heroTag;
+  @override
+  @JsonKey()
   final String currency;
   @override
   @JsonKey()
@@ -407,7 +424,7 @@ class _$DevotionalBookModelImpl implements _DevotionalBookModel {
 
   @override
   String toString() {
-    return 'DevotionalBookModel(id: $id, year: $year, published: $published, purchased: $purchased, thumbnail: $thumbnail, devotionalType: $devotionalType, devotionalId: $devotionalId, devotion: $devotion, description: $description, title: $title, name: $name, author: $author, page: $page, currency: $currency, price: $price)';
+    return 'DevotionalBookModel(id: $id, year: $year, published: $published, purchased: $purchased, thumbnail: $thumbnail, devotionalType: $devotionalType, devotionalId: $devotionalId, devotion: $devotion, description: $description, title: $title, name: $name, author: $author, page: $page, heroTag: $heroTag, currency: $currency, price: $price)';
   }
 
   @override
@@ -435,6 +452,7 @@ class _$DevotionalBookModelImpl implements _DevotionalBookModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.author, author) || other.author == author) &&
             (identical(other.page, page) || other.page == page) &&
+            (identical(other.heroTag, heroTag) || other.heroTag == heroTag) &&
             (identical(other.currency, currency) ||
                 other.currency == currency) &&
             (identical(other.price, price) || other.price == price));
@@ -457,6 +475,7 @@ class _$DevotionalBookModelImpl implements _DevotionalBookModel {
     name,
     author,
     page,
+    heroTag,
     currency,
     price,
   );
@@ -493,6 +512,7 @@ abstract class _DevotionalBookModel implements DevotionalBookModel {
     final String name,
     final String author,
     final String page,
+    final String heroTag,
     final String currency,
     final String price,
   }) = _$DevotionalBookModelImpl;
@@ -529,6 +549,8 @@ abstract class _DevotionalBookModel implements DevotionalBookModel {
   String get author;
   @override
   String get page;
+  @override
+  String get heroTag;
   @override
   String get currency;
   @override

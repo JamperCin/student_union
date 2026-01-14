@@ -43,8 +43,7 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
                       width: appDimen.screenWidth * 0.7,
                       height: appDimen.screenHeight * 0.4,
                       fit: BoxFit.contain,
-                      heroTag:
-                          "${getModel().thumbnail}_${getModel().id}_${getModel().name}",
+                      heroTag: getModel().heroTag,
                       placeHolderWidget: ContainerWidget(
                         width: appDimen.screenWidth,
                         height: appDimen.screenHeight * 0.4,

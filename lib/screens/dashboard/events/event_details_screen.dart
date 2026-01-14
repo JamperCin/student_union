@@ -30,13 +30,13 @@ class EventDetailsScreen extends BaseSharedScreen {
           Text(event.name, style: textTheme.titleLarge),
           Gap(10.dp()),
           NetworkImageWidget(
-            height: appDimen.screenHeight * 0.3,
+            height: appDimen.screenHeight * 0.4,
             width: appDimen.screenWidth,
             url: event.image,
             fit: BoxFit.contain,
             heroTag: "${event.image}_${event.id}_${event.name}",
             placeHolderWidget: ContainerWidget(
-              height: appDimen.screenHeight * 0.3,
+              height: appDimen.screenHeight * 0.4,
               width: appDimen.screenWidth,
             ),
           ),

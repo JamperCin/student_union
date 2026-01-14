@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:core_module/core/def/global_def.dart';
+import 'package:core_module/core_module.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,7 @@ class FcmApi {
   ///Listen to foreground notifications
   Future<void> _registerListeners() async {
     //on Foreground
-    FirebaseMessaging.onMessage.listen(_handleForeground);
+    FirebaseMessaging.onMessage.listen(handleFcmMessage);
 
     //When user clicks on Notification to open app
     FirebaseMessaging.onMessageOpenedApp.listen(_handleOnNotificationOnClick);
@@ -83,18 +84,15 @@ class FcmApi {
 
   /// Handle foreground messages
   /// This is called when the app is in the foreground and a notification is received
-  Future<void> _handleForeground(RemoteMessage msg) async {
-    debugPrint(
-      "Foreground Running ====>> ${msg.notification?.toMap().toString()}",
-    );
-    notificationApi.showNotification(
-      id: 1,
-      title: msg.notification?.title,
-      body: msg.notification?.body,
-      payload: msg.data,
-    );
-    handleFcmMessage(msg);
-  }
+  // Future<void> _handleForeground(RemoteMessage msg) async {
+  //   notificationApi.showNotification(
+  //     id: 1,
+  //     title: msg.notification?.title,
+  //     body: msg.notification?.body,
+  //     payload: msg.data,
+  //   );
+  //   // handleFcmMessage(msg);
+  // }
 
   /// Handle notification click
   /// This is called when the user clicks on a notification and the app is opened from a terminated state
@@ -104,16 +102,28 @@ class FcmApi {
     if (initMess != null) {
       msg = initMess;
     }
-    navUtils.fireTarget(NotificationsScreen());
+    Get.to(() => NotificationsScreen(), preventDuplicates: true);
   }
 
   ///Handle all notifications at one central place
-  Future<void> handleFcmMessage(RemoteMessage msg) async {
+  Future<void> handleFcmMessage(
+    RemoteMessage msg, {
+    bool isForeground = true,
+  }) async {
     notificationCount.value = notificationCount.value + 1;
     appPreference.setNotificationCount(notificationCount.value);
 
-    Map<String, dynamic> data = msg.data;
-    debugPrint("Data ====>> ${data.toString()}");
+    if (isForeground) {
+      notificationApi.showNotification(
+        id: 1,
+        title: msg.notification?.title,
+        body: msg.notification?.body,
+        payload: msg.data,
+      );
+    }
+
+    //Map<String, dynamic> data = msg.data;
+    //debugPrint("Data ====>> ${data.toString()}");
 
     // String type = data.containsKey('payment_type') ? data['payment_type'] : '';
     // String status = data.containsKey('status') ? data['status'] : '';
@@ -129,8 +139,6 @@ class FcmApi {
     //     break;
 
     // }
-
-    navUtils.fireTarget(NotificationsScreen());
   }
 
   Future<void> handleNotificationInStack() async {

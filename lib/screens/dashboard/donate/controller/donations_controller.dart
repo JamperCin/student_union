@@ -13,6 +13,26 @@ import '../ui/donate_to_core_ministry_screen.dart';
 class DonationsController extends BaseController {
   TextEditingController amountTxt = TextEditingController();
 
+  @override
+  void onInit() {
+    super.onInit();
+    checkForScreenUpdate();
+  }
+
+  Future<void> checkForScreenUpdate() async {
+    final event = currentEvent.value;
+
+    if (event is EventTrigger && event.model is CampaignModel) {
+      debugPrint("EVENT TRIGGERED ---> ${event.model}");
+      //Change tab after a short delay to allow for screen to load
+      await Future.delayed(const Duration(seconds: 1));
+
+      navUtils.fireBack();
+      onViewDonationHistory();
+      currentEvent.value = null; //Reset event after use
+    }
+  }
+
   //Onclick listener when a donation is clicked
   void onDonationOnClick(CampaignModel model) {
     navUtils.fireTarget(DonateToCoreMinistryScreen(), model: model);
@@ -22,7 +42,7 @@ class DonationsController extends BaseController {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    if(amountTxt.text.isEmpty || amountTxt.text.toDouble() < 1){
+    if (amountTxt.text.isEmpty || amountTxt.text.toDouble() < 1) {
       SnackBarSnippet().snackBarError("Please enter a valid amount");
       return;
     }
@@ -89,11 +109,11 @@ class DonationsController extends BaseController {
 
     const LoaderWidget().showProgressIndicator(context: context);
     final results = await paymentApiService.makePaymentOfBook(param);
-    navToPaymentScreen(results.authUrl);
+    navToPaymentScreen(results.authUrl, campaign: model);
     const LoaderWidget().hideProgress();
   }
 
-  void navToPaymentScreen(String url) {
+  void navToPaymentScreen(String url, {CampaignModel? campaign}) {
     if (url.isEmpty) return;
 
     navUtils.fireTarget(
@@ -102,6 +122,14 @@ class DonationsController extends BaseController {
           url: url,
           onDoneOnclick: () {
             navUtils.fireTargetHome();
+            if (url.isNotEmpty) {
+              currentEvent.value = EventTrigger(
+                screen: 'Donation',
+                model: campaign,
+              );
+            } else {
+              currentEvent.value = null;
+            }
           },
         ),
       ),

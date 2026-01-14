@@ -29,7 +29,7 @@ Future<void> firebaseBackgroundMessageHandler(RemoteMessage msg) async {
   await FcmApi()
       .initializeFirebase(); // Initialize Firebase if not already initialized
 
-  FcmApi().handleFcmMessage(msg);
+  FcmApi().handleFcmMessage(msg, isForeground: false);
   // Perform background tasks based on the message data
 }
 

@@ -9,8 +9,7 @@ class NotificationApi {
   static NotificationApi? _instance;
   final _notifications = FlutterLocalNotificationsPlugin();
   final _fileUtils = FileUtils();
-  final iconUrl = "https://primeegiftfiles.s3.us-east-2.amazonaws.com/prime-merchants-categories-logo/prime.png";
-
+ 
   NotificationApi._() {
     _initialize();
   }
@@ -41,13 +40,15 @@ class NotificationApi {
   Future<void> _initialize() async {
     bool? isPermissionAccepted = await _notifications
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.requestNotificationsPermission();
 
-    if(Platform.isIOS) {
-      final iosPlugin =
-      _notifications.resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin>();
+    if (Platform.isIOS) {
+      final iosPlugin = _notifications
+          .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin
+          >();
 
       isPermissionAccepted = await iosPlugin?.requestPermissions(
         alert: true,
@@ -55,7 +56,6 @@ class NotificationApi {
         sound: true,
       );
     }
-
 
     if (isPermissionAccepted == null || isPermissionAccepted == false) {
       return;
@@ -81,12 +81,7 @@ class NotificationApi {
     );
   }
 
-  // static void onDidReceiveLocalNotification(
-  //     int id, String? title, String? body, String? payload) async {
-  //   debugPrint("Running ====>> ${payload}");
-  // }
-
-   void _onDidReceiveNotificationResponse(NotificationResponse payload) {
+  void _onDidReceiveNotificationResponse(NotificationResponse payload) {
     debugPrint("Running ====>> ${payload.payload}");
     //_onNotificationClickHandler.add(payload.payload);
   }
@@ -127,7 +122,6 @@ class NotificationApi {
     dynamic payload,
     String? largePicture, //= AppStrings.PRIME_ICON,
   }) async {
-    debugPrint("Running ====>> ${title}");
     return await _notifications.show(
       id,
       title,
