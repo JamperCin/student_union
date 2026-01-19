@@ -80,6 +80,9 @@ jobs:
           bundle update CFPropertyList
           bundle install
 
+      - name: Make Gradlew Executable
+        run: chmod +x android/gradlew
+
       # 4. Run Fastlane
       # We skip 'flutter build' because Fastlane's 'gradle' action will build the AAB
       - name: Run Fastlane Release
