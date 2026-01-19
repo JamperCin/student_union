@@ -23,8 +23,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          #flutter-version: 3.32.8
-
+        
       - name: Cache Flutter packages
         uses: actions/cache@v3
         with:
@@ -33,7 +32,6 @@ jobs:
             .packages
             pubspec.lock
           key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-
 
       - run: flutter --version
 
@@ -73,7 +71,15 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: false
+          bundler-cache: true
+          working-directory: android
+
+      # [NEW STEP] Ensure gems are installed
+      - name: Install Bundler dependencies
+        working-directory: android
+        run: |
+          gem install bundler
+          bundle install
 
       # 4. Run Fastlane
       # We skip 'flutter build' because Fastlane's 'gradle' action will build the AAB
@@ -135,8 +141,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          #flutter-version: 3.32.8
-
+         
       - name: Clean flutter
         run: flutter clean
         
@@ -155,7 +160,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: false
+          bundler-cache: true
           working-directory: ios
 
       - name: Install dependencies
