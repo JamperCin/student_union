@@ -228,6 +228,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  CFPropertyList
   fastlane
 
 BUNDLED WITH

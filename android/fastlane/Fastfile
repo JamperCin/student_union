@@ -48,22 +48,35 @@ default_platform(:android)
 platform :android do
   desc "Build and upload a new Android version to the internal track"
   lane :internal_release do
+    credentials = ENV['GPLAY_JSON_DATA']
     
-    # 1. Get the latest VERSION NAME
-    # Removed package_name here (pulled from Appfile)
-    names = google_play_track_release_names(
-      track: 'alpha',
-      json_key_data: ENV['GPLAY_JSON_DATA']
-    )
+     # 1. Safely fetch Version Names
+    names = []
+    begin
+      names = google_play_track_release_names(
+        track: 'alpha',
+        json_key_data: credentials
+      )
+    rescue => e
+      puts "Notice: Could not fetch release names (Track might be empty): #{e}"
+    end
     play_store_version_name = names.first || "1.0.0"
     
-    # 2. Get the latest VERSION CODE
-    # Removed package_name here (pulled from Appfile)
-    codes = google_play_track_version_codes(
-      track: 'alpha',
-      json_key_data: ENV['GPLAY_JSON_DATA'] # Added missing json_key_data here
-    )
-    new_version_code = (codes.max || 0) + 1
+    # 2. Safely fetch Version Codes (Fix for the 'flat_map' error)
+    codes = []
+    begin
+      codes = google_play_track_version_codes(
+        track: 'alpha',
+        json_key_data: credentials
+      )
+    rescue => e
+      # This catches the nil:NilClass error when the track is empty
+      puts "Notice: Track 'alpha' is empty. Starting from version code 1."
+      codes = [0] 
+    end
+    
+    # Ensure codes is an array even if the action returns nil unexpectedly
+    new_version_code = ((codes || [0]).max || 0) + 1
 
     # 3. Increment the Version Name
     new_version_name = increment_version_name(play_store_version_name)
@@ -75,6 +88,7 @@ platform :android do
     gradle(
       task: 'clean bundle',
       build_type: 'Release',
+      gradle_path: './gradlew', # Explicitly point to the local wrapper
       properties: {
         "android.injected.version.name" => new_version_name,
         "android.injected.version.code" => new_version_code
@@ -87,7 +101,7 @@ platform :android do
       track: "alpha",
       aab: "../build/app/outputs/bundle/release/app-release.aab", # Verified path for Flutter
       release_status: "completed",
-      json_key_data: ENV['GPLAY_JSON_DATA']
+      json_key_data: credentials
     )
   end
 end
