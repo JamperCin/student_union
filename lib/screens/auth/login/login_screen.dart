@@ -99,16 +99,16 @@ class LoginScreen extends BaseScreenDecorated {
             backgroundColor: colorScheme.tertiary,
           ),
           SizedBox(height: appDimen.dimen(20)),
-          // Align(
-          //   alignment: Alignment.centerRight,
-          //   child: TextButtonWidget.withTextOnly(
-          //     text: 'Forgot Password',
-          //     style: textTheme.bodyMedium?.copyWith(
-          //       color: colorScheme.tertiary,
-          //     ),
-          //     onTap: _controller.onForgotPasswordClicked,
-          //   ),
-          // ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButtonWidget.withTextOnly(
+              text: 'Forgot Password',
+              style: textTheme.bodyMedium?.copyWith(
+                color: colorScheme.tertiary,
+              ),
+              onTap: _controller.onForgotPasswordClicked,
+            ),
+          ),
           SizedBox(height: appDimen.dimen(40)),
           ButtonWidget(
             backgroundColor: colorScheme.secondary,

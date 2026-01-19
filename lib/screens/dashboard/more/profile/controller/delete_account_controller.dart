@@ -58,6 +58,10 @@ class DeleteAccountController extends BaseController {
         SuccessScreen(onTap: () => navUtils.fireTargetOff(LoginScreen())),
         model: model,
       );
+    } else {
+      snackBarSnippet.snackBarError(
+        results.error ?? 'Account deletion failed. Please try again.',
+      );
     }
   }
 }

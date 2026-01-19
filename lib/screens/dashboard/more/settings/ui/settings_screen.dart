@@ -26,17 +26,16 @@ class SettingsScreen extends BaseSharedScreen {
       padding: EdgeInsets.symmetric(vertical: 10.dp(), horizontal: 10.dp()),
       child: Column(
         children: [
-          //TODO implement change password functionality
-          // SimpleCardItem(
-          //   title: "Change Password",
-          //   prefixAsset: icChangePassword,
-          //   prefixAssetHeight: prefixSize,
-          //   elevation: elevation,
-          //   onTap: (v) {
-          //     _controller.onChangePasswordOnClick();
-          //   },
-          // ),
-          // Gap(10.dp()),
+          SimpleCardItem(
+            title: "Change Password",
+            prefixAsset: icChangePassword,
+            prefixAssetHeight: prefixSize,
+            elevation: elevation,
+            onTap: (v) {
+              _controller.onChangePasswordOnClick();
+            },
+          ),
+          Gap(10.dp()),
           Obx(
             () => SimpleCardItem(
               title: Get.find<ThemeController>().isDark.value

@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
+import 'package:student_union/core/model/local/success_model.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
-import 'package:student_union/screens/dashboard/main_dashboard_screen.dart';
+import 'package:student_union/screens/shared/success_screen.dart';
 
 class SignUpController extends BaseController {
   RxString profilePic =
@@ -26,7 +27,7 @@ class SignUpController extends BaseController {
 
   //Go to the Login Screen
   void onPrivacyPolicyOnClick() {
-   navUtils.fireTarget(
+    navUtils.fireTarget(
       BaseWebView(
         model: WebModel(
           url: "https://sughana.org/privacy/",
@@ -42,10 +43,15 @@ class SignUpController extends BaseController {
 
   ///OnClick listener to the sigUn Button
   Future<void> onSignUpOnClick(BuildContext context) async {
-    if (validationUtils.validateDataEntry(fullNameCtrl,
-            err: 'Full name required') &&
+    if (validationUtils.validateDataEntry(
+          fullNameCtrl,
+          err: 'Full name required',
+        ) &&
         validationUtils.validateEntryEmail(emailTxtCtrl) &&
-        validationUtils.validateDataEntry(passwordTxtCtrl, err: 'Password required')) {
+        validationUtils.validateDataEntry(
+          passwordTxtCtrl,
+          err: 'Password required',
+        )) {
       if (!isTermsAndCondChecked) {
         snackBarSnippet.snackBarError("Please accept the Terms and Conditions");
         return;
@@ -70,10 +76,30 @@ class SignUpController extends BaseController {
     if (response != null && response.token != null) {
       appPreference.setToken(response.token!);
       appPreference.setUser(response.user);
-      navUtils.fireTargetOff(MainDashboardScreen());
-    }else{
-      snackBarSnippet.snackBarError(response?.errors?.first ?? "Sorry, something went wrong. Kindly try again");
+      //Navigate to Success Screen and then to Login Screen
+      onSuccessSignUp();
+    } else {
+      snackBarSnippet.snackBarError(
+        response?.errors?.first ??
+            "Sorry, something went wrong. Kindly try again",
+      );
     }
+  }
+
+  //User needs to verify email before logging in
+  void onSuccessSignUp() {
+    navUtils.fireTargetOff(
+      SuccessScreen(
+        onTap: () {
+          navUtils.fireTargetOff(LoginScreen());
+        },
+      ),
+      model: SuccessModel(
+        title: "Account Created Successfully!",
+        message:
+            "Your account has been successfully created. Kindly check your email to verify your account before logging in.",
+      ),
+    );
   }
 
   void onPickProfilePic() {}
@@ -83,4 +109,3 @@ class SignUpController extends BaseController {
     // navUtils.fireTarget(OtpVerificationScreen());
   }
 }
-
