@@ -23,7 +23,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.32.8
+          #flutter-version: 3.32.8
 
       - name: Cache Flutter packages
         uses: actions/cache@v3
@@ -50,23 +50,50 @@ jobs:
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/su-keystore.jks
 
-      - name: Build Android APK
-        run: flutter build apk --release
+      #- name: Build Android APK
+      #  run: flutter build apk --release
 
-      - name: Upload Android APK
-        uses: actions/upload-artifact@v4
+      #- name: Upload Android APK
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: android-apk
+      #    path: build/app/outputs/flutter-apk/app-release.apk
+
+      #- name: Build Android App Bundle
+      #  run: flutter build appbundle --release
+
+      #- name: Upload Android App Bundle
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: app-bundle
+      #    path: build/app/outputs/bundle/release/app-release.aab
+
+      #Instal Ruby first before fastlane
+      - name: Set up Ruby 3.2
+        uses: ruby/setup-ruby@v1
         with:
-          name: android-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          ruby-version: '3.2'
+          bundler-cache: false
 
-      - name: Build Android App Bundle
-        run: flutter build appbundle --release
+      # 4. Run Fastlane
+      # We skip 'flutter build' because Fastlane's 'gradle' action will build the AAB
+      - name: Run Fastlane Release
+        working-directory: android
+        env:
+          GPLAY_JSON_DATA: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
+          ANDROID_KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: bundle exec fastlane internal_release
 
-      - name: Upload Android App Bundle
+      # 5. Upload the generated AAB as an artifact (Optional)
+      - name: Upload App Bundle
         uses: actions/upload-artifact@v4
         with:
           name: app-bundle
           path: build/app/outputs/bundle/release/app-release.aab
+
+ #-------------------------------------------------------------------------------------------------         
 
   ios:
     runs-on: macos-latest
@@ -74,6 +101,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Select latest Xcode
+        run: |
+          ls /Applications | grep Xcode
+          sudo xcode-select -s /Applications/Xcode.app
+          xcodebuild -version
+
 
         # --- Caching for faster builds and preventing timeouts ---
       - name: Cache CocoaPods dependencies
@@ -101,7 +135,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.32.8
+          #flutter-version: 3.32.8
 
       - name: Clean flutter
         run: flutter clean
@@ -112,30 +146,22 @@ jobs:
   # ---- CocoaPods ----
       - name: Install CocoaPods and install Pod dependencies
         run: |
-          sudo gem install cocoapods
           cd ios
           pod install --repo-update
 
-      - name: List Xcode versions
-        run: xcodebuild -version
-
-
-    # Set up Xcode environment
-      #- name: Set up Xcode
-       # run: sudo xcode-select -s /Applications/Xcode.app
 
 #Instal Ruby first before fastlane
-      - name: Set up Ruby 3.1
+      - name: Set up Ruby 3.2
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1'
+          ruby-version: '3.2'
           bundler-cache: false
 
       - name: Install dependencies
         run: |
           cd ios
-            bundle config set --local path 'vendor/bundle'
-            bundle install
+          bundle config set --local path 'vendor/bundle'
+          bundle install
 
 
  # ---- Install Fastlane ----

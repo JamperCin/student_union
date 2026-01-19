@@ -97,7 +97,7 @@ class SignUpController extends BaseController {
       model: SuccessModel(
         title: "Account Created Successfully!",
         message:
-            "Your account has been successfully created. Kindly check your email to verify your account before logging in.",
+            "Your account has been successfully created. Please check your inbox or spam folder to verify your email before logging in.",
       ),
     );
   }
