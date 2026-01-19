@@ -71,7 +71,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true
+          bundler-cache: false
           working-directory: android
 
       # [NEW STEP] Ensure gems are installed
@@ -161,7 +161,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true
+          bundler-cache: false
           working-directory: ios
 
       - name: Install dependencies
