@@ -18,8 +18,17 @@
 
 
 def increment_version_name(version)
-  major, minor, patch = version.split(".").map(&:to_i)
+  # Extract version from format '20 (1.2.0)' using regex
+  # This looks for digits separated by dots inside parentheses
+  match = version.match(/\(([\d.]+)\)/)
+  
+  # Use the extracted part, or the original if no parentheses found
+  version_to_parse = match ? match[1] : version
 
+  # Split into integers
+  major, minor, patch = version_to_parse.split(".").map(&:to_i)
+
+  # Logic for 2026: typical semantic versioning increments
   if patch < 9
     patch += 1
   else
