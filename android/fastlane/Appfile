@@ -1,0 +1,12 @@
+#json_key_file("/Users/aninamankwah/Documents/Projects/Flutter/su-ios-certificates/android/scriptureunion-467679bd7a33.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+#We no longer need the above since we are using the json file from GitHub Secrets 
+
+package_name("com.kodeit.scriptureunion") # e.g. com.krausefx.app
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+# For a list of all available actions, check out
+#     https://docs.fastlane.tools/actions
+# For a list of all available plugins, check out
+#     https://docs.fastlane.tools/plugins/available-plugins
