@@ -42,6 +42,9 @@ end
 #-----------------------------------------------------------------------------------------
 # Android lane for internal release
 #-----------------------------------------------------------------------------------------
+
+default_platform(:android)
+
 platform :android do
   desc "Build and upload a new Android version to the internal track"
   lane :internal_release do
