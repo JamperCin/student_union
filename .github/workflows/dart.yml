@@ -23,7 +23,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.32.8
+          #flutter-version: 3.32.8
 
       - name: Cache Flutter packages
         uses: actions/cache@v3
@@ -75,6 +75,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Select latest Xcode
+        run: |
+          ls /Applications | grep Xcode
+          sudo xcode-select -s /Applications/Xcode.app
+          xcodebuild -version
+
+
         # --- Caching for faster builds and preventing timeouts ---
       - name: Cache CocoaPods dependencies
         uses: actions/cache@v4
@@ -101,7 +108,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.32.8
+          #flutter-version: 3.32.8
 
       - name: Clean flutter
         run: flutter clean
@@ -112,17 +119,9 @@ jobs:
   # ---- CocoaPods ----
       - name: Install CocoaPods and install Pod dependencies
         run: |
-          sudo gem install cocoapods
           cd ios
           pod install --repo-update
 
-      - name: List Xcode versions
-        run: xcodebuild -version
-
-
-    # Set up Xcode environment
-      #- name: Set up Xcode
-       # run: sudo xcode-select -s /Applications/Xcode.app
 
 #Instal Ruby first before fastlane
       - name: Set up Ruby 3.1
@@ -134,8 +133,8 @@ jobs:
       - name: Install dependencies
         run: |
           cd ios
-            bundle config set --local path 'vendor/bundle'
-            bundle install
+          bundle config set --local path 'vendor/bundle'
+          bundle install
 
 
  # ---- Install Fastlane ----
