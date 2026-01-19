@@ -156,11 +156,14 @@ jobs:
         with:
           ruby-version: '3.2'
           bundler-cache: false
+          working-directory: ios
 
       - name: Install dependencies
+        working-directory: ios
         run: |
-          cd ios
-          bundle config set --local path 'vendor/bundle'
+          #cd ios
+          #bundle config set --local path 'vendor/bundle'
+          bundle update CFPropertyList
           bundle install
 
 
