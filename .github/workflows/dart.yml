@@ -75,11 +75,11 @@ jobs:
           working-directory: android
 
       # [NEW STEP] Ensure gems are installed
-      - name: Install Bundler dependencies
-        working-directory: android
-        run: |
-          gem install bundler
-          bundle install
+      # - name: Install Bundler dependencies
+      #   working-directory: android
+      #   run: |
+      #     gem install bundler
+      #     bundle install
 
       # 4. Run Fastlane
       # We skip 'flutter build' because Fastlane's 'gradle' action will build the AAB
@@ -163,13 +163,13 @@ jobs:
           bundler-cache: true
           working-directory: ios
 
-      - name: Install dependencies
-        working-directory: ios
-        run: |
-          #cd ios
-          #bundle config set --local path 'vendor/bundle'
-          bundle update CFPropertyList
-          bundle install
+      # - name: Install dependencies
+      #   working-directory: ios
+      #   run: |
+      #     #cd ios
+      #     #bundle config set --local path 'vendor/bundle'
+      #     bundle update CFPropertyList
+      #     bundle install
 
 
  # ---- Install Fastlane ----
