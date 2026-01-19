@@ -1,0 +1,101 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Dart
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+        
+      - name: Cache Flutter packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            .packages
+            pubspec.lock
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+
+      - run: flutter --version
+
+      - name: Clean flutter
+        run: flutter clean
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/su-keystore.jks
+
+      #- name: Build Android APK
+      #  run: flutter build apk --release
+
+      #- name: Upload Android APK
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: android-apk
+      #    path: build/app/outputs/flutter-apk/app-release.apk
+
+      #- name: Build Android App Bundle
+      #  run: flutter build appbundle --release
+
+      #- name: Upload Android App Bundle
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: app-bundle
+      #    path: build/app/outputs/bundle/release/app-release.aab
+
+      #Instal Ruby first before fastlane
+      - name: Set up Ruby 3.2
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: false
+          working-directory: android
+
+      # [NEW STEP] Ensure gems are installed
+      - name: Install Bundler dependencies
+        working-directory: android
+        run: |
+          gem install bundler
+          bundle update CFPropertyList
+          bundle install
+
+      # 4. Run Fastlane
+      # We skip 'flutter build' because Fastlane's 'gradle' action will build the AAB
+      - name: Run Fastlane Release
+        working-directory: android
+        env:
+          GPLAY_JSON_DATA: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
+          ANDROID_KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: bundle exec fastlane internal_release
+
+      # 5. Upload the generated AAB as an artifact (Optional)
+      - name: Upload App Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-bundle
+          path: build/app/outputs/bundle/release/app-release.aab
+
+ #-------------------------------------------------------------------------------------------------         
