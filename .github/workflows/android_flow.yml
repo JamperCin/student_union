@@ -80,6 +80,10 @@ jobs:
           bundle update CFPropertyList
           bundle install
 
+      - name: Prepare Android config
+        # This generates GeneratedPluginRegistrant.java with all dependencies
+        run: flutter build apk --config-only --release
+
       - name: Make Gradlew Executable
         run: chmod +x android/gradlew
 
