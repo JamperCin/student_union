@@ -1,7 +1,5 @@
-import 'package:core_module/core/model/remote/base_response_model.dart';
-import 'package:core_module/core/services/base_api_service.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import 'package:core_module/core_module.dart';
+
 import 'package:student_union/core/model/remote/customer_model.dart';
 import 'package:student_union/core/services/user/user_api_interface.dart';
 
@@ -17,23 +15,26 @@ class UserApiService extends BaseApiService implements UserApiInterface {
 
   @override
   Future<CustomerModel> fetchUserDetails() async {
-    final results = await _apiService?.getRequest<CustomerModel>(
+    final results =
+        await _apiService?.getRequest<CustomerModel>(
           api: 'customer/v1/profile?',
-          print: true,
-          parser: (json) => json.containsKey('errors') && json['errors'] == "Unauthorized User Access" ? const CustomerModel(status: "401") : CustomerModel.fromJson(json),
+          parser: (json) =>
+              json.containsKey('errors') &&
+                  json['errors'] == "Unauthorized User Access"
+              ? const CustomerModel(status: "401")
+              : CustomerModel.fromJson(json),
         ) ??
         const CustomerModel();
 
-    debugPrint("Results here ==> ${results.toJson()}");
     return results;
   }
 
   @override
   Future<CustomerModel> updateUserDetails(Map<String, Object> params) async {
-    final results = await _apiService?.putRequest<CustomerModel>(
+    final results =
+        await _apiService?.putRequest<CustomerModel>(
           api: 'customer/v1/profile?',
           param: params,
-          showToast: true,
           parser: (json) => CustomerModel.fromJson(json),
         ) ??
         const CustomerModel();
@@ -43,38 +44,58 @@ class UserApiService extends BaseApiService implements UserApiInterface {
 
   @override
   Future<BaseResponseModel> deleteUserDetails() async {
-    final results = await _apiService?.deleteRequest<BaseResponseModel>(
+    final results =
+        await _apiService?.deleteRequest<BaseResponseModel>(
           api: 'customer/v1/profile?',
-          showToast: true,
-          parser: (json) => const BaseResponseModel(success: true),
+          parser: (json) => handleBaseResponse(json),
         ) ??
         const BaseResponseModel();
 
     return results;
   }
+
 
   @override
   Future<BaseResponseModel> sendResetPasswordLink(
-      Map<String, Object> params) async {
-    final results = await _apiService?.postRequest<BaseResponseModel>(
-          api: 'customer/v1/password/reset',
+    Map<String, Object> params,
+  ) async {
+    final results =
+        await _apiService?.postRequest<BaseResponseModel>(
+          api: 'customer/v1/password/forgot',
           param: params,
-          parser: (json) => BaseResponseModel.fromJson(json),
+          parser: (json) => handleBaseResponse(json),
         ) ??
         const BaseResponseModel();
 
     return results;
   }
 
-  @override
-  Future<BaseResponseModel> verifyOtpCode(Map<String, Object> params) async {
-    final results = await _apiService?.postRequest<BaseResponseModel>(
-          api: 'customer/v1/verify/code',
-          param: params,
-          parser: (json) => BaseResponseModel.fromJson(json),
-        ) ??
-        const BaseResponseModel();
 
-    return results;
+
+  //Handle BaseResponse well tracking or forms orf errors depending on keys of BaseResponse
+  BaseResponseModel handleBaseResponse(Map<String, dynamic> json) {
+    if (json.containsKey('errors') && json['errors'] is List<dynamic>) {
+      return BaseResponseModel(
+        success: false,
+        error: (json['errors'] as List<dynamic>).first.toString(),
+      );
+    } else if (json.containsKey('error') && json['error'] is String) {
+      return BaseResponseModel(success: false, error: json['error'] as String);
+    } else if (json.containsKey('errorMsg') && json['errorMsg'] is String) {
+      return BaseResponseModel(
+        success: false,
+        errorMsg: json['errorMsg'] as String,
+      );
+    } else if (json.containsKey('message') &&
+        json['message'] is String &&
+        json.containsKey('success') &&
+        json['success'] == false) {
+      return BaseResponseModel(
+        success: false,
+        data: {'message': json['message'] as String},
+      );
+    } else {
+      return BaseResponseModel(success: true, data: json);
+    }
   }
 }

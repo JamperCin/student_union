@@ -8,5 +8,6 @@ abstract class UserApiInterface{
   Future<CustomerModel> updateUserDetails(Map<String, Object> params);
   Future<BaseResponseModel> deleteUserDetails();
   Future<BaseResponseModel> sendResetPasswordLink(Map<String, Object> params);
-  Future<BaseResponseModel> verifyOtpCode(Map<String, Object> params);
+  // Future<BaseResponseModel> forgotPassword(Map<String, Object> params);
+  // Future<BaseResponseModel> verifyOtpCode(Map<String, Object> params);
 }
