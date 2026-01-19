@@ -3,6 +3,9 @@ apple_id("appiahmarkkusi@gmail.com") # Your Apple Developer Portal username
 team_id("4ULV23UL8T") # Your Apple Developer Portal Team ID
 itc_team_id("128144334") # Your App Store Connect Team ID
 
+#Setup for android
+#json_key_file("/Users/aninamankwah/Documents/Projects/Flutter/su-ios-certificates/android/scriptureunion-467679bd7a33.json")
+package_name("com.kodeit.scriptureunion") # The package name of your app
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile
