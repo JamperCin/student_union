@@ -90,6 +90,8 @@ platform :android do
     # 3. Increment the Version Name
     new_version_name = increment_version_name(play_store_version_name)
 
+    puts("Current Version: #{play_store_version_name}")
+
     puts("New Version Name: #{new_version_name}")
     puts("New Version Code: #{new_version_code}")
 

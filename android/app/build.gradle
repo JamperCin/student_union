@@ -38,8 +38,15 @@ android {
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24
         targetSdk = 35
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        //versionCode = flutter.versionCode
+        //versionName = flutter.versionName
+        // Check if property was injected, otherwise use default
+        versionCode = project.hasProperty('android.injected.version.code') ? 
+                    project.property('android.injected.version.code').toInteger() : flutter.versionCode
+                    
+        versionName = project.hasProperty('android.injected.version.name') ? 
+                    project.property('android.injected.version.name') : flutter.versionName
+
     }
 
     signingConfigs {
