@@ -34,3 +34,20 @@ class EventTrigger {
 
   EventTrigger({this.bookType, required this.screen, this.model});
 }
+
+String decodeErrorMessage(
+  String error, {
+  String defaultMsg = "Sorry, something went wrong. Kindly try again",
+}) {
+  if (error.contains("EMAIL_EXISTS")) {
+    return "The email address is already in use by another account.";
+  } else if (error.contains("INVALID_LOGIN_CREDENTIALS")) {
+    return "The email or password provided is incorrect. Please try again.";
+  } else if (error.contains("USER_DISABLED")) {
+    return "The user account has been disabled by an administrator. Please contact support for assistance.";
+  } else if (error.contains("EMAIL_NOT_FOUND")) {
+    return "There is no user record corresponding to this identifier. The user may have been deleted.";
+  } else {
+    return defaultMsg;
+  }
+}

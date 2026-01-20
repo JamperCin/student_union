@@ -15,9 +15,9 @@ class SignUpResponse extends BaseObject with _$SignUpResponse {
     @JsonKey(name: 'user') CustomerModel? user,
     @JsonKey(name: 'status') String? status,
     @JsonKey(name: 'errors') List<String>? errors,
+    @JsonKey(name: 'error') String? error,
   }) = _SignUpResponse;
 
-  factory SignUpResponse.fromJson(Map<String, Object?> json) => _$SignUpResponseFromJson(json);
+  factory SignUpResponse.fromJson(Map<String, Object?> json) =>
+      _$SignUpResponseFromJson(json);
 }
-
-

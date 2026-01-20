@@ -16,6 +16,7 @@ _$SignUpResponseImpl _$$SignUpResponseImplFromJson(Map<String, dynamic> json) =>
       errors: (json['errors'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      error: json['error'] as String?,
     );
 
 Map<String, dynamic> _$$SignUpResponseImplToJson(
@@ -25,4 +26,5 @@ Map<String, dynamic> _$$SignUpResponseImplToJson(
   'user': instance.user,
   'status': instance.status,
   'errors': instance.errors,
+  'error': instance.error,
 };

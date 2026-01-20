@@ -127,6 +127,22 @@ class SignUpScreen extends BaseScreenDecorated {
             prefixAsset: icPasswordInput,
           ),
           SizedBox(height: appDimen.dimen(1)),
+          TextFieldWidget.withPassword(
+            labelText: 'Confirm Password',
+            hintText: '********',
+            hintStyle: textTheme.bodySmall?.copyWith(
+              color: colorScheme.outline,
+            ),
+            style: textTheme.bodySmall?.copyWith(color: darkColor),
+            controller: _controller.confirmPasswordTxtCtrl,
+            focusColor: colorScheme.tertiary,
+            backgroundColor: colorScheme.tertiary,
+            labelStyle: textTheme.labelSmall?.copyWith(
+              color: colorScheme.tertiary,
+            ),
+            prefixAsset: icPasswordInput,
+          ),
+          SizedBox(height: appDimen.dimen(1)),
           CheckboxWidget(
             unCheckedValue: colorScheme.tertiary,
             scaleSize: 1.5,
