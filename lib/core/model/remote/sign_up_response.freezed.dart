@@ -29,6 +29,8 @@ mixin _$SignUpResponse {
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'errors')
   List<String>? get errors => throw _privateConstructorUsedError;
+  @JsonKey(name: 'error')
+  String? get error => throw _privateConstructorUsedError;
 
   /// Serializes this SignUpResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,6 +54,7 @@ abstract class $SignUpResponseCopyWith<$Res> {
     @JsonKey(name: 'user') CustomerModel? user,
     @JsonKey(name: 'status') String? status,
     @JsonKey(name: 'errors') List<String>? errors,
+    @JsonKey(name: 'error') String? error,
   });
 
   $CustomerModelCopyWith<$Res>? get user;
@@ -76,6 +79,7 @@ class _$SignUpResponseCopyWithImpl<$Res, $Val extends SignUpResponse>
     Object? user = freezed,
     Object? status = freezed,
     Object? errors = freezed,
+    Object? error = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -95,6 +99,10 @@ class _$SignUpResponseCopyWithImpl<$Res, $Val extends SignUpResponse>
                 ? _value.errors
                 : errors // ignore: cast_nullable_to_non_nullable
                       as List<String>?,
+            error: freezed == error
+                ? _value.error
+                : error // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -129,6 +137,7 @@ abstract class _$$SignUpResponseImplCopyWith<$Res>
     @JsonKey(name: 'user') CustomerModel? user,
     @JsonKey(name: 'status') String? status,
     @JsonKey(name: 'errors') List<String>? errors,
+    @JsonKey(name: 'error') String? error,
   });
 
   @override
@@ -153,6 +162,7 @@ class __$$SignUpResponseImplCopyWithImpl<$Res>
     Object? user = freezed,
     Object? status = freezed,
     Object? errors = freezed,
+    Object? error = freezed,
   }) {
     return _then(
       _$SignUpResponseImpl(
@@ -172,6 +182,10 @@ class __$$SignUpResponseImplCopyWithImpl<$Res>
             ? _value._errors
             : errors // ignore: cast_nullable_to_non_nullable
                   as List<String>?,
+        error: freezed == error
+            ? _value.error
+            : error // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -185,6 +199,7 @@ class _$SignUpResponseImpl implements _SignUpResponse {
     @JsonKey(name: 'user') this.user,
     @JsonKey(name: 'status') this.status,
     @JsonKey(name: 'errors') final List<String>? errors,
+    @JsonKey(name: 'error') this.error,
   }) : _errors = errors;
 
   factory _$SignUpResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -211,8 +226,12 @@ class _$SignUpResponseImpl implements _SignUpResponse {
   }
 
   @override
+  @JsonKey(name: 'error')
+  final String? error;
+
+  @override
   String toString() {
-    return 'SignUpResponse(token: $token, user: $user, status: $status, errors: $errors)';
+    return 'SignUpResponse(token: $token, user: $user, status: $status, errors: $errors, error: $error)';
   }
 
   @override
@@ -223,7 +242,8 @@ class _$SignUpResponseImpl implements _SignUpResponse {
             (identical(other.token, token) || other.token == token) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._errors, _errors));
+            const DeepCollectionEquality().equals(other._errors, _errors) &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -234,6 +254,7 @@ class _$SignUpResponseImpl implements _SignUpResponse {
     user,
     status,
     const DeepCollectionEquality().hash(_errors),
+    error,
   );
 
   /// Create a copy of SignUpResponse
@@ -259,6 +280,7 @@ abstract class _SignUpResponse implements SignUpResponse {
     @JsonKey(name: 'user') final CustomerModel? user,
     @JsonKey(name: 'status') final String? status,
     @JsonKey(name: 'errors') final List<String>? errors,
+    @JsonKey(name: 'error') final String? error,
   }) = _$SignUpResponseImpl;
 
   factory _SignUpResponse.fromJson(Map<String, dynamic> json) =
@@ -276,6 +298,9 @@ abstract class _SignUpResponse implements SignUpResponse {
   @override
   @JsonKey(name: 'errors')
   List<String>? get errors;
+  @override
+  @JsonKey(name: 'error')
+  String? get error;
 
   /// Create a copy of SignUpResponse
   /// with the given fields replaced by the non-null parameter values.

@@ -18,6 +18,7 @@ class SignUpController extends BaseController {
   TextEditingController emailTxtCtrl = TextEditingController();
   TextEditingController fullNameCtrl = TextEditingController();
   TextEditingController passwordTxtCtrl = TextEditingController();
+  TextEditingController confirmPasswordTxtCtrl = TextEditingController();
   bool isTermsAndCondChecked = false;
 
   ///Go to the Login Screen
@@ -48,9 +49,9 @@ class SignUpController extends BaseController {
           err: 'Full name required',
         ) &&
         validationUtils.validateEntryEmail(emailTxtCtrl) &&
-        validationUtils.validateDataEntry(
+        validationUtils.validatePasswords(
           passwordTxtCtrl,
-          err: 'Password required',
+          confirmPasswordTxtCtrl,
         )) {
       if (!isTermsAndCondChecked) {
         snackBarSnippet.snackBarError("Please accept the Terms and Conditions");
@@ -80,8 +81,11 @@ class SignUpController extends BaseController {
       onSuccessSignUp();
     } else {
       snackBarSnippet.snackBarError(
-        response?.errors?.first ??
-            "Sorry, something went wrong. Kindly try again",
+        decodeErrorMessage(
+          response?.errors?.last ?? response?.error ?? "",
+          defaultMsg:
+              "Sorry, an error occurred during sign up. Kindly try again",
+        ),
       );
     }
   }

@@ -69,6 +69,13 @@ class LoginController extends BaseController {
       appPreference.setUser(response.user);
       appPreference.setPassword(passwordTxtCtrl.getData());
       navUtils.fireTargetOff(MainDashboardScreen());
+    }else {
+      snackBarSnippet.snackBarError(
+        decodeErrorMessage(
+          response?.errors?.last ?? response?.error ?? "",
+          defaultMsg: "Sorry, an error occurred during login. Kindly try again",
+        ),
+      );
     }
   }
 }
