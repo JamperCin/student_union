@@ -26,15 +26,6 @@ def get_pubspec_version
   return version
 end
 
-# In your Fastfile
-
-def get_pubspec_version_code
-  # Use the flutter_version plugin to get the build number
-  version_info = flutter_version
-  build_number = version_info[:build_number].to_i
-  return build_number
-end
-
 
 def increment_version_name(version)
   major, minor, patch = version.split(".").map(&:to_i)
@@ -141,7 +132,7 @@ platform :ios do
     puts("New build number and version name: #{new_version_name} #{new_build_number}")
 
     # 5.4.1. Get local version code
-    local_version_code = get_pubspec_version_code()
+    local_version_code = get_pubspec_version().split("+").last.to_i
     puts("Local pubspec.yaml build number: #{local_version_code}")
 
     # 5.4.2. Ensure new local_version_code number is greater than store version code

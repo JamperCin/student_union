@@ -54,13 +54,13 @@ def check_version_and_abort_if_needed(local_version, store_version)
   end
 end
 
-def get_pubspec_version_code
-  # Use the flutter_version plugin to get the build number
-  version_info = flutter_version
-  build_number = version_info[:build_number].to_i
-  return build_number
-end
 
+def get_pubspec_version
+  pubspec = File.read("../../pubspec.yaml")
+  version_line = pubspec.lines.find { |line| line.start_with?("version:") }
+  version = version_line.split(":").last.strip
+  return version
+end
 
 #-----------------------------------------------------------------------------------------
 # End of helper methods for versioning pubspec.yaml
@@ -116,7 +116,7 @@ platform :android do
     puts("New Version Code: #{new_version_code}")
 
     # 3.1. Get local version code
-    local_version_code = get_pubspec_version_code()
+    local_version_code = get_pubspec_version().split("+").last.to_i
     puts("Local pubspec.yaml build number: #{local_version_code}")
 
     # 3.2. Ensure new local_version_code number is greater than store version code
