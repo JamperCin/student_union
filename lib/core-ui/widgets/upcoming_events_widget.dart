@@ -29,6 +29,7 @@ class UpcomingEventsWidget extends StatelessWidget {
 
   Widget _allEventsWidget(BuildContext context, List<UpcomingEventModel> list) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     if (list.isEmpty) {
       return const NoDataWidget(
@@ -41,32 +42,45 @@ class UpcomingEventsWidget extends StatelessWidget {
     return ListViewWidget<UpcomingEventModel>(
       list: list,
       listItemWidget: (event) {
-        return ListTile(
-          onTap: () => onTap?.call(event),
-          leading: NetworkImageWidget(
-            height: 100.dp(),
-            width: 100.dp(),
-            url: event.image,
-            fit: BoxFit.cover,
-            heroTag: "${event.image}_${event.id}_${event.name}",
-            placeHolderWidget: ContainerWidget(
-              height: 100.dp(),
-              width: 100.dp(),
+        return Column(
+          children: [
+            ListTile(
+              onTap: () => onTap?.call(event),
+              leading: NetworkImageWidget(
+                height: 100.dp(),
+                width: 100.dp(),
+                url: event.image,
+                fit: BoxFit.cover,
+                heroTag: "${event.image}_${event.id}_${event.name}",
+                placeHolderWidget: ContainerWidget(
+                  height: 100.dp(),
+                  width: 100.dp(),
+                ),
+              ),
+              title: RichText(
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                text: TextSpan(text: event.name, style: textTheme.bodyMedium),
+              ),
+              subtitle: Column(
+                children: [
+                  Gap(5.dp()),
+                  RichText(
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      text: event.description,
+                      style: textTheme.labelSmall,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          title: RichText(
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            text: TextSpan(text: event.name, style: textTheme.titleMedium),
-          ),
-          subtitle: RichText(
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            text: TextSpan(
-              text: event.description,
-              style: textTheme.labelSmall,
+            Divider(
+              color: colorScheme.inverseSurface.withAlpha(84),
+              thickness: 1,
             ),
-          ),
+          ],
         );
       },
     );
@@ -153,7 +167,7 @@ class UpcomingEventsWidget extends StatelessWidget {
                     flex: 0,
                     child: Text(
                       DateTimeUtils().formatDate(
-                        model.date,
+                        model.startDate,
                         format: "dd MMM, yyyy",
                       ),
                       style: textTheme.labelMedium?.copyWith(fontSize: 8.dp()),

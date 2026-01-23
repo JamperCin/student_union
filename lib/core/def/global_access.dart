@@ -3,7 +3,7 @@ import 'package:student_union/core/api/notification_api.dart';
 import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/enums/book_type.dart';
 import 'package:student_union/core/services/auth/auth_api_service.dart';
-import 'package:student_union/core/services/campaigns/campaigns_api_service.dart';
+import 'package:student_union/core/services/campaigns/donations_api_service.dart';
 import 'package:student_union/core/services/devotional_guide/devotional_guide_api_service.dart';
 import 'package:student_union/core/services/news_update/news_update_api_service.dart';
 import 'package:student_union/core/services/notifications/notification_api_service.dart';
@@ -15,7 +15,7 @@ late UserApiService userApiService;
 late AppPreference appPreference;
 late DevotionalGuideApiService devGuideService;
 late UpcomingEventsApiService upcomingEventsApiService;
-late CampaignApiService campaignApiService;
+late DonationsService campaignApiService;
 late NewsUpdateApiService newsUpdateApiService;
 late AuthApiService authApiService;
 late PaymentApiService paymentApiService;
@@ -26,6 +26,8 @@ late NotificationApi notificationApi;
 
 RxInt notificationCount = 0.obs;
 Rxn<dynamic> currentEvent = Rxn<dynamic>();
+
+bool isMayBeLaterSet = false;
 
 class EventTrigger {
   BookType? bookType;

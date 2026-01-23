@@ -31,12 +31,12 @@ mixin _$UpcomingEventModel {
   String get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'current_state')
   String get state => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created_at')
-  String get date => throw _privateConstructorUsedError;
   @JsonKey(name: 'start_datetime')
   String get startDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'end_datetime')
   String get endDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  String get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this UpcomingEventModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -63,9 +63,9 @@ abstract class $UpcomingEventModelCopyWith<$Res> {
     String location,
     @JsonKey(name: 'event_status') String status,
     @JsonKey(name: 'current_state') String state,
-    @JsonKey(name: 'created_at') String date,
     @JsonKey(name: 'start_datetime') String startDate,
     @JsonKey(name: 'end_datetime') String endDate,
+    @JsonKey(name: 'created_at') String createdAt,
   });
 }
 
@@ -91,9 +91,9 @@ class _$UpcomingEventModelCopyWithImpl<$Res, $Val extends UpcomingEventModel>
     Object? location = null,
     Object? status = null,
     Object? state = null,
-    Object? date = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? createdAt = null,
   }) {
     return _then(
       _value.copyWith(
@@ -125,10 +125,6 @@ class _$UpcomingEventModelCopyWithImpl<$Res, $Val extends UpcomingEventModel>
                 ? _value.state
                 : state // ignore: cast_nullable_to_non_nullable
                       as String,
-            date: null == date
-                ? _value.date
-                : date // ignore: cast_nullable_to_non_nullable
-                      as String,
             startDate: null == startDate
                 ? _value.startDate
                 : startDate // ignore: cast_nullable_to_non_nullable
@@ -136,6 +132,10 @@ class _$UpcomingEventModelCopyWithImpl<$Res, $Val extends UpcomingEventModel>
             endDate: null == endDate
                 ? _value.endDate
                 : endDate // ignore: cast_nullable_to_non_nullable
+                      as String,
+            createdAt: null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
                       as String,
           )
           as $Val,
@@ -160,9 +160,9 @@ abstract class _$$UpcomingEventModelImplCopyWith<$Res>
     String location,
     @JsonKey(name: 'event_status') String status,
     @JsonKey(name: 'current_state') String state,
-    @JsonKey(name: 'created_at') String date,
     @JsonKey(name: 'start_datetime') String startDate,
     @JsonKey(name: 'end_datetime') String endDate,
+    @JsonKey(name: 'created_at') String createdAt,
   });
 }
 
@@ -187,9 +187,9 @@ class __$$UpcomingEventModelImplCopyWithImpl<$Res>
     Object? location = null,
     Object? status = null,
     Object? state = null,
-    Object? date = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? createdAt = null,
   }) {
     return _then(
       _$UpcomingEventModelImpl(
@@ -221,10 +221,6 @@ class __$$UpcomingEventModelImplCopyWithImpl<$Res>
             ? _value.state
             : state // ignore: cast_nullable_to_non_nullable
                   as String,
-        date: null == date
-            ? _value.date
-            : date // ignore: cast_nullable_to_non_nullable
-                  as String,
         startDate: null == startDate
             ? _value.startDate
             : startDate // ignore: cast_nullable_to_non_nullable
@@ -232,6 +228,10 @@ class __$$UpcomingEventModelImplCopyWithImpl<$Res>
         endDate: null == endDate
             ? _value.endDate
             : endDate // ignore: cast_nullable_to_non_nullable
+                  as String,
+        createdAt: null == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
                   as String,
       ),
     );
@@ -249,9 +249,9 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
     this.location = "",
     @JsonKey(name: 'event_status') this.status = "",
     @JsonKey(name: 'current_state') this.state = "",
-    @JsonKey(name: 'created_at') this.date = "",
     @JsonKey(name: 'start_datetime') this.startDate = "",
     @JsonKey(name: 'end_datetime') this.endDate = "",
+    @JsonKey(name: 'created_at') this.createdAt = "",
   });
 
   factory _$UpcomingEventModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -279,18 +279,18 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
   @JsonKey(name: 'current_state')
   final String state;
   @override
-  @JsonKey(name: 'created_at')
-  final String date;
-  @override
   @JsonKey(name: 'start_datetime')
   final String startDate;
   @override
   @JsonKey(name: 'end_datetime')
   final String endDate;
+  @override
+  @JsonKey(name: 'created_at')
+  final String createdAt;
 
   @override
   String toString() {
-    return 'UpcomingEventModel(image: $image, id: $id, description: $description, name: $name, location: $location, status: $status, state: $state, date: $date, startDate: $startDate, endDate: $endDate)';
+    return 'UpcomingEventModel(image: $image, id: $id, description: $description, name: $name, location: $location, status: $status, state: $state, startDate: $startDate, endDate: $endDate, createdAt: $createdAt)';
   }
 
   @override
@@ -307,10 +307,11 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
                 other.location == location) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.state, state) || other.state == state) &&
-            (identical(other.date, date) || other.date == date) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate));
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -324,9 +325,9 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
     location,
     status,
     state,
-    date,
     startDate,
     endDate,
+    createdAt,
   );
 
   /// Create a copy of UpcomingEventModel
@@ -355,9 +356,9 @@ abstract class _UpcomingEventModel implements UpcomingEventModel {
     final String location,
     @JsonKey(name: 'event_status') final String status,
     @JsonKey(name: 'current_state') final String state,
-    @JsonKey(name: 'created_at') final String date,
     @JsonKey(name: 'start_datetime') final String startDate,
     @JsonKey(name: 'end_datetime') final String endDate,
+    @JsonKey(name: 'created_at') final String createdAt,
   }) = _$UpcomingEventModelImpl;
 
   factory _UpcomingEventModel.fromJson(Map<String, dynamic> json) =
@@ -381,14 +382,14 @@ abstract class _UpcomingEventModel implements UpcomingEventModel {
   @JsonKey(name: 'current_state')
   String get state;
   @override
-  @JsonKey(name: 'created_at')
-  String get date;
-  @override
   @JsonKey(name: 'start_datetime')
   String get startDate;
   @override
   @JsonKey(name: 'end_datetime')
   String get endDate;
+  @override
+  @JsonKey(name: 'created_at')
+  String get createdAt;
 
   /// Create a copy of UpcomingEventModel
   /// with the given fields replaced by the non-null parameter values.

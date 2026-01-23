@@ -1,11 +1,14 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
 import 'package:student_union/core/api/fcm_api.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
+import 'package:student_union/core/services/app/app_update_service.dart';
 import 'package:student_union/screens/auth/login/login_screen.dart';
+import 'package:student_union/screens/dashboard/more/app_update/app_update_screen.dart';
 
 class DashboardController extends BaseController with WidgetsBindingObserver {
   ///Initialise this when the main dashboard is called
@@ -13,7 +16,32 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
     await Future.delayed(const Duration(milliseconds: 180));
     await fetchUserDetails();
     await checkForScreenUpdate();
+    await checkForAppUpdate();
     await FcmApi().init();
+  }
+
+  //Check if there is a new app update available
+  Future<void> checkForAppUpdate() async {
+    final appUpdate = await AppUpdateService().checkForUpdate();
+    if (appUpdate.versionCode.isEmpty) {
+      return;
+    }
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    int newBuildNumber = NumberUtils().parseInt(appUpdate.versionCode);
+    int buildNumber = NumberUtils().parseInt(packageInfo.buildNumber);
+    debugPrint(
+      "Current Build Number: $buildNumber, New Build Number: $newBuildNumber",
+    );
+
+    if (newBuildNumber > buildNumber &&
+        Get.context != null &&
+        Get.context!.mounted) {
+      if (isMayBeLaterSet) {
+        isMayBeLaterSet = false;
+        return;
+      }
+      navUtils.fireTargetOff(AppUpdateScreen(), model: appUpdate);
+    }
   }
 
   Future<void> checkForScreenUpdate() async {

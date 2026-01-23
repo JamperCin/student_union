@@ -157,5 +157,9 @@ class AppPreference {
   void setSelectedSpeechRateValue(double value) {
     setDouble(SELECTED_SPEECH_RATE_VALUE, value);
   }
+
+  String getUserEmail() {
+    return getUser().email;
+  }
   
 }

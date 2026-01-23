@@ -26,6 +26,16 @@ def get_pubspec_version
   return version
 end
 
+# In your Fastfile
+
+def get_pubspec_version_code
+  # Use the flutter_version plugin to get the build number
+  version_info = flutter_version
+  build_number = version_info[:build_number].to_i
+  return build_number
+end
+
+
 def increment_version_name(version)
   major, minor, patch = version.split(".").map(&:to_i)
 
@@ -55,6 +65,17 @@ def update_pubspec(new_version_name, new_build_number)
   File.write(pubspec_path, updated_pubspec)
   puts("Updated pubspec.yaml to version #{new_version_name}+#{new_build_number}")
 end
+
+# In your Fastfile
+
+def check_version_and_abort_if_needed(local_version, store_version)
+  if local_version <= store_version
+    UI.abort("❌ Fastlane aborted: The local version code (#{local_version}) in pubspec.yaml is not higher than the existing store version code (#{store_version}). Please increment the version code.")
+  else
+    UI.success("✅ Version code check passed: Local version code (#{local_version}) is higher than the store version code (#{store_version}). Proceeding with the build.")
+  end
+end
+
 
 #-----------------------------------------------------------------------------------------
 # End of helper methods for versioning pubspec.yaml
@@ -118,6 +139,14 @@ platform :ios do
   # 5.4. Increment appstore build number
     new_build_number = build_number + 1
     puts("New build number and version name: #{new_version_name} #{new_build_number}")
+
+    # 5.4.1. Get local version code
+    local_version_code = get_pubspec_version_code()
+    puts("Local pubspec.yaml build number: #{local_version_code}")
+
+    # 5.4.2. Ensure new local_version_code number is greater than store version code
+    check_version_and_abort_if_needed(local_version_code, build_number)
+
 
   # 5.5. Update pubspec.yaml
     update_pubspec(new_version_name, new_build_number)

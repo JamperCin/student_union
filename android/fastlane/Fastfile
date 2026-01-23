@@ -44,6 +44,24 @@ def increment_version_name(version)
   "#{major}.#{minor}.#{patch}"
 end
 
+
+#Check and abort release if pubspec.yaml version is not in sync with Play Store
+def check_version_and_abort_if_needed(local_version, store_version)
+  if local_version <= store_version
+    UI.abort("❌ Fastlane aborted: The local version code (#{local_version}) in pubspec.yaml is not higher than the existing store version code (#{store_version}). Please increment the version code.")
+  else
+    UI.success("✅ Version code check passed: Local version code (#{local_version}) is higher than the store version code (#{store_version}). Proceeding with the build.")
+  end
+end
+
+def get_pubspec_version_code
+  # Use the flutter_version plugin to get the build number
+  version_info = flutter_version
+  build_number = version_info[:build_number].to_i
+  return build_number
+end
+
+
 #-----------------------------------------------------------------------------------------
 # End of helper methods for versioning pubspec.yaml
 #-----------------------------------------------------------------------------------------`
@@ -86,14 +104,23 @@ platform :android do
     
     # Ensure codes is an array even if the action returns nil unexpectedly
     new_version_code = ((codes || [0]).max || 0) + 1
+    current_store_version_code = new_version_code - 1
 
     # 3. Increment the Version Name
     new_version_name = increment_version_name(play_store_version_name)
 
     puts("Current Version: #{play_store_version_name}")
+    puts("Current Version Code: #{current_store_version_code}")
 
     puts("New Version Name: #{new_version_name}")
     puts("New Version Code: #{new_version_code}")
+
+    # 3.1. Get local version code
+    local_version_code = get_pubspec_version_code()
+    puts("Local pubspec.yaml build number: #{local_version_code}")
+
+    # 3.2. Ensure new local_version_code number is greater than store version code
+    check_version_and_abort_if_needed(local_version_code, current_store_version_code)
 
     # 4. Build the App
     gradle(

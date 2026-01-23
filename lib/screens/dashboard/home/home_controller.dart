@@ -25,7 +25,7 @@ class HomeController extends BaseController {
     //navUtils.fireTarget(ProfileScreen());
   }
 
-  void onDonationOnClick(CampaignModel model) {
+  void onDonationOnClick(DonationModel model) {
     navUtils.fireTarget(DonateToCoreMinistryScreen(), model: model);
   }
 
@@ -39,7 +39,7 @@ class HomeController extends BaseController {
   }
 
   void onNewsUpdateTap(NewsUpdateModel news) {
-    if(news.url.isEmpty) return;
+    if (news.url.isEmpty) return;
     navUtils.fireTarget(
       BaseWebView(
         model: WebModel(
@@ -82,7 +82,6 @@ class HomeController extends BaseController {
 
   void onUpcomingEventTap(BuildContext context, UpcomingEventModel event) {
     navUtils.fireTarget(EventDetailsScreen(event));
-
   }
 
   void onSeeAllUpcomingEvents() {

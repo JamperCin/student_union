@@ -19,12 +19,17 @@ class DonateToCoreMinistryScreen extends BaseSharedScreen {
   }
 
   @override
-  CampaignModel getModel() {
-    return super.getModel() as CampaignModel;
+  DonationModel getModel() {
+    return super.getModel() as DonationModel;
   }
 
   @override
   Widget body(BuildContext context) {
+    final model = getModel();
+    final goalAmount = parseDouble(model.goalAmount);
+    final raisedAmount = parseDouble(model.raisedAmount);
+    final currency = model.currency.isEmpty ? "GHS" : model.currency;
+
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 16.dp(), vertical: 14.dp()),
       child: Column(
@@ -32,22 +37,79 @@ class DonateToCoreMinistryScreen extends BaseSharedScreen {
         children: [
           Center(
             child: Text(
-              getModel().title,
+              model.title,
               textAlign: TextAlign.center,
               style: textTheme.bodyLarge?.copyWith(color: colorScheme.primary),
             ),
           ),
-          Gap(5.dp()),
+          Gap(10.dp()),
           NetworkImageWidget(
-            url: getModel().image,
+            url: model.image,
             width: appDimen.screenWidth,
-            height: appDimen.screenHeight * 0.35,
+            height: appDimen.screenHeight * 0.3,
             fit: BoxFit.contain,
             placeHolderWidget: ContainerWidget(
               width: appDimen.screenWidth,
-              height: appDimen.screenHeight * 0.35,
+              height: appDimen.screenHeight * 0.3,
             ),
           ),
+
+          //display description if available
+          if (model.description.isNotEmpty)
+            Column(
+              children: [
+                Gap(10.dp()),
+                Text(model.description, style: textTheme.labelMedium),
+              ],
+            ),
+
+          //if Goal amount is not empty and greater than zero, display it
+          if (goalAmount > 0.0)
+            Column(
+              children: [
+                Gap(20.dp()),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Goal Amount: ",
+                        style: textTheme.labelMedium,
+                      ),
+                      TextSpan(
+                        text: "$currency ${goalAmount.toDecimalPlaces()}",
+                        style: textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+          //If Raised amount is not empty and greater than zero, display it
+          if (raisedAmount > 0.0)
+            Column(
+              children: [
+                Gap(10.dp()),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Raised Amount: ",
+                        style: textTheme.labelMedium,
+                      ),
+                      TextSpan(
+                        text: "$currency ${raisedAmount.toStringAsFixed(2)}",
+                        style: textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           Gap(40.dp()),
           Text(
             "Enter an amount to donate",
@@ -81,5 +143,19 @@ class DonateToCoreMinistryScreen extends BaseSharedScreen {
         ],
       ),
     );
+  }
+
+  double parseDouble(String? amount) {
+    double value = 0.0;
+    if (amount == null || amount.isEmpty) {
+      return value;
+    }
+
+    try {
+      value = amount.isEmpty ? 0.0 : double.parse(amount);
+    } catch (e) {
+      return value;
+    }
+    return value;
   }
 }

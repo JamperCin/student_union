@@ -14,7 +14,7 @@ import 'package:student_union/core/app/theme_controller.dart';
 import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
-import 'package:student_union/core/services/campaigns/campaigns_api_service.dart';
+import 'package:student_union/core/services/campaigns/donations_api_service.dart';
 import 'package:student_union/core/services/devotional_guide/devotional_guide_api_service.dart';
 import 'package:student_union/core/services/news_update/news_update_api_service.dart';
 import 'package:student_union/core/services/notifications/notification_api_service.dart';
@@ -87,7 +87,7 @@ Future<void> _initializeApp() async {
   appPreference = AppPreference();
   devGuideService = DevotionalGuideApiService();
   upcomingEventsApiService = UpcomingEventsApiService();
-  campaignApiService = CampaignApiService();
+  campaignApiService = DonationsService();
   newsUpdateApiService = NewsUpdateApiService();
   authApiService = AuthApiService();
   paymentApiService = PaymentApiService();
