@@ -1,8 +1,7 @@
-import 'package:core_module/core_ui/snippets/country_picker/res/strings/de.dart';
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
+import 'package:student_union/core-ui/widgets/bible_scripture_widget.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
@@ -130,6 +129,17 @@ class DailyDevotionWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
+                      IconButtonWidget(
+                        icon: Icons.menu_book_rounded,
+                        iconSize: 25.dp(),
+                        iconColor: colorScheme.tertiary,
+                        onTap: () {
+                          BibleScriptureWidget().viewScripture(
+                            context,
+                            list.first,
+                          );
+                        },
+                      ),
                       Obx(
                         () => hasStartedSharing.value
                             ? const CircularProgressIndicator.adaptive(

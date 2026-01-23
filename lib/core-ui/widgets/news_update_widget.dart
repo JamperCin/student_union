@@ -14,33 +14,31 @@ class NewsUpdateWidget extends StatelessWidget {
   int page = 1;
   RxInt selectedIndex = 0.obs;
 
-  NewsUpdateWidget({
-    super.key,
-    this.onTap,
-    this.onMoreOnTap,
-  })  : withDetails = false,
-        onReadTap = null,
-        onShareOnTap = null;
+  NewsUpdateWidget({super.key, this.onTap, this.onMoreOnTap})
+    : withDetails = false,
+      onReadTap = null,
+      onShareOnTap = null;
 
   NewsUpdateWidget.withDetails({
     super.key,
     this.onReadTap,
     this.onShareOnTap,
     this.onTap,
-  })  : withDetails = true,
-        onMoreOnTap = null;
+  }) : withDetails = true,
+       onMoreOnTap = null;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _onLoadMoreNews(page = 1),
-        builder: (context, data) {
-          return (data.hasData && data.data != null)
-              ? (withDetails
+      future: _onLoadMoreNews(page = 1),
+      builder: (context, data) {
+        return (data.hasData && data.data != null)
+            ? (withDetails
                   ? _newsWithDetails(context, data.data!)
                   : _newsWithLessDetails(context, data.data!))
-              : ShimmerWidget.withList(length: withDetails ? 4 : 1);
-        });
+            : ShimmerWidget.withList(length: withDetails ? 4 : 1);
+      },
+    );
   }
 
   /// This is the widget that displays news updates with MORE details
@@ -73,6 +71,7 @@ class NewsUpdateWidget extends StatelessWidget {
               horizontal: 10.dp(),
               vertical: 10.dp(),
             ),
+            color: colorScheme.surfaceContainerHigh,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,20 +99,26 @@ class NewsUpdateWidget extends StatelessWidget {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                                text: e.title,
-                                style: textTheme.labelLarge
-                                    ?.copyWith(color: colorScheme.primary))
+                              text: e.title,
+                              style: textTheme.labelLarge?.copyWith(
+                                color: colorScheme.primary,
+                              ),
+                            ),
                           ],
                         ),
                       ),
                       Gap(5.dp()),
                       RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
                               text: e.description,
-                              style: textTheme.labelSmall
-                                  ?.copyWith(fontSize: 12.dp()))
-                        ]),
+                              style: textTheme.labelSmall?.copyWith(
+                                fontSize: 12.dp(),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Gap(5.dp()),
                       Row(
@@ -122,8 +127,9 @@ class NewsUpdateWidget extends StatelessWidget {
                           Text(
                             DateTimeUtils().formatDate(e.createdAt),
                             style: textTheme.labelMedium?.copyWith(
-                                fontSize: 10.dp(),
-                                color: colorScheme.surfaceDim),
+                              fontSize: 10.dp(),
+                              color: colorScheme.surfaceDim,
+                            ),
                           ),
                           Row(
                             children: [
@@ -145,9 +151,9 @@ class NewsUpdateWidget extends StatelessWidget {
                                   onTap: () {
                                     onReadTap?.call(e);
                                   },
-                                )
+                                ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ],
@@ -163,7 +169,9 @@ class NewsUpdateWidget extends StatelessWidget {
 
   /// This is the widget that displays news updates with less details
   Widget _newsWithLessDetails(
-      BuildContext context, List<NewsUpdateModel> list) {
+    BuildContext context,
+    List<NewsUpdateModel> list,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
@@ -174,36 +182,39 @@ class NewsUpdateWidget extends StatelessWidget {
               Gap(20.dp()),
               TitleTextWidget(text: "News Updates", onTap: onMoreOnTap),
               CarouselSlider.builder(
-                  itemCount: list.length,
-                  itemBuilder: (context, index, realIndex) {
-                    NewsUpdateModel model = list[index];
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.dp()),
-                      child: _newsItemWidget(context, model),
-                    );
+                itemCount: list.length,
+                itemBuilder: (context, index, realIndex) {
+                  NewsUpdateModel model = list[index];
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.dp()),
+                    child: _newsItemWidget(context, model),
+                  );
+                },
+                options: CarouselOptions(
+                  scrollPhysics: const BouncingScrollPhysics(),
+                  enableInfiniteScroll: true,
+                  initialPage: list.length > 1 ? 1 : 0,
+                  height: 150.dp(),
+                  viewportFraction: 0.9,
+                  autoPlay: true,
+                  onPageChanged: (index, reason) {
+                    selectedIndex.value = index;
                   },
-                  options: CarouselOptions(
-                    scrollPhysics: const BouncingScrollPhysics(),
-                    enableInfiniteScroll: true,
-                    initialPage: list.length > 1 ? 1 : 0,
-                    height: 150.dp(),
-                    viewportFraction: 0.9,
-                    autoPlay: true,
-                    onPageChanged: (index, reason) {
-                      selectedIndex.value = index;
-                    },
-                  )),
+                ),
+              ),
               Gap(10.dp()),
               Center(
                 child: PodWidget(
-                    podLength: list.length, currentIndex: selectedIndex),
+                  podLength: list.length,
+                  currentIndex: selectedIndex,
+                ),
               ),
               Gap(20.dp()),
             ],
           );
   }
 
-  Widget _newsItemWidget(BuildContext context,NewsUpdateModel e){
+  Widget _newsItemWidget(BuildContext context, NewsUpdateModel e) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
@@ -230,35 +241,43 @@ class NewsUpdateWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   RichText(
-                      maxLines: 2,
-                      text: TextSpan(children: [
+                    maxLines: 2,
+                    text: TextSpan(
+                      children: [
                         TextSpan(
                           text: e.title,
                           style: textTheme.labelMedium?.copyWith(
-                              fontWeight: FontWeight.w600),
-                        )
-                      ])),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   RichText(
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                              text: e.description,
-                              style: textTheme.labelSmall
-                                  ?.copyWith(fontSize: 12.dp()))
-                        ],
-                      )),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: e.description,
+                          style: textTheme.labelSmall?.copyWith(
+                            fontSize: 12.dp(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Gap(5.dp()),
                   Text(
                     DateTimeUtils().formatDate(e.createdAt),
                     style: textTheme.labelMedium?.copyWith(
-                        fontSize: 10.dp(),
-                        color: colorScheme.tertiaryContainer),
-                  )
+                      fontSize: 10.dp(),
+                      color: colorScheme.tertiaryContainer,
+                    ),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -267,9 +286,7 @@ class NewsUpdateWidget extends StatelessWidget {
 
   ///Load more Purchased books
   Future<List<NewsUpdateModel>> _onLoadMoreNews(int page) async {
-    Map<String, Object> param = {
-      "page": page.toString(),
-    };
+    Map<String, Object> param = {"page": page.toString()};
     return await newsUpdateApiService.fetchNewsUpdate(param: param);
   }
 }

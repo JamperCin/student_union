@@ -41,48 +41,69 @@ class TopHeaderWidget extends StatelessWidget {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            InkWell(
-              onTap: onProfileOnClick,
-              child: Row(
-                children: [
-                  NetworkImageWidget.withCircular(
-                    url: userApiService.profilePic.value.isEmpty
-                        ? appPreference.getString(AppPreference().PROFILE_IMAGE)
-                        : userApiService.profilePic.value,
-                    radius: appDimen.dimen(40),
-                    placeholder: icUserIc,
-                    heroTag: "Profile_img_ui_xyz",
-                  ),
-                  SizedBox(width: appDimen.dimen(5)),
-                  if (displayEmail)
-                    RichText(
-                        text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: appPreference.getUser().name,
-                          style: textTheme.titleLarge,
+            Expanded(
+              child: InkWell(
+                onTap: onProfileOnClick,
+                child: Row(
+                  children: [
+                    NetworkImageWidget.withCircular(
+                      url: userApiService.profilePic.value.isEmpty
+                          ? appPreference.getString(
+                              AppPreference().PROFILE_IMAGE,
+                            )
+                          : userApiService.profilePic.value,
+                      radius: appDimen.dimen(40),
+                      placeholder: icUserIc,
+                      heroTag: "Profile_img_ui_xyz",
+                    ),
+                    SizedBox(width: appDimen.dimen(5)),
+                    if (displayEmail)
+                      Flexible(
+                        child: RichText(
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: appPreference.getUser().name,
+                                style: textTheme.titleLarge,
+                              ),
+                              TextSpan(
+                                text: appPreference.getUser().email,
+                                style: textTheme.labelSmall,
+                              ),
+                            ],
+                          ),
                         ),
-                        TextSpan(
-                          text: appPreference.getUser().email,
-                          style: textTheme.labelSmall,
-                        )
-                      ],
-                    ))
-                  else
-                    RichText(
-                        text: TextSpan(
-                      children: [
-                        TextSpan(text: 'Welcome', style: textTheme.titleLarge),
-                        const TextSpan(text: '\n'),
-                        TextSpan(
-                          text: appPreference.getUser().name,
-                          style: textTheme.bodyMedium
-                              ?.copyWith(color: colorScheme.primary),
+                      )
+                    else
+                      Flexible(
+                        child: RichText(
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Welcome',
+                                style: textTheme.titleLarge,
+                              ),
+                              const TextSpan(text: '\n'),
+                              TextSpan(
+                                text: appPreference.getUser().name,
+                                style: textTheme.bodyMedium?.copyWith(
+                                  color: colorScheme.primary,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '  👋',
+                                style: textTheme.bodyLarge,
+                              ),
+                            ],
+                          ),
                         ),
-                        TextSpan(text: '  👋', style: textTheme.bodyLarge),
-                      ],
-                    )),
-                ],
+                      ),
+                  ],
+                ),
               ),
             ),
             SizedBox(width: appDimen.dimen(5)),

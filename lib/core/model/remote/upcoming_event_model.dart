@@ -16,9 +16,9 @@ class UpcomingEventModel extends BaseObject with _$UpcomingEventModel {
     @Default("") String location,
     @JsonKey(name: 'event_status')@Default("") String status,
     @JsonKey(name: 'current_state')@Default("") String state,
-    @JsonKey(name: 'created_at')@Default("") String date,
     @JsonKey(name: 'start_datetime')@Default("") String startDate,
     @JsonKey(name: 'end_datetime')@Default("") String endDate,
+    @JsonKey(name: 'created_at')@Default("") String createdAt,
   }) = _UpcomingEventModel;
 
   factory UpcomingEventModel.fromJson(Map<String, dynamic> json) =>

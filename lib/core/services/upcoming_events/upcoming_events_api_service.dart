@@ -14,24 +14,26 @@ class UpcomingEventsApiService extends BaseApiService
   }
 
   @override
-  Future<List<UpcomingEventModel>> fetchUpcomingEvents(
-      {Map<String, dynamic>? param}) async {
-    // await Future.delayed(const Duration(seconds: 2));
-    // final results = await FileUtils().fetchList<UpcomingEventModel>(
-    //   path: path,
-    //   key: 'data',
-    //   secondaryKey: 'events',
-    //   parser: (json) => UpcomingEventModel.fromJson(json),
-    // );
-
-    final results = await _instance?.getListRequest<UpcomingEventModel>(
-            api: 'customer/v1/events',
-            key: "events",
-            param: param,
-            parser: (json) {
-              return UpcomingEventModel.fromJson(json);
-            }) ??
+  Future<List<UpcomingEventModel>> fetchUpcomingEvents({
+    Map<String, dynamic>? param,
+  }) async {
+    final results =
+        await _instance?.getListRequest<UpcomingEventModel>(
+          api: 'customer/v1/events',
+          key: "events",
+          param: param,
+          print: false,
+          parser: (json) {
+            return UpcomingEventModel.fromJson(json);
+          },
+        ) ??
         [];
+
+    results.sort((a, b) {
+      DateTime dateA = DateTime.parse(a.createdAt);
+      DateTime dateB = DateTime.parse(b.createdAt);
+      return dateB.compareTo(dateA);
+    });
 
     return results;
   }

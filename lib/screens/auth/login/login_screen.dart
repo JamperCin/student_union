@@ -74,9 +74,7 @@ class LoginScreen extends BaseScreenDecorated {
             labelStyle: textTheme.labelSmall?.copyWith(
               color: colorScheme.tertiary,
             ),
-            hintStyle: textTheme.bodySmall?.copyWith(
-              color: colorScheme.outline,
-            ),
+            hintStyle: textTheme.bodySmall?.copyWith(color: greyPodActiveColor),
             style: textTheme.bodySmall?.copyWith(color: darkColor),
             prefixAsset: icEmailInput,
             backgroundColor: colorScheme.tertiary,
@@ -91,9 +89,8 @@ class LoginScreen extends BaseScreenDecorated {
             labelStyle: textTheme.labelSmall?.copyWith(
               color: colorScheme.tertiary,
             ),
-            hintStyle: textTheme.bodySmall?.copyWith(
-              color: colorScheme.outline,
-            ),
+            hintStyle: textTheme.bodySmall?.copyWith(color: greyPodActiveColor),
+            suffixIconColor: darkBrownColor,
             style: textTheme.bodySmall?.copyWith(color: darkColor),
             prefixAsset: icPasswordInput,
             backgroundColor: colorScheme.tertiary,

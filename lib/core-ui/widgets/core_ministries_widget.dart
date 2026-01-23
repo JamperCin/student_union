@@ -8,21 +8,16 @@ import 'package:student_union/core/res/asset_path.dart';
 
 class CoreMinistriesWidget extends StatelessWidget {
   final bool horizontalGrid;
-  final Function(CampaignModel)? onTap;
+  final Function(DonationModel)? onTap;
   final GestureTapCallback? onSeeMore;
   RxInt selectedIndex = 0.obs;
 
-   CoreMinistriesWidget({
-    super.key,
-    this.onTap,
-    this.onSeeMore,
-  }) : horizontalGrid = true;
+  CoreMinistriesWidget({super.key, this.onTap, this.onSeeMore})
+    : horizontalGrid = true;
 
-   CoreMinistriesWidget.withDonations({
-    super.key,
-    this.onTap,
-  })  : horizontalGrid = false,
-        onSeeMore = null;
+  CoreMinistriesWidget.withDonations({super.key, this.onTap})
+    : horizontalGrid = false,
+      onSeeMore = null;
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +28,16 @@ class CoreMinistriesWidget extends StatelessWidget {
 
   Widget _coreMinistriesScreen(BuildContext context) {
     return FutureBuilder(
-        future: campaignApiService.fetchListOfCoreMinistries(),
-        builder: (context, data) {
-          return (data.hasData && data.data != null)
-              ? _horizontalGridItem(context, data.data!)
-              : ShimmerWidget.withList(length: 1);
-        });
+      future: campaignApiService.fetchListOfCoreMinistries(),
+      builder: (context, data) {
+        return (data.hasData && data.data != null)
+            ? _horizontalGridItem(context, data.data!)
+            : ShimmerWidget.withList(length: 1);
+      },
+    );
   }
 
-  Widget _horizontalGridItem(BuildContext context, List<CampaignModel> list) {
+  Widget _horizontalGridItem(BuildContext context, List<DonationModel> list) {
     if (list.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -49,16 +45,13 @@ class CoreMinistriesWidget extends StatelessWidget {
     return Column(
       children: [
         Gap(20.dp()),
-        TitleTextWidget(
-          text: "Donations",
-          onTap: onSeeMore,
-        ),
+        TitleTextWidget(text: "Donations", onTap: onSeeMore),
         Gap(10.dp()),
         CarouselSlider.builder(
           itemCount: list.length,
           itemBuilder: (context, index, realIndex) {
-            CampaignModel model = list[index];
-            return SimpleCardItem<CampaignModel>.withButton(
+            DonationModel model = list[index];
+            return SimpleCardItem<DonationModel>.withButton(
               title: model.title,
               onTap: onTap,
               model: model,
@@ -78,8 +71,7 @@ class CoreMinistriesWidget extends StatelessWidget {
         ),
         Gap(10.dp()),
         Center(
-          child: PodWidget(
-              podLength: list.length, currentIndex: selectedIndex),
+          child: PodWidget(podLength: list.length, currentIndex: selectedIndex),
         ),
         Gap(10.dp()),
       ],
@@ -97,7 +89,7 @@ class CoreMinistriesWidget extends StatelessWidget {
     );
   }
 
-  Widget _campaignsLayout(BuildContext context, List<CampaignModel> list) {
+  Widget _campaignsLayout(BuildContext context, List<DonationModel> list) {
     if (list.isEmpty) {
       return const NoDataWidget(
         asset: icCoreMinistry,
@@ -109,7 +101,7 @@ class CoreMinistriesWidget extends StatelessWidget {
     return ListViewWidget(
       list: list,
       listItemWidget: (model) {
-        return SimpleCardItem<CampaignModel>(
+        return SimpleCardItem<DonationModel>(
           title: model.title,
           model: model,
           onTap: onTap,

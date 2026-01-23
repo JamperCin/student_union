@@ -16,9 +16,9 @@ _$UpcomingEventModelImpl _$$UpcomingEventModelImplFromJson(
   location: json['location'] as String? ?? "",
   status: json['event_status'] as String? ?? "",
   state: json['current_state'] as String? ?? "",
-  date: json['created_at'] as String? ?? "",
   startDate: json['start_datetime'] as String? ?? "",
   endDate: json['end_datetime'] as String? ?? "",
+  createdAt: json['created_at'] as String? ?? "",
 );
 
 Map<String, dynamic> _$$UpcomingEventModelImplToJson(
@@ -31,7 +31,7 @@ Map<String, dynamic> _$$UpcomingEventModelImplToJson(
   'location': instance.location,
   'event_status': instance.status,
   'current_state': instance.state,
-  'created_at': instance.date,
   'start_datetime': instance.startDate,
   'end_datetime': instance.endDate,
+  'created_at': instance.createdAt,
 };

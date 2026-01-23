@@ -1,4 +1,5 @@
 import 'package:core_module/core_module.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core/app/app_colors.dart';
@@ -18,11 +19,92 @@ class EventDetailsScreen extends BaseSharedScreen {
     return "Event Details";
   }
 
+  Widget _buildDescriptionWithLinks() {
+    final List<TextSpan> spans = [];
+    final text = event.description;
+    int lastIndex = 0;
+
+    try {
+      // Find all phone numbers
+      final phoneRegex = RegExp(r'(\+233\s?\d{3}\s?\d{3}\s?\d{3})');
+      final phoneMatches = phoneRegex.allMatches(text).toList();
+
+      // Find all URLs
+      final urlRegex = RegExp(r'(https?://\S+)');
+      final urlMatches = urlRegex.allMatches(text).toList();
+
+      // Combine and sort all matches by position
+      final allMatches = [...phoneMatches, ...urlMatches].toList()
+        ..sort((a, b) => a.start.compareTo(b.start));
+
+      for (final match in allMatches) {
+        // Add text before the match
+        if (lastIndex < match.start) {
+          spans.add(
+            TextSpan(
+              text: text.substring(lastIndex, match.start),
+              style: textTheme.bodySmall,
+            ),
+          );
+        }
+
+        // Add the matched text (phone or URL) with styling
+        if (phoneMatches.contains(match)) {
+          spans.add(
+            TextSpan(
+              text: match.group(0),
+              style: textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.w700,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.blue,
+                color: Colors.blue,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  //Dial the phone number
+                  var phoneNumber = match.group(0)?.replaceAll(' ', '') ?? '';
+                  debugPrint("Dialing phone number: $phoneNumber");
+                  launchUrl(Uri.parse("tel:$phoneNumber"));
+                },
+            ),
+          );
+        } else if (urlMatches.contains(match)) {
+          spans.add(
+            TextSpan(
+              text: match.group(0),
+              style: textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.w700,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.blue,
+                color: Colors.blue,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () => launchUrl(Uri.parse(match.group(0) ?? '')),
+            ),
+          );
+        }
+
+        lastIndex = match.end;
+      }
+
+      // Add remaining text
+      if (lastIndex < text.length) {
+        spans.add(
+          TextSpan(text: text.substring(lastIndex), style: textTheme.bodySmall),
+        );
+      }
+
+      return spans.isEmpty
+          ? Text(event.description, style: textTheme.bodySmall)
+          : RichText(text: TextSpan(children: spans));
+    } catch (e) {
+      debugPrint("Error parsing description links: $e");
+      return Text(event.description, style: textTheme.bodySmall);
+    }
+  }
+
   @override
   Widget body(BuildContext context) {
-    final url =
-        RegExp(r'(https?://\S+)').firstMatch(event.description)?.group(0) ?? '';
-
     return SingleChildScrollView(
       padding: EdgeInsets.all(24.dp()),
       child: Column(
@@ -41,21 +123,13 @@ class EventDetailsScreen extends BaseSharedScreen {
             ),
           ),
           Gap(10.dp()),
+
+          //Display decription, if it contains a url or telephone number, make
+          //only the url and phone clickable, underlined and blue.
+          //The rest of text in black normal font eg: +233 243 303 679 | +233 556 711 969. or http link
           Align(
             alignment: Alignment.centerLeft,
-            child: event.description.contains('http')
-                ? GestureDetector(
-                    onTap: () => launchUrl(Uri.parse(url)),
-                    child: Text(
-                      event.description,
-                      style: textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        decoration: TextDecoration.underline,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  )
-                : Text(event.description, style: textTheme.bodySmall),
+            child: _buildDescriptionWithLinks(),
           ),
           Gap(20.dp()),
           Align(
@@ -91,6 +165,24 @@ class EventDetailsScreen extends BaseSharedScreen {
                       event.endDate,
                       format: "dd MMM, yyyy",
                     ),
+                    style: textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Gap(10.dp()),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: RichText(
+              textAlign: TextAlign.start,
+              text: TextSpan(
+                children: [
+                  TextSpan(text: 'Location: ', style: textTheme.bodyMedium),
+                  TextSpan(
+                    text: event.location,
                     style: textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),

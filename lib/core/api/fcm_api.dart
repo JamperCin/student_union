@@ -42,8 +42,16 @@ class FcmApi {
 
     debugPrint('User granted permission: ${settings.authorizationStatus}');
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      await subscribeToTopicAllUsers();
+      
       await checkForApnToken();
     }
+  }
+
+  //Register to topic : all_users
+  Future<void> subscribeToTopicAllUsers() async {
+    await _firebaseMessaging.subscribeToTopic('all_users');
+    debugPrint("Subscribed to topic: all_users");
   }
 
   Future<void> checkForApnToken() async {
@@ -55,7 +63,7 @@ class FcmApi {
 
   ///Send FCM Token to the server and save it locally to shared preference
   Future<void> _sendTokenToSerer(String? token) async {
-    if (token == null) return;
+    if (token == null || token.isEmpty) return;
     if (appPreference.getFcmToken() != token) {
       final param = {
         'user': {"fcm_id": token},

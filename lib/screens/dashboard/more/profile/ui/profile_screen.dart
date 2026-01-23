@@ -74,7 +74,7 @@ class ProfileScreen extends BaseSharedScreen {
               isEnabled: false,
               disabledColor: colorScheme.inverseSurface,
               controller: TextEditingController(
-                text: appPreference.getUser().email,
+                text: appPreference.getUserEmail(),
               ),
               prefixIcon: AssetImageWidget(
                 asset: icEmailInput,

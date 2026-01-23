@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
+import 'package:student_union/core-ui/widgets/bible_scripture_widget.dart';
 import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
@@ -111,42 +112,70 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
                       ),
                     ],
                   ),
-                  Gap(5.dp()),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      "Read Bible text first",
-                      style: textTheme.labelSmall?.copyWith(fontSize: 10.dp()),
-                    ),
-                  ),
-                  Gap(12.dp()),
+                  //Gap(5.dp()),
+                  // InkWell(
+                  //   onTap: () {},
+                  //   child: Text(
+                  //     "Read bible text first",
+                  //     style: textTheme.labelSmall?.copyWith(fontSize: 10.dp()),
+                  //   ),
+                  // ),
+                  Gap(16.dp()),
                   ContainerWidget(
                     onTap: () {},
                     color: primaryGreenColor,
                     borderRadius: 0,
                     padding: EdgeInsets.symmetric(
                       horizontal: 8.dp(),
-                      vertical: 5.dp(),
+                      vertical: 2.dp(),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
                       children: [
-                        Flexible(
-                          child: Text(
-                            (_controller.book.value.devotion?.reference ?? '')
-                                .toUpperCase(),
-                            style: textTheme.labelLarge?.copyWith(
-                              color: whiteColor,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                (_controller.book.value.devotion?.reference ??
+                                        '')
+                                    .toUpperCase(),
+                                style: textTheme.labelLarge?.copyWith(
+                                  color: whiteColor,
+                                ),
+                              ),
                             ),
-                          ),
+                            Gap(5.dp()),
+                            Flexible(
+                              flex: 0,
+                              child: IconButtonWidget(
+                                icon: Icons.menu_book_rounded,
+                                iconSize: 25.dp(),
+                                iconColor: colorScheme.tertiary,
+                                onTap: () {
+                                  BibleScriptureWidget().viewScripture(
+                                    context,
+                                    _controller.book.value,
+                                  );
+                                },
+                              ),
+                              // child: Text(
+                              //   _controller.selectedDateTimeline.value
+                              //       .toUpperCase(),
+                              //   style: textTheme.labelMedium?.copyWith(
+                              //     color: whiteColor,
+                              //   ),
+                              // ),
+                            ),
+                          ],
                         ),
-                        Gap(5.dp()),
-                        Flexible(
-                          flex: 0,
+
+                        Align(
+                          alignment: Alignment.topRight,
                           child: Text(
-                            _controller.selectedDateTimeline.value
-                                .toUpperCase(),
-                            style: textTheme.labelMedium?.copyWith(
+                            "Read bible text first",
+                            textAlign: TextAlign.start,
+                            style: textTheme.labelSmall?.copyWith(
+                              fontSize: 10.dp(),
                               color: whiteColor,
                             ),
                           ),

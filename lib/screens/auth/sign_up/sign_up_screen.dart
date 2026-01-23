@@ -82,9 +82,9 @@ class SignUpScreen extends BaseScreenDecorated {
             labelText: 'Full Name',
             hintText: 'Ex. John Doe',
             controller: _controller.fullNameCtrl,
-            hintStyle: textTheme.bodySmall?.copyWith(
-              color: colorScheme.outline,
-            ),
+
+            hintStyle: textTheme.bodySmall?.copyWith(color: greyPodActiveColor),
+            suffixIconColor: darkBrownColor,
             style: textTheme.bodySmall?.copyWith(color: darkColor),
             focusColor: colorScheme.tertiary,
             backgroundColor: colorScheme.tertiary,
@@ -97,9 +97,8 @@ class SignUpScreen extends BaseScreenDecorated {
           TextFieldWidget(
             labelText: 'Email',
             hintText: 'example@mail.com',
-            hintStyle: textTheme.bodySmall?.copyWith(
-              color: colorScheme.outline,
-            ),
+            hintStyle: textTheme.bodySmall?.copyWith(color: greyPodActiveColor),
+            suffixIconColor: darkBrownColor,
             style: textTheme.bodySmall?.copyWith(color: darkColor),
             textCapitalization: TextCapitalization.none,
             controller: _controller.emailTxtCtrl,
@@ -114,9 +113,8 @@ class SignUpScreen extends BaseScreenDecorated {
           TextFieldWidget.withPassword(
             labelText: 'Password',
             hintText: '********',
-            hintStyle: textTheme.bodySmall?.copyWith(
-              color: colorScheme.outline,
-            ),
+            hintStyle: textTheme.bodySmall?.copyWith(color: greyPodActiveColor),
+            suffixIconColor: darkBrownColor,
             style: textTheme.bodySmall?.copyWith(color: darkColor),
             controller: _controller.passwordTxtCtrl,
             focusColor: colorScheme.tertiary,
@@ -130,9 +128,8 @@ class SignUpScreen extends BaseScreenDecorated {
           TextFieldWidget.withPassword(
             labelText: 'Confirm Password',
             hintText: '********',
-            hintStyle: textTheme.bodySmall?.copyWith(
-              color: colorScheme.outline,
-            ),
+            hintStyle: textTheme.bodySmall?.copyWith(color: greyPodActiveColor),
+            suffixIconColor: darkBrownColor,
             style: textTheme.bodySmall?.copyWith(color: darkColor),
             controller: _controller.confirmPasswordTxtCtrl,
             focusColor: colorScheme.tertiary,
