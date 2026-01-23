@@ -48,7 +48,7 @@ end
 #Check and abort release if pubspec.yaml version is not in sync with Play Store
 def check_version_and_abort_if_needed(local_version, store_version)
   if local_version <= store_version
-    UI.abort("❌ Fastlane aborted: The local version code (#{local_version}) in pubspec.yaml is not higher than the existing store version code (#{store_version}). Please increment the version code.")
+    UI.user_error!("❌ Fastlane aborted: The local version code (#***local_version***) in pubspec.yaml is not higher than the existing store version code (#***store_version***). Please increment the version code.")
   else
     UI.success("✅ Version code check passed: Local version code (#{local_version}) is higher than the store version code (#{store_version}). Proceeding with the build.")
   end
