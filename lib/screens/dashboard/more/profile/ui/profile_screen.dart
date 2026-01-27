@@ -1,6 +1,7 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
+import 'package:student_union/core-ui/widgets/create_account_button.dart';
 import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
@@ -20,6 +21,7 @@ class ProfileScreen extends BaseSharedScreen {
 
   @override
   Widget body(BuildContext context) {
+    if (isGuestUser.value) return CreateAccountButton();
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(
         vertical: appDimen.dimen(20),

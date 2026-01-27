@@ -27,6 +27,7 @@ mixin _$UpcomingEventModel {
   String get description => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
+  String get heroTag => throw _privateConstructorUsedError;
   @JsonKey(name: 'event_status')
   String get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'current_state')
@@ -61,6 +62,7 @@ abstract class $UpcomingEventModelCopyWith<$Res> {
     String description,
     String name,
     String location,
+    String heroTag,
     @JsonKey(name: 'event_status') String status,
     @JsonKey(name: 'current_state') String state,
     @JsonKey(name: 'start_datetime') String startDate,
@@ -89,6 +91,7 @@ class _$UpcomingEventModelCopyWithImpl<$Res, $Val extends UpcomingEventModel>
     Object? description = null,
     Object? name = null,
     Object? location = null,
+    Object? heroTag = null,
     Object? status = null,
     Object? state = null,
     Object? startDate = null,
@@ -116,6 +119,10 @@ class _$UpcomingEventModelCopyWithImpl<$Res, $Val extends UpcomingEventModel>
             location: null == location
                 ? _value.location
                 : location // ignore: cast_nullable_to_non_nullable
+                      as String,
+            heroTag: null == heroTag
+                ? _value.heroTag
+                : heroTag // ignore: cast_nullable_to_non_nullable
                       as String,
             status: null == status
                 ? _value.status
@@ -158,6 +165,7 @@ abstract class _$$UpcomingEventModelImplCopyWith<$Res>
     String description,
     String name,
     String location,
+    String heroTag,
     @JsonKey(name: 'event_status') String status,
     @JsonKey(name: 'current_state') String state,
     @JsonKey(name: 'start_datetime') String startDate,
@@ -185,6 +193,7 @@ class __$$UpcomingEventModelImplCopyWithImpl<$Res>
     Object? description = null,
     Object? name = null,
     Object? location = null,
+    Object? heroTag = null,
     Object? status = null,
     Object? state = null,
     Object? startDate = null,
@@ -212,6 +221,10 @@ class __$$UpcomingEventModelImplCopyWithImpl<$Res>
         location: null == location
             ? _value.location
             : location // ignore: cast_nullable_to_non_nullable
+                  as String,
+        heroTag: null == heroTag
+            ? _value.heroTag
+            : heroTag // ignore: cast_nullable_to_non_nullable
                   as String,
         status: null == status
             ? _value.status
@@ -247,6 +260,7 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
     this.description = "",
     this.name = "",
     this.location = "",
+    this.heroTag = "",
     @JsonKey(name: 'event_status') this.status = "",
     @JsonKey(name: 'current_state') this.state = "",
     @JsonKey(name: 'start_datetime') this.startDate = "",
@@ -273,6 +287,9 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
   @JsonKey()
   final String location;
   @override
+  @JsonKey()
+  final String heroTag;
+  @override
   @JsonKey(name: 'event_status')
   final String status;
   @override
@@ -290,7 +307,7 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
 
   @override
   String toString() {
-    return 'UpcomingEventModel(image: $image, id: $id, description: $description, name: $name, location: $location, status: $status, state: $state, startDate: $startDate, endDate: $endDate, createdAt: $createdAt)';
+    return 'UpcomingEventModel(image: $image, id: $id, description: $description, name: $name, location: $location, heroTag: $heroTag, status: $status, state: $state, startDate: $startDate, endDate: $endDate, createdAt: $createdAt)';
   }
 
   @override
@@ -305,6 +322,7 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.location, location) ||
                 other.location == location) &&
+            (identical(other.heroTag, heroTag) || other.heroTag == heroTag) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.startDate, startDate) ||
@@ -323,6 +341,7 @@ class _$UpcomingEventModelImpl implements _UpcomingEventModel {
     description,
     name,
     location,
+    heroTag,
     status,
     state,
     startDate,
@@ -354,6 +373,7 @@ abstract class _UpcomingEventModel implements UpcomingEventModel {
     final String description,
     final String name,
     final String location,
+    final String heroTag,
     @JsonKey(name: 'event_status') final String status,
     @JsonKey(name: 'current_state') final String state,
     @JsonKey(name: 'start_datetime') final String startDate,
@@ -375,6 +395,8 @@ abstract class _UpcomingEventModel implements UpcomingEventModel {
   String get name;
   @override
   String get location;
+  @override
+  String get heroTag;
   @override
   @JsonKey(name: 'event_status')
   String get status;

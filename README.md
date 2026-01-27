@@ -193,3 +193,134 @@ team_id("ABCDEFGH12")                 # Your Apple Developer Portal Team ID
 - It should load a json content, then search for ```contentProviderId```. Copy the value and that is your ```itc_team_id```
 
 - Update your Fastfile: Open ```ios/fastlane/Fastfile``` and set up your release lane using the API Key method (to avoid the 2FA prompt):
+
+### Setup Github Actions so we can use them in our workflows
+To keep your credentials secure, do not put them in your code. Go to your ```GitHub Repository > Settings > Secrets and variables > Actions```
+and add the following New repository secrets:
+
+```ruby
+APP_STORE_CONNECT_KEY_ID: Your Key ID from App Store Connect. Copy this and save
+APP_STORE_CONNECT_ISSUER_ID: Your Issuer ID from App store
+APP_STORE_CONNECT_KEY_CONTENT: The text content of your .p8 API key file in the form of base64 content
+MATCH_PASSWORD: The password you used to encrypt your certificates. The MATCH_PASSWORD is not something you "obtain" from Apple or GitLab; it is a passphrase that you create yourself to encrypt and decrypt your code-signing certificates.
+```
+In cases where you are mirroring from Gitlab to Github, you can make use of Gitlab secure files storage. You can setup another secret
+
+```ruby
+GITLAB_PRIVATE_TOKEN: A GitLab Project Access Token (with api scope) so the GitHub runner can download your certificates from GitLab Secure Files.
+Use Fastlane Match with GitLab Secure Files to store your certificates for free without needing a separate private repository
+```
+
+To generate the base64 content of the app store connect api key do the following:
+
+1. Encode your .p8 key to Base64 
+Do not paste the raw text of your .p8 file directly into GitHub Secrets. Instead, convert it to a single-line Base64 string locally first:
+bash
+#### Run this on your local terminal
+cat AuthKey_XXXXXXXXXX.p8 | base64 | pbcopy
+
+Paste this resulting single-line string into your GitHub Repository Secret `APP_STORE_CONNECT_KEY_CONTENT`
+
+Update the app_store_connect_api_key action to tell fastlane that the content is Base64 encoded. example below:
+```ruby
+app_store_connect_api_key(
+  key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
+  issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+  key_content: ENV["APP_STORE_CONNECT_KEY_CONTENT"],
+  is_key_content_base64: true, # This is the critical fix
+  in_house: false
+)
+```
+
+
+### When Using Gitlab and mirroring to Github repository
+#### Configure Fastlane for Code Signing 
+Use ```Fastlane Match``` with ```GitLab Secure Files``` to store your certificates for free without needing a separate private repository. 
+
+1. Initialize: Run ```bundle exec fastlane match init``` in your /ios folder and select ```gitlab_secure_files```.
+2. Auth: Create a ```GitLab Project Access Token``` with ```api``` scope. 
+3. Export it locally: ```export PRIVATE_TOKEN=your_token```.
+4. Sync: Run ```bundle exec fastlane match development``` to generate and upload certificates to GitLab Secure Files.
+
+## When using Github alone
+#### Configure Fastlane for code signing
+Use ```Fastlane Match``` and a new private GitHub repository to store your certificates. In cases where you want to use an existing repo which already stores your certifcates and provisioning profiles, you just have to use that and create a new branch to store this one. So same repo but different branches for seperate projects. 
+
+1. Initialize: Run ```bundle exec fastlane match init``` in your /ios folder and select ```git```.
+2. Enter ```URL```: Provide the ```SSH URL``` of your dedicated private GitHub certificate repository. 
+3. Open ios/fastlane/Matchfile and specify the unique branch for the current team. This is when you are using one repo that stores all your certificates for different projects. In that case you specify which branch is responsibe for your current project.
+- An example is ```git_branch("prime-customer-certs") ```
+4. Uncomment the following or make sure you add the following 
+   ```ruby
+    app_identifier(["com.team-b.app"])
+    username("apple-id-for-team-b@email.com")
+   ```
+
+##  Link to GitHub Actions (Secrets)
+Since the ```GitHub runner``` needs to authenticate with your certificate repo, you must provide it with authorization. 
+
+1. Generate a `Personal Access Token (PAT)`: Create a GitHub PAT with repo scope.
+
+2. Add Secrets to Project Repo: On your main GitHub project, add the PAT and save it as : `MATCH_GIT_BASIC_AUTHORIZATION`: 
+
+3. `MATCH_PASSWORD`: The passphrase you used to encrypt the certificates, if you already have it created, ignore. This one you create your own passphrase. 
+
+### How to generate the PAT
+To generate a `Personal Access Token (PAT)` in 2026, follow these steps on GitHub. This token acts as a password that allows Fastlane and GitHub Actions to access your private certificate repository.
+
+1. Navigate to `Developer Settings`
+- Log in to your GitHub account.
+- Click your Profile Photo in the top-right corner.
+- Select Settings.
+- On the left-hand sidebar, scroll all the way to the bottom and click <> `Developer settings`.
+
+2. Generate the `Token`
+- In the left sidebar, click Personal access tokens.
+- Select Tokens (classic). 
+Note: While "Fine-grained tokens" are newer, most Fastlane setups still prefer "Classic" for broader compatibility with git commands. GitHub Documentation
+- Click the Generate new token dropdown and select Generate new token (classic).
+
+3. Configure the `Scopes`
+- Note: Give it a name you'll remember, like Fastlane-Match-Token.
+- Expiration: Choose an expiration date (e.g., 90 days or "No expiration" if you are the only one with access, though 90 days is safer).
+- Select Scopes: Check the box for repo (Full control of private repositories). This is the only scope Fastlane needs to read and write your certificates.
+
+4. Save the `Token`
+- Click Generate token at the bottom of the page.
+- CRITICAL: Copy the token (it starts with ghp_...).
+Warning: You will never see this token again. If you leave the page without copying it, you will have to delete it and create a new one.
+
+5. How to use it for Fastlane
+- As mentioned in previous steps, you will use this token in two places:
+Locally (on your 2017 Mac): Use it when match prompts you for your GitHub password.
+- On GitHub (Secrets):
+- Go to your Main Project Repo > Settings > Secrets and variables > Actions.
+- Add a new secret named MATCH_GIT_BASIC_AUTHORIZATION as said above and paste the PAT.
+
+
+## Generate the provisioning profiles and store them to repo
+
+To generate the certificates from Apple and upload them to your new ```GitHub certificate repository```, 
+
+1. Run the Command Locally
+Open the Terminal on your Mac, navigate to your /ios folder, and run:
+bash
+
+```bundle exec fastlane match appstore```
+
+2. Follow the prompt and enter the PASSPHRASE for Match storage. In this case enter the ```MATCH_PASSWORD``` and hit enter.
+
+3. Now you may be prompted to enter the password for your apple Id. Enter it and hit enter
+
+4. You may be prompted to enter a 6-digit code generated on your apple device. enter it and hit enter and fter that, the profiles will be downloaded and stored at the private repo in the said branch specified in your ```matchfile```.
+ 
+## Setting up Github actions and workflows
+Set up Github action and create a new workflow by choosing `dart` option.
+- After that add your workflows like below :
+
+
+
+
+
+
+    

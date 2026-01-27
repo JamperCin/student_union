@@ -1,5 +1,6 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/widgets/create_account_button.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/notification_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
@@ -20,6 +21,7 @@ class NotificationsScreen extends BaseScreenStandard {
 
   @override
   Widget body(BuildContext context) {
+    if (isGuestUser.value) return CreateAccountButton();
     return FutureBuilder(
       future: notificationApiService.fetchNotifications(
         param: {"page": (_controller.page = 1).toString()},

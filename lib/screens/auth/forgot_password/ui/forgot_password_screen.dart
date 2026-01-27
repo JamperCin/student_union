@@ -1,6 +1,7 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
+import 'package:student_union/core-ui/widgets/create_account_button.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/forgot_password/controller/forgot_password_controller.dart';
 
@@ -19,6 +20,7 @@ class ForgotPasswordScreen extends BaseSharedScreen {
 
   @override
   Widget body(BuildContext context) {
+    if (isGuestUser.value) return CreateAccountButton();
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(
         horizontal: appDimen.dimen(24),

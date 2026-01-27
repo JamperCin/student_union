@@ -29,6 +29,7 @@ class LoginController extends BaseController {
 
   ///OnClick listener to the LogIn Button
   void onLoginOnClick(BuildContext context) {
+    isGuestUser.value = false;
     if (validationUtils.validateEntryEmail(emailTxtCtrl) &&
         validationUtils.validateDataEntry(passwordTxtCtrl)) {
       _initLoginRequest(context);
@@ -77,5 +78,8 @@ class LoginController extends BaseController {
         ),
       );
     }
+  }
+
+  void onGuestLoginClicked() {
   }
 }

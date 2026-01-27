@@ -1,0 +1,1 @@
+enum SegmentType { text, phone, url }

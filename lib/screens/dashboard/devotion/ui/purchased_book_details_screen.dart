@@ -37,21 +37,21 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
       onPopInvokedWithResult: (canPop, onPop) {
         TextToSpeechApi().stop();
       },
-      child: Obx(
-        () => Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.dp(),
-                vertical: 10.dp(),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 16.dp(),
+              vertical: 10.dp(),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Obx(
+                      () => SizedBox(
                         width: appDimen.screenWidth * 0.52,
                         height: 50.dp(),
                         child: FilledButton.icon(
@@ -73,69 +73,76 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
                           ),
                         ),
                       ),
-                      // ButtonWidget(
-                      //   asset: icCalendar,
-                      //   backgroundColor: primaryGreenColor,
-                      //   text: _controller.selectedDate.value,
-                      //   textColor: colorScheme.tertiary,
-                      //   assetColor: colorScheme.tertiary,
-                      //   assetBgColor: colorScheme.tertiary.withAlpha(104),
-                      //   width: appDimen.screenWidth * 0.55,
-                      //   onTap: () => _controller.onPickCalendar(context),
-                      // ),
-                      Gap(10.dp()),
-                      Obx(
-                        () => IconButtonWidget(
-                          icon: _controller.textToSpeechApi.isReadingAloud.value
-                              ? Icons.volume_off_rounded
-                              : Icons.volume_up,
-                          iconSize: 25.dp(),
-                          iconColor: colorScheme.inverseSurface,
-                          onTap: _controller.onReadAloudOnTap,
-                        ),
-                      ),
-                      Gap(10.dp()),
-                      Obx(
-                        () => _controller.hasStartedSharing.value
-                            ? const CircularProgressIndicator.adaptive(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.white,
-                                ),
-                                strokeWidth: 2,
-                              )
-                            : IconButtonWidget(
-                                icon: Icons.share,
-                                iconSize: 25.dp(),
-                                iconColor: colorScheme.inverseSurface,
-                                onTap: _controller.onShareDevotionOnTap,
-                              ),
-                      ),
-                    ],
-                  ),
-                  //Gap(5.dp()),
-                  // InkWell(
-                  //   onTap: () {},
-                  //   child: Text(
-                  //     "Read bible text first",
-                  //     style: textTheme.labelSmall?.copyWith(fontSize: 10.dp()),
-                  //   ),
-                  // ),
-                  Gap(16.dp()),
-                  ContainerWidget(
-                    onTap: () {},
-                    color: primaryGreenColor,
-                    borderRadius: 0,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.dp(),
-                      vertical: 2.dp(),
                     ),
-                    child: Column(
+                    // ButtonWidget(
+                    //   asset: icCalendar,
+                    //   backgroundColor: primaryGreenColor,
+                    //   text: _controller.selectedDate.value,
+                    //   textColor: colorScheme.tertiary,
+                    //   assetColor: colorScheme.tertiary,
+                    //   assetBgColor: colorScheme.tertiary.withAlpha(104),
+                    //   width: appDimen.screenWidth * 0.55,
+                    //   onTap: () => _controller.onPickCalendar(context),
+                    // ),
+                    Gap(10.dp()),
+                    Row(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Text(
+                        Obx(
+                          () => IconButtonWidget(
+                            icon:
+                                _controller.textToSpeechApi.isReadingAloud.value
+                                ? Icons.volume_off_rounded
+                                : Icons.volume_up,
+                            iconSize: 25.dp(),
+                            iconColor: colorScheme.inverseSurface,
+                            onTap: _controller.onReadAloudOnTap,
+                          ),
+                        ),
+                        Gap(10.dp()),
+                        Obx(
+                          () => _controller.hasStartedSharing.value
+                              ? const CircularProgressIndicator.adaptive(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.white,
+                                  ),
+                                  strokeWidth: 2,
+                                )
+                              : IconButtonWidget(
+                                  icon: Icons.share,
+                                  iconSize: 25.dp(),
+                                  iconColor: colorScheme.inverseSurface,
+                                  onTap: _controller.onShareDevotionOnTap,
+                                ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                //Gap(5.dp()),
+                // InkWell(
+                //   onTap: () {},
+                //   child: Text(
+                //     "Read bible text first",
+                //     style: textTheme.labelSmall?.copyWith(fontSize: 10.dp()),
+                //   ),
+                // ),
+                Gap(16.dp()),
+                ContainerWidget(
+                  onTap: () {},
+                  color: primaryGreenColor,
+                  borderRadius: 0,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.dp(),
+                    vertical: 2.dp(),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Obx(
+                              () => Text(
                                 (_controller.book.value.devotion?.reference ??
                                         '')
                                     .toUpperCase(),
@@ -144,68 +151,70 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
                                 ),
                               ),
                             ),
-                            Gap(5.dp()),
-                            Flexible(
-                              flex: 0,
-                              child: IconButtonWidget(
-                                icon: Icons.menu_book_rounded,
-                                iconSize: 25.dp(),
-                                iconColor: colorScheme.tertiary,
-                                onTap: () {
-                                  BibleScriptureWidget().viewScripture(
-                                    context,
-                                    _controller.book.value,
-                                  );
-                                },
-                              ),
-                              // child: Text(
-                              //   _controller.selectedDateTimeline.value
-                              //       .toUpperCase(),
-                              //   style: textTheme.labelMedium?.copyWith(
-                              //     color: whiteColor,
-                              //   ),
-                              // ),
+                          ),
+                          Gap(5.dp()),
+                          Flexible(
+                            flex: 0,
+                            child: IconButtonWidget(
+                              icon: Icons.menu_book_rounded,
+                              iconSize: 25.dp(),
+                              iconColor: colorScheme.tertiary,
+                              onTap: () {
+                                BibleScriptureWidget(
+                                  context: context,
+                                  book: _controller.book.value,
+                                ).viewScripture();
+                              },
                             ),
-                          ],
-                        ),
+                            // child: Text(
+                            //   _controller.selectedDateTimeline.value
+                            //       .toUpperCase(),
+                            //   style: textTheme.labelMedium?.copyWith(
+                            //     color: whiteColor,
+                            //   ),
+                            // ),
+                          ),
+                        ],
+                      ),
 
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: Text(
-                            "Read bible text first",
-                            textAlign: TextAlign.start,
-                            style: textTheme.labelSmall?.copyWith(
-                              fontSize: 10.dp(),
-                              color: whiteColor,
-                            ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "Read bible text first",
+                          textAlign: TextAlign.start,
+                          style: textTheme.labelSmall?.copyWith(
+                            fontSize: 10.dp(),
+                            color: whiteColor,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Gap(5.dp()),
-                  ContainerWidget(
-                    color: colorScheme.inversePrimary,
-                    borderRadius: 0,
-                    onTap: () {},
-                    width: appDimen.screenWidth,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.dp(),
-                      vertical: 5.dp(),
-                    ),
-                    child: Text(
-                      _controller.book.value.devotion?.title ?? '',
-                      style: textTheme.labelLarge?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: darkColor,
                       ),
+                    ],
+                  ),
+                ),
+                Gap(5.dp()),
+                ContainerWidget(
+                  color: colorScheme.inversePrimary,
+                  borderRadius: 0,
+                  onTap: () {},
+                  width: appDimen.screenWidth,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.dp(),
+                    vertical: 5.dp(),
+                  ),
+                  child: Text(
+                    _controller.book.value.devotion?.title ?? '',
+                    style: textTheme.labelLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: darkColor,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Gap(12.dp()),
-            Expanded(
+          ),
+          Gap(12.dp()),
+          Obx(
+            () => Expanded(
               child: _controller.isLoadingContent.value
                   ? const LoaderWidget.withIndicator()
                   : (_controller.book.value.devotion?.content ?? '').isEmpty
@@ -230,8 +239,8 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
                       ),
                     ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -242,6 +251,7 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
       onPressed: _controller.onOpenBibleTextOnTap,
       shape: CircleBorder(),
       backgroundColor: colorScheme.surfaceBright,
+      heroTag: "youversion_fab_tag",
       child: AssetImageWidget(
         asset: icYouVersion,
         height: 30.dp(),

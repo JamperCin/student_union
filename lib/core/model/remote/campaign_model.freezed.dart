@@ -244,7 +244,7 @@ class _$CampaignModelImpl implements _CampaignModel {
   const _$CampaignModelImpl({
     @JsonKey(name: 'image_url') this.image = "",
     this.description = "",
-    this.currency = "",
+    this.currency = "GHS",
     this.id = 0,
     @JsonKey(name: 'goal_amount') this.goalAmount = "",
     @JsonKey(name: 'raised_amount') this.raisedAmount = "",

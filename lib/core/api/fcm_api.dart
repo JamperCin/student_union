@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:core_module/core/def/global_def.dart';
 import 'package:core_module/core_module.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -158,7 +157,7 @@ class FcmApi {
       String type = data.containsKey('payment_type')
           ? data['payment_type']
           : '';
-      String status = data.containsKey('status') ? data['status'] : '';
+     // String status = data.containsKey('status') ? data['status'] : '';
 
       switch (type) {
         case 'campaign_donation':
