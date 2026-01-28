@@ -42,7 +42,7 @@ class FcmApi {
     debugPrint('User granted permission: ${settings.authorizationStatus}');
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       await subscribeToTopicAllUsers();
-      
+
       await checkForApnToken();
     }
   }
@@ -54,14 +54,15 @@ class FcmApi {
   }
 
   Future<void> checkForApnToken() async {
+    if (isGuestUser.value) return;
     String? apnsToken = await _firebaseMessaging.getToken();
     apnsToken ??= await _firebaseMessaging.getAPNSToken();
     debugPrint("FCM TOKEN: $apnsToken");
-    _sendTokenToSerer(apnsToken);
+    _sendTokenToServer(apnsToken);
   }
 
   ///Send FCM Token to the server and save it locally to shared preference
-  Future<void> _sendTokenToSerer(String? token) async {
+  Future<void> _sendTokenToServer(String? token) async {
     if (token == null || token.isEmpty) return;
     if (appPreference.getFcmToken() != token) {
       final param = {
@@ -85,7 +86,7 @@ class FcmApi {
 
     _firebaseMessaging.onTokenRefresh.listen((newToken) {
       debugPrint('New FCM Token: $newToken');
-      _sendTokenToSerer(newToken);
+      _sendTokenToServer(newToken);
     });
   }
 
@@ -157,7 +158,7 @@ class FcmApi {
       String type = data.containsKey('payment_type')
           ? data['payment_type']
           : '';
-     // String status = data.containsKey('status') ? data['status'] : '';
+      // String status = data.containsKey('status') ? data['status'] : '';
 
       switch (type) {
         case 'campaign_donation':

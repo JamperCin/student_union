@@ -4,6 +4,7 @@ import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
 import 'package:student_union/core-ui/widgets/bible_scripture_widget.dart';
+import 'package:student_union/core-ui/widgets/create_account_button.dart';
 import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
@@ -33,6 +34,7 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
 
   @override
   Widget body(BuildContext context) {
+    if (isGuestUser.value) return CreateAccountButton();
     return PopScope(
       onPopInvokedWithResult: (canPop, onPop) {
         TextToSpeechApi().stop();
@@ -74,16 +76,6 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
                         ),
                       ),
                     ),
-                    // ButtonWidget(
-                    //   asset: icCalendar,
-                    //   backgroundColor: primaryGreenColor,
-                    //   text: _controller.selectedDate.value,
-                    //   textColor: colorScheme.tertiary,
-                    //   assetColor: colorScheme.tertiary,
-                    //   assetBgColor: colorScheme.tertiary.withAlpha(104),
-                    //   width: appDimen.screenWidth * 0.55,
-                    //   onTap: () => _controller.onPickCalendar(context),
-                    // ),
                     Gap(10.dp()),
                     Row(
                       children: [
@@ -158,7 +150,7 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
                             child: IconButtonWidget(
                               icon: Icons.menu_book_rounded,
                               iconSize: 25.dp(),
-                              iconColor: colorScheme.tertiary,
+                              iconColor: whiteColor,
                               onTap: () {
                                 BibleScriptureWidget(
                                   context: context,
@@ -201,11 +193,13 @@ class PurchasedBookDetailsScreen extends BaseSharedScreen {
                     horizontal: 16.dp(),
                     vertical: 5.dp(),
                   ),
-                  child: Text(
-                    _controller.book.value.devotion?.title ?? '',
-                    style: textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: darkColor,
+                  child: Obx(
+                    () => Text(
+                      _controller.book.value.devotion?.title ?? '',
+                      style: textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: darkColor,
+                      ),
                     ),
                   ),
                 ),

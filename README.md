@@ -204,6 +204,10 @@ APP_STORE_CONNECT_ISSUER_ID: Your Issuer ID from App store
 APP_STORE_CONNECT_KEY_CONTENT: The text content of your .p8 API key file in the form of base64 content
 MATCH_PASSWORD: The password you used to encrypt your certificates. The MATCH_PASSWORD is not something you "obtain" from Apple or GitLab; it is a passphrase that you create yourself to encrypt and decrypt your code-signing certificates.
 ```
+To obtain the base content of your .p8 file, kindly run this comand in the folder where your file resides:
+
+```cat AuthKey_XXXXXXXXXX.p8 | base64 | tr -d '\n' | pbcopy```
+
 In cases where you are mirroring from Gitlab to Github, you can make use of Gitlab secure files storage. You can setup another secret
 
 ```ruby

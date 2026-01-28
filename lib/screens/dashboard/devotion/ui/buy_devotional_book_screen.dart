@@ -1,6 +1,7 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
+import 'package:student_union/core-ui/widgets/create_account_button.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 
 import '../controller/devotion_controller.dart';
@@ -20,6 +21,7 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
 
   @override
   Widget body(BuildContext context) {
+    if (isGuestUser.value) return CreateAccountButton();
     final lead = '—  ';
     final script =
         "${getModel().devotionalType?.name}\n${getModel().devotionalType?.description}"; //'Deuteronomy 29:29';
