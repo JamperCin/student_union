@@ -53,9 +53,9 @@ class MoreController extends BaseController {
 
   void _onLogOutOnClick() {
     appPreference.logOut();
+    isGuestUser.value = false;
     navUtils.fireTargetOff(LoginScreen());
   }
-
 
   Future<void> onReadBibleOnClick(v) async {
     YouVersionUtils().openBibleReference();

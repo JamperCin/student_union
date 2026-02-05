@@ -1,6 +1,7 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
+import 'package:student_union/core-ui/widgets/create_account_button.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/dashboard/more/profile/controller/delete_account_controller.dart';
 
@@ -19,15 +20,12 @@ class DeleteAccountProfileScreen extends BaseSharedScreen {
 
   @override
   Widget body(BuildContext context) {
+    if (isGuestUser.value) return CreateAccountButton();
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 16.dp(), vertical: 20.dp()),
       child: Column(
         children: [
-          AssetImageWidget(
-            asset: icDanger,
-            height: 150.dp(),
-            width: 180.dp(),
-          ),
+          AssetImageWidget(asset: icDanger, height: 150.dp(), width: 180.dp()),
           Gap(50.dp()),
           Text(
             'Deleting your account will:',
@@ -57,7 +55,8 @@ class DeleteAccountProfileScreen extends BaseSharedScreen {
             textStyle: textTheme.labelMedium,
             text: 'Delete all your purchase history.',
           ),
-          Gap(10.dp()), IconTextWidget(
+          Gap(10.dp()),
+          IconTextWidget(
             asset: icDanger,
             textStyle: textTheme.labelMedium,
             text: 'Delete all your favorite devotional guides.',
@@ -66,7 +65,7 @@ class DeleteAccountProfileScreen extends BaseSharedScreen {
           ButtonWidget(
             text: "Delete Account",
             textColor: colorScheme.surface,
-            onTap:()=> _controller.onConfirmDeleteAccount(context),
+            onTap: () => _controller.onConfirmDeleteAccount(context),
           ),
           Gap(10.dp()),
         ],

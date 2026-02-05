@@ -92,6 +92,7 @@ class SignUpController extends BaseController {
 
   //User needs to verify email before logging in
   void onSuccessSignUp() {
+    isGuestUser.value = false;
     navUtils.fireTargetOff(
       SuccessScreen(
         onTap: () {

@@ -134,10 +134,10 @@ class DailyDevotionWidget extends StatelessWidget {
                         iconSize: 25.dp(),
                         iconColor: colorScheme.tertiary,
                         onTap: () {
-                          BibleScriptureWidget().viewScripture(
-                            context,
-                            list.first,
-                          );
+                          BibleScriptureWidget(
+                            context: context,
+                            book: list.first,
+                          ).viewScripture();
                         },
                       ),
                       Obx(

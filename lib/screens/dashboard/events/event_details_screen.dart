@@ -2,6 +2,7 @@ import 'package:core_module/core_module.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
+import 'package:student_union/core-ui/widgets/event_text_segmentation_widget.dart';
 import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/utils/share_file_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -116,7 +117,7 @@ class EventDetailsScreen extends BaseSharedScreen {
             width: appDimen.screenWidth,
             url: event.image,
             fit: BoxFit.contain,
-            heroTag: "${event.image}_${event.id}_${event.name}",
+            heroTag: event.heroTag,
             placeHolderWidget: ContainerWidget(
               height: appDimen.screenHeight * 0.4,
               width: appDimen.screenWidth,
@@ -129,7 +130,7 @@ class EventDetailsScreen extends BaseSharedScreen {
           //The rest of text in black normal font eg: +233 243 303 679 | +233 556 711 969. or http link
           Align(
             alignment: Alignment.centerLeft,
-            child: _buildDescriptionWithLinks(),
+            child: EventTextSegmentationWidget(event: event),
           ),
           Gap(20.dp()),
           Align(
