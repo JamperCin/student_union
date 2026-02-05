@@ -51,7 +51,7 @@ class UpcomingEventsWidget extends StatelessWidget {
                 width: 100.dp(),
                 url: event.image,
                 fit: BoxFit.cover,
-                heroTag: "${event.image}_${event.id}_${event.name}",
+                heroTag: event.heroTag,
                 placeHolderWidget: ContainerWidget(
                   height: 100.dp(),
                   width: 100.dp(),
@@ -141,7 +141,7 @@ class UpcomingEventsWidget extends StatelessWidget {
               width: appDimen.screenWidth,
               url: model.image,
               fit: BoxFit.cover,
-              heroTag: model.image,
+              heroTag: model.heroTag,
               placeHolderWidget: ContainerWidget(
                 height: height,
                 width: appDimen.screenWidth,

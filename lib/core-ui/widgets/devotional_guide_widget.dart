@@ -1,5 +1,6 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/widgets/create_account_button.dart';
 import 'package:student_union/core-ui/widgets/title_text_widget.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
@@ -75,6 +76,7 @@ class DevotionalGuideWidget extends StatelessWidget {
   }
 
   Widget _purchasedBooks() {
+    if (isGuestUser.value) return CreateAccountButton();
     page = 1;
 
     Map<String, dynamic>? param = {"page": page.toString(), "limit": "20"};

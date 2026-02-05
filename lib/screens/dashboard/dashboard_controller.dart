@@ -100,6 +100,7 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
   }
 
   Future<void> fetchUserDetails() async {
+    if (isGuestUser.value) return;
     final user = await userApiService.fetchUserDetails();
 
     if (user.status == "401" && Get.context != null && Get.context!.mounted) {

@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:core_module/core/def/global_def.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:student_union/core-ui/screen/base_web.dart';
 import 'package:student_union/core/base/base_controller.dart';
+import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/campaign_model.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 import 'package:student_union/core/model/remote/news_update_model.dart';
@@ -14,6 +17,7 @@ import 'package:student_union/screens/dashboard/events/all_events_screen.dart';
 import 'package:student_union/screens/dashboard/events/event_details_screen.dart';
 import 'package:student_union/screens/dashboard/more/notifications/notificationsScreen.dart';
 import 'package:student_union/screens/dashboard/more/profile/ui/profile_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/model/local/web_model.dart';
 import '../devotion/ui/buy_devotional_book_screen.dart';
@@ -21,12 +25,19 @@ import '../donate/ui/donate_to_core_ministry_screen.dart';
 import '../news/ui/news_screen.dart';
 
 class HomeController extends BaseController {
-  void onSettingsOnClick() {
-    //navUtils.fireTarget(ProfileScreen());
-  }
 
-  void onDonationOnClick(DonationModel model) {
-    navUtils.fireTarget(DonateToCoreMinistryScreen(), model: model);
+
+  Future<void> onDonationOnClick(DonationModel model) async {
+    if (Platform.isIOS) {
+      final userEmail = appPreference.getUserEmail();
+      var link =
+          "https://www.sughana.app/donations?campaign_id=${model.id}&email=$userEmail";
+      if (await canLaunchUrl(Uri.parse(link))) {
+        launchUrl(Uri.parse(link), mode: LaunchMode.externalApplication);
+      }
+    } else {
+      navUtils.fireTarget(DonateToCoreMinistryScreen(), model: model);
+    }
   }
 
   void onDevotionTap(DevotionalBookModel model) {

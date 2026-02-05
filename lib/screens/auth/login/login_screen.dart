@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core_module/core_module.dart';
+import 'package:student_union/core-ui/widgets/guest_login_button.dart';
 import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/auth/login/login_controller.dart';
@@ -45,10 +46,10 @@ class LoginScreen extends BaseScreenDecorated {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(70.dp()),
+          Gap(40.dp()),
           Center(
             child: AssetImageWidget(
-              height: appDimen.dimen(180),
+              height: appDimen.dimen(150),
               width: appDimen.dimen(250),
               asset: icSu,
             ),
@@ -116,7 +117,7 @@ class LoginScreen extends BaseScreenDecorated {
           ),
           SizedBox(height: appDimen.dimen(20)),
           // const DividerWidget.withChild(text: 'Or'),
-          SizedBox(height: appDimen.dimen(20)),
+          //SizedBox(height: appDimen.dimen(20)),
           // const ThirdPartyAuthWidget(),
           // SizedBox(height: appDimen.dimen(20)),
           Center(
@@ -142,7 +143,18 @@ class LoginScreen extends BaseScreenDecorated {
               ),
             ),
           ),
-          SizedBox(height: appDimen.dimen(20)),
+          Gap(5.dp()),
+          Center(
+            child: Text(
+              "OR",
+              style: textTheme.labelSmall?.copyWith(
+                color: colorScheme.tertiary,
+              ),
+            ),
+          ),
+          Gap(5.dp()),
+          GuestLoginButton(),
+          Gap(40.dp()),
         ],
       ),
     );
