@@ -49,6 +49,9 @@ String decodeErrorMessage(
     return "The user account has been disabled by an administrator. Please contact support for assistance.";
   } else if (error.contains("EMAIL_NOT_FOUND")) {
     return "There is no user record corresponding to this identifier. The user may have been deleted.";
+  }
+  if (error.contains("USER_NOT_FOUND")) {
+    return "There is no user record corresponding to this identifier. The user may have been deleted.";
   } else {
     return defaultMsg;
   }
