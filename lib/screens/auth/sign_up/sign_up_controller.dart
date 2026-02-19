@@ -83,7 +83,8 @@ class SignUpController extends BaseController {
       snackBarSnippet.snackBarError(
         decodeErrorMessage(
           response?.errors?.last ?? response?.error ?? "",
-          defaultMsg:
+          defaultMsg: response?.errors?.last ??
+              response?.error ??
               "Sorry, an error occurred during sign up. Kindly try again",
         ),
       );

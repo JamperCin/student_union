@@ -60,7 +60,11 @@ class DeleteAccountController extends BaseController {
       );
     } else {
       snackBarSnippet.snackBarError(
-        results.error ?? 'Account deletion failed. Please try again.',
+        decodeErrorMessage(
+          results.error ?? "",
+          defaultMsg:
+              results.error ?? "Account deletion failed. Please try again.",
+        ),
       );
     }
   }
