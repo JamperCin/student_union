@@ -29,6 +29,16 @@ Rxn<dynamic> currentEvent = Rxn<dynamic>();
 
 bool isMayBeLaterSet = false;
 
+void clearAppCaches() {
+  devGuideService.clearCache();
+  upcomingEventsApiService.clearCache();
+  campaignApiService.clearCache();
+  newsUpdateApiService.clearCache();
+  paymentApiService.clearCache();
+  currentEvent.value = null;
+  notificationCount.value = 0;
+}
+
 class EventTrigger {
   BookType? bookType;
   String screen;

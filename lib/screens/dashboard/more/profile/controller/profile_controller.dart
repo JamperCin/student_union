@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/db/app_preference.dart';
 import 'package:student_union/core/def/global_access.dart';
+import 'package:student_union/core/utils/app_feedback.dart';
 
 class ProfileController extends BaseController {
   String profilePic = "";
@@ -17,7 +18,10 @@ class ProfileController extends BaseController {
 
   Future<void> _initUpdate(BuildContext context) async {
     if (profilePic.isEmpty) {
-      snackBarSnippet.snackBarError("Please first upload a profile image");
+      AppFeedback.error(
+        "Please first upload a profile image",
+        context: context,
+      );
       return;
     }
 
@@ -31,9 +35,9 @@ class ProfileController extends BaseController {
     if (results.profilePic.isNotEmpty) {
       userApiService.profilePic.value = profilePic;
       appPreference.setString(AppPreference().PROFILE_IMAGE, profilePic);
-      snackBarSnippet.snackBarSuccess("Profile updated successfully");
+      AppFeedback.success("Profile updated successfully", context: context);
     } else {
-      snackBarSnippet.snackBarError("Failed to update profile image");
+      AppFeedback.error("Failed to update profile image", context: context);
     }
     const LoaderWidget().hideProgress();
   }

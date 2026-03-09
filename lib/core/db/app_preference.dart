@@ -131,6 +131,7 @@ class AppPreference {
   void logOut() {
     bool theme = getBool(THEME_TYPE);
     bool intro = getBool(IS_INTRO_SHOWN);
+    clearAppCaches();
     preference.clear();
     setBool(IS_INTRO_SHOWN, intro);
     setBool(THEME_TYPE, theme);
@@ -161,5 +162,4 @@ class AppPreference {
   String getUserEmail() {
     return getUser().email;
   }
-  
 }

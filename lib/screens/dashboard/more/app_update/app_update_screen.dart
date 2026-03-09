@@ -2,11 +2,16 @@ import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:student_union/core-ui/screen/base_shared_screen.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/app_update_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
 
 class AppUpdateScreen extends BaseSharedScreen {
+  final AppUpdateModel? model;
+
+  AppUpdateScreen({this.model});
+
   @override
   bool showAppBar() {
     return false;
@@ -14,7 +19,7 @@ class AppUpdateScreen extends BaseSharedScreen {
 
   @override
   AppUpdateModel getModel() {
-    return baseObject as AppUpdateModel;
+    return model ?? baseObject as AppUpdateModel;
   }
 
   @override
@@ -60,7 +65,7 @@ class AppUpdateScreen extends BaseSharedScreen {
             ),
             onPressed: () {
               isMayBeLaterSet = true;
-              navUtils.fireTargetHome();
+              AppRouter.goHome();
             },
             child: Text(
               'Maybe Later',

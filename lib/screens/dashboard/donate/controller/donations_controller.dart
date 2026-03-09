@@ -1,19 +1,21 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
-import 'package:student_union/core-ui/screen/base_web.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/enums/payment_type.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/model/remote/campaign_model.dart';
-import 'package:student_union/screens/dashboard/donate/ui/donations_history_screen.dart';
+import 'package:student_union/core-ui/widgets/app_confirm_transaction_layout.dart';
+import 'package:student_union/core/utils/app_bottom_sheet.dart';
+import 'package:student_union/core/utils/app_feedback.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../ui/donate_to_core_ministry_screen.dart';
-
 class DonationsController extends BaseController {
+  final RxInt refreshTick = 0.obs;
   TextEditingController amountTxt = TextEditingController();
 
   @override
@@ -30,7 +32,7 @@ class DonationsController extends BaseController {
       //Change tab after a short delay to allow for screen to load
       await Future.delayed(const Duration(seconds: 1));
 
-      navUtils.fireBack();
+      AppRouter.pop();
       onViewDonationHistory();
       currentEvent.value = null; //Reset event after use
     }
@@ -48,7 +50,7 @@ class DonationsController extends BaseController {
         launchUrl(Uri.parse(link), mode: LaunchMode.externalApplication);
       }
     } else {
-      navUtils.fireTarget(DonateToCoreMinistryScreen(), model: model);
+      AppRouter.pushNamed(AppRouteNames.donateToCoreMinistry, extra: model);
     }
   }
 
@@ -57,14 +59,14 @@ class DonationsController extends BaseController {
     final textTheme = Theme.of(context).textTheme;
 
     if (amountTxt.text.isEmpty || amountTxt.text.toDouble() < 1) {
-      SnackBarSnippet().snackBarError("Please enter a valid amount");
+      AppFeedback.error("Please enter a valid amount", context: context);
       return;
     }
 
-    BottomSheetWidget(
+    AppBottomSheet.show(
       context: context,
       height: appDimen.screenHeight * 0.5,
-      child: ConfirmTransactionLayout(
+      child: AppConfirmTransactionLayout(
         title: "Confirm Donation",
         titleStyle: textTheme.titleMedium?.copyWith(color: colorScheme.primary),
         subTitle:
@@ -130,27 +132,64 @@ class DonationsController extends BaseController {
   void navToPaymentScreen(String url, {DonationModel? campaign}) {
     if (url.isEmpty) return;
 
-    navUtils.fireTarget(
-      BaseWebView(
-        model: WebModel(
-          url: url,
-          onDoneOnclick: () {
-            navUtils.fireTargetHome();
-            if (url.isNotEmpty) {
-              currentEvent.value = EventTrigger(
-                screen: 'Donation',
-                model: campaign,
-              );
-            } else {
-              currentEvent.value = null;
-            }
-          },
-        ),
+    AppRouter.pushNamed(
+      AppRouteNames.web,
+      extra: WebModel(
+        url: url,
+        onDoneOnclick: () {
+          AppRouter.goHome();
+          if (url.isNotEmpty) {
+            currentEvent.value = EventTrigger(
+              screen: 'Donation',
+              model: campaign,
+            );
+          } else {
+            currentEvent.value = null;
+          }
+        },
       ),
     );
   }
 
   void onViewDonationHistory() {
-    navUtils.fireTarget(DonationsHistoryScreen());
+    AppRouter.pushNamed(AppRouteNames.donationsHistory);
+  }
+
+  Future<void> onRefresh() async {
+    await _refreshIfChanged(onlyWhenHasCachedData: false);
+  }
+
+  Future<void> onTabOpened() async {
+    await _refreshIfChanged(onlyWhenHasCachedData: true);
+  }
+
+  Future<void> _refreshIfChanged({required bool onlyWhenHasCachedData}) async {
+    if (onlyWhenHasCachedData &&
+        !campaignApiService.hasCachedCoreMinistries()) {
+      return;
+    }
+
+    final previous = jsonEncode(
+      campaignApiService
+          .getCachedCoreMinistries()
+          .map((e) => e.toJson())
+          .toList(),
+    );
+
+    try {
+      await campaignApiService.fetchListOfCoreMinistries(forceRefresh: true);
+    } catch (_) {
+      // Ignore refresh errors and keep page interactive.
+    }
+
+    final current = jsonEncode(
+      campaignApiService
+          .getCachedCoreMinistries()
+          .map((e) => e.toJson())
+          .toList(),
+    );
+    if (previous != current) {
+      refreshTick.value++;
+    }
   }
 }

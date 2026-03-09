@@ -24,8 +24,12 @@ class DailyDevotionWidget extends StatelessWidget {
     //
     // final param = {"date": formatDate};
 
-    return FutureBuilder(
+    final hasCachedData = devGuideService.hasCachedDailyDevotion();
+    return FutureBuilder<List<DevotionalBookModel>>(
       future: devGuideService.fetchDailyDevotion(),
+      initialData: hasCachedData
+          ? devGuideService.getCachedDailyDevotion()
+          : null,
       builder:
           (
             BuildContext context,

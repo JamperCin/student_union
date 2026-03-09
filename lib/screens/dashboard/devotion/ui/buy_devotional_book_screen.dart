@@ -7,7 +7,10 @@ import 'package:student_union/core/model/remote/devotional_book_model.dart';
 import '../controller/devotion_controller.dart';
 
 class BuyDevotionalBookScreen extends BaseSharedScreen {
+  final DevotionalBookModel? book;
   final _controller = Get.put(DevotionController());
+
+  BuyDevotionalBookScreen({this.book});
 
   @override
   String appBarTitle() {
@@ -16,7 +19,7 @@ class BuyDevotionalBookScreen extends BaseSharedScreen {
 
   @override
   DevotionalBookModel getModel() {
-    return super.getModel() as DevotionalBookModel;
+    return book ?? super.getModel() as DevotionalBookModel;
   }
 
   @override

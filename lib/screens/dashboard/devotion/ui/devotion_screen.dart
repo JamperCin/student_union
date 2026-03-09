@@ -66,7 +66,7 @@ class _DevotionsScreenState extends State<DevotionsScreen>
             child: TabBar(
               controller: _controller.tabController,
               onTap: _controller.onTabChanged,
-              
+
               tabs: [
                 const Tab(text: "Available Books"),
                 const Tab(text: "Purchased Books"),
@@ -95,10 +95,16 @@ class _DevotionsScreenState extends State<DevotionsScreen>
           ),
         ],
       ),
-      body: TabBarView(
-        controller: _controller.tabController,
-        children: tabsViews(),
-      ),
+      body: Obx(() {
+        final tabOpenTick = _controller.tabOpenTick.value;
+        return TabBarView(
+          key: ValueKey(
+            'devotions-open-$tabOpenTick-${_controller.selectedYear.value}',
+          ),
+          controller: _controller.tabController,
+          children: tabsViews(),
+        );
+      }),
     );
   }
 

@@ -28,16 +28,23 @@ class PaymentHistoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final firstPageParam = {"page": "1", "payment_type": paymentType.name};
+    final hasCachedData = paymentApiService.hasCachedPaymentHistory(
+      param: firstPageParam,
+    );
     return FutureBuilder(
       future: _onLoadMorePayment(page = 1),
-      builder: (
-        BuildContext context,
-        AsyncSnapshot<List<PaymentModel>> snapshot,
-      ) {
-        return snapshot.hasData && snapshot.data != null
-            ? _transactionLayout(context, snapshot.data!)
-            : ShimmerWidget.withList(length: onSeeMoreOnTap != null ? 1 : 5);
-      },
+      initialData: hasCachedData
+          ? paymentApiService.getCachedPaymentHistory(param: firstPageParam)
+          : null,
+      builder:
+          (BuildContext context, AsyncSnapshot<List<PaymentModel>> snapshot) {
+            return snapshot.hasData && snapshot.data != null
+                ? _transactionLayout(context, snapshot.data!)
+                : ShimmerWidget.withList(
+                    length: onSeeMoreOnTap != null ? 1 : 5,
+                  );
+          },
     );
   }
 
@@ -48,7 +55,8 @@ class PaymentHistoryWidget extends StatelessWidget {
           : const NoDataWidget(
               asset: icDonate,
               title: "No donation history available",
-              description: "Once you start donating to campaigns and core"
+              description:
+                  "Once you start donating to campaigns and core"
                   " ministries, your history will show up here. You don’t have any records just yet.",
             );
     }
@@ -57,13 +65,12 @@ class PaymentHistoryWidget extends StatelessWidget {
       children: [
         Gap(20.dp()),
         if (onSeeMoreOnTap != null)
-          TitleTextWidget(
-            text: "Donation History",
-            onTap: onSeeMoreOnTap,
-          ),
+          TitleTextWidget(text: "Donation History", onTap: onSeeMoreOnTap),
         if (onSeeMoreOnTap != null) Gap(5.dp()),
         if (onSeeMoreOnTap != null) //display only first 5 transactions only
-          ...list.getRange(0, list.length > 5 ? 5 : list.length).map((e) => _transactionItemWidget(context, e)),
+          ...list
+              .getRange(0, list.length > 5 ? 5 : list.length)
+              .map((e) => _transactionItemWidget(context, e)),
         if (onSeeMoreOnTap == null)
           Expanded(
             child: ListViewWidget(
@@ -74,7 +81,7 @@ class PaymentHistoryWidget extends StatelessWidget {
                 return _transactionItemWidget(context, item);
               },
             ),
-          )
+          ),
       ],
     );
   }
@@ -113,7 +120,7 @@ class PaymentHistoryWidget extends StatelessWidget {
                         TextSpan(
                           text: model.payableMeta?.title,
                           style: textTheme.labelLarge,
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -132,8 +139,9 @@ class PaymentHistoryWidget extends StatelessWidget {
                   // ),
                   // Gap(2.dp()),
                   Text(
-                    (DateTimeUtils().formatDate(model.createdAt ?? ''))
-                        .toString(),
+                    (DateTimeUtils().formatDate(
+                      model.createdAt ?? '',
+                    )).toString(),
                     style: textTheme.labelSmall?.copyWith(
                       color: colorTheme.inverseSurface,
                       fontSize: 10.dp(),
@@ -151,14 +159,16 @@ class PaymentHistoryWidget extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: model.currency ?? '',
-                        style: textTheme.labelMedium
-                            ?.copyWith(fontWeight: FontWeight.w700),
+                        style: textTheme.labelMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       TextSpan(text: ' ', style: textTheme.bodyMedium),
                       TextSpan(
                         text: model.amount.toDecimalPlaces(),
-                        style: textTheme.labelMedium
-                            ?.copyWith(fontWeight: FontWeight.w700),
+                        style: textTheme.labelMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ],
                   ),

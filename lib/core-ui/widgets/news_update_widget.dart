@@ -29,8 +29,15 @@ class NewsUpdateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    const firstPageParam = <String, Object>{"page": "1"};
+    final hasCachedData = newsUpdateApiService.hasCachedNews(
+      param: firstPageParam,
+    );
+    return FutureBuilder<List<NewsUpdateModel>>(
       future: _onLoadMoreNews(page = 1),
+      initialData: hasCachedData
+          ? newsUpdateApiService.getCachedNews(param: firstPageParam)
+          : null,
       builder: (context, data) {
         return (data.hasData && data.data != null)
             ? (withDetails

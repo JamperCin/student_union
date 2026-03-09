@@ -115,11 +115,13 @@ class MyApp extends StatelessWidget {
         //   "Screen Height: ${mq.size.height}, Width: ${mq.size.width}, Ratio: $ratio",
         // );
 
-        return GetMaterialApp(
+        return GetMaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: 'Scripture Union',
-          initialRoute: rootRoute,
-          getPages: appRoute,
+          routeInformationParser: appRouter.routeInformationParser,
+          routeInformationProvider: appRouter.routeInformationProvider,
+          routerDelegate: appRouter.routerDelegate,
+          backButtonDispatcher: appRouter.backButtonDispatcher,
           theme: lightMode, // uses appDimen safely now
           darkTheme: darkMode,
           themeMode: themeController.isDark.value

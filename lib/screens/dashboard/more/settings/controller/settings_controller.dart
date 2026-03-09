@@ -1,19 +1,19 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/app/theme_controller.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
-import 'package:student_union/screens/auth/forgot_password/ui/forgot_password_screen.dart';
-import 'package:student_union/screens/dashboard/more/profile/ui/delete_account_profile_screen.dart';
+import 'package:student_union/core/utils/app_bottom_sheet.dart';
 
 class SettingsController extends BaseController {
   void onChangePasswordOnClick() {
-    navUtils.fireTarget(ForgotPasswordScreen());
+    AppRouter.pushNamed(AppRouteNames.forgotPassword);
   }
 
   ///Confirm deletion of Account from the platform
   void onDeleteAccountOnClick(BuildContext context) {
-    navUtils.fireTarget(DeleteAccountProfileScreen());
+    AppRouter.pushNamed(AppRouteNames.deleteAccount);
   }
 
   void onThemeSwitch(bool isThemeDark) {
@@ -40,11 +40,11 @@ class SettingsController extends BaseController {
 
     String selectedSpeechRateKey = speech.key;
 
-    BottomSheetWidget(
+    AppBottomSheet.showWithTitle(
       context: context,
       height: appDimen.screenHeight * 0.4,
       title: "Select Speech Rate",
-      subChild: ListItemWidget(
+      child: ListItemWidget(
         items: getSpeechRatesList().map((e) => e.keys.first).toList(),
         selectedItem: selectedSpeechRateKey,
         onTap: (item) {

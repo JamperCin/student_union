@@ -1,23 +1,30 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/local/success_model.dart';
-import 'package:student_union/screens/auth/login/login_screen.dart';
-import 'package:student_union/screens/shared/success_screen.dart';
+import 'package:student_union/core-ui/widgets/app_confirm_transaction_layout.dart';
+import 'package:student_union/core/utils/app_bottom_sheet.dart';
+import 'package:student_union/core/utils/app_feedback.dart';
 
 class ForgotPasswordController extends BaseController {
   final emailTxtCtrl = TextEditingController();
 
   void onConfirmEmail(BuildContext context) {
-    if (!validationUtils.validateEntryEmail(emailTxtCtrl)) {
+    final email = emailTxtCtrl.text.toString().trim().toLowerCase();
+    if (!_isValidEmail(email)) {
+      AppFeedback.error(
+        "Please enter a valid email address.",
+        context: context,
+      );
       return;
     }
 
-    BottomSheetWidget(
+    AppBottomSheet.show(
       context: context,
       height: appDimen.screenHeight * 0.4,
-      child: ConfirmTransactionLayout(
+      child: AppConfirmTransactionLayout(
         title: "Confirm your email",
         subTitle:
             "Kindly confirm your email below as we will send you a link to reset your password",
@@ -54,18 +61,24 @@ class ForgotPasswordController extends BaseController {
             'A password reset link has been sent to your email address. Kindly check your mail to reset your password.',
       );
 
-      navUtils.fireTarget(
-        SuccessScreen(
-          onTap: () {
-            navUtils.fireTargetOff(LoginScreen());
-          },
+      AppRouter.pushNamed(
+        AppRouteNames.success,
+        extra: SuccessRouteExtra(
+          model: model,
+          onDone: () => AppRouter.goNamed(AppRouteNames.login),
         ),
-        model: model,
       );
     } else {
-      snackBarSnippet.snackBarError(
+      AppFeedback.error(
         results.error ?? 'Email provided not found',
+        context: context,
       );
     }
+  }
+
+  bool _isValidEmail(String email) {
+    return RegExp(
+      r"^[a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+$",
+    ).hasMatch(email);
   }
 }

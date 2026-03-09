@@ -7,9 +7,10 @@ import 'package:student_union/core/res/asset_path.dart';
 import '../controller/donations_controller.dart';
 
 class DonateToCoreMinistryScreen extends BaseSharedScreen {
+  final DonationModel? donation;
   final _controller = Get.put(DonationsController());
 
-  DonateToCoreMinistryScreen() {
+  DonateToCoreMinistryScreen({this.donation}) {
     _controller.amountTxt.text = "";
   }
 
@@ -20,7 +21,7 @@ class DonateToCoreMinistryScreen extends BaseSharedScreen {
 
   @override
   DonationModel getModel() {
-    return super.getModel() as DonationModel;
+    return donation ?? super.getModel() as DonationModel;
   }
 
   @override

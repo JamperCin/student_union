@@ -1,17 +1,13 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_union/screens/dashboard/dashboard_controller.dart';
-import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart';
-import 'package:student_union/screens/dashboard/donate/ui/donations_core_ministries_screen.dart';
-import 'package:student_union/screens/dashboard/home/home_screen.dart';
-import 'package:student_union/screens/dashboard/more/more_screen.dart';
-import 'package:student_union/screens/dashboard/news/ui/news_screen.dart';
-
 
 class MainDashboardScreen extends BaseScreenStandard {
+  final StatefulNavigationShell navigationShell;
   final _controller = Get.put(DashboardController());
 
-  MainDashboardScreen() {
+  MainDashboardScreen({required this.navigationShell}) {
     _controller.initData();
   }
 
@@ -22,23 +18,7 @@ class MainDashboardScreen extends BaseScreenStandard {
 
   @override
   Widget body(BuildContext context) {
-    return Obx(() {
-      BottomBarModel model =
-          _controller.bottomBarMenuList.firstWhere((e) => e.isSelected == true);
-
-      switch (model.text) {
-        case "Devotional":
-          return DevotionsScreen();
-        case "Donation":
-          return DonationCoreMinistriesScreen();
-        case "News Update":
-          return NewsScreen();
-        case "More":
-          return MoreScreen();
-        default:
-          return HomeScreen();
-      }
-    });
+    return navigationShell;
   }
 
   @override
@@ -53,28 +33,32 @@ class MainDashboardScreen extends BaseScreenStandard {
       ),
       margin: EdgeInsets.zero,
       elevation: 5,
-      child: Obx(
-        () => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ..._controller.bottomBarMenuList.value.map((model) {
-                  return BottomAppBarWidget(
-                    activeColor: colorScheme.secondary,
-                    inActiveColor: colorScheme.primary,
-                    model: model,
-                    style: textTheme.labelMedium?.copyWith(fontSize: 12.dp()),
-                    onTap: () {
-                      _controller.onBottomMenuOnClick(model);
-                    },
-                  );
-                })
-              ],
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List<Widget>.generate(
+              _controller.bottomBarMenuList.length,
+              (index) {
+                final model = _controller.bottomBarMenuList[index].copyWith(
+                  isSelected: index == navigationShell.currentIndex,
+                );
+
+                return BottomAppBarWidget(
+                  activeColor: colorScheme.secondary,
+                  inActiveColor: colorScheme.primary,
+                  model: model,
+                  style: textTheme.labelMedium?.copyWith(fontSize: 12.dp()),
+                  onTap: () {
+                    navigationShell.goBranch(index, initialLocation: true);
+                    _controller.onBottomMenuOnClick(index);
+                  },
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

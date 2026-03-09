@@ -43,8 +43,12 @@ class DevotionalGuideWidget extends StatelessWidget {
   Widget _availableBooks() {
     ///Return available books in a horizontal list
     if (axis == Axis.horizontal) {
-      return FutureBuilder(
+      final hasCachedData = devGuideService.hasCachedDevotionalBooks();
+      return FutureBuilder<List<DevotionalBookModel>>(
         future: devGuideService.fetchDevotionalBooks(),
+        initialData: hasCachedData
+            ? devGuideService.getCachedDevotionalBooks()
+            : null,
         builder: (context, data) {
           return (data.hasData && data.data != null)
               ? _horizontalDisplayOfAvailableBooksWidget(data.data!)
@@ -61,8 +65,14 @@ class DevotionalGuideWidget extends StatelessWidget {
       param.putIfAbsent("year", () => yearFilter);
     }
 
-    return FutureBuilder(
+    final hasCachedData = devGuideService.hasCachedDevotionalBooks(
+      param: param,
+    );
+    return FutureBuilder<List<DevotionalBookModel>>(
       future: devGuideService.fetchDevotionalBooks(param: param),
+      initialData: hasCachedData
+          ? devGuideService.getCachedDevotionalBooks(param: param)
+          : null,
       key: ValueKey(const Uuid().v4()),
       builder: (context, data) {
         return (data.hasData && data.data != null)
@@ -84,8 +94,12 @@ class DevotionalGuideWidget extends StatelessWidget {
       param.putIfAbsent("year", () => yearFilter);
     }
 
-    return FutureBuilder(
+    final hasCachedData = devGuideService.hasCachedPurchasedBooks(param: param);
+    return FutureBuilder<List<DevotionalBookModel>>(
       future: devGuideService.fetchPurchasedBooks(param: param),
+      initialData: hasCachedData
+          ? devGuideService.getCachedPurchasedBooks(param: param)
+          : null,
       key: ValueKey(const Uuid().v4()),
       builder: (context, snapshot) {
         return (snapshot.hasData && snapshot.data != null)

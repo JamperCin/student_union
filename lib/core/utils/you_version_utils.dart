@@ -1,9 +1,9 @@
 import 'package:core_module/core/def/global_def.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/enums/bible_version.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../core-ui/screen/base_web.dart';
 import '../model/local/web_model.dart';
 
 class YouVersionUtils {
@@ -163,10 +163,9 @@ class YouVersionUtils {
       if (await canLaunchUrl(mobileUri)) {
         await launchUrl(mobileUri);
       } else {
-        navUtils.fireTarget(
-          BaseWebView(
-            model: WebModel(title: "Read Bible ($version)", uri: webUri),
-          ),
+        AppRouter.pushNamed(
+          AppRouteNames.web,
+          extra: WebModel(title: "Read Bible ($version)", uri: webUri),
         );
       }
     } catch (e) {

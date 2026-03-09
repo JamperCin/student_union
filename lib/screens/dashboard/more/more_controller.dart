@@ -1,15 +1,12 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
-import 'package:student_union/core-ui/screen/base_web.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
+import 'package:student_union/core/utils/app_bottom_sheet.dart';
 import 'package:student_union/core/utils/you_version_utils.dart';
-import 'package:student_union/screens/auth/login/login_screen.dart';
-import 'package:student_union/screens/dashboard/more/about/about_screen.dart';
-import 'package:student_union/screens/dashboard/more/profile/ui/profile_screen.dart';
-import 'package:student_union/screens/dashboard/more/settings/ui/settings_screen.dart';
 
 class MoreController extends BaseController {
   // RxString profilePic =
@@ -17,19 +14,19 @@ class MoreController extends BaseController {
   //         .obs;
 
   void onEditProfileOnClick() {
-    navUtils.fireTarget(ProfileScreen());
+    AppRouter.pushNamed(AppRouteNames.profile);
   }
 
   void onSettingsOnClick() {
-    navUtils.fireTarget(SettingsScreen());
+    AppRouter.pushNamed(AppRouteNames.settings);
   }
 
   void onLogOutOnClick(BuildContext context) {
-    BottomSheetWidget(
+    AppBottomSheet.showWithTitle(
       context: context,
       height: appDimen.screenHeight * 0.4,
       title: "Log Out",
-      subChild: Padding(
+      child: Padding(
         padding: EdgeInsets.all(10.dp()),
         child: Column(
           children: [
@@ -54,7 +51,7 @@ class MoreController extends BaseController {
   void _onLogOutOnClick() {
     appPreference.logOut();
     isGuestUser.value = false;
-    navUtils.fireTargetOff(LoginScreen());
+    AppRouter.goNamed(AppRouteNames.login);
   }
 
   Future<void> onReadBibleOnClick(v) async {
@@ -62,27 +59,25 @@ class MoreController extends BaseController {
   }
 
   void onCounsellingOnClick(v) {
-    navUtils.fireTarget(
-      BaseWebView(
-        model: WebModel(
-          url: "https://tawk.to/socialmediamissionary",
-          title: "Counselling & Prayers",
-        ),
+    AppRouter.pushNamed(
+      AppRouteNames.web,
+      extra: WebModel(
+        url: "https://tawk.to/socialmediamissionary",
+        title: "Counselling & Prayers",
       ),
     );
   }
 
   void onAboutOnClick() {
-    navUtils.fireTarget(AboutScreen());
+    AppRouter.pushNamed(AppRouteNames.about);
   }
 
   void onPrivacyPolicyOnClick() {
-    navUtils.fireTarget(
-      BaseWebView(
-        model: WebModel(
-          url: "https://sughana.org/privacy/",
-          title: "Privacy Policy",
-        ),
+    AppRouter.pushNamed(
+      AppRouteNames.web,
+      extra: WebModel(
+        url: "https://sughana.org/privacy/",
+        title: "Privacy Policy",
       ),
     );
   }

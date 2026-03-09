@@ -1,5 +1,6 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core/utils/app_feedback.dart';
 
 class BaseController extends GetxController {
   ///A generic method to execute any request
@@ -14,7 +15,7 @@ class BaseController extends GetxController {
   }) async {
     if (validate != null && !validate()) {
       if (validationErrorMessage != null) {
-        SnackBarSnippet().snackBarError(validationErrorMessage);
+        AppFeedback.error(validationErrorMessage, context: context);
       }
       return;
     }
@@ -22,7 +23,7 @@ class BaseController extends GetxController {
     if (context != null) {
       const LoaderWidget().showProgressIndicator(context: context);
     }
-    final response  = await execute?.call();
+    final response = await execute?.call();
     if (context != null) const LoaderWidget().hideProgress();
     results?.call(response);
   }

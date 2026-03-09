@@ -1,18 +1,28 @@
+import 'dart:async';
+
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
 import 'package:student_union/core/api/fcm_api.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/core/services/app/app_update_service.dart';
-import 'package:student_union/screens/auth/login/login_screen.dart';
-import 'package:student_union/screens/dashboard/more/app_update/app_update_screen.dart';
+import 'package:student_union/screens/dashboard/devotion/controller/devotion_controller.dart';
+import 'package:student_union/screens/dashboard/donate/controller/donations_controller.dart';
+import 'package:student_union/screens/dashboard/home/home_controller.dart';
+import 'package:student_union/screens/dashboard/news/controller/news_controller.dart';
 
 class DashboardController extends BaseController with WidgetsBindingObserver {
+  bool _hasInitialized = false;
+
   ///Initialise this when the main dashboard is called
   Future<void> initData() async {
+    if (_hasInitialized) return;
+    _hasInitialized = true;
+
     await Future.delayed(const Duration(milliseconds: 180));
     await fetchUserDetails();
     await checkForScreenUpdate();
@@ -33,14 +43,13 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
       "Current Build Number: $buildNumber, New Build Number: $newBuildNumber",
     );
 
-    if (newBuildNumber > buildNumber &&
-        Get.context != null &&
-        Get.context!.mounted) {
+    final context = AppRouter.rootNavigatorKey.currentContext;
+    if (newBuildNumber > buildNumber && context != null && context.mounted) {
       if (isMayBeLaterSet) {
         isMayBeLaterSet = false;
         return;
       }
-      navUtils.fireTargetOff(AppUpdateScreen(), model: appUpdate);
+      AppRouter.goNamed(AppRouteNames.appUpdate, extra: appUpdate);
     }
   }
 
@@ -48,16 +57,17 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
     final event = currentEvent.value;
     if (event is EventTrigger) {
       await Future.delayed(const Duration(milliseconds: 180));
-      onBottomMenuOnClick(BottomBarModel(text: event.screen));
+      final index = _tabIndexFromLabel(event.screen);
+      AppRouter.goToTabByLabel(event.screen);
+      onTabOpened(index);
     }
   }
 
   ///List of menu for the bottom navigation bar
-  RxList<BottomBarModel> bottomBarMenuList = [
+  final List<BottomBarModel> bottomBarMenuList = [
     BottomBarModel(
       asset: icHomeIcon,
       text: 'Home',
-      isSelected: true,
       iconSize: 22.dp(),
       key: GlobalKey<AnimatorWidgetState>(),
     ),
@@ -85,33 +95,70 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
       iconSize: 22.dp(),
       key: GlobalKey<AnimatorWidgetState>(),
     ),
-  ].obs;
+  ];
 
-  void onBottomMenuOnClick(BottomBarModel model) {
-    var mod = bottomBarMenuList.firstWhere((e) => e.isSelected == true);
-    if (mod == model) return;
+  void onBottomMenuOnClick(int index) {
+    bottomBarMenuList[index].key?.currentState?.forward();
+    onTabOpened(index);
+  }
 
-    bottomBarMenuList.value = bottomBarMenuList
-        .map((e) => e.copyWith(isSelected: e.text == model.text))
-        .toList();
+  void onTabOpened(int index) {
+    switch (index) {
+      case 0:
+        if (Get.isRegistered<HomeController>()) {
+          unawaited(Get.find<HomeController>().onTabOpened());
+        }
+        break;
+      case 1:
+        if (Get.isRegistered<DevotionController>()) {
+          unawaited(Get.find<DevotionController>().onTabOpened());
+        }
+        break;
+      case 2:
+        if (Get.isRegistered<DonationsController>()) {
+          unawaited(Get.find<DonationsController>().onTabOpened());
+        }
+        break;
+      case 3:
+        if (Get.isRegistered<NewsController>()) {
+          unawaited(Get.find<NewsController>().onTabOpened());
+        }
+        break;
+    }
+  }
 
-    mod = bottomBarMenuList.firstWhere((e) => e.isSelected == true);
-    mod.key?.currentState?.forward();
+  int _tabIndexFromLabel(String screen) {
+    switch (screen.toLowerCase()) {
+      case 'devotional':
+        return 1;
+      case 'donation':
+        return 2;
+      case 'news update':
+      case 'news':
+        return 3;
+      case 'more':
+        return 4;
+      default:
+        return 0;
+    }
   }
 
   Future<void> fetchUserDetails() async {
     if (isGuestUser.value) return;
     final user = await userApiService.fetchUserDetails();
 
-    if (user.status == "401" && Get.context != null && Get.context!.mounted) {
+    final context = AppRouter.rootNavigatorKey.currentContext;
+    if (user.status == "401" && context != null && context.mounted) {
       snackBarSnippet.showCountdownSnackBar(
-        Get.context!,
+        context,
         message: "Session Timeout!. Kindly login again.",
         actionIcon: Icons.timer_off_outlined,
         showCloseIcon: false,
         onProgressCompletion: () async {
           await Future.delayed(const Duration(seconds: 1));
-          navUtils.fireTargetOff(LoginScreen());
+          appPreference.logOut();
+          isGuestUser.value = false;
+          AppRouter.goNamed(AppRouteNames.login);
         },
       );
 
