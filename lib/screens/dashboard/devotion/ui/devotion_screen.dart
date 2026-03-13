@@ -30,7 +30,7 @@ class _DevotionsScreenState extends State<DevotionsScreen>
 
   @override
   void initState() {
-    _controller.checkForScreenUpdate();
+   // _controller.checkForScreenUpdate();
     _controller.tabController = TabController(
       length: 2,
       vsync: this,
@@ -112,6 +112,7 @@ class _DevotionsScreenState extends State<DevotionsScreen>
     return [
       Obx(
         () => DevotionalGuideWidget.withAvailableBooks(
+          heroScope: 'devotions_available',
           yearFilter: _controller.selectedYear.value,
           onTap: _controller.onDevotionTap,
           axis: Axis.vertical,
@@ -119,6 +120,7 @@ class _DevotionsScreenState extends State<DevotionsScreen>
       ),
       Obx(
         () => DevotionalGuideWidget.withPurchasedBooks(
+          heroScope: 'devotions_purchased',
           yearFilter: _controller.selectedYear.value,
           onTap: _controller.onPurchasedBookOnClick,
         ),

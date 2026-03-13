@@ -105,9 +105,15 @@ class SignUpController extends BaseController {
     if (response != null && response.token != null) {
       appPreference.setToken(response.token!);
       appPreference.setUser(response.user);
+      await revenueCatService.identifyUser(
+        response.user?.email.isNotEmpty == true
+            ? response.user!.email
+            : emailTxtCtrl.getData().toLowerCase(),
+      );
       //Navigate to Success Screen and then to Login Screen
       onSuccessSignUp();
     } else {
+      if (!context.mounted) return;
       AppFeedback.error(
         decodeErrorMessage(
           response?.errors?.last ?? response?.error ?? "",

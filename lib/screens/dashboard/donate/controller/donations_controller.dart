@@ -18,25 +18,25 @@ class DonationsController extends BaseController {
   final RxInt refreshTick = 0.obs;
   TextEditingController amountTxt = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-    checkForScreenUpdate();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   checkForScreenUpdate();
+  // }
 
-  Future<void> checkForScreenUpdate() async {
-    final event = currentEvent.value;
+  // Future<void> checkForScreenUpdate() async {
+  //   final event = currentEvent.value;
 
-    if (event is EventTrigger && event.model is DonationModel) {
-      debugPrint("EVENT TRIGGERED ---> ${event.model}");
-      //Change tab after a short delay to allow for screen to load
-      await Future.delayed(const Duration(seconds: 1));
+  //   if (event is EventTrigger && event.model is DonationModel) {
+  //     debugPrint("EVENT TRIGGERED ---> ${event.model}");
+  //     //Change tab after a short delay to allow for screen to load
+  //     await Future.delayed(const Duration(seconds: 1));
 
-      AppRouter.pop();
-      onViewDonationHistory();
-      currentEvent.value = null; //Reset event after use
-    }
-  }
+  //     AppRouter.pop();
+  //     onViewDonationHistory();
+  //     currentEvent.value = null; //Reset event after use
+  //   }
+  // }
 
   //Onclick listener when a donation is clicked
   //For now if iOS, open in external browser else navigate to internal screen
@@ -137,15 +137,16 @@ class DonationsController extends BaseController {
       extra: WebModel(
         url: url,
         onDoneOnclick: () {
-          AppRouter.goHome();
-          if (url.isNotEmpty) {
-            currentEvent.value = EventTrigger(
-              screen: 'Donation',
-              model: campaign,
-            );
-          } else {
-            currentEvent.value = null;
-          }
+          AppRouter.goNamed(  AppRouteNames.donationsHistory, extra: campaign);
+          // AppRouter.goHome();
+          // if (url.isNotEmpty) {
+          //   currentEvent.value = EventTrigger(
+          //     screen: 'Donation',
+          //     model: campaign,
+          //   );
+          // } else {
+          //   currentEvent.value = null;
+          // }
         },
       ),
     );

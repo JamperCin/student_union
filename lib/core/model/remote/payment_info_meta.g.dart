@@ -14,6 +14,9 @@ _$PaymentInfoMetaImpl _$$PaymentInfoMetaImplFromJson(
   initResponse: json['init_response'] == null
       ? null
       : InitResponse.fromJson(json['init_response'] as Map<String, dynamic>),
+  paystackInit: json['paystack_init'] == null
+      ? null
+      : InitResponse.fromJson(json['paystack_init'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$$PaymentInfoMetaImplToJson(
@@ -22,6 +25,7 @@ Map<String, dynamic> _$$PaymentInfoMetaImplToJson(
   'note': instance.note,
   'campaign_id': instance.campaignId,
   'init_response': instance.initResponse,
+  'paystack_init': instance.paystackInit,
 };
 
 _$InitResponseImpl _$$InitResponseImplFromJson(Map<String, dynamic> json) =>

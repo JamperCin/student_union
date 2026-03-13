@@ -55,6 +55,7 @@ class HomeScreen extends BaseScreenStandard {
 
         ///Devotions
         DevotionalGuideWidget.withAvailableBooks(
+          heroScope: 'home_devotional',
           onTap: _controller.onDevotionTap,
           onSeeMoreOnTap: _controller.onSeeMoreDevotionalBooks,
         ),

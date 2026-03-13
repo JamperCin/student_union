@@ -4,6 +4,7 @@ import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Ap
 import 'package:student_union/core-ui/widgets/draggable_bottom_sheet.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
+import 'package:student_union/core/utils/app_feedback.dart';
 
 class BibleScriptureWidget {
   final DevotionalBookModel book;
@@ -12,6 +13,10 @@ class BibleScriptureWidget {
   BibleScriptureWidget({required this.book, required this.context});
 
   void viewScripture() {
+    if (book.devotion == null || book.devotion?.referenceText == null || (book.devotion?.referenceText ?? '').isEmpty ) {
+      AppFeedback.error('No scripture found.', context: context);
+      return;
+    }
     DraggableBottomSheetWidget().show(
       context: context,
       backgroundImageAsset: icDevotionBg,

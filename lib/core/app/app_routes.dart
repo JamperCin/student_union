@@ -84,6 +84,10 @@ class AppRoutePaths {
   static const String donateToCoreMinistry = '/donate-to-core-ministry';
   static const String buyDevotionalBook = '/buy-devotional-book';
   static const String purchasedBookDetails = '/purchased-book-details';
+  static const String bookDetails =
+      '$dashboardDevotional/${AppRouteNames.purchasedBookDetails}';
+  static const String buybook =
+      '$dashboardDevotional/${AppRouteNames.buyDevotionalBook}';
   static const String allEvents = '/all-events';
   static const String eventDetails = '/event-details';
   static const String success = '/success';
@@ -142,6 +146,32 @@ final GoRouter appRouter = GoRouter(
               path: AppRoutePaths.dashboardDevotional,
               name: AppRouteNames.dashboardDevotional,
               builder: (_, __) => DevotionsScreen(),
+              routes: <RouteBase>[
+                //Devotional details
+                GoRoute(
+                  parentNavigatorKey: AppRouter.rootNavigatorKey,
+                  path: AppRouteNames.purchasedBookDetails,
+                  name: AppRouteNames.purchasedBookDetails,
+                  builder: (_, state) {
+                    final book = state.extra is DevotionalBookModel
+                        ? state.extra! as DevotionalBookModel
+                        : const DevotionalBookModel();
+                    return PurchasedBookDetailsScreen(book: book);
+                  },
+                ),
+                //Buy devotional book
+                GoRoute(
+                  parentNavigatorKey: AppRouter.rootNavigatorKey,
+                  path: AppRouteNames.buyDevotionalBook,
+                  name: AppRouteNames.buyDevotionalBook,
+                  builder: (_, state) {
+                    final book = state.extra is DevotionalBookModel
+                        ? state.extra! as DevotionalBookModel
+                        : const DevotionalBookModel();
+                    return BuyDevotionalBookScreen(book: book);
+                  },
+                ),
+              ],
             ),
           ],
         ),
@@ -151,6 +181,15 @@ final GoRouter appRouter = GoRouter(
               path: AppRoutePaths.dashboardDonation,
               name: AppRouteNames.dashboardDonation,
               builder: (_, __) => DonationCoreMinistriesScreen(),
+              routes: [
+                //Donation history
+                GoRoute(
+                  parentNavigatorKey: AppRouter.rootNavigatorKey,
+                  path: AppRouteNames.donationsHistory,
+                  name: AppRouteNames.donationsHistory,
+                  builder: (_, __) => DonationsHistoryScreen(),
+                ),
+              ],
             ),
           ],
         ),
@@ -215,12 +254,12 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteNames.about,
       builder: (_, __) => AboutScreen(),
     ),
-    GoRoute(
-      parentNavigatorKey: AppRouter.rootNavigatorKey,
-      path: AppRoutePaths.donationsHistory,
-      name: AppRouteNames.donationsHistory,
-      builder: (_, __) => DonationsHistoryScreen(),
-    ),
+    // GoRoute(
+    //   parentNavigatorKey: AppRouter.rootNavigatorKey,
+    //   path: AppRoutePaths.donationsHistory,
+    //   name: AppRouteNames.donationsHistory,
+    //   builder: (_, __) => DonationsHistoryScreen(),
+    // ),
     GoRoute(
       parentNavigatorKey: AppRouter.rootNavigatorKey,
       path: AppRoutePaths.donateToCoreMinistry,
@@ -232,28 +271,29 @@ final GoRouter appRouter = GoRouter(
         return DonateToCoreMinistryScreen(donation: donation);
       },
     ),
-    GoRoute(
-      parentNavigatorKey: AppRouter.rootNavigatorKey,
-      path: AppRoutePaths.buyDevotionalBook,
-      name: AppRouteNames.buyDevotionalBook,
-      builder: (_, state) {
-        final book = state.extra is DevotionalBookModel
-            ? state.extra! as DevotionalBookModel
-            : const DevotionalBookModel();
-        return BuyDevotionalBookScreen(book: book);
-      },
-    ),
-    GoRoute(
-      parentNavigatorKey: AppRouter.rootNavigatorKey,
-      path: AppRoutePaths.purchasedBookDetails,
-      name: AppRouteNames.purchasedBookDetails,
-      builder: (_, state) {
-        final book = state.extra is DevotionalBookModel
-            ? state.extra! as DevotionalBookModel
-            : const DevotionalBookModel();
-        return PurchasedBookDetailsScreen(book: book);
-      },
-    ),
+    // GoRoute(
+    //   parentNavigatorKey: AppRouter.rootNavigatorKey,
+    //   path: AppRoutePaths.buyDevotionalBook,
+    //   name: AppRouteNames.buyDevotionalBook,
+    //   builder: (_, state) {
+    //     final book = state.extra is DevotionalBookModel
+    //         ? state.extra! as DevotionalBookModel
+    //         : const DevotionalBookModel();
+    //     return BuyDevotionalBookScreen(book: book);
+    //   },
+    // ),
+    //TODO
+    // GoRoute(
+    //   parentNavigatorKey: AppRouter.rootNavigatorKey,
+    //   path: AppRoutePaths.purchasedBookDetails,
+    //   name: AppRouteNames.purchasedBookDetails,
+    //   builder: (_, state) {
+    //     final book = state.extra is DevotionalBookModel
+    //         ? state.extra! as DevotionalBookModel
+    //         : const DevotionalBookModel();
+    //     return PurchasedBookDetailsScreen(book: book);
+    //   },
+    // ),
     GoRoute(
       parentNavigatorKey: AppRouter.rootNavigatorKey,
       path: AppRoutePaths.allEvents,
@@ -321,6 +361,7 @@ class AppRouter {
     final path = state.uri.path;
     final introShown = appPreference.isIntroShown();
     final authenticated = _isAuthenticated();
+    debugPrint('redirect path: $path');
 
     if (path == AppRoutePaths.root) {
       if (!introShown) return AppRoutePaths.intro;
@@ -355,8 +396,16 @@ class AppRouter {
     return appRouter.pushNamed<T>(name, extra: extra);
   }
 
+  static Future<T?> pushPath<T extends Object?>(String path, {Object? extra}) {
+    return appRouter.push<T>(path, extra: extra);
+  }
+
   static void goNamed(String name, {Object? extra}) {
     appRouter.goNamed(name, extra: extra);
+  }
+
+  static void goPath(String path, {Object? extra}) {
+    appRouter.go(path, extra: extra);
   }
 
   static void goHome() {
