@@ -19,6 +19,7 @@ import 'package:student_union/core/services/devotional_guide/devotional_guide_ap
 import 'package:student_union/core/services/news_update/news_update_api_service.dart';
 import 'package:student_union/core/services/notifications/notification_api_service.dart';
 import 'package:student_union/core/services/payment/payment_api_service.dart';
+import 'package:student_union/core/services/purchases/revenuecat_service.dart';
 import 'package:student_union/core/services/upcoming_events/upcoming_events_api_service.dart';
 import 'package:student_union/core/services/user/user_api_service.dart';
 import 'core/services/auth/auth_api_service.dart';
@@ -91,6 +92,10 @@ Future<void> _initializeApp() async {
   newsUpdateApiService = NewsUpdateApiService();
   authApiService = AuthApiService();
   paymentApiService = PaymentApiService();
+  revenueCatService = RevenueCatService();
+  await revenueCatService.initialize(
+    appUserId: appPreference.isLogin() ? appPreference.getUserEmail() : null,
+  );
   notificationApiService = NotificationApiService();
   notificationApi = NotificationApi();
 }
@@ -115,11 +120,13 @@ class MyApp extends StatelessWidget {
         //   "Screen Height: ${mq.size.height}, Width: ${mq.size.width}, Ratio: $ratio",
         // );
 
-        return GetMaterialApp(
+        return GetMaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: 'Scripture Union',
-          initialRoute: rootRoute,
-          getPages: appRoute,
+          routeInformationParser: appRouter.routeInformationParser,
+          routeInformationProvider: appRouter.routeInformationProvider,
+          routerDelegate: appRouter.routerDelegate,
+          backButtonDispatcher: appRouter.backButtonDispatcher,
           theme: lightMode, // uses appDimen safely now
           darkTheme: darkMode,
           themeMode: themeController.isDark.value

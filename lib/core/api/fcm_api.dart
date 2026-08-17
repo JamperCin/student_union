@@ -4,11 +4,9 @@ import 'package:core_module/core_module.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/firebase_options.dart';
-import 'package:student_union/screens/dashboard/devotion/ui/devotion_screen.dart';
-import 'package:student_union/screens/dashboard/donate/ui/donations_history_screen.dart';
-import 'package:student_union/screens/dashboard/more/notifications/notificationsScreen.dart';
 
 class FcmApi {
   static FcmApi? _instance;
@@ -110,7 +108,7 @@ class FcmApi {
     if (initMess != null) {
       msg = initMess;
     }
-    Get.to(() => NotificationsScreen(), preventDuplicates: true);
+    AppRouter.pushNamed(AppRouteNames.notifications);
   }
 
   ///Handle all notifications at one central place
@@ -162,17 +160,17 @@ class FcmApi {
 
       switch (type) {
         case 'campaign_donation':
-          navUtils.fireTarget(DonationsHistoryScreen());
+          AppRouter.pushNamed(AppRouteNames.donationsHistory);
           break;
         case 'devotional_year_purchase':
-          navUtils.fireTarget(DevotionsScreen());
+          AppRouter.goNamed(AppRouteNames.dashboardDevotional);
           break;
         default:
           break;
       }
     } else {
       debugPrint("No notification in stack");
-      navUtils.fireTargetHome();
+      AppRouter.goHome();
     }
   }
 }

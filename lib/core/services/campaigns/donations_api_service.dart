@@ -5,6 +5,7 @@ import 'package:student_union/core/services/campaigns/donations_api_interface.da
 class DonationsService extends BaseApiService implements DonationsApiInterface {
   static DonationsService? _instance;
   final path = "assets/data/core_ministries.json";
+  List<DonationModel>? _cache;
 
   DonationsService._();
 
@@ -13,7 +14,13 @@ class DonationsService extends BaseApiService implements DonationsApiInterface {
   }
 
   @override
-  Future<List<DonationModel>> fetchListOfCoreMinistries() async {
+  Future<List<DonationModel>> fetchListOfCoreMinistries({
+    bool forceRefresh = false,
+  }) async {
+    if (!forceRefresh && _cache != null) {
+      return _cache!;
+    }
+
     final results =
         await _instance?.getListRequest<DonationModel>(
           api: 'customer/v1/campaigns',
@@ -29,6 +36,15 @@ class DonationsService extends BaseApiService implements DonationsApiInterface {
       return dateA.compareTo(dateB);
     });
 
+    _cache = results;
     return results;
+  }
+
+  bool hasCachedCoreMinistries() => _cache != null;
+
+  List<DonationModel> getCachedCoreMinistries() => _cache ?? const [];
+
+  void clearCache() {
+    _cache = null;
   }
 }

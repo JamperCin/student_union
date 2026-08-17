@@ -1,16 +1,18 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/model/local/success_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
 
 class SuccessScreen extends BaseScreenStandard {
+  final SuccessModel? model;
   final GestureTapCallback? onTap;
 
-  SuccessScreen({this.onTap});
+  SuccessScreen({this.onTap, this.model});
 
   @override
   SuccessModel getModel() {
-    return super.getModel() as SuccessModel;
+    return model ?? super.getModel() as SuccessModel;
   }
 
   @override
@@ -40,7 +42,7 @@ class SuccessScreen extends BaseScreenStandard {
             onTap:
                 onTap ??
                 () {
-                  navUtils.fireTargetHome();
+                  AppRouter.goHome();
                 },
           ),
           Gap(20.dp()),

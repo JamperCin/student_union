@@ -1,18 +1,21 @@
+import 'dart:io';
+import 'dart:convert';
 
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
-import 'package:student_union/core-ui/screen/base_web.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/enums/book_type.dart';
 import 'package:student_union/core/enums/payment_type.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
-import 'package:student_union/screens/dashboard/devotion/ui/purchased_book_details_screen.dart';
-
-import '../ui/buy_devotional_book_screen.dart';
+import 'package:student_union/core/utils/app_feedback.dart';
+import 'package:student_union/core-ui/widgets/app_confirm_transaction_layout.dart';
+import 'package:student_union/core/utils/app_bottom_sheet.dart';
 
 class DevotionController extends BaseController {
+  final RxInt tabOpenTick = 0.obs;
   RxString selectedYear = "All".obs; //${DateTime.now().year}
   Rx<BookType> bookTypeFilter = BookType.availableBooks.obs;
   TabController? tabController;
@@ -31,55 +34,63 @@ class DevotionController extends BaseController {
     return ["All", ...data];
   }
 
-  void onDevotionTap(DevotionalBookModel model) {
-    navUtils.fireTarget(
-      model.purchased
-          ? PurchasedBookDetailsScreen()
-          : BuyDevotionalBookScreen(),
-      model: model,
-    );
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    checkForScreenUpdate();
-  }
-
-  Future<void> checkForScreenUpdate() async {
-    final event = currentEvent.value;
-    debugPrint(
-      "EVENT TRIGGERED MODEL $event bookType ---> ${bookTypeFilter.value}",
-    );
-
-    if (event is EventTrigger &&
-        event.bookType != null &&
-        event.model is DevotionalBookModel) {
-      debugPrint("EVENT TRIGGERED ${event.bookType} ---> ${event.model}");
-      //Change tab after a short delay to allow for screen to load
-      await Future.delayed(const Duration(seconds: 1));
-      bookTypeFilter.value = event.bookType!;
-      tabController?.index = event.bookType == BookType.availableBooks ? 0 : 1;
-
-      //If a model is passed, open the purchased book details screen
-      await Future.delayed(const Duration(seconds: 1));
-      navUtils.fireBack();
-      navUtils.fireTarget(PurchasedBookDetailsScreen(), model: event.model);
-      currentEvent.value = null; //Reset event after use
-    } else {
-      bookTypeFilter.value = BookType.availableBooks;
-      tabController?.index = 0;
+  Future<void> onDevotionTap(DevotionalBookModel model) async {
+    bool isOwned = model.purchased;
+    if (!isOwned && Platform.isIOS) {
+      isOwned = await revenueCatService.ownsBook(model);
     }
+
+    AppRouter.pushNamed(
+      isOwned
+          ? AppRouteNames.purchasedBookDetails
+          : AppRouteNames.buyDevotionalBook,
+      extra: model,
+    );
   }
+
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   checkForScreenUpdate();
+  // }
+
+  // Future<void> checkForScreenUpdate() async {
+  //   final event = currentEvent.value;
+  //   debugPrint(
+  //     "EVENT TRIGGERED MODEL $event bookType ---> ${bookTypeFilter.value}",
+  //   );
+
+  //   if (event is EventTrigger &&
+  //       event.bookType != null &&
+  //       event.model is DevotionalBookModel) {
+  //     debugPrint("EVENT TRIGGERED ${event.bookType} ---> ${event.model}");
+  //     //Change tab after a short delay to allow for screen to load
+  //     await Future.delayed(const Duration(seconds: 1));
+  //     bookTypeFilter.value = event.bookType!;
+  //     tabController?.index = event.bookType == BookType.availableBooks ? 0 : 1;
+
+  //     //If a model is passed, open the purchased book details screen
+  //     await Future.delayed(const Duration(seconds: 1));
+  //     AppRouter.pop();
+  //     AppRouter.pushNamed(
+  //       AppRouteNames.purchasedBookDetails,
+  //       extra: event.model,
+  //     );
+  //     currentEvent.value = null; //Reset event after use
+  //   } else {
+  //     bookTypeFilter.value = BookType.availableBooks;
+  //     tabController?.index = 0;
+  //   }
+  // }
 
   void confirmPayment(BuildContext context, DevotionalBookModel model) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    BottomSheetWidget(
+    AppBottomSheet.show(
       context: context,
       height: appDimen.screenHeight * 0.4,
-      child: ConfirmTransactionLayout(
+      child: AppConfirmTransactionLayout(
         title: "Confirm Purchase",
         crossAxisAlignment: CrossAxisAlignment.center,
         cancelAssetColor: Theme.of(context).colorScheme.surface,
@@ -116,6 +127,28 @@ class DevotionController extends BaseController {
   ) async {
     const LoaderWidget().showProgressIndicator(context: context);
 
+    if (Platform.isIOS) {
+      final result = await revenueCatService.purchaseDevotionalBook(model);
+      const LoaderWidget().hideProgress();
+
+      if (result.cancelled) {
+        if (!context.mounted) return;
+        AppFeedback.info('Purchase cancelled.', context: context);
+        return;
+      }
+
+      if (!result.success) {
+        if (!context.mounted) return;
+        AppFeedback.error(result.message, context: context);
+        return;
+      }
+
+      await _onPurchaseSuccess(model);
+      if (!context.mounted) return;
+      AppFeedback.success('Purchase completed successfully.', context: context);
+      return;
+    }
+
     Map<String, dynamic> param = {
       "payment_type": PaymentType.devotion_year_purchase.name,
       "metadata": {
@@ -129,32 +162,38 @@ class DevotionController extends BaseController {
     navToPaymentScreen(results.authUrl, book: model);
   }
 
-  void navToPaymentScreen(String url, {DevotionalBookModel? book}) {
+  Future<void> _onPurchaseSuccess(DevotionalBookModel book) async {
+    final defaultParam = <String, dynamic>{"page": "1", "limit": "20"};
+
+    try {
+      await devGuideService.fetchPurchasedBooks(
+        param: defaultParam,
+        forceRefresh: true,
+      );
+    } catch (_) {
+      // Ignore refresh failures; purchase success should not block navigation.
+    }
+
+    AppRouter.goNamed(AppRouteNames.purchasedBookDetails, extra: book);
+  }
+
+  void navToPaymentScreen(String url, {required DevotionalBookModel book}) {
     if (url.isEmpty) return;
-    navUtils.fireTarget(
-      BaseWebView(
-        model: WebModel(
-          url: url,
-          onDoneOnclick: () {
-            debugPrint("NAVIGATED BACK ---> $url");
-            navUtils.fireTargetHome();
-            if (url.isNotEmpty) {
-              currentEvent.value = EventTrigger(
-                bookType: BookType.purchasedBooks,
-                screen: 'Devotional',
-                model: book,
-              );
-            } else {
-              currentEvent.value = null;
-            }
-          },
-        ),
+    AppRouter.pushNamed(
+      AppRouteNames.web,
+      extra: WebModel(
+        url: url,
+        onDoneOnclick: () async {
+         // debugPrint("NAVIGATED BACK ---> $url");
+          //AppRouter.goNamed(AppRouteNames.purchasedBookDetails, extra: book);
+          await _onPurchaseSuccess(book);
+        },
       ),
     );
   }
 
   void onPurchasedBookOnClick(DevotionalBookModel book) {
-    navUtils.fireTarget(PurchasedBookDetailsScreen(), model: book);
+    AppRouter.pushNamed(AppRouteNames.purchasedBookDetails, extra: book);
   }
 
   void onTabChanged(int value) {
@@ -163,5 +202,64 @@ class DevotionController extends BaseController {
     } else {
       bookTypeFilter.value = BookType.purchasedBooks;
     }
+  }
+
+  Future<void> onTabOpened() async {
+    final param = {"page": "1", "limit": "20"};
+    if (selectedYear.value != "All") {
+      param["year"] = selectedYear.value;
+    }
+
+    final tabIndex = tabController?.index ?? 0;
+    final hasCachedData = tabIndex == 1
+        ? devGuideService.hasCachedPurchasedBooks(param: param)
+        : devGuideService.hasCachedDevotionalBooks(param: param);
+
+    if (!hasCachedData) {
+      return;
+    }
+
+    final previous = tabIndex == 1
+        ? _booksSignature(devGuideService.getCachedPurchasedBooks(param: param))
+        : _booksSignature(
+            devGuideService.getCachedDevotionalBooks(param: param),
+          );
+
+    try {
+      if (tabIndex == 1) {
+        if (!isGuestUser.value) {
+          await devGuideService.fetchPurchasedBooks(
+            param: param,
+            forceRefresh: true,
+          );
+        }
+      } else {
+        await devGuideService.fetchDevotionalBooks(
+          param: param,
+          forceRefresh: true,
+        );
+      }
+    } catch (_) {
+      // Keep tab switching resilient when an endpoint fails.
+    }
+
+    final current = tabIndex == 1
+        ? _booksSignature(devGuideService.getCachedPurchasedBooks(param: param))
+        : _booksSignature(
+            devGuideService.getCachedDevotionalBooks(param: param),
+          );
+
+    if (previous != current) {
+      tabOpenTick.value++;
+    }
+  }
+
+  String _booksSignature(List<DevotionalBookModel> books) {
+    final normalized = books.map((item) {
+      final json = Map<String, dynamic>.from(item.toJson());
+      json.remove('heroTag');
+      return json;
+    }).toList();
+    return jsonEncode(normalized);
   }
 }

@@ -27,6 +27,8 @@ mixin _$PaymentInfoMeta {
   int? get campaignId => throw _privateConstructorUsedError;
   @JsonKey(name: 'init_response')
   InitResponse? get initResponse => throw _privateConstructorUsedError;
+  @JsonKey(name: 'paystack_init')
+  InitResponse? get paystackInit => throw _privateConstructorUsedError;
 
   /// Serializes this PaymentInfoMeta to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,9 +51,11 @@ abstract class $PaymentInfoMetaCopyWith<$Res> {
     @JsonKey(name: 'note') String? note,
     @JsonKey(name: 'campaign_id') int? campaignId,
     @JsonKey(name: 'init_response') InitResponse? initResponse,
+    @JsonKey(name: 'paystack_init') InitResponse? paystackInit,
   });
 
   $InitResponseCopyWith<$Res>? get initResponse;
+  $InitResponseCopyWith<$Res>? get paystackInit;
 }
 
 /// @nodoc
@@ -72,6 +76,7 @@ class _$PaymentInfoMetaCopyWithImpl<$Res, $Val extends PaymentInfoMeta>
     Object? note = freezed,
     Object? campaignId = freezed,
     Object? initResponse = freezed,
+    Object? paystackInit = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -86,6 +91,10 @@ class _$PaymentInfoMetaCopyWithImpl<$Res, $Val extends PaymentInfoMeta>
             initResponse: freezed == initResponse
                 ? _value.initResponse
                 : initResponse // ignore: cast_nullable_to_non_nullable
+                      as InitResponse?,
+            paystackInit: freezed == paystackInit
+                ? _value.paystackInit
+                : paystackInit // ignore: cast_nullable_to_non_nullable
                       as InitResponse?,
           )
           as $Val,
@@ -105,6 +114,20 @@ class _$PaymentInfoMetaCopyWithImpl<$Res, $Val extends PaymentInfoMeta>
       return _then(_value.copyWith(initResponse: value) as $Val);
     });
   }
+
+  /// Create a copy of PaymentInfoMeta
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $InitResponseCopyWith<$Res>? get paystackInit {
+    if (_value.paystackInit == null) {
+      return null;
+    }
+
+    return $InitResponseCopyWith<$Res>(_value.paystackInit!, (value) {
+      return _then(_value.copyWith(paystackInit: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -120,10 +143,13 @@ abstract class _$$PaymentInfoMetaImplCopyWith<$Res>
     @JsonKey(name: 'note') String? note,
     @JsonKey(name: 'campaign_id') int? campaignId,
     @JsonKey(name: 'init_response') InitResponse? initResponse,
+    @JsonKey(name: 'paystack_init') InitResponse? paystackInit,
   });
 
   @override
   $InitResponseCopyWith<$Res>? get initResponse;
+  @override
+  $InitResponseCopyWith<$Res>? get paystackInit;
 }
 
 /// @nodoc
@@ -143,6 +169,7 @@ class __$$PaymentInfoMetaImplCopyWithImpl<$Res>
     Object? note = freezed,
     Object? campaignId = freezed,
     Object? initResponse = freezed,
+    Object? paystackInit = freezed,
   }) {
     return _then(
       _$PaymentInfoMetaImpl(
@@ -158,6 +185,10 @@ class __$$PaymentInfoMetaImplCopyWithImpl<$Res>
             ? _value.initResponse
             : initResponse // ignore: cast_nullable_to_non_nullable
                   as InitResponse?,
+        paystackInit: freezed == paystackInit
+            ? _value.paystackInit
+            : paystackInit // ignore: cast_nullable_to_non_nullable
+                  as InitResponse?,
       ),
     );
   }
@@ -170,6 +201,7 @@ class _$PaymentInfoMetaImpl implements _PaymentInfoMeta {
     @JsonKey(name: 'note') this.note,
     @JsonKey(name: 'campaign_id') this.campaignId,
     @JsonKey(name: 'init_response') this.initResponse,
+    @JsonKey(name: 'paystack_init') this.paystackInit,
   });
 
   factory _$PaymentInfoMetaImpl.fromJson(Map<String, dynamic> json) =>
@@ -184,10 +216,13 @@ class _$PaymentInfoMetaImpl implements _PaymentInfoMeta {
   @override
   @JsonKey(name: 'init_response')
   final InitResponse? initResponse;
+  @override
+  @JsonKey(name: 'paystack_init')
+  final InitResponse? paystackInit;
 
   @override
   String toString() {
-    return 'PaymentInfoMeta(note: $note, campaignId: $campaignId, initResponse: $initResponse)';
+    return 'PaymentInfoMeta(note: $note, campaignId: $campaignId, initResponse: $initResponse, paystackInit: $paystackInit)';
   }
 
   @override
@@ -199,12 +234,15 @@ class _$PaymentInfoMetaImpl implements _PaymentInfoMeta {
             (identical(other.campaignId, campaignId) ||
                 other.campaignId == campaignId) &&
             (identical(other.initResponse, initResponse) ||
-                other.initResponse == initResponse));
+                other.initResponse == initResponse) &&
+            (identical(other.paystackInit, paystackInit) ||
+                other.paystackInit == paystackInit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, note, campaignId, initResponse);
+  int get hashCode =>
+      Object.hash(runtimeType, note, campaignId, initResponse, paystackInit);
 
   /// Create a copy of PaymentInfoMeta
   /// with the given fields replaced by the non-null parameter values.
@@ -228,6 +266,7 @@ abstract class _PaymentInfoMeta implements PaymentInfoMeta {
     @JsonKey(name: 'note') final String? note,
     @JsonKey(name: 'campaign_id') final int? campaignId,
     @JsonKey(name: 'init_response') final InitResponse? initResponse,
+    @JsonKey(name: 'paystack_init') final InitResponse? paystackInit,
   }) = _$PaymentInfoMetaImpl;
 
   factory _PaymentInfoMeta.fromJson(Map<String, dynamic> json) =
@@ -242,6 +281,9 @@ abstract class _PaymentInfoMeta implements PaymentInfoMeta {
   @override
   @JsonKey(name: 'init_response')
   InitResponse? get initResponse;
+  @override
+  @JsonKey(name: 'paystack_init')
+  InitResponse? get paystackInit;
 
   /// Create a copy of PaymentInfoMeta
   /// with the given fields replaced by the non-null parameter values.

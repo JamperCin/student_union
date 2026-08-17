@@ -13,29 +13,35 @@ class DonationCoreMinistriesScreen extends BaseSharedScreen {
     return "Donations";
   }
 
-
   @override
   List<Widget> actions() {
     return [
       Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16.dp(),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 16.dp()),
         child: IconButtonWidget(
           icon: Icons.history,
           iconSize: 25.dp(),
           iconColor: colorScheme.tertiary,
           onTap: _controller.onViewDonationHistory,
         ),
-      )
+      ),
     ];
   }
 
-
   @override
   Widget body(BuildContext context) {
-    return CoreMinistriesWidget.withDonations(
-      onTap: _controller.onDonationOnClick,
-    );
+    return Obx(() {
+      final refreshTick = _controller.refreshTick.value;
+      return RefreshIndicator(
+        onRefresh: _controller.onRefresh,
+        notificationPredicate: (_) => true,
+        child: KeyedSubtree(
+          key: ValueKey(refreshTick),
+          child: CoreMinistriesWidget.withDonations(
+            onTap: _controller.onDonationOnClick,
+          ),
+        ),
+      );
+    });
   }
 }

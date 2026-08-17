@@ -12,7 +12,14 @@ import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/dashboard/devotion/controller/purchased_book_controller.dart';
 
 class PurchasedBookDetailsScreen extends BaseSharedScreen {
+  final DevotionalBookModel? book;
   final _controller = Get.put(PurchasedBookController());
+
+  PurchasedBookDetailsScreen({this.book}) {
+    if (book != null) {
+      _controller.setPurchasedBook(book!);
+    }
+  }
 
   @override
   void setModel(BaseObject baseObject) {

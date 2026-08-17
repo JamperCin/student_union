@@ -33,11 +33,19 @@ class HomeScreen extends BaseScreenStandard {
 
   @override
   Widget body(BuildContext context) {
-    return _homeBody(context);
+    return Obx(() {
+      final refreshTick = _controller.refreshTick.value;
+      return RefreshIndicator(
+        onRefresh: _controller.onRefresh,
+        child: _homeBody(context, refreshTick),
+      );
+    });
   }
 
-  Widget _homeBody(BuildContext context) {
+  Widget _homeBody(BuildContext context, int refreshTick) {
     return ListView(
+      key: ValueKey(refreshTick),
+      physics: const AlwaysScrollableScrollPhysics(),
       padding: EdgeInsets.symmetric(horizontal: 10.dp(), vertical: 16.dp()),
       children: [
         ///Daily Devotional
@@ -47,6 +55,7 @@ class HomeScreen extends BaseScreenStandard {
 
         ///Devotions
         DevotionalGuideWidget.withAvailableBooks(
+          heroScope: 'home_devotional',
           onTap: _controller.onDevotionTap,
           onSeeMoreOnTap: _controller.onSeeMoreDevotionalBooks,
         ),

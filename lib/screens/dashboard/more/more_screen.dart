@@ -85,7 +85,7 @@ class MoreScreen extends BaseSharedScreen {
           Gap(5.dp()),
 
           SimpleCardItem(
-            onTap:(v)=> _controller.onPrivacyPolicyOnClick(),
+            onTap: (v) => _controller.onPrivacyPolicyOnClick(),
             title: "Privacy Policy",
             prefixWidget: Icon(
               Icons.privacy_tip_rounded,

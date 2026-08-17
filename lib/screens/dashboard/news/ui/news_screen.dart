@@ -8,17 +8,25 @@ import '../controller/news_controller.dart';
 class NewsScreen extends BaseSharedScreen {
   final _controller = Get.put(NewsController());
 
-
   @override
   String appBarTitle() {
     return "News Update";
   }
 
-
   @override
   Widget body(BuildContext context) {
-    return NewsUpdateWidget.withDetails(
-      onTap: _controller.onNewsUpdateTap,
-    );
+    return Obx(() {
+      final refreshTick = _controller.refreshTick.value;
+      return RefreshIndicator(
+        onRefresh: _controller.onRefresh,
+        notificationPredicate: (_) => true,
+        child: KeyedSubtree(
+          key: ValueKey(refreshTick),
+          child: NewsUpdateWidget.withDetails(
+            onTap: _controller.onNewsUpdateTap,
+          ),
+        ),
+      );
+    });
   }
 }

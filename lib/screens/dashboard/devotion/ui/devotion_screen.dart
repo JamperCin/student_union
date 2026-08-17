@@ -30,7 +30,7 @@ class _DevotionsScreenState extends State<DevotionsScreen>
 
   @override
   void initState() {
-    _controller.checkForScreenUpdate();
+   // _controller.checkForScreenUpdate();
     _controller.tabController = TabController(
       length: 2,
       vsync: this,
@@ -66,7 +66,7 @@ class _DevotionsScreenState extends State<DevotionsScreen>
             child: TabBar(
               controller: _controller.tabController,
               onTap: _controller.onTabChanged,
-              
+
               tabs: [
                 const Tab(text: "Available Books"),
                 const Tab(text: "Purchased Books"),
@@ -95,10 +95,16 @@ class _DevotionsScreenState extends State<DevotionsScreen>
           ),
         ],
       ),
-      body: TabBarView(
-        controller: _controller.tabController,
-        children: tabsViews(),
-      ),
+      body: Obx(() {
+        final tabOpenTick = _controller.tabOpenTick.value;
+        return TabBarView(
+          key: ValueKey(
+            'devotions-open-$tabOpenTick-${_controller.selectedYear.value}',
+          ),
+          controller: _controller.tabController,
+          children: tabsViews(),
+        );
+      }),
     );
   }
 
@@ -106,6 +112,7 @@ class _DevotionsScreenState extends State<DevotionsScreen>
     return [
       Obx(
         () => DevotionalGuideWidget.withAvailableBooks(
+          heroScope: 'devotions_available',
           yearFilter: _controller.selectedYear.value,
           onTap: _controller.onDevotionTap,
           axis: Axis.vertical,
@@ -113,6 +120,7 @@ class _DevotionsScreenState extends State<DevotionsScreen>
       ),
       Obx(
         () => DevotionalGuideWidget.withPurchasedBooks(
+          heroScope: 'devotions_purchased',
           yearFilter: _controller.selectedYear.value,
           onTap: _controller.onPurchasedBookOnClick,
         ),

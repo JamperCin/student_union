@@ -1,12 +1,9 @@
-import 'package:core_module/core/def/global_def.dart';
-import 'package:core_module/core/model/local/intro_model.dart';
+import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/res/asset_path.dart';
-import 'package:student_union/screens/auth/login/login_screen.dart';
-
 
 class IntroController extends BaseController {
   final pageIndex = 0.obs;
@@ -22,16 +19,19 @@ class IntroController extends BaseController {
     const IntroModel(
       assetName: intro2,
       mainText: 'Donate To SU GHANA',
-      subText: 'Come on board to support SU Ghana \nMinistry as we disciple and nurture children,\n **young people** and families **in the Lord**.',
+      subText:
+          'Come on board to support SU Ghana \nMinistry as we disciple and nurture children,\n **young people** and families **in the Lord**.',
     ),
     const IntroModel(
       mainText: 'Community Updates & News',
-      subText: 'Join the SU community globally, receive \nupdates on the SU Ghana Ministry, and \nengage with fellow SU members.',
+      subText:
+          'Join the SU community globally, receive \nupdates on the SU Ghana Ministry, and \nengage with fellow SU members.',
       assetName: intro3,
     ),
     const IntroModel(
       mainText: 'Counseling & Prayers',
-      subText: 'Get in touch with our seasoned Counsellors and well-trained Social Media Missionaries, who will provide godly guidance, prayer, and counsel to you in your time of need.',
+      subText:
+          'Get in touch with our seasoned Counsellors and well-trained Social Media Missionaries, who will provide godly guidance, prayer, and counsel to you in your time of need.',
       assetName: intro4,
     ),
   ];
@@ -60,9 +60,7 @@ class IntroController extends BaseController {
   }
 
   void onSkipOnClick() {
-    navUtils.fireTargetOff(LoginScreen());
     appPreference.setBool(appPreference.IS_INTRO_SHOWN, true);
+    AppRouter.goNamed(AppRouteNames.login);
   }
-
-
 }

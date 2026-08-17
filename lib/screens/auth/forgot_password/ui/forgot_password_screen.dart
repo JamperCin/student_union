@@ -42,6 +42,7 @@ class ForgotPasswordScreen extends BaseSharedScreen {
             labelText: 'Email',
             hintText: 'Email Eg. example@gmail.com',
             keyboardType: TextInputType.emailAddress,
+            textCapitalization: TextCapitalization.none,
             controller: _controller.emailTxtCtrl,
             prefixAsset: icEmailInput,
           ),
