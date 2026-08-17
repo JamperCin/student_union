@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Dart
+name: iOS
 
 on:
   push:
@@ -12,84 +12,6 @@ on:
     branches: [ "main" ]
 
 jobs:
-  android:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-
-      - name: Cache Flutter packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pub-cache
-            .packages
-            pubspec.lock
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-
-      - run: flutter --version
-
-      - name: Clean flutter
-        run: flutter clean
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Run tests
-        run: flutter test
-
-      - name: Decode Keystore
-        run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/su-keystore.jks
-
-      - name: Set up Ruby 3.2
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-          bundler-cache: false
-          working-directory: android
-
-      - name: Install Bundler dependencies
-        working-directory: android
-        run: |
-          gem install bundler
-          bundle update CFPropertyList
-          bundle install
-
-      - name: Prepare Android config
-        # Generates GeneratedPluginRegistrant.java with all dependencies.
-        run: flutter build apk --config-only --release
-
-      - name: Make Gradlew Executable
-        run: chmod +x android/gradlew
-
-      - name: Run Fastlane Release
-        working-directory: android
-        env:
-          GPLAY_JSON_DATA: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
-          ANDROID_KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-        run: bundle exec fastlane internal_release
-
-      - name: Upload App Bundle
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-bundle
-          path: build/app/outputs/bundle/release/app-release.aab
-
   ios:
     runs-on: macos-latest
 
