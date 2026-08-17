@@ -8,6 +8,7 @@ import 'package:student_union/core/services/devotional_guide/devotional_guide_ap
 import 'package:student_union/core/services/news_update/news_update_api_service.dart';
 import 'package:student_union/core/services/notifications/notification_api_service.dart';
 import 'package:student_union/core/services/payment/payment_api_service.dart';
+import 'package:student_union/core/services/purchases/revenuecat_service.dart';
 import 'package:student_union/core/services/upcoming_events/upcoming_events_api_service.dart';
 import 'package:student_union/core/services/user/user_api_service.dart';
 
@@ -19,15 +20,26 @@ late DonationsService campaignApiService;
 late NewsUpdateApiService newsUpdateApiService;
 late AuthApiService authApiService;
 late PaymentApiService paymentApiService;
+late RevenueCatService revenueCatService;
 late NotificationApiService notificationApiService;
 late NotificationApi notificationApi;
 
 ///--------------------------------------------------------------
 
 RxInt notificationCount = 0.obs;
-Rxn<dynamic> currentEvent = Rxn<dynamic>();
+//Rxn<dynamic> currentEvent = Rxn<dynamic>();
 
 bool isMayBeLaterSet = false;
+
+void clearAppCaches() {
+  devGuideService.clearCache();
+  upcomingEventsApiService.clearCache();
+  campaignApiService.clearCache();
+  newsUpdateApiService.clearCache();
+  paymentApiService.clearCache();
+  //currentEvent.value = null;
+  notificationCount.value = 0;
+}
 
 class EventTrigger {
   BookType? bookType;
@@ -48,6 +60,9 @@ String decodeErrorMessage(
   } else if (error.contains("USER_DISABLED")) {
     return "The user account has been disabled by an administrator. Please contact support for assistance.";
   } else if (error.contains("EMAIL_NOT_FOUND")) {
+    return "There is no user record corresponding to this identifier. The user may have been deleted.";
+  }
+  if (error.contains("USER_NOT_FOUND")) {
     return "There is no user record corresponding to this identifier. The user may have been deleted.";
   } else {
     return defaultMsg;

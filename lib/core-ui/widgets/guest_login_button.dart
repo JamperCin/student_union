@@ -1,5 +1,6 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/def/global_access.dart';
 
 class GuestLoginButton extends StatelessWidget {
@@ -16,7 +17,7 @@ class GuestLoginButton extends StatelessWidget {
           isGuestUser.value = true;
           final uuid = Uuid().v4();
           appPreference.setToken(uuid);
-          navUtils.fireTargetHome();
+          AppRouter.goHome();
         },
         label: Text(
           'Login as a Guest User',

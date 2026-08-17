@@ -10,6 +10,7 @@ class DevotionalGuideWidget extends StatelessWidget {
   final String? yearFilter;
   final Axis? axis;
   final bool isAvailableBooks;
+  final String heroScope;
   final GestureTapCallback? onSeeMoreOnTap;
   final Function(DevotionalBookModel)? onTap;
   int page = 1;
@@ -20,6 +21,7 @@ class DevotionalGuideWidget extends StatelessWidget {
   DevotionalGuideWidget.withAvailableBooks({
     super.key,
     this.yearFilter,
+    this.heroScope = 'devotional_available',
     this.onTap,
     this.onSeeMoreOnTap,
     this.axis = Axis.horizontal,
@@ -28,6 +30,7 @@ class DevotionalGuideWidget extends StatelessWidget {
   DevotionalGuideWidget.withPurchasedBooks({
     super.key,
     this.yearFilter,
+    this.heroScope = 'devotional_purchased',
     this.onTap,
   }) : axis = null,
        onSeeMoreOnTap = null,
@@ -43,8 +46,12 @@ class DevotionalGuideWidget extends StatelessWidget {
   Widget _availableBooks() {
     ///Return available books in a horizontal list
     if (axis == Axis.horizontal) {
-      return FutureBuilder(
+      final hasCachedData = devGuideService.hasCachedDevotionalBooks();
+      return FutureBuilder<List<DevotionalBookModel>>(
         future: devGuideService.fetchDevotionalBooks(),
+        initialData: hasCachedData
+            ? devGuideService.getCachedDevotionalBooks()
+            : null,
         builder: (context, data) {
           return (data.hasData && data.data != null)
               ? _horizontalDisplayOfAvailableBooksWidget(data.data!)
@@ -61,8 +68,14 @@ class DevotionalGuideWidget extends StatelessWidget {
       param.putIfAbsent("year", () => yearFilter);
     }
 
-    return FutureBuilder(
+    final hasCachedData = devGuideService.hasCachedDevotionalBooks(
+      param: param,
+    );
+    return FutureBuilder<List<DevotionalBookModel>>(
       future: devGuideService.fetchDevotionalBooks(param: param),
+      initialData: hasCachedData
+          ? devGuideService.getCachedDevotionalBooks(param: param)
+          : null,
       key: ValueKey(const Uuid().v4()),
       builder: (context, data) {
         return (data.hasData && data.data != null)
@@ -84,8 +97,12 @@ class DevotionalGuideWidget extends StatelessWidget {
       param.putIfAbsent("year", () => yearFilter);
     }
 
-    return FutureBuilder(
+    final hasCachedData = devGuideService.hasCachedPurchasedBooks(param: param);
+    return FutureBuilder<List<DevotionalBookModel>>(
       future: devGuideService.fetchPurchasedBooks(param: param),
+      initialData: hasCachedData
+          ? devGuideService.getCachedPurchasedBooks(param: param)
+          : null,
       key: ValueKey(const Uuid().v4()),
       builder: (context, snapshot) {
         return (snapshot.hasData && snapshot.data != null)
@@ -108,8 +125,9 @@ class DevotionalGuideWidget extends StatelessWidget {
       );
     }
 
+    final scopedList = _scopeHeroTags(list, section: 'purchased_grid');
     return ListViewWidget<DevotionalBookModel>.withGridView(
-      list: list,
+      list: scopedList,
       refreshIndicatorBackgroundColor: colorScheme.inverseSurface,
       refreshIndicatorColor: colorScheme.surface,
       listItemWidget: (book) {
@@ -136,6 +154,7 @@ class DevotionalGuideWidget extends StatelessWidget {
   Widget _horizontalDisplayOfAvailableBooksWidget(
     List<DevotionalBookModel> list,
   ) {
+    final scopedList = _scopeHeroTags(list, section: 'available_carousel');
     return list.isEmpty
         ? const SizedBox.shrink()
         : Column(
@@ -145,9 +164,9 @@ class DevotionalGuideWidget extends StatelessWidget {
               TitleTextWidget(text: "Devotional Guides", onTap: onSeeMoreOnTap),
               Gap(5.dp()),
               CarouselSlider.builder(
-                itemCount: list.length,
+                itemCount: scopedList.length,
                 itemBuilder: (context, index, realIndex) {
-                  DevotionalBookModel model = list[index];
+                  DevotionalBookModel model = scopedList[index];
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.dp()),
                     child: NetworkImageWidget(
@@ -168,8 +187,8 @@ class DevotionalGuideWidget extends StatelessWidget {
                 },
                 options: CarouselOptions(
                   scrollPhysics: const BouncingScrollPhysics(),
-                  enableInfiniteScroll: true,
-                  initialPage: list.length > 1 ? 1 : 0,
+                  enableInfiniteScroll: scopedList.length > 2,
+                  initialPage: scopedList.length > 1 ? 1 : 0,
                   viewportFraction: 0.4,
                   autoPlay: true,
                   onPageChanged: (index, reason) {
@@ -180,7 +199,7 @@ class DevotionalGuideWidget extends StatelessWidget {
               Gap(10.dp()),
               Center(
                 child: PodWidget(
-                  podLength: list.length,
+                  podLength: scopedList.length,
                   currentIndex: selectedIndex,
                 ),
               ),
@@ -201,8 +220,9 @@ class DevotionalGuideWidget extends StatelessWidget {
       );
     }
 
+    final scopedList = _scopeHeroTags(list, section: 'available_grid');
     return ListViewWidget<DevotionalBookModel>.withGridView(
-      list: list.obs,
+      list: scopedList.obs,
       onLoadMore: () => _onLoadMoreAvailableBooks(page = page + 1),
       onRefresh: () => _onLoadMoreAvailableBooks(page = 1),
       refreshIndicatorBackgroundColor: colorScheme.inverseSurface,
@@ -245,6 +265,19 @@ class DevotionalGuideWidget extends StatelessWidget {
         );
       },
     );
+  }
+
+  List<DevotionalBookModel> _scopeHeroTags(
+    List<DevotionalBookModel> books, {
+    required String section,
+  }) {
+    return List<DevotionalBookModel>.generate(books.length, (index) {
+      final book = books[index];
+      final baseTag = book.heroTag.isNotEmpty ? book.heroTag : book.id;
+      return book.copyWith(
+        heroTag: '${heroScope}_${section}_${baseTag}_$index',
+      );
+    });
   }
 
   ///Load more Available books

@@ -2,11 +2,10 @@ import 'dart:collection';
 
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core/app/app_routes.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
-import 'package:student_union/screens/auth/forgot_password/ui/forgot_password_screen.dart';
-import 'package:student_union/screens/auth/sign_up/sign_up_screen.dart';
-import 'package:student_union/screens/dashboard/main_dashboard_screen.dart';
+import 'package:student_union/core/utils/app_feedback.dart';
 
 class LoginController extends BaseController {
   var emailTxtCtrl = TextEditingController();
@@ -20,20 +19,33 @@ class LoginController extends BaseController {
   // }
 
   void onSignUpClicked() {
-    navUtils.fireTarget(SignUpScreen());
+    AppRouter.pushNamed(AppRouteNames.signUp);
   }
 
   void onForgotPasswordClicked() {
-    navUtils.fireTarget(ForgotPasswordScreen());
+    AppRouter.pushNamed(AppRouteNames.forgotPassword);
   }
 
   ///OnClick listener to the LogIn Button
   void onLoginOnClick(BuildContext context) {
     isGuestUser.value = false;
-    if (validationUtils.validateEntryEmail(emailTxtCtrl) &&
-        validationUtils.validateDataEntry(passwordTxtCtrl)) {
-      _initLoginRequest(context);
+    final email = emailTxtCtrl.getData().trim();
+    final password = passwordTxtCtrl.getData().trim();
+
+    if (!_isValidEmail(email)) {
+      AppFeedback.error(
+        "Please enter a valid email address.",
+        context: context,
+      );
+      return;
     }
+
+    if (password.isEmpty) {
+      AppFeedback.error("Password required", context: context);
+      return;
+    }
+
+    _initLoginRequest(context);
   }
 
   /// Initializes the login request to the API.
@@ -69,17 +81,32 @@ class LoginController extends BaseController {
       appPreference.setToken(response.token!);
       appPreference.setUser(response.user);
       appPreference.setPassword(passwordTxtCtrl.getData());
-      navUtils.fireTargetOff(MainDashboardScreen());
-    }else {
-      snackBarSnippet.snackBarError(
+      await revenueCatService.identifyUser(
+        response.user?.email.isNotEmpty == true
+            ? response.user!.email
+            : emailTxtCtrl.getData().toLowerCase(),
+      );
+      AppRouter.goHome();
+    } else {
+      if (!context.mounted) return;
+      AppFeedback.error(
         decodeErrorMessage(
           response?.errors?.last ?? response?.error ?? "",
-          defaultMsg: "Sorry, an error occurred during login. Kindly try again",
+          defaultMsg:
+              response?.errors?.last ??
+              response?.error ??
+              "Sorry, an error occurred during login. Kindly try again",
         ),
+        context: context,
       );
     }
   }
 
-  void onGuestLoginClicked() {
+  void onGuestLoginClicked() {}
+
+  bool _isValidEmail(String email) {
+    return RegExp(
+      r"^[a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+$",
+    ).hasMatch(email);
   }
 }

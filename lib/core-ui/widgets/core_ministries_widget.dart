@@ -27,8 +27,12 @@ class CoreMinistriesWidget extends StatelessWidget {
   }
 
   Widget _coreMinistriesScreen(BuildContext context) {
-    return FutureBuilder(
+    final hasCachedData = campaignApiService.hasCachedCoreMinistries();
+    return FutureBuilder<List<DonationModel>>(
       future: campaignApiService.fetchListOfCoreMinistries(),
+      initialData: hasCachedData
+          ? campaignApiService.getCachedCoreMinistries()
+          : null,
       builder: (context, data) {
         return (data.hasData && data.data != null)
             ? _horizontalGridItem(context, data.data!)
@@ -79,13 +83,18 @@ class CoreMinistriesWidget extends StatelessWidget {
   }
 
   Widget _donationsScreen(BuildContext context) {
-    return FutureBuilder(
+    final hasCachedData = campaignApiService.hasCachedCoreMinistries();
+    return FutureBuilder<List<DonationModel>>(
       future: campaignApiService.fetchListOfCoreMinistries(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        return (snapshot.hasData && snapshot.data != null)
-            ? _campaignsLayout(context, snapshot.data)
-            : ShimmerWidget.withList();
-      },
+      initialData: hasCachedData
+          ? campaignApiService.getCachedCoreMinistries()
+          : null,
+      builder:
+          (BuildContext context, AsyncSnapshot<List<DonationModel>> snapshot) {
+            return (snapshot.hasData && snapshot.data != null)
+                ? _campaignsLayout(context, snapshot.data!)
+                : ShimmerWidget.withList();
+          },
     );
   }
 

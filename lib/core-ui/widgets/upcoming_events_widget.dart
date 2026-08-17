@@ -15,8 +15,12 @@ class UpcomingEventsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    final hasCachedData = upcomingEventsApiService.hasCachedUpcomingEvents();
+    return FutureBuilder<List<UpcomingEventModel>>(
       future: upcomingEventsApiService.fetchUpcomingEvents(),
+      initialData: hasCachedData
+          ? upcomingEventsApiService.getCachedUpcomingEvents()
+          : null,
       builder: (context, data) {
         return (data.hasData && data.data != null)
             ? (onSeeAllOnTap == null

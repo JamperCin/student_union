@@ -2,16 +2,19 @@ import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:student_union/core-ui/snippets/speech_to_voice/text_to_speech_Api.dart';
+import 'package:student_union/core/app/app_colors.dart';
 import 'package:student_union/core/base/base_controller.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
+import 'package:student_union/core/utils/app_feedback.dart';
 import 'package:student_union/core/utils/share_file_utils.dart';
 import 'package:student_union/core/utils/you_version_utils.dart';
 
 class PurchasedBookController extends BaseController {
   Rx<DevotionalBookModel> book = const DevotionalBookModel().obs;
   RxString selectedDate = 'Today'.obs;
+  Rx<DateTime> selectedDateValue = DateTime.now().obs;
   RxBool isLoadingContent = false.obs;
   RxBool hasStartedSharing = false.obs;
   TextToSpeechApi textToSpeechApi = TextToSpeechApi();
@@ -22,11 +25,13 @@ class PurchasedBookController extends BaseController {
 
   Future<void> setPurchasedBook(DevotionalBookModel book) async {
     this.book.value = book;
-    selectedDate = 'Today'.obs;
-    isLoadingContent = false.obs;
-    selectedDateTimeline = DateTimeUtils()
-        .formatDate(DateTime.now().toString(), format: "dd MMM, yyyy")
-        .obs;
+    selectedDate.value = 'Today';
+    selectedDateValue.value = DateTime.now();
+    isLoadingContent.value = false;
+    selectedDateTimeline.value = DateTimeUtils().formatDate(
+      DateTime.now().toString(),
+      format: "dd MMM, yyyy",
+    );
 
     if (book.devotion == null) {
       await Future.delayed(const Duration(milliseconds: 30));
@@ -70,39 +75,110 @@ class PurchasedBookController extends BaseController {
       );
     }
 
-    currentEvent.value = null; //Reset event after use
+    // currentEvent.value = null; //Reset event after use
     return sections;
   }
 
-  void onPickCalendar(BuildContext context) {
-    CalendarPickerWidget.show(
-      context: context,
-      endDate: DateTime(
-        DateTime.now().year + 1,
-        DateTime.now().month,
-        DateTime.now().day,
-      ),
-      onSelectDate: (date) {
-        if (DateTime.now().year == date.year &&
-            DateTime.now().month == date.month &&
-            DateTime.now().day == date.day) {
-          selectedDate.value = 'Today';
-        } else {
-          selectedDate.value = DateTimeUtils().formatDate(
-            date.toString(),
-            format: "dd MMM, yyyy",
-          );
-        }
-        selectedDateTimeline.value = DateTimeUtils().formatDate(
-          date.toString(),
-          format: "EEEE, MMMM dd",
-        );
+  Future<void> onPickCalendar(BuildContext context) async {
+    try {
+      final now = DateTime.now();
+      final theme = Theme.of(context);
+      final isDark = theme.brightness == Brightness.dark;
+      final pickerTextColor = isDark ? whiteColor : darkColor;
+      final actionColor = theme.colorScheme.secondary;
 
-        _fetchDevotionContent(date.toString());
-      },
-      okButtonTextStyle: Theme.of(context).textTheme.titleLarge,
-      cancelButtonTextStyle: Theme.of(context).textTheme.titleMedium,
-    );
+      final pickedDate = await showDatePicker(
+        context: context,
+        initialDate: selectedDateValue.value,
+        firstDate: DateTime(2020, 1, 1),
+        lastDate: DateTime(now.year + 1, now.month, now.day),
+        builder: (context, child) {
+          if (child == null) return const SizedBox.shrink();
+
+          final datePickerTheme = theme.datePickerTheme.copyWith(
+            headerHeadlineStyle: theme.textTheme.displaySmall?.copyWith(
+              fontSize: 30.dp(),
+              fontWeight: FontWeight.w700,
+              color: pickerTextColor,
+            ),
+            dayForegroundColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.disabled)) {
+                return pickerTextColor.withValues(alpha: 0.45);
+              }
+              if (states.contains(WidgetState.selected)) {
+                return whiteColor;
+              }
+              return pickerTextColor;
+            }),
+            dayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.selected)) {
+                return primaryGreenColor;
+              }
+              return Colors.transparent;
+            }),
+            todayForegroundColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.selected)) {
+                return whiteColor;
+              }
+              return actionColor;
+            }),
+            todayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.selected)) {
+                return primaryGreenColor;
+              }
+              return Colors.transparent;
+            }),
+            todayBorder: BorderSide(color: actionColor, width: 1.5),
+            cancelButtonStyle: TextButton.styleFrom(
+              foregroundColor: actionColor,
+              backgroundColor: Colors.transparent,
+            ),
+            confirmButtonStyle: TextButton.styleFrom(
+              foregroundColor: actionColor,
+              backgroundColor: Colors.transparent,
+            ),
+          );
+
+          return Theme(
+            data: theme.copyWith(
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  foregroundColor: actionColor,
+                  backgroundColor: Colors.transparent,
+                ),
+              ),
+              datePickerTheme: datePickerTheme,
+            ),
+            child: child,
+          );
+        },
+      );
+
+      if (pickedDate == null) return;
+
+      selectedDateValue.value = pickedDate;
+      if (DateUtils.isSameDay(now, pickedDate)) {
+        selectedDate.value = 'Today';
+      } else {
+        selectedDate.value = DateTimeUtils().formatDate(
+          pickedDate.toString(),
+          format: "dd MMM, yyyy",
+        );
+      }
+
+      selectedDateTimeline.value = DateTimeUtils().formatDate(
+        pickedDate.toString(),
+        format: "EEEE, MMMM dd",
+      );
+
+      _fetchDevotionContent(pickedDate.toString());
+    } catch (e) {
+      if (!context.mounted) return;
+      AppFeedback.error(
+        'Unable to open calendar. Please try again.',
+        context: context,
+      );
+    }
   }
 
   Future<void> _fetchDevotionContent(String date) async {

@@ -1,12 +1,13 @@
 import 'package:core_module/core_module.dart';
 import 'package:flutter/material.dart';
+import 'package:student_union/core-ui/screen/base_shared_screen.dart';
 import 'package:student_union/core-ui/widgets/create_account_button.dart';
 import 'package:student_union/core/def/global_access.dart';
 import 'package:student_union/core/model/remote/notification_model.dart';
 import 'package:student_union/core/res/asset_path.dart';
 import 'package:student_union/screens/dashboard/more/notifications/notification_controller.dart';
 
-class NotificationsScreen extends BaseScreenStandard {
+class NotificationsScreen extends BaseSharedScreen {
   final _controller = Get.put(NotificationController());
 
   @override
