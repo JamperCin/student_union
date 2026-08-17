@@ -84,6 +84,15 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: bundle exec fastlane internal_release
 
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+         name: android-apk
+         path: build/app/outputs/flutter-apk/app-release.apk
+
       - name: Upload App Bundle
         uses: actions/upload-artifact@v4
         with:
