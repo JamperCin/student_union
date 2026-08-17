@@ -19,6 +19,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -208,5 +214,4 @@ jobs:
             #echo "KEY_ID = $APP_STORE_CONNECT_API_KEY_ID"
             #export MATCH_GIT_URL="https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git"
             bundle exec fastlane beta
-
 
