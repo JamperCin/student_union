@@ -57,6 +57,10 @@ dependencies:
       url: https://github.com/JamperCin/core_package
       path: packages/core_module
 
+dependency_overrides:
+  core_module:
+    path: third_party/core_module
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
