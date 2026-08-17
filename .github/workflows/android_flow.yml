@@ -3,10 +3,12 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Dart
+name: Android
 
 on:
   push:
+    branches: [ "main" ]
+  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -17,11 +19,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-        
+
       - name: Cache Flutter packages
         uses: actions/cache@v3
         with:
@@ -46,25 +54,6 @@ jobs:
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/su-keystore.jks
 
-      #- name: Build Android APK
-      #  run: flutter build apk --release
-
-      #- name: Upload Android APK
-      #  uses: actions/upload-artifact@v4
-      #  with:
-      #    name: android-apk
-      #    path: build/app/outputs/flutter-apk/app-release.apk
-
-      #- name: Build Android App Bundle
-      #  run: flutter build appbundle --release
-
-      #- name: Upload Android App Bundle
-      #  uses: actions/upload-artifact@v4
-      #  with:
-      #    name: app-bundle
-      #    path: build/app/outputs/bundle/release/app-release.aab
-
-      #Instal Ruby first before fastlane
       - name: Set up Ruby 3.2
         uses: ruby/setup-ruby@v1
         with:
@@ -72,7 +61,6 @@ jobs:
           bundler-cache: false
           working-directory: android
 
-      # [NEW STEP] Ensure gems are installed
       - name: Install Bundler dependencies
         working-directory: android
         run: |
@@ -81,14 +69,12 @@ jobs:
           bundle install
 
       - name: Prepare Android config
-        # This generates GeneratedPluginRegistrant.java with all dependencies
+        # Generates GeneratedPluginRegistrant.java with all dependencies.
         run: flutter build apk --config-only --release
 
       - name: Make Gradlew Executable
         run: chmod +x android/gradlew
 
-      # 4. Run Fastlane
-      # We skip 'flutter build' because Fastlane's 'gradle' action will build the AAB
       - name: Run Fastlane Release
         working-directory: android
         env:
@@ -98,11 +84,8 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: bundle exec fastlane internal_release
 
-      # 5. Upload the generated AAB as an artifact (Optional)
       - name: Upload App Bundle
         uses: actions/upload-artifact@v4
         with:
           name: app-bundle
           path: build/app/outputs/bundle/release/app-release.aab
-
- #-------------------------------------------------------------------------------------------------         
