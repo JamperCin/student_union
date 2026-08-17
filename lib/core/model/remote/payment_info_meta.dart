@@ -10,9 +10,11 @@ class PaymentInfoMeta extends BaseObject with _$PaymentInfoMeta {
     @JsonKey(name: 'note') String? note,
     @JsonKey(name: 'campaign_id') int? campaignId,
     @JsonKey(name: 'init_response') InitResponse? initResponse,
+    @JsonKey(name: 'paystack_init') InitResponse? paystackInit,
   }) = _PaymentInfoMeta;
 
-  factory PaymentInfoMeta.fromJson(Map<String, Object?> json) => _$PaymentInfoMetaFromJson(json);
+  factory PaymentInfoMeta.fromJson(Map<String, Object?> json) =>
+      _$PaymentInfoMetaFromJson(json);
 }
 
 @freezed
@@ -23,7 +25,8 @@ class InitResponse with _$InitResponse {
     @JsonKey(name: 'message') String? message,
   }) = _InitResponse;
 
-  factory InitResponse.fromJson(Map<String, Object?> json) => _$InitResponseFromJson(json);
+  factory InitResponse.fromJson(Map<String, Object?> json) =>
+      _$InitResponseFromJson(json);
 }
 
 @freezed
@@ -36,4 +39,3 @@ class Data with _$Data {
 
   factory Data.fromJson(Map<String, Object?> json) => _$DataFromJson(json);
 }
-

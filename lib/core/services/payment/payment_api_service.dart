@@ -83,4 +83,57 @@ class PaymentApiService extends BaseApiService implements PaymentApiInterface {
   void clearCache() {
     _historyCache.clear();
   }
+
+  PaymentModel _parsePayment(Map<String, dynamic> json) {
+    final parsed = PaymentModel.fromJson(json);
+    if (parsed.authUrl.isNotEmpty) return parsed;
+
+    final extracted = _extractAuthorizationUrl(json);
+    if (extracted.isEmpty) return parsed;
+    return parsed.copyWith(authUrl: extracted);
+  }
+
+  String _extractAuthorizationUrl(Map<String, dynamic> json) {
+    final direct = _asString(json['authorization_url']);
+    if (direct.isNotEmpty) return direct;
+
+    dynamic metadata = json['metadata'];
+    if (metadata is String && metadata.trim().isNotEmpty) {
+      try {
+        metadata = jsonDecode(metadata);
+      } catch (_) {
+        metadata = null;
+      }
+    }
+
+    final metaMap = _asMap(metadata);
+    if (metaMap == null) return '';
+
+    final initResponse =
+        _asMap(metaMap['init_response']) ??
+        _asMap(metaMap['paystack_init']) ??
+        _asMap(metaMap['paystackInit']);
+
+    final dataMap = _asMap(initResponse?['data']);
+    if (dataMap == null) return '';
+
+    return _asString(dataMap['authorization_url']).isNotEmpty
+        ? _asString(dataMap['authorization_url'])
+        : _asString(dataMap['authorizationUrl']);
+  }
+
+  Map<String, dynamic>? _asMap(dynamic value) {
+    if (value is Map<String, dynamic>) return value;
+    if (value is Map) {
+      return Map<String, dynamic>.from(value);
+    }
+    return null;
+  }
+
+  String _asString(dynamic value) {
+    if (value == null) return '';
+    final result = value.toString().trim();
+    if (result.toLowerCase() == 'null') return '';
+    return result;
+  }
 }

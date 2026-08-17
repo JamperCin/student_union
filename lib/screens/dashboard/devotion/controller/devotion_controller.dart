@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:convert';
 
 import 'package:core_module/core_module.dart';
@@ -9,6 +10,7 @@ import 'package:student_union/core/enums/book_type.dart';
 import 'package:student_union/core/enums/payment_type.dart';
 import 'package:student_union/core/model/local/web_model.dart';
 import 'package:student_union/core/model/remote/devotional_book_model.dart';
+import 'package:student_union/core/utils/app_feedback.dart';
 import 'package:student_union/core-ui/widgets/app_confirm_transaction_layout.dart';
 import 'package:student_union/core/utils/app_bottom_sheet.dart';
 
@@ -32,49 +34,54 @@ class DevotionController extends BaseController {
     return ["All", ...data];
   }
 
-  void onDevotionTap(DevotionalBookModel model) {
+  Future<void> onDevotionTap(DevotionalBookModel model) async {
+    bool isOwned = model.purchased;
+    if (!isOwned && Platform.isIOS) {
+      isOwned = await revenueCatService.ownsBook(model);
+    }
+
     AppRouter.pushNamed(
-      model.purchased
+      isOwned
           ? AppRouteNames.purchasedBookDetails
           : AppRouteNames.buyDevotionalBook,
       extra: model,
     );
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-    checkForScreenUpdate();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   checkForScreenUpdate();
+  // }
 
-  Future<void> checkForScreenUpdate() async {
-    final event = currentEvent.value;
-    debugPrint(
-      "EVENT TRIGGERED MODEL $event bookType ---> ${bookTypeFilter.value}",
-    );
+  // Future<void> checkForScreenUpdate() async {
+  //   final event = currentEvent.value;
+  //   debugPrint(
+  //     "EVENT TRIGGERED MODEL $event bookType ---> ${bookTypeFilter.value}",
+  //   );
 
-    if (event is EventTrigger &&
-        event.bookType != null &&
-        event.model is DevotionalBookModel) {
-      debugPrint("EVENT TRIGGERED ${event.bookType} ---> ${event.model}");
-      //Change tab after a short delay to allow for screen to load
-      await Future.delayed(const Duration(seconds: 1));
-      bookTypeFilter.value = event.bookType!;
-      tabController?.index = event.bookType == BookType.availableBooks ? 0 : 1;
+  //   if (event is EventTrigger &&
+  //       event.bookType != null &&
+  //       event.model is DevotionalBookModel) {
+  //     debugPrint("EVENT TRIGGERED ${event.bookType} ---> ${event.model}");
+  //     //Change tab after a short delay to allow for screen to load
+  //     await Future.delayed(const Duration(seconds: 1));
+  //     bookTypeFilter.value = event.bookType!;
+  //     tabController?.index = event.bookType == BookType.availableBooks ? 0 : 1;
 
-      //If a model is passed, open the purchased book details screen
-      await Future.delayed(const Duration(seconds: 1));
-      AppRouter.pop();
-      AppRouter.pushNamed(
-        AppRouteNames.purchasedBookDetails,
-        extra: event.model,
-      );
-      currentEvent.value = null; //Reset event after use
-    } else {
-      bookTypeFilter.value = BookType.availableBooks;
-      tabController?.index = 0;
-    }
-  }
+  //     //If a model is passed, open the purchased book details screen
+  //     await Future.delayed(const Duration(seconds: 1));
+  //     AppRouter.pop();
+  //     AppRouter.pushNamed(
+  //       AppRouteNames.purchasedBookDetails,
+  //       extra: event.model,
+  //     );
+  //     currentEvent.value = null; //Reset event after use
+  //   } else {
+  //     bookTypeFilter.value = BookType.availableBooks;
+  //     tabController?.index = 0;
+  //   }
+  // }
 
   void confirmPayment(BuildContext context, DevotionalBookModel model) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -120,6 +127,28 @@ class DevotionController extends BaseController {
   ) async {
     const LoaderWidget().showProgressIndicator(context: context);
 
+    if (Platform.isIOS) {
+      final result = await revenueCatService.purchaseDevotionalBook(model);
+      const LoaderWidget().hideProgress();
+
+      if (result.cancelled) {
+        if (!context.mounted) return;
+        AppFeedback.info('Purchase cancelled.', context: context);
+        return;
+      }
+
+      if (!result.success) {
+        if (!context.mounted) return;
+        AppFeedback.error(result.message, context: context);
+        return;
+      }
+
+      await _onPurchaseSuccess(model);
+      if (!context.mounted) return;
+      AppFeedback.success('Purchase completed successfully.', context: context);
+      return;
+    }
+
     Map<String, dynamic> param = {
       "payment_type": PaymentType.devotion_year_purchase.name,
       "metadata": {
@@ -133,24 +162,31 @@ class DevotionController extends BaseController {
     navToPaymentScreen(results.authUrl, book: model);
   }
 
-  void navToPaymentScreen(String url, {DevotionalBookModel? book}) {
+  Future<void> _onPurchaseSuccess(DevotionalBookModel book) async {
+    final defaultParam = <String, dynamic>{"page": "1", "limit": "20"};
+
+    try {
+      await devGuideService.fetchPurchasedBooks(
+        param: defaultParam,
+        forceRefresh: true,
+      );
+    } catch (_) {
+      // Ignore refresh failures; purchase success should not block navigation.
+    }
+
+    AppRouter.goNamed(AppRouteNames.purchasedBookDetails, extra: book);
+  }
+
+  void navToPaymentScreen(String url, {required DevotionalBookModel book}) {
     if (url.isEmpty) return;
     AppRouter.pushNamed(
       AppRouteNames.web,
       extra: WebModel(
         url: url,
-        onDoneOnclick: () {
-          debugPrint("NAVIGATED BACK ---> $url");
-          AppRouter.goHome();
-          if (url.isNotEmpty) {
-            currentEvent.value = EventTrigger(
-              bookType: BookType.purchasedBooks,
-              screen: 'Devotional',
-              model: book,
-            );
-          } else {
-            currentEvent.value = null;
-          }
+        onDoneOnclick: () async {
+         // debugPrint("NAVIGATED BACK ---> $url");
+          //AppRouter.goNamed(AppRouteNames.purchasedBookDetails, extra: book);
+          await _onPurchaseSuccess(book);
         },
       ),
     );

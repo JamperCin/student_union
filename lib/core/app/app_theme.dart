@@ -6,6 +6,46 @@ import 'app_colors.dart';
 
 const String _fontFamily = "KumbhSans"; //"SfUI"; //"Gotham";
 
+DatePickerThemeData _buildDatePickerTheme({required bool isDark}) {
+  final normalDayTextColor = isDark ? whiteColor : darkColor;
+  final disabledDayTextColor = isDark
+      ? whiteColor.withValues(alpha: 0.45)
+      : darkColor.withValues(alpha: 0.45);
+  final dialogBg = isDark ? darkBrownColor : whiteColor;
+
+  return DatePickerThemeData(
+    backgroundColor: dialogBg,
+    surfaceTintColor: Colors.transparent,
+    headerBackgroundColor: dialogBg,
+    headerForegroundColor: normalDayTextColor,
+    weekdayStyle: bodyMediumTextLightModeStyle.copyWith(
+      color: normalDayTextColor.withValues(alpha: 0.85),
+    ),
+    dayForegroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.disabled)) return disabledDayTextColor;
+      if (states.contains(WidgetState.selected)) return whiteColor;
+      return normalDayTextColor;
+    }),
+    dayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) return primaryGreenColor;
+      return Colors.transparent;
+    }),
+    todayForegroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) return whiteColor;
+      return primaryGreenColor;
+    }),
+    todayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) return primaryGreenColor;
+      return Colors.transparent;
+    }),
+    todayBorder: BorderSide(color: primaryGreenColor, width: 1.5),
+    cancelButtonStyle: TextButton.styleFrom(foregroundColor: primaryGreenColor),
+    confirmButtonStyle: TextButton.styleFrom(
+      foregroundColor: primaryGreenColor,
+    ),
+  );
+}
+
 ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   primarySwatch: Colors.green,
@@ -102,34 +142,7 @@ ThemeData lightMode = ThemeData(
     outlineVariant: darkBrownColor,
     surfaceDim: dividerColor,
   ),
-  datePickerTheme: DatePickerThemeData(
-    // backgroundColor: Colors.red,
-    todayBackgroundColor: WidgetStateProperty.all(Colors.white),
-    dayBackgroundColor: WidgetStateProperty.all(primaryGreenColor),
-    // dayShape: WidgetStateProperty.all(
-    //   RoundedRectangleBorder(
-    //     borderRadius: BorderRadius.circular(12),side: BorderSide(color: Colors.red)
-    //   ),
-    // ),
-    // weekdayStyle: bodyMediumTextLightModeStyle,
-    // headerBackgroundColor: primaryGreenColor,
-    // headerForegroundColor: Colors.black,
-    // headerHeadlineStyle: bodyLargeTextLightModeStyle,
-    // dayStyle: bodyMediumTextLightModeStyle,
-    // todayForegroundColor: WidgetStateProperty.all(secondary),
-    // yearForegroundColor: WidgetStateProperty.resolveWith<Color>((states) {
-    //   if (states.contains(WidgetState.disabled)) {
-    //     return Colors.grey; // Faint for disabled days
-    //   }
-    //   return Colors.black; // Normal active days
-    // }),
-    // dayForegroundColor: WidgetStateProperty.resolveWith<Color>((states) {
-    //   if (states.contains(WidgetState.disabled)) {
-    //     return Colors.grey; // Faint for disabled days
-    //   }
-    //   return Colors.black; // Normal active days
-    // }),
-  ),
+  datePickerTheme: _buildDatePickerTheme(isDark: false),
   dialogTheme: DialogThemeData(backgroundColor: whiteColor),
   appBarTheme: AppBarTheme(
     backgroundColor: primaryGreenColor,
@@ -199,6 +212,7 @@ ThemeData darkMode = lightMode.copyWith(
       ),
     ),
   ),
+  datePickerTheme: _buildDatePickerTheme(isDark: true),
   dialogTheme: DialogThemeData(backgroundColor: darkColor),
   appBarTheme: AppBarTheme(
     backgroundColor: darkColor,

@@ -81,8 +81,14 @@ class LoginController extends BaseController {
       appPreference.setToken(response.token!);
       appPreference.setUser(response.user);
       appPreference.setPassword(passwordTxtCtrl.getData());
+      await revenueCatService.identifyUser(
+        response.user?.email.isNotEmpty == true
+            ? response.user!.email
+            : emailTxtCtrl.getData().toLowerCase(),
+      );
       AppRouter.goHome();
     } else {
+      if (!context.mounted) return;
       AppFeedback.error(
         decodeErrorMessage(
           response?.errors?.last ?? response?.error ?? "",

@@ -128,9 +128,14 @@ class HomeController extends BaseController {
     }
   }
 
-  void onDevotionTap(DevotionalBookModel model) {
+  Future<void> onDevotionTap(DevotionalBookModel model) async {
+    bool isOwned = model.purchased;
+    if (!isOwned && Platform.isIOS) {
+      isOwned = await revenueCatService.ownsBook(model);
+    }
+
     AppRouter.pushNamed(
-      model.purchased
+      isOwned
           ? AppRouteNames.purchasedBookDetails
           : AppRouteNames.buyDevotionalBook,
       extra: model,

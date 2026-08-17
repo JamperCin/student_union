@@ -25,7 +25,7 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
 
     await Future.delayed(const Duration(milliseconds: 180));
     await fetchUserDetails();
-    await checkForScreenUpdate();
+    //await checkForScreenUpdate();
     await checkForAppUpdate();
     await FcmApi().init();
   }
@@ -53,15 +53,15 @@ class DashboardController extends BaseController with WidgetsBindingObserver {
     }
   }
 
-  Future<void> checkForScreenUpdate() async {
-    final event = currentEvent.value;
-    if (event is EventTrigger) {
-      await Future.delayed(const Duration(milliseconds: 180));
-      final index = _tabIndexFromLabel(event.screen);
-      AppRouter.goToTabByLabel(event.screen);
-      onTabOpened(index);
-    }
-  }
+  // Future<void> checkForScreenUpdate() async {
+  //   final event = currentEvent.value;
+  //   if (event is EventTrigger) {
+  //     await Future.delayed(const Duration(milliseconds: 180));
+  //     final index = _tabIndexFromLabel(event.screen);
+  //     AppRouter.goToTabByLabel(event.screen);
+  //     onTabOpened(index);
+  //   }
+  // }
 
   ///List of menu for the bottom navigation bar
   final List<BottomBarModel> bottomBarMenuList = [

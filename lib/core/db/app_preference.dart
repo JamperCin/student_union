@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_module/core_module.dart';
 import 'package:student_union/core/def/global_access.dart';
 
@@ -131,6 +133,7 @@ class AppPreference {
   void logOut() {
     bool theme = getBool(THEME_TYPE);
     bool intro = getBool(IS_INTRO_SHOWN);
+    unawaited(revenueCatService.clearUserIdentity());
     clearAppCaches();
     preference.clear();
     setBool(IS_INTRO_SHOWN, intro);
