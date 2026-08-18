@@ -8,8 +8,6 @@ name: iOS
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   ios:
@@ -24,7 +22,7 @@ jobs:
           ls /Applications | grep Xcode
           sudo xcode-select -s /Applications/Xcode_26.2.app
           xcodebuild -version
-
+        # --- Caching for faster builds and preventing timeouts ---
       - name: Cache CocoaPods dependencies
         uses: actions/cache@v4
         with:
@@ -34,7 +32,6 @@ jobs:
           key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
-
       - name: Cache Xcode DerivedData
         uses: actions/cache@v4
         with:
@@ -43,23 +40,26 @@ jobs:
           key: ${{ runner.os }}-xcode-deriveddata-${{ hashFiles('ios/Podfile.lock') }}-${{ hashFiles('ios/Runner.xcodeproj/project.pbxproj') }}
           restore-keys: |
             ${{ runner.os }}-xcode-deriveddata-
+      # ---------------------------------------------------------
+
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-
+         
       - name: Clean flutter
         run: flutter clean
-
+        
       - name: Install dependencies
         run: flutter pub get
 
+  # ---- CocoaPods ----
       - name: Install CocoaPods and install Pod dependencies
         run: |
           cd ios
           pod install --repo-update
-
+#Instal Ruby first before fastlane
       - name: Set up Ruby 3.2
         uses: ruby/setup-ruby@v1
         with:
@@ -70,31 +70,31 @@ jobs:
       - name: Install dependencies
         working-directory: ios
         run: |
+          #cd ios
+          #bundle config set --local path 'vendor/bundle'
           bundle update CFPropertyList
           bundle install
+ # ---- Install Fastlane ----
+      #- name: Install fastlane
+        #run: sudo gem install fastlane
 
-      - name: Verify signing secrets
-        if: github.event_name == 'push'
+      #Setup iOS signing (certificates & provisioning profiles)
+      - name: Setup iOS Signing (Fastlane Match)
+      
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_PAT: ${{ secrets.MATCH_GIT_PAT }}
+          CI: true
+          FLUTTER_ROOT: /opt/hostedtoolcache/flutter/3.13.0-stable/x64  # your Flutter path
+          
         run: |
-          test -n "$APP_STORE_CONNECT_API_KEY_ID"
-          test -n "$APP_STORE_CONNECT_ISSUER_ID"
-          test -n "$APP_STORE_CONNECT_KEY"
-          test -n "$MATCH_PASSWORD"
-          test -n "$MATCH_GIT_PAT"
-
-      - name: Run iOS checks on PRs
-        if: github.event_name == 'pull_request'
-        run: |
-          echo "Skipping Fastlane signing/upload on pull_request because repository secrets are not guaranteed to be available."
-
+          # Use HTTPS URL with secret expanded
+          export MATCH_GIT_URL="https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git"
+      # Run Fastlane lanes
       - name: Run Fastlane build and upload
-        if: github.event_name == 'push'
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
@@ -102,6 +102,9 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_GIT_PAT: ${{ secrets.MATCH_GIT_PAT }}
           MATCH_GIT_URL: https://${{ secrets.MATCH_GIT_PAT }}@github.com/JamperCin/su-ios-certificates.git
+
         run: |
           cd ios
-          bundle exec fastlane beta
+            #echo "KEY_ID = $APP_STORE_CONNECT_API_KEY_ID"
+            #export MATCH_GIT_URL="https://$MATCH_GIT_PAT@github.com/JamperCin/su-ios-certificates.git"
+            bundle exec fastlane beta
