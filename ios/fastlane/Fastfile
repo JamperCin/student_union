@@ -77,6 +77,9 @@ default_platform(:ios)
 platform :ios do
   desc "Build and upload to TestFlight"
   lane :beta do
+    # Xcode can take longer to enumerate build settings when SPM packages are present.
+    ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] ||= "60"
+    ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] ||= "6"
 
     # --- 1. Authenticate with App Store Connect ---
     app_store_connect_api_key(
@@ -174,4 +177,3 @@ platform :ios do
     )
   end
 end
-
