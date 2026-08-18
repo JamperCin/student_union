@@ -54,11 +54,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Prepare iOS build config
+        run: flutter build ios --config-only --no-codesign
+
   # ---- CocoaPods ----
       - name: Install CocoaPods and install Pod dependencies
         run: |
           cd ios
-          pod install --repo-update
+          pod install --repo-update --clean-install
 #Instal Ruby first before fastlane
       - name: Set up Ruby 3.2
         uses: ruby/setup-ruby@v1
