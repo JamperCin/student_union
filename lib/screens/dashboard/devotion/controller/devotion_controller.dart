@@ -15,6 +15,11 @@ import 'package:student_union/core-ui/widgets/app_confirm_transaction_layout.dar
 import 'package:student_union/core/utils/app_bottom_sheet.dart';
 
 class DevotionController extends BaseController {
+  static const int _purchaseConfirmationAttempts = 10;
+  static const Duration _purchaseConfirmationDelay = Duration(
+    milliseconds: 1500,
+  );
+
   final RxInt tabOpenTick = 0.obs;
   RxString selectedYear = "All".obs; //${DateTime.now().year}
   Rx<BookType> bookTypeFilter = BookType.availableBooks.obs;
@@ -129,22 +134,34 @@ class DevotionController extends BaseController {
 
     if (Platform.isIOS) {
       final result = await revenueCatService.purchaseDevotionalBook(model);
-      const LoaderWidget().hideProgress();
 
       if (result.cancelled) {
+        const LoaderWidget().hideProgress();
         if (!context.mounted) return;
         AppFeedback.info('Purchase cancelled.', context: context);
         return;
       }
 
       if (!result.success) {
+        const LoaderWidget().hideProgress();
         if (!context.mounted) return;
         AppFeedback.error(result.message, context: context);
         return;
       }
 
-      await _onPurchaseSuccess(model);
+      final confirmedBook = await _waitForBackendPurchase(model);
+      const LoaderWidget().hideProgress();
       if (!context.mounted) return;
+
+      if (confirmedBook == null) {
+        AppFeedback.info(
+          'Your payment was completed, but access is still awaiting server confirmation. Please try opening the devotional again shortly.',
+          context: context,
+        );
+        return;
+      }
+
+      _openConfirmedPurchase(confirmedBook);
       AppFeedback.success('Purchase completed successfully.', context: context);
       return;
     }
@@ -162,18 +179,40 @@ class DevotionController extends BaseController {
     navToPaymentScreen(results.authUrl, book: model);
   }
 
-  Future<void> _onPurchaseSuccess(DevotionalBookModel book) async {
-    final defaultParam = <String, dynamic>{"page": "1", "limit": "20"};
+  Future<DevotionalBookModel?> _waitForBackendPurchase(
+    DevotionalBookModel book,
+  ) async {
+    final confirmationParam = <String, dynamic>{
+      'page': '1',
+      'limit': '1',
+      'devotion_year_id': book.id.toString(),
+    };
 
-    try {
-      await devGuideService.fetchPurchasedBooks(
-        param: defaultParam,
-        forceRefresh: true,
-      );
-    } catch (_) {
-      // Ignore refresh failures; purchase success should not block navigation.
+    for (var attempt = 0; attempt < _purchaseConfirmationAttempts; attempt++) {
+      try {
+        final purchasedBooks = await devGuideService.fetchPurchasedBooks(
+          param: confirmationParam,
+          forceRefresh: true,
+        );
+
+        for (final purchasedBook in purchasedBooks) {
+          if (purchasedBook.devotionalId == book.id) {
+            return purchasedBook;
+          }
+        }
+      } catch (error) {
+        debugPrint('Purchase confirmation attempt failed: $error');
+      }
+
+      if (attempt < _purchaseConfirmationAttempts - 1) {
+        await Future<void>.delayed(_purchaseConfirmationDelay);
+      }
     }
 
+    return null;
+  }
+
+  void _openConfirmedPurchase(DevotionalBookModel book) {
     AppRouter.goNamed(AppRouteNames.purchasedBookDetails, extra: book);
   }
 
@@ -184,9 +223,10 @@ class DevotionController extends BaseController {
       extra: WebModel(
         url: url,
         onDoneOnclick: () async {
-         // debugPrint("NAVIGATED BACK ---> $url");
-          //AppRouter.goNamed(AppRouteNames.purchasedBookDetails, extra: book);
-          await _onPurchaseSuccess(book);
+          final confirmedBook = await _waitForBackendPurchase(book);
+          if (confirmedBook != null) {
+            _openConfirmedPurchase(confirmedBook);
+          }
         },
       ),
     );

@@ -24,24 +24,18 @@ class PurchasedBookController extends BaseController {
       .obs;
 
   Future<void> setPurchasedBook(DevotionalBookModel book) async {
+    final today = DateUtils.dateOnly(DateTime.now());
     this.book.value = book;
     selectedDate.value = 'Today';
-    selectedDateValue.value = DateTime.now();
+    selectedDateValue.value = today;
     isLoadingContent.value = false;
     selectedDateTimeline.value = DateTimeUtils().formatDate(
-      DateTime.now().toString(),
+      today.toString(),
       format: "dd MMM, yyyy",
     );
 
-    if (book.devotion == null) {
-      await Future.delayed(const Duration(milliseconds: 30));
-      _fetchDevotionContent(
-        DateTimeUtils().formatDate(
-          DateTime.now().toString(),
-          format: "yyyy-MM-dd",
-        ),
-      );
-    }
+    await Future.delayed(const Duration(milliseconds: 30));
+    await _fetchDevotionContent(today);
   }
 
   List<Section> getDevotionSections() {
@@ -171,7 +165,7 @@ class PurchasedBookController extends BaseController {
         format: "EEEE, MMMM dd",
       );
 
-      _fetchDevotionContent(pickedDate.toString());
+      await _fetchDevotionContent(pickedDate);
     } catch (e) {
       if (!context.mounted) return;
       AppFeedback.error(
@@ -181,7 +175,7 @@ class PurchasedBookController extends BaseController {
     }
   }
 
-  Future<void> _fetchDevotionContent(String date) async {
+  Future<void> _fetchDevotionContent(DateTime date) async {
     textToSpeechApi.stop();
 
     final formatDate = DateTimeUtils().formatDate(
@@ -189,19 +183,31 @@ class PurchasedBookController extends BaseController {
       format: "yyyy-MM-dd",
     );
 
+    final requestedDevotionYearId = book.value.devotionalId == 0
+        ? book.value.id
+        : book.value.devotionalId;
     final param = {
-      "devotion_year_id":
-          (book.value.devotionalId == 0
-                  ? book.value.id
-                  : book.value.devotionalId)
-              .toString(),
+      "devotion_year_id": requestedDevotionYearId.toString(),
       "date": formatDate,
     };
 
     isLoadingContent.value = true;
-    final result = await devGuideService.fetchPurchasedBooks(param: param);
-    isLoadingContent.value = false;
-    book.value = result.isNotEmpty ? result.first : book.value;
+    try {
+      final result = await devGuideService.fetchPurchasedBooks(
+        param: param,
+        forceRefresh: true,
+      );
+
+      final activeDevotionYearId = book.value.devotionalId == 0
+          ? book.value.id
+          : book.value.devotionalId;
+      if (result.isNotEmpty &&
+          activeDevotionYearId == requestedDevotionYearId) {
+        book.value = result.first;
+      }
+    } finally {
+      isLoadingContent.value = false;
+    }
   }
 
   void onReadAloudOnTap() {
