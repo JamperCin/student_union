@@ -119,6 +119,27 @@ class BaseWebView extends BaseScreenStatefulStandard {
     if (model.uri != null) return model.uri;
 
     final buffer = StringBuffer();
+    final sections = model.sections ?? <Section>[];
+
+    bool isQuestionSection(Section section) {
+      final title = section.title.trim().toLowerCase();
+      return title == 'question' || title == 'questions';
+    }
+
+    void writeSection(Section section) {
+      buffer.writeln("""
+      <div class="section">
+        <div class="title" style="font-size: 20px;">${section.title}</div>
+        <div class="content" style="font-size: 18px;">${section.content}</div>
+      </div>
+      """);
+    }
+
+    // Show devotional questions before the main content.
+    final questionSection = sections.firstWhereOrNull(isQuestionSection);
+    if (questionSection != null) {
+      writeSection(questionSection);
+    }
 
     // Add main content if available
     if (model.content != null && model.content!.trim().isNotEmpty) {
@@ -129,16 +150,10 @@ class BaseWebView extends BaseScreenStatefulStandard {
     """);
     }
 
-    // Add extra sections (if any)
-    if (model.sections != null && model.sections!.isNotEmpty) {
-      for (final section in model.sections!) {
-        buffer.writeln("""
-      <div class="section">
-        <div class="title" style="font-size: 20px;">${section.title}</div>
-        <div class="content" style="font-size: 18px;">${section.content}</div>
-      </div>
-      """);
-      }
+    // Keep the remaining sections in their original order after the content.
+    final otherSections = sections.where((section) => !isQuestionSection(section));
+    for (final section in otherSections) {
+      writeSection(section);
     }
 
     // If nothing to render, return null
@@ -176,29 +191,6 @@ class BaseWebView extends BaseScreenStatefulStandard {
       mimeType: 'text/html',
       encoding: Encoding.getByName('utf-8'),
     );
-  }
-
-  @Deprecated('Use _getContent() instead')
-  Uri? _getContents() {
-    return model.uri ??
-        (model.content != null
-            ? Uri.dataFromString(
-                '''
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>body { font-family: sans-serif; padding: 16px; }</style>
-              </head>
-              <body>
-                ${model.content ?? ''}
-                </body>
-              </html>
-              ''',
-                mimeType: 'text/html',
-                encoding: Encoding.getByName('utf-8'),
-              )
-            : null);
   }
 
   @override
